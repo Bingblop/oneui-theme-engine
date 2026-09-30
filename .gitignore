@@ -1,0 +1,15 @@
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.pytest_cache/
+apps/**/bin/
+apps/**/obj/
+apps/**/build/
+*.keystore
+*.idsig
+*.apk
+.hex_temp/
+daemon.pid
+daemon.log
+*.jar
