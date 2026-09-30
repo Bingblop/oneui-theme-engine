@@ -8,8 +8,8 @@
         :root {
             --bg-base: #080A0F;
             --bg-surface: #10141E;
-            --bg-card: rgba(22, 28, 42, 0.75);
-            --bg-card-hover: rgba(30, 38, 58, 0.95);
+            --bg-card: #141A28;
+            --bg-card-hover: #1E2638;
             --border-glass: rgba(255, 255, 255, 0.09);
             --accent: #00E5FF;
             --accent-glow: rgba(0, 229, 255, 0.35);
@@ -26,7 +26,7 @@
             --status-bloat: #FF5252;
 
             --radius-xl: 24px;
-            --radius-lg: 18px;
+            --radius-lg: 16px;
             --radius-md: 12px;
             --radius-sm: 8px;
         }
@@ -37,26 +37,29 @@
             box-sizing: border-box;
             -webkit-tap-highlight-color: transparent;
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+        }
+
+        html, body {
+            background-color: var(--bg-base);
+            color: var(--text-main);
+            padding: 0 0 120px 0;
+            overflow-x: hidden;
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
+            touch-action: pan-y;
+            overscroll-behavior-y: contain;
+            min-height: 100vh;
             user-select: none;
         }
 
-        body {
-            background-color: var(--bg-base);
-            color: var(--text-main);
-            padding: 0 0 110px 0;
-            overflow-x: hidden;
-            min-height: 100vh;
-        }
-
-        /* Top Sticky Header */
+        /* Top Sticky Header (Solid background for high-FPS scrolling) */
         .app-header {
             position: sticky;
             top: 0;
             z-index: 100;
-            background: rgba(8, 10, 15, 0.92);
-            backdrop-filter: blur(20px);
+            background: #080A0F;
             border-bottom: 1px solid var(--border-glass);
-            padding: 12px 18px;
+            padding: 12px 16px;
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -69,21 +72,21 @@
         }
 
         .app-icon {
-            width: 42px;
-            height: 42px;
+            width: 40px;
+            height: 40px;
             border-radius: 12px;
             background: linear-gradient(135deg, var(--accent), var(--secondary));
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 22px;
-            box-shadow: 0 0 16px var(--accent-glow);
+            font-size: 20px;
+            box-shadow: 0 0 14px var(--accent-glow);
         }
 
         .brand-text h1 {
-            font-size: 18px;
+            font-size: 17px;
             font-weight: 800;
-            letter-spacing: -0.5px;
+            letter-spacing: -0.4px;
             background: linear-gradient(90deg, #FFFFFF, var(--accent));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -108,6 +111,8 @@
             border-radius: 20px;
             font-size: 11px;
             font-weight: 800;
+            cursor: pointer;
+            transition: all 0.2s;
         }
 
         .status-dot {
@@ -128,14 +133,15 @@
         /* Top Navigation Tabs */
         .tab-bar {
             display: flex;
-            background: var(--bg-surface);
+            background: #0E121B;
             border-bottom: 1px solid var(--border-glass);
             overflow-x: auto;
             scrollbar-width: none;
             padding: 4px 8px;
             position: sticky;
-            top: 67px;
+            top: 65px;
             z-index: 90;
+            touch-action: pan-x;
         }
 
         .tab-bar::-webkit-scrollbar {
@@ -144,16 +150,16 @@
 
         .tab-btn {
             flex: 0 0 auto;
-            padding: 10px 16px;
+            padding: 9px 15px;
             background: none;
             border: none;
             color: var(--text-muted);
-            font-size: 13px;
+            font-size: 12px;
             font-weight: 800;
             cursor: pointer;
             border-radius: 20px;
-            margin: 4px;
-            transition: all 0.25s ease;
+            margin: 3px;
+            transition: all 0.2s ease;
             display: flex;
             align-items: center;
             gap: 6px;
@@ -162,91 +168,85 @@
         .tab-btn.active {
             color: #000000;
             background: var(--accent);
-            box-shadow: 0 2px 14px var(--accent-glow);
+            box-shadow: 0 2px 12px var(--accent-glow);
         }
 
         /* Container */
         .container {
-            padding: 14px 16px;
+            padding: 12px 16px;
             max-width: 600px;
             margin: 0 auto;
+            position: relative;
         }
 
         .view-content {
             display: none;
-            animation: fadeIn 0.3s ease;
         }
 
         .view-content.active {
             display: block;
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(6px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
         /* Stats Dashboard Strip */
         .stats-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 10px;
-            margin-bottom: 16px;
+            gap: 8px;
+            margin-bottom: 14px;
         }
 
         .stat-card {
             background: var(--bg-card);
             border: 1px solid var(--border-glass);
             border-radius: var(--radius-md);
-            padding: 12px 10px;
+            padding: 10px 8px;
             text-align: center;
-            transition: all 0.2s;
             cursor: pointer;
+            transition: transform 0.15s;
         }
 
         .stat-card:active {
+            transform: scale(0.96);
             background: var(--bg-card-hover);
-            transform: scale(0.98);
         }
 
         .stat-num {
-            font-size: 18px;
+            font-size: 17px;
             font-weight: 900;
             color: var(--accent);
             margin-bottom: 2px;
         }
 
         .stat-label {
-            font-size: 10px;
+            font-size: 9px;
             font-weight: 700;
             color: var(--text-muted);
             text-transform: uppercase;
             letter-spacing: 0.5px;
         }
 
-        /* Search & Filter Toolbar */
+        /* Search Bar */
         .search-box {
             position: relative;
-            margin-bottom: 12px;
+            margin-bottom: 10px;
         }
 
         .search-input {
             width: 100%;
-            height: 48px;
+            height: 46px;
             background: var(--bg-surface);
             border: 1px solid var(--border-glass);
             border-radius: var(--radius-lg);
-            padding: 0 44px 0 16px;
+            padding: 0 42px 0 16px;
             color: #FFFFFF;
             font-size: 14px;
             font-weight: 600;
             outline: none;
-            transition: all 0.25s ease;
+            transition: border-color 0.2s;
         }
 
         .search-input:focus {
             border-color: var(--accent);
-            box-shadow: 0 0 16px var(--accent-glow);
         }
 
         .search-clear {
@@ -267,8 +267,9 @@
             gap: 8px;
             overflow-x: auto;
             scrollbar-width: none;
-            padding-bottom: 8px;
-            margin-bottom: 14px;
+            padding-bottom: 6px;
+            margin-bottom: 12px;
+            touch-action: pan-x;
         }
 
         .filter-scroll::-webkit-scrollbar {
@@ -277,7 +278,7 @@
 
         .filter-pill {
             flex: 0 0 auto;
-            padding: 6px 14px;
+            padding: 6px 13px;
             background: rgba(255, 255, 255, 0.05);
             border: 1px solid var(--border-glass);
             border-radius: 20px;
@@ -285,7 +286,7 @@
             font-weight: 800;
             color: var(--text-muted);
             cursor: pointer;
-            transition: all 0.2s ease;
+            transition: all 0.15s ease;
         }
 
         .filter-pill.active {
@@ -294,22 +295,25 @@
             color: var(--accent);
         }
 
-        /* Apps List */
+        /* High-Performance App Card */
         .app-card {
             background: var(--bg-card);
             border: 1px solid var(--border-glass);
-            border-radius: var(--radius-lg);
-            padding: 14px;
-            margin-bottom: 10px;
+            border-radius: var(--radius-md);
+            padding: 12px 14px;
+            margin-bottom: 8px;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            transition: all 0.2s ease;
+            touch-action: pan-y;
+            content-visibility: auto;
+            contain-intrinsic-size: 0 74px;
+            transition: background 0.15s;
         }
 
         .app-card.selected {
             border-color: var(--accent);
-            background: rgba(0, 229, 255, 0.08);
+            background: rgba(0, 229, 255, 0.1);
         }
 
         .app-left {
@@ -319,6 +323,7 @@
             flex: 1;
             overflow: hidden;
             cursor: pointer;
+            touch-action: pan-y;
         }
 
         .app-checkbox {
@@ -332,7 +337,6 @@
             font-size: 11px;
             font-weight: 900;
             color: #000000;
-            transition: all 0.2s ease;
             flex-shrink: 0;
         }
 
@@ -342,14 +346,14 @@
         }
 
         .app-avatar {
-            width: 38px;
-            height: 38px;
+            width: 36px;
+            height: 36px;
             border-radius: 10px;
             background: #1C2030;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 16px;
+            font-size: 15px;
             font-weight: 800;
             color: var(--accent);
             border: 1px solid var(--border-glass);
@@ -370,27 +374,27 @@
         }
 
         .app-pkg {
-            font-size: 11px;
+            font-size: 10px;
             color: var(--text-muted);
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
-            margin-bottom: 4px;
+            margin-bottom: 3px;
         }
 
         .badge-row {
             display: flex;
-            gap: 6px;
+            gap: 5px;
             flex-wrap: wrap;
         }
 
         .tag-badge {
             font-size: 9px;
             font-weight: 800;
-            padding: 2px 7px;
-            border-radius: 6px;
+            padding: 2px 6px;
+            border-radius: 5px;
             text-transform: uppercase;
-            letter-spacing: 0.4px;
+            letter-spacing: 0.3px;
         }
 
         .tag-running {
@@ -428,13 +432,13 @@
             align-items: center;
             gap: 6px;
             flex-shrink: 0;
-            margin-left: 10px;
+            margin-left: 8px;
         }
 
         .btn-mini {
             width: 34px;
             height: 34px;
-            border-radius: 10px;
+            border-radius: 9px;
             background: rgba(255, 255, 255, 0.06);
             border: 1px solid var(--border-glass);
             color: var(--text-main);
@@ -443,7 +447,7 @@
             justify-content: center;
             font-size: 13px;
             cursor: pointer;
-            transition: all 0.2s;
+            transition: background 0.15s;
         }
 
         .btn-mini:active {
@@ -451,24 +455,111 @@
             color: #000000;
         }
 
-        /* Floating Batch Actions Bar */
-        .floating-batch-bar {
+        /* Alphabet Fast-Scroller Strip (Samsung / One UI style) */
+        .alphabet-strip {
             position: fixed;
-            bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%) translateY(150px);
-            background: rgba(16, 20, 30, 0.95);
-            backdrop-filter: blur(25px);
-            border: 1px solid var(--accent);
-            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.8), 0 0 20px var(--accent-glow);
-            border-radius: 30px;
-            padding: 8px 16px;
+            right: 2px;
+            top: 140px;
+            bottom: 40px;
+            width: 22px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 150;
+            touch-action: none;
+            user-select: none;
+        }
+
+        .alpha-char {
+            font-size: 9px;
+            font-weight: 800;
+            color: var(--text-muted);
+            cursor: pointer;
+            padding: 1px;
+            transition: color 0.1s, transform 0.1s;
+        }
+
+        .alpha-char.active {
+            color: var(--accent);
+            transform: scale(1.4);
+        }
+
+        .alphabet-bubble {
+            position: fixed;
+            right: 36px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            background: var(--accent);
+            color: #000000;
+            font-size: 26px;
+            font-weight: 900;
             display: flex;
             align-items: center;
-            gap: 8px;
+            justify-content: center;
+            box-shadow: 0 4px 20px var(--accent-glow);
             z-index: 200;
-            transition: transform 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            max-width: 90vw;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.2s ease;
+        }
+
+        .alphabet-bubble.show {
+            opacity: 1;
+        }
+
+        /* Scroll To Top FAB */
+        .fab-scroll-top {
+            position: fixed;
+            right: 20px;
+            bottom: 24px;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: var(--bg-surface);
+            border: 1px solid var(--accent);
+            color: var(--accent);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            font-weight: 900;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.6);
+            z-index: 120;
+            cursor: pointer;
+            opacity: 0;
+            transform: scale(0.8);
+            transition: opacity 0.2s, transform 0.2s;
+            pointer-events: none;
+        }
+
+        .fab-scroll-top.show {
+            opacity: 1;
+            transform: scale(1);
+            pointer-events: auto;
+        }
+
+        /* Floating Batch Bar */
+        .floating-batch-bar {
+            position: fixed;
+            bottom: 24px;
+            left: 50%;
+            transform: translateX(-50%) translateY(150px);
+            background: #10141E;
+            border: 1px solid var(--accent);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.8), 0 0 20px var(--accent-glow);
+            border-radius: 30px;
+            padding: 8px 14px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            z-index: 180;
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            max-width: 92vw;
+            overflow-x: auto;
         }
 
         .floating-batch-bar.show {
@@ -476,49 +567,30 @@
         }
 
         .batch-count {
-            font-size: 12px;
+            font-size: 11px;
             font-weight: 800;
             color: var(--accent);
-            padding: 0 8px;
+            padding: 0 6px;
             white-space: nowrap;
         }
 
         .batch-action-btn {
-            height: 38px;
-            padding: 0 12px;
+            height: 36px;
+            padding: 0 11px;
             background: rgba(255, 255, 255, 0.08);
             border: 1px solid var(--border-glass);
-            border-radius: 20px;
+            border-radius: 18px;
             color: #FFFFFF;
-            font-size: 12px;
+            font-size: 11px;
             font-weight: 800;
             cursor: pointer;
             display: flex;
             align-items: center;
-            gap: 6px;
-            transition: all 0.2s;
+            gap: 5px;
             white-space: nowrap;
         }
 
         .batch-action-btn:active {
-            background: var(--accent);
-            color: #000000;
-        }
-
-        .apps-tool-btn {
-            flex: 1;
-            padding: 8px 10px;
-            background: rgba(255, 255, 255, 0.06);
-            border: 1px solid var(--border-glass);
-            border-radius: var(--radius-md);
-            color: var(--text-main);
-            font-size: 11px;
-            font-weight: 800;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-
-        .apps-tool-btn:active {
             background: var(--accent);
             color: #000000;
         }
@@ -536,9 +608,6 @@
             font-size: 14px;
             font-weight: 800;
             margin-bottom: 4px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
         }
 
         .color-card-subtitle {
@@ -625,7 +694,6 @@
             height: 24px;
             border-radius: 50%;
             border: 2px solid #FFFFFF;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.6);
         }
 
         .bubble-hex {
@@ -649,14 +717,13 @@
             right: 0;
             bottom: 0;
             background: rgba(0, 0, 0, 0.85);
-            backdrop-filter: blur(16px);
             z-index: 300;
             display: flex;
             align-items: flex-end;
             justify-content: center;
             opacity: 0;
             pointer-events: none;
-            transition: opacity 0.3s ease;
+            transition: opacity 0.25s ease;
         }
 
         .modal-overlay.show {
@@ -673,9 +740,10 @@
             max-width: 600px;
             max-height: 85vh;
             overflow-y: auto;
-            padding: 20px;
+            padding: 18px;
             transform: translateY(100%);
-            transition: transform 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.15);
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.15);
+            -webkit-overflow-scrolling: touch;
         }
 
         .modal-overlay.show .modal-sheet {
@@ -686,7 +754,7 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            margin-bottom: 16px;
+            margin-bottom: 14px;
         }
 
         .sheet-app-hero {
@@ -696,8 +764,8 @@
         }
 
         .sheet-avatar {
-            width: 46px;
-            height: 46px;
+            width: 44px;
+            height: 44px;
             border-radius: 12px;
             background: linear-gradient(135deg, var(--accent), var(--secondary));
             display: flex;
@@ -709,12 +777,12 @@
         }
 
         .sheet-title h3 {
-            font-size: 16px;
+            font-size: 15px;
             font-weight: 800;
         }
 
         .sheet-title p {
-            font-size: 11px;
+            font-size: 10px;
             color: var(--text-muted);
             word-break: break-all;
         }
@@ -723,24 +791,23 @@
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 8px;
-            margin-bottom: 18px;
+            margin-bottom: 16px;
         }
 
         .sheet-btn {
-            height: 46px;
+            height: 44px;
             background: rgba(255, 255, 255, 0.06);
             border: 1px solid var(--border-glass);
             border-radius: var(--radius-md);
             color: #FFFFFF;
-            font-size: 11px;
+            font-size: 10px;
             font-weight: 800;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            gap: 3px;
+            gap: 2px;
             cursor: pointer;
-            transition: all 0.2s;
         }
 
         .sheet-btn:active {
@@ -751,13 +818,13 @@
         .sheet-tabs {
             display: flex;
             border-bottom: 1px solid var(--border-glass);
-            margin-bottom: 14px;
+            margin-bottom: 12px;
             gap: 8px;
         }
 
         .sheet-tab-pill {
             padding: 8px 12px;
-            font-size: 12px;
+            font-size: 11px;
             font-weight: 800;
             color: var(--text-muted);
             cursor: pointer;
@@ -773,6 +840,7 @@
             display: none;
             max-height: 250px;
             overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
         }
 
         .sheet-tab-content.active {
@@ -785,13 +853,13 @@
             justify-content: space-between;
             padding: 8px 0;
             border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-            font-size: 12px;
+            font-size: 11px;
         }
 
         .perm-toggle-btn {
-            padding: 4px 10px;
-            border-radius: 12px;
-            font-size: 10px;
+            padding: 3px 8px;
+            border-radius: 10px;
+            font-size: 9px;
             font-weight: 800;
             cursor: pointer;
             border: none;
@@ -807,29 +875,29 @@
             color: var(--status-bloat);
         }
 
-        /* Preset Bloatware View */
+        /* Bloatware & Terminal View Styles */
         .bloat-card {
             background: var(--bg-card);
             border: 1px solid var(--border-glass);
             border-radius: var(--radius-lg);
             padding: 16px;
-            margin-bottom: 14px;
+            margin-bottom: 12px;
         }
 
         .bloat-header {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            margin-bottom: 10px;
+            margin-bottom: 8px;
         }
 
         .bloat-title {
-            font-size: 14px;
+            font-size: 13px;
             font-weight: 800;
         }
 
         .bloat-btn {
-            padding: 6px 14px;
+            padding: 5px 12px;
             background: var(--accent);
             border: none;
             border-radius: 14px;
@@ -839,19 +907,31 @@
             cursor: pointer;
         }
 
-        /* Terminal View */
+        .apps-tool-btn {
+            flex: 1;
+            padding: 7px 10px;
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid var(--border-glass);
+            border-radius: var(--radius-md);
+            color: var(--text-main);
+            font-size: 11px;
+            font-weight: 800;
+            cursor: pointer;
+        }
+
         .terminal-box {
             background: #06080D;
             border: 1px solid var(--border-glass);
             border-radius: var(--radius-lg);
-            padding: 14px;
+            padding: 12px;
             height: 350px;
             overflow-y: auto;
             font-family: monospace;
             font-size: 12px;
             color: var(--accent);
             line-height: 1.5;
-            margin-bottom: 12px;
+            margin-bottom: 10px;
+            -webkit-overflow-scrolling: touch;
         }
 
         .term-input-row {
@@ -861,11 +941,11 @@
 
         .term-input {
             flex: 1;
-            height: 46px;
+            height: 44px;
             background: var(--bg-surface);
             border: 1px solid var(--border-glass);
             border-radius: var(--radius-md);
-            padding: 0 14px;
+            padding: 0 12px;
             color: #FFFFFF;
             font-family: monospace;
             font-size: 13px;
@@ -874,32 +954,31 @@
 
         .term-run-btn {
             width: 70px;
-            height: 46px;
+            height: 44px;
             background: var(--accent);
             border: none;
             border-radius: var(--radius-md);
             color: #000000;
             font-weight: 900;
-            font-size: 13px;
+            font-size: 12px;
             cursor: pointer;
         }
 
         /* Toast */
         .toast {
             position: fixed;
-            bottom: 30px;
+            bottom: 24px;
             left: 50%;
             transform: translateX(-50%) translateY(100px);
-            background: rgba(23, 27, 40, 0.95);
-            backdrop-filter: blur(20px);
+            background: #141A28;
             border: 1px solid var(--accent);
             color: #FFFFFF;
-            padding: 10px 20px;
-            border-radius: 30px;
-            font-size: 12px;
+            padding: 9px 18px;
+            border-radius: 24px;
+            font-size: 11px;
             font-weight: 800;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.8);
-            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.8);
+            transition: transform 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             z-index: 999;
             pointer-events: none;
             display: flex;
@@ -923,7 +1002,7 @@
                 <p id="deviceInfoSubtitle">Samsung One UI 9.0</p>
             </div>
         </div>
-        <div class="status-badge" id="execModeBadge" onclick="handleShizukuTap()" style="cursor:pointer;" title="Tap to Authorize in Shizuku">
+        <div class="status-badge" id="execModeBadge" onclick="handleShizukuTap()" title="Tap to Authorize in Shizuku">
             <div class="status-dot"></div>
             <span id="execModeText">Checking Shizuku...</span>
         </div>
@@ -936,6 +1015,13 @@
         <button class="tab-btn" onclick="switchView('colors')">🎨 Color & Themes</button>
         <button class="tab-btn" onclick="switchView('terminal')">💻 ADB Console</button>
     </nav>
+
+    <!-- Alphabet Quick Scroller Strip -->
+    <div class="alphabet-strip" id="alphabetStrip"></div>
+    <div class="alphabet-bubble" id="alphabetBubble">A</div>
+
+    <!-- Scroll to Top FAB -->
+    <div class="fab-scroll-top" id="fabScrollTop" onclick="scrollToTop()">▲</div>
 
     <div class="container">
 
@@ -999,8 +1085,8 @@
         <!-- VIEW 2: BLOATWARE PRESETS -->
         <section id="view-bloatware" class="view-content">
             <div style="margin-bottom:14px;">
-                <h3 style="font-size:16px; font-weight:800; margin-bottom:4px;">One-Tap Bloatware Manager</h3>
-                <p style="font-size:12px; color:var(--text-muted);">Batch debloat safe OEM & carrier background services.</p>
+                <h3 style="font-size:15px; font-weight:800; margin-bottom:4px;">One-Tap Bloatware Manager</h3>
+                <p style="font-size:11px; color:var(--text-muted);">Batch debloat safe OEM & carrier background services.</p>
             </div>
 
             <div class="bloat-card">
@@ -1060,17 +1146,15 @@
                 <div class="color-card-subtitle">Choose from luxury dark and high-contrast color schemes</div>
 
                 <div class="palette-presets-grid">
-                    <!-- Preset 1 -->
                     <div class="palette-preset-card active" onclick="applyPalettePreset('amoled', this)">
                         <div class="preset-strip">
                             <div class="preset-swatch" style="background:#00E5FF"></div>
                             <div class="preset-swatch" style="background:#000000"></div>
-                            <div class="preset-swatch" style="background:#10141E"></div>
+                            <div class="preset-swatch" style="background:#141A28"></div>
                         </div>
                         <div class="preset-name">AMOLED Cyan</div>
                     </div>
 
-                    <!-- Preset 2 -->
                     <div class="palette-preset-card" onclick="applyPalettePreset('cyberpunk', this)">
                         <div class="preset-strip">
                             <div class="preset-swatch" style="background:#FF0055"></div>
@@ -1080,7 +1164,6 @@
                         <div class="preset-name">Cyberpunk Violet</div>
                     </div>
 
-                    <!-- Preset 3 -->
                     <div class="palette-preset-card" onclick="applyPalettePreset('emerald', this)">
                         <div class="preset-strip">
                             <div class="preset-swatch" style="background:#00E676"></div>
@@ -1090,7 +1173,6 @@
                         <div class="preset-name">Nordic Emerald</div>
                     </div>
 
-                    <!-- Preset 4 -->
                     <div class="palette-preset-card" onclick="applyPalettePreset('amber', this)">
                         <div class="preset-strip">
                             <div class="preset-swatch" style="background:#FF9100"></div>
@@ -1100,7 +1182,6 @@
                         <div class="preset-name">Sunset Amber</div>
                     </div>
 
-                    <!-- Preset 5 -->
                     <div class="palette-preset-card" onclick="applyPalettePreset('slate', this)">
                         <div class="preset-strip">
                             <div class="preset-swatch" style="background:#448AFF"></div>
@@ -1110,7 +1191,6 @@
                         <div class="preset-name">Midnight Slate</div>
                     </div>
 
-                    <!-- Preset 6 -->
                     <div class="palette-preset-card" onclick="applyPalettePreset('crimson', this)">
                         <div class="preset-strip">
                             <div class="preset-swatch" style="background:#FF1744"></div>
@@ -1154,9 +1234,9 @@
                         <p>App cards and dialog containers</p>
                     </div>
                     <label class="picker-bubble-btn">
-                        <div class="bubble-circle" id="circCard" style="background: #10141E;"></div>
-                        <span class="bubble-hex" id="hexCard">#10141E</span>
-                        <input type="color" value="#10141E" onchange="updateCustomColor('card', this.value)">
+                        <div class="bubble-circle" id="circCard" style="background: #141A28;"></div>
+                        <span class="bubble-hex" id="hexCard">#141A28</span>
+                        <input type="color" value="#141A28" onchange="updateCustomColor('card', this.value)">
                     </label>
                 </div>
 
@@ -1168,7 +1248,7 @@
                     <label class="picker-bubble-btn">
                         <div class="bubble-circle" id="circRunning" style="background: #00E676;"></div>
                         <span class="bubble-hex" id="hexRunning">#00E676</span>
-                        <input type="color" value="#00E676" onchange="updateCustomColor('status-running', this.value)">
+                        <input type="color" value="#00E676" onchange="updateCustomColor('running', this.value)">
                     </label>
                 </div>
 
@@ -1180,7 +1260,7 @@
                     <label class="picker-bubble-btn">
                         <div class="bubble-circle" id="circFrozen" style="background: #00E5FF;"></div>
                         <span class="bubble-hex" id="hexFrozen">#00E5FF</span>
-                        <input type="color" value="#00E5FF" onchange="updateCustomColor('status-frozen', this.value)">
+                        <input type="color" value="#00E5FF" onchange="updateCustomColor('frozen', this.value)">
                     </label>
                 </div>
 
@@ -1192,7 +1272,7 @@
                     <label class="picker-bubble-btn">
                         <div class="bubble-circle" id="circSystem" style="background: #7C4DFF;"></div>
                         <span class="bubble-hex" id="hexSystem">#7C4DFF</span>
-                        <input type="color" value="#7C4DFF" onchange="updateCustomColor('status-system', this.value)">
+                        <input type="color" value="#7C4DFF" onchange="updateCustomColor('system', this.value)">
                     </label>
                 </div>
 
@@ -1204,7 +1284,7 @@
                     <label class="picker-bubble-btn">
                         <div class="bubble-circle" id="circBloat" style="background: #FF5252;"></div>
                         <span class="bubble-hex" id="hexBloat">#FF5252</span>
-                        <input type="color" value="#FF5252" onchange="updateCustomColor('status-bloat', this.value)">
+                        <input type="color" value="#FF5252" onchange="updateCustomColor('bloat', this.value)">
                     </label>
                 </div>
             </div>
@@ -1228,8 +1308,8 @@
             </div>
 
             <div style="margin-bottom:12px;">
-                <h3 style="font-size:16px; font-weight:800; margin-bottom:4px;">ADB Shell Terminal</h3>
-                <p style="font-size:12px; color:var(--text-muted);">Execute arbitrary pm, am, cmd, or shell commands directly.</p>
+                <h3 style="font-size:15px; font-weight:800; margin-bottom:4px;">ADB Shell Terminal</h3>
+                <p style="font-size:11px; color:var(--text-muted);">Execute arbitrary pm, am, cmd, or shell commands directly.</p>
             </div>
 
             <div class="terminal-box" id="termOutput">
@@ -1308,23 +1388,20 @@ Type any command below (e.g. pm list packages -d)
                 <div class="sheet-tab-pill" onclick="switchSheetTab('raw')">📋 Raw Dumpsys</div>
             </div>
 
-            <!-- Tab 1: Permissions -->
             <div id="sheetTabPerms" class="sheet-tab-content active">
                 <div id="permsContainer">
-                    <div style="color:var(--text-muted); font-size:12px;">Loading permissions...</div>
+                    <div style="color:var(--text-muted); font-size:11px;">Loading permissions...</div>
                 </div>
             </div>
 
-            <!-- Tab 2: Components -->
             <div id="sheetTabComps" class="sheet-tab-content">
                 <div id="compsContainer">
-                    <div style="color:var(--text-muted); font-size:12px;">Loading activities & services...</div>
+                    <div style="color:var(--text-muted); font-size:11px;">Loading activities & services...</div>
                 </div>
             </div>
 
-            <!-- Tab 3: Raw -->
             <div id="sheetTabRaw" class="sheet-tab-content">
-                <pre id="rawContainer" style="font-family:monospace; font-size:11px; color:var(--accent); white-space:pre-wrap;"></pre>
+                <pre id="rawContainer" style="font-family:monospace; font-size:10px; color:var(--accent); white-space:pre-wrap;"></pre>
             </div>
         </div>
     </div>
@@ -1343,10 +1420,14 @@ Type any command below (e.g. pm list packages -d)
         let currentFilter = 'all';
         let inspectedPkg = null;
 
+        // Progressive Infinite Scrolling
+        const CHUNK_SIZE = 40;
+        let renderedIndex = 0;
+
         const themeState = {
             accent: '#00E5FF',
             bg: '#080A0F',
-            card: '#10141E',
+            card: '#141A28',
             running: '#00E676',
             frozen: '#00E5FF',
             system: '#7C4DFF',
@@ -1354,7 +1435,7 @@ Type any command below (e.g. pm list packages -d)
         };
 
         const palettes = {
-            amoled: { accent: '#00E5FF', bg: '#000000', card: '#10141E', running: '#00E676', frozen: '#00E5FF', system: '#7C4DFF', bloat: '#FF5252' },
+            amoled: { accent: '#00E5FF', bg: '#000000', card: '#141A28', running: '#00E676', frozen: '#00E5FF', system: '#7C4DFF', bloat: '#FF5252' },
             cyberpunk: { accent: '#FF0055', bg: '#0F051D', card: '#1D0C38', running: '#00FFFF', frozen: '#FF0055', system: '#9D4EDD', bloat: '#FF5252' },
             emerald: { accent: '#00E676', bg: '#04140D', card: '#0D2619', running: '#69F0AE', frozen: '#00E676', system: '#4CAF50', bloat: '#FF5252' },
             amber: { accent: '#FF9100', bg: '#140F08', card: '#2A1E11', running: '#FFD740', frozen: '#FF9100', system: '#FF6D00', bloat: '#FF5252' },
@@ -1362,16 +1443,17 @@ Type any command below (e.g. pm list packages -d)
             crimson: { accent: '#FF1744', bg: '#000000', card: '#1C080B', running: '#00E676', frozen: '#FF1744', system: '#D50000', bloat: '#FF5252' }
         };
 
-        // Navigation Views
         function switchView(viewName) {
             document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
             event.currentTarget.classList.add('active');
             document.querySelectorAll('.view-content').forEach(v => v.classList.remove('active'));
             document.getElementById('view-' + viewName).classList.add('active');
+            
+            // Toggle Alphabet strip visibility
+            document.getElementById('alphabetStrip').style.display = (viewName === 'apps') ? 'flex' : 'none';
             haptic();
         }
 
-        // Haptic & Toast
         function haptic() {
             if (window.AndroidBridge && window.AndroidBridge.vibrate) {
                 window.AndroidBridge.vibrate();
@@ -1383,17 +1465,15 @@ Type any command below (e.g. pm list packages -d)
             document.getElementById('toastMsg').innerText = msg;
             document.getElementById('toastIcon').innerText = icon;
             toast.classList.add('show');
-            setTimeout(() => toast.classList.remove('show'), 2600);
+            setTimeout(() => toast.classList.remove('show'), 2400);
         }
 
         function handleShizukuTap() {
             haptic();
             if (window.AndroidBridge && window.AndroidBridge.requestShizukuPermission) {
-                showToast('Requesting Shizuku ADB permission...', '⚡');
+                showToast('Requesting Shizuku ADB authorization...', '⚡');
                 window.AndroidBridge.requestShizukuPermission();
                 setTimeout(checkShizuku, 2000);
-            } else {
-                showToast('Shizuku bridge not available in browser mode', 'ℹ️');
             }
         }
 
@@ -1424,36 +1504,34 @@ Type any command below (e.g. pm list packages -d)
             }
         }
 
-        // Data Loading
+        // Initialize App
         function initApp() {
             checkShizuku();
+            initAlphabetStrip();
+
             if (window.AndroidBridge) {
-                // Load system info
                 const sysInfoStr = window.AndroidBridge.getSystemInfo();
                 try {
                     const info = JSON.parse(sysInfoStr);
                     if (info.device) {
                         document.getElementById('deviceInfoSubtitle').innerText = `${info.manufacturer} ${info.device} • Android ${info.release}`;
                     }
-                    if (info.execMode) {
-                        document.getElementById('execModeText').innerText = info.execMode;
-                    }
                 } catch(e) {}
 
-                // Load packages
-                setTimeout(loadPackageData, 100);
+                setTimeout(loadPackageData, 80);
             } else {
-                // Mock test data for browser testing
-                document.getElementById('deviceInfoSubtitle').innerText = 'Samsung SM-S948U1 • Android 16';
-                document.getElementById('execModeText').innerText = 'Privileged Shell (Shizuku)';
-                allApps = [
-                    { name: 'SystemUI', pkg: 'com.android.systemui', isSystem: true, isRunning: true, isFrozen: false, isUninstalled: false },
-                    { name: 'One UI Settings', pkg: 'com.android.settings', isSystem: true, isRunning: true, isFrozen: false, isUninstalled: false },
-                    { name: 'Bixby Voice', pkg: 'com.samsung.android.bixby.agent', isSystem: true, isRunning: false, isFrozen: true, isUninstalled: false },
-                    { name: 'Samsung Free', pkg: 'com.samsung.android.app.spage', isSystem: true, isRunning: false, isFrozen: false, isUninstalled: true },
-                    { name: 'WhatsApp', pkg: 'com.whatsapp', isSystem: false, isRunning: true, isFrozen: false, isUninstalled: false },
-                    { name: 'Spotify', pkg: 'com.spotify.music', isSystem: false, isRunning: false, isFrozen: false, isUninstalled: false }
-                ];
+                // Browser test dummy data
+                for (let i = 1; i <= 200; i++) {
+                    const ch = String.fromCharCode(65 + (i % 26));
+                    allApps.push({
+                        name: `${ch}pplication ${i}`,
+                        pkg: `com.example.${ch.toLowerCase()}${i}`,
+                        isSystem: i % 2 === 0,
+                        isRunning: i % 3 === 0,
+                        isFrozen: i % 5 === 0,
+                        isUninstalled: i % 15 === 0
+                    });
+                }
                 renderApps();
             }
         }
@@ -1463,62 +1541,65 @@ Type any command below (e.g. pm list packages -d)
             const jsonStr = window.AndroidBridge.loadPackages();
             try {
                 allApps = JSON.parse(jsonStr);
+                // Sort alphabetically by name
+                allApps.sort((a, b) => a.name.localeCompare(b.name, undefined, { sensitivity: 'base' }));
                 renderApps();
             } catch (e) {
                 document.getElementById('appsListContainer').innerHTML = `<div style="text-align:center; padding:30px; color:var(--status-bloat);">Failed to parse package data: ${e.message}</div>`;
             }
         }
 
-        // Render Apps List
+        // Render Apps Filter & Progressive Chunking
         function renderApps() {
             const query = (document.getElementById('searchInput').value || '').toLowerCase().trim();
 
             filteredApps = allApps.filter(app => {
-                // Filter pill match
                 if (currentFilter === 'running' && !app.isRunning) return false;
                 if (currentFilter === 'frozen' && !app.isFrozen) return false;
                 if (currentFilter === 'user' && (app.isSystem || app.isUninstalled)) return false;
                 if (currentFilter === 'system' && (!app.isSystem || app.isUninstalled)) return false;
                 if (currentFilter === 'uninstalled' && !app.isUninstalled) return false;
 
-                // Search query match
                 if (query) {
                     return app.name.toLowerCase().includes(query) || app.pkg.toLowerCase().includes(query);
                 }
                 return true;
             });
 
-            // Update stats
-            const total = allApps.length;
-            const running = allApps.filter(a => a.isRunning).length;
-            const frozen = allApps.filter(a => a.isFrozen).length;
-            const user = allApps.filter(a => !a.isSystem && !a.isUninstalled).length;
-            const system = allApps.filter(a => a.isSystem && !a.isUninstalled).length;
-            const uninstalled = allApps.filter(a => a.isUninstalled).length;
+            // Update stats counts
+            document.getElementById('statTotal').innerText = allApps.length;
+            document.getElementById('statRunning').innerText = allApps.filter(a => a.isRunning).length;
+            document.getElementById('statFrozen').innerText = allApps.filter(a => a.isFrozen).length;
+            document.getElementById('statUser').innerText = allApps.filter(a => !a.isSystem && !a.isUninstalled).length;
+            document.getElementById('statSystem').innerText = allApps.filter(a => a.isSystem && !a.isUninstalled).length;
+            document.getElementById('statUninstalled').innerText = allApps.filter(a => a.isUninstalled).length;
 
-            document.getElementById('statTotal').innerText = total;
-            document.getElementById('statRunning').innerText = running;
-            document.getElementById('statFrozen').innerText = frozen;
-            document.getElementById('statUser').innerText = user;
-            document.getElementById('statSystem').innerText = system;
-            document.getElementById('statUninstalled').innerText = uninstalled;
+            document.getElementById('countAll').innerText = allApps.length;
+            document.getElementById('countRunning').innerText = allApps.filter(a => a.isRunning).length;
+            document.getElementById('countUser').innerText = allApps.filter(a => !a.isSystem && !a.isUninstalled).length;
+            document.getElementById('countSystem').innerText = allApps.filter(a => a.isSystem && !a.isUninstalled).length;
+            document.getElementById('countFrozen').innerText = allApps.filter(a => a.isFrozen).length;
+            document.getElementById('countUninstalled').innerText = allApps.filter(a => a.isUninstalled).length;
 
-            document.getElementById('countAll').innerText = total;
-            document.getElementById('countRunning').innerText = running;
-            document.getElementById('countUser').innerText = user;
-            document.getElementById('countSystem').innerText = system;
-            document.getElementById('countFrozen').innerText = frozen;
-            document.getElementById('countUninstalled').innerText = uninstalled;
-
-            // Render items
             const container = document.getElementById('appsListContainer');
             if (filteredApps.length === 0) {
                 container.innerHTML = '<div style="text-align:center; padding: 40px; color: var(--text-muted);">No applications found matching criteria.</div>';
                 return;
             }
 
+            container.innerHTML = '';
+            renderedIndex = 0;
+            renderNextBatch();
+        }
+
+        function renderNextBatch() {
+            if (renderedIndex >= filteredApps.length) return;
+            const batch = filteredApps.slice(renderedIndex, renderedIndex + CHUNK_SIZE);
+            const container = document.getElementById('appsListContainer');
+
             let html = '';
-            filteredApps.forEach(app => {
+            batch.forEach((app, idx) => {
+                const globalIndex = renderedIndex + idx;
                 const isSelected = selectedPkgs.has(app.pkg);
                 const initial = (app.name && app.name.length > 0) ? app.name.charAt(0).toUpperCase() : '⚡';
 
@@ -1530,7 +1611,7 @@ Type any command below (e.g. pm list packages -d)
                 else badges += '<span class="tag-badge tag-user">USER</span>';
 
                 html += `
-                    <div class="app-card ${isSelected ? 'selected' : ''}" id="card_${app.pkg}">
+                    <div class="app-card ${isSelected ? 'selected' : ''}" id="card_${app.pkg}" data-initial="${initial}">
                         <div class="app-left" onclick="toggleSelectPkg('${app.pkg}')">
                             <div class="app-checkbox">${isSelected ? '✓' : ''}</div>
                             <div class="app-avatar">${initial}</div>
@@ -1545,15 +1626,101 @@ Type any command below (e.g. pm list packages -d)
                                 `<button class="btn-mini" title="Enable" onclick="quickAction('unfreeze', '${app.pkg}')">🔥</button>` : 
                                 `<button class="btn-mini" title="Freeze" onclick="quickAction('freeze', '${app.pkg}')">❄️</button>`}
                             <button class="btn-mini" title="Force Stop" onclick="quickAction('force_stop', '${app.pkg}')">🛑</button>
-                            <button class="btn-mini" title="Inspect Details" onclick="openInspector('${app.pkg}')">⋯</button>
+                            <button class="btn-mini" title="Inspect" onclick="openInspector('${app.pkg}')">⋯</button>
                         </div>
                     </div>
                 `;
             });
-            container.innerHTML = html;
+
+            container.insertAdjacentHTML('beforeend', html);
+            renderedIndex += batch.length;
         }
 
-        // Selection & Batch
+        // Window Scroll Listener for Progressive Infinite Loading & Scroll-to-Top FAB
+        window.addEventListener('scroll', () => {
+            const scrollY = window.scrollY || window.pageYOffset;
+            
+            // Show / Hide Scroll To Top FAB
+            const fab = document.getElementById('fabScrollTop');
+            if (scrollY > 600) {
+                fab.classList.add('show');
+            } else {
+                fab.classList.remove('show');
+            }
+
+            // Auto-render next chunk when within 800px of bottom
+            if ((window.innerHeight + scrollY) >= document.body.offsetHeight - 800) {
+                renderNextBatch();
+            }
+        }, { passive: true });
+
+        function scrollToTop() {
+            haptic();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Alphabet Fast-Scroller Implementation
+        function initAlphabetStrip() {
+            const strip = document.getElementById('alphabetStrip');
+            const chars = ['#', 'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'];
+            let html = '';
+            chars.forEach(ch => {
+                html += `<span class="alpha-char" data-char="${ch}">${ch}</span>`;
+            });
+            strip.innerHTML = html;
+
+            // Touch Drag / Tap Support
+            strip.addEventListener('touchstart', handleAlphaTouch, { passive: false });
+            strip.addEventListener('touchmove', handleAlphaTouch, { passive: false });
+            strip.addEventListener('touchend', () => {
+                document.getElementById('alphabetBubble').classList.remove('show');
+            });
+        }
+
+        let lastJumpChar = '';
+        function handleAlphaTouch(e) {
+            e.preventDefault();
+            const touch = e.touches[0];
+            const target = document.elementFromPoint(touch.clientX, touch.clientY);
+            if (target && target.classList.contains('alpha-char')) {
+                const char = target.dataset.char;
+                if (char !== lastJumpChar) {
+                    lastJumpChar = char;
+                    jumpToChar(char);
+                }
+            }
+        }
+
+        function jumpToChar(char) {
+            haptic();
+            const bubble = document.getElementById('alphabetBubble');
+            bubble.innerText = char;
+            bubble.classList.add('show');
+
+            // Find index of first app matching this char
+            const targetIdx = filteredApps.findIndex(app => {
+                if (char === '#') return !/^[A-Za-z]/.test(app.name);
+                return app.name.toUpperCase().startsWith(char);
+            });
+
+            if (targetIdx !== -1) {
+                // Ensure all items up to targetIdx are rendered
+                while (renderedIndex <= targetIdx + 10 && renderedIndex < filteredApps.length) {
+                    renderNextBatch();
+                }
+
+                // Scroll to card
+                const targetApp = filteredApps[targetIdx];
+                const card = document.getElementById('card_' + targetApp.pkg);
+                if (card) {
+                    const rect = card.getBoundingClientRect();
+                    const targetY = window.pageYOffset + rect.top - 120;
+                    window.scrollTo({ top: targetY, behavior: 'auto' });
+                }
+            }
+        }
+
+        // Selection & Batch Operations
         function toggleSelectPkg(pkg) {
             if (selectedPkgs.has(pkg)) {
                 selectedPkgs.delete(pkg);
@@ -1606,26 +1773,19 @@ Type any command below (e.g. pm list packages -d)
                     showToast(`Batch completed`, '✔');
                 }
                 clearBatchSelection();
-                setTimeout(loadPackageData, 500);
-            } else {
-                showToast(`Mock batch executed: ${action}`, '✔');
-                clearBatchSelection();
+                setTimeout(loadPackageData, 400);
             }
         }
 
-        // Quick Actions
         function quickAction(action, pkg) {
             haptic();
             if (window.AndroidBridge) {
                 window.AndroidBridge.executeAppAction(action, pkg);
-                showToast(`Action ${action} executed`, '✔');
+                showToast(`Action executed`, '✔');
                 setTimeout(loadPackageData, 400);
-            } else {
-                showToast(`Mock: ${action} on ${pkg}`, '✔');
             }
         }
 
-        // Filter & Search
         function setFilter(filter, el) {
             currentFilter = filter;
             if (el) {
@@ -1634,6 +1794,7 @@ Type any command below (e.g. pm list packages -d)
             }
             haptic();
             renderApps();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
         function handleSearch() {
@@ -1648,7 +1809,7 @@ Type any command below (e.g. pm list packages -d)
             renderApps();
         }
 
-        // Detailed Inspector Modal
+        // Inspector Modal
         function openInspector(pkg) {
             inspectedPkg = pkg;
             haptic();
@@ -1660,11 +1821,9 @@ Type any command below (e.g. pm list packages -d)
             document.getElementById('sheetPkg').innerText = app.pkg;
             document.getElementById('sheetAvatar').innerText = app.name.charAt(0).toUpperCase();
 
-            // Toggle action buttons based on app state
             document.getElementById('sheetBtnReinstall').style.display = app.isUninstalled ? 'flex' : 'none';
             document.getElementById('sheetBtnUninstall').style.display = app.isUninstalled ? 'none' : 'flex';
 
-            // Load details from native
             if (window.AndroidBridge) {
                 const detailsStr = window.AndroidBridge.getAppDetails(pkg);
                 try {
@@ -1675,7 +1834,6 @@ Type any command below (e.g. pm list packages -d)
         }
 
         function renderInspectorDetails(d) {
-            // Permissions
             const permsContainer = document.getElementById('permsContainer');
             if (d.permissions && d.permissions.length > 0) {
                 let html = '';
@@ -1693,14 +1851,13 @@ Type any command below (e.g. pm list packages -d)
                 });
                 permsContainer.innerHTML = html;
             } else {
-                permsContainer.innerHTML = '<div style="color:var(--text-muted); font-size:12px;">No permissions declared in manifest.</div>';
+                permsContainer.innerHTML = '<div style="color:var(--text-muted); font-size:11px;">No permissions declared.</div>';
             }
 
-            // Components
             const compsContainer = document.getElementById('compsContainer');
             let compHtml = '';
             if (d.activities && d.activities.length > 0) {
-                compHtml += '<div style="font-weight:800; font-size:12px; margin-bottom:6px; color:var(--accent);">ACTIVITIES</div>';
+                compHtml += '<div style="font-weight:800; font-size:11px; margin-bottom:6px; color:var(--accent);">ACTIVITIES</div>';
                 d.activities.forEach(a => {
                     const shortAct = a.split('.').pop();
                     compHtml += `
@@ -1712,7 +1869,7 @@ Type any command below (e.g. pm list packages -d)
                 });
             }
             if (d.services && d.services.length > 0) {
-                compHtml += '<div style="font-weight:800; font-size:12px; margin:12px 0 6px 0; color:var(--secondary);">SERVICES</div>';
+                compHtml += '<div style="font-weight:800; font-size:11px; margin:12px 0 6px 0; color:var(--secondary);">SERVICES</div>';
                 d.services.forEach(s => {
                     const shortSrv = s.split('.').pop();
                     compHtml += `
@@ -1723,9 +1880,7 @@ Type any command below (e.g. pm list packages -d)
                     `;
                 });
             }
-            compsContainer.innerHTML = compHtml || '<div style="color:var(--text-muted); font-size:12px;">No exported activities or services found.</div>';
-
-            // Raw
+            compsContainer.innerHTML = compHtml || '<div style="color:var(--text-muted); font-size:11px;">No exported activities or services found.</div>';
             document.getElementById('rawContainer').innerText = JSON.stringify(d, null, 2);
         }
 
@@ -1754,7 +1909,7 @@ Type any command below (e.g. pm list packages -d)
             haptic();
             if (window.AndroidBridge && inspectedPkg) {
                 window.AndroidBridge.setPermission(inspectedPkg, perm, !wasGranted);
-                showToast(`Toggled permission`, '🛡️');
+                showToast(`Permission updated`, '🛡️');
                 openInspector(inspectedPkg);
             }
         }
@@ -1810,8 +1965,6 @@ Type any command below (e.g. pm list packages -d)
                 window.AndroidBridge.executeBatchAction('freeze', JSON.stringify(targets));
                 showToast(`Debloat applied (${targets.length} targets)`, '✔');
                 setTimeout(loadPackageData, 500);
-            } else {
-                showToast(`Mock debloat: ${type}`, '✔');
             }
         }
 
@@ -1827,8 +1980,6 @@ Type any command below (e.g. pm list packages -d)
                 window.AndroidBridge.executeBatchAction('reinstall', JSON.stringify(debloated));
                 showToast(`Restored ${debloated.length} apps`, '✔');
                 setTimeout(loadPackageData, 500);
-            } else {
-                showToast(`Mock restored ${debloated.length} apps`, '✔');
             }
         }
 
@@ -1850,7 +2001,6 @@ Type any command below (e.g. pm list packages -d)
         }
 
         function updateColorsLive() {
-            // Apply CSS Root Variables
             document.documentElement.style.setProperty('--accent', themeState.accent);
             document.documentElement.style.setProperty('--accent-glow', themeState.accent + '44');
             document.documentElement.style.setProperty('--bg-base', themeState.bg);
@@ -1860,7 +2010,6 @@ Type any command below (e.g. pm list packages -d)
             document.documentElement.style.setProperty('--status-system', themeState.system);
             document.documentElement.style.setProperty('--status-bloat', themeState.bloat);
 
-            // Update Color Pickers UI
             document.getElementById('circAccent').style.background = themeState.accent;
             document.getElementById('hexAccent').innerText = themeState.accent.toUpperCase();
 
@@ -1882,7 +2031,6 @@ Type any command below (e.g. pm list packages -d)
             document.getElementById('circBloat').style.background = themeState.bloat;
             document.getElementById('hexBloat').innerText = themeState.bloat.toUpperCase();
 
-            // Save preferences
             if (window.AndroidBridge && window.AndroidBridge.savePreferences) {
                 window.AndroidBridge.savePreferences(JSON.stringify(themeState));
             }
@@ -1902,8 +2050,6 @@ Type any command below (e.g. pm list packages -d)
             if (window.AndroidBridge) {
                 const res = window.AndroidBridge.executeShell(cmd);
                 term.innerHTML += res;
-            } else {
-                term.innerHTML += 'Executed in mock mode: output OK\n';
             }
             term.scrollTop = term.scrollHeight;
         }
