@@ -505,6 +505,24 @@
             color: #000000;
         }
 
+        .apps-tool-btn {
+            flex: 1;
+            padding: 8px 10px;
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid var(--border-glass);
+            border-radius: var(--radius-md);
+            color: var(--text-main);
+            font-size: 11px;
+            font-weight: 800;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .apps-tool-btn:active {
+            background: var(--accent);
+            color: #000000;
+        }
+
         /* Color Settings View */
         .color-card {
             background: var(--bg-card);
@@ -905,9 +923,9 @@
                 <p id="deviceInfoSubtitle">Samsung One UI 9.0</p>
             </div>
         </div>
-        <div class="status-badge" id="execModeBadge">
+        <div class="status-badge" id="execModeBadge" onclick="handleShizukuTap()" style="cursor:pointer;" title="Tap to Authorize in Shizuku">
             <div class="status-dot"></div>
-            <span id="execModeText">Shizuku Privileged</span>
+            <span id="execModeText">Checking Shizuku...</span>
         </div>
     </header>
 
@@ -1194,6 +1212,21 @@
 
         <!-- VIEW 4: ADB CONSOLE -->
         <section id="view-terminal" class="view-content">
+            <div class="bloat-card" style="margin-bottom:14px; border-color:var(--accent);">
+                <div class="bloat-header">
+                    <div>
+                        <h4 style="font-size:14px; font-weight:800; color:var(--accent);">⚡ Shizuku ADB Authorization</h4>
+                        <p style="font-size:11px; color:var(--text-muted); margin-top:2px;">Grants direct ADB shell access (UID 2000) without root</p>
+                    </div>
+                    <button class="bloat-btn" onclick="handleShizukuTap()">Authorize</button>
+                </div>
+                <div style="display:flex; gap:8px; margin-top:8px;">
+                    <button class="apps-tool-btn" onclick="checkShizuku(); showToast('Checked Shizuku status', '🔍');">Check Status</button>
+                    <button class="apps-tool-btn" onclick="document.getElementById('termCmd').value = 'id'; runTerminalCmd();">Test UID (id)</button>
+                    <button class="apps-tool-btn" onclick="document.getElementById('termCmd').value = 'pm list packages -s | head -n 10'; runTerminalCmd();">Sample PM</button>
+                </div>
+            </div>
+
             <div style="margin-bottom:12px;">
                 <h3 style="font-size:16px; font-weight:800; margin-bottom:4px;">ADB Shell Terminal</h3>
                 <p style="font-size:12px; color:var(--text-muted);">Execute arbitrary pm, am, cmd, or shell commands directly.</p>
@@ -1353,8 +1386,47 @@ Type any command below (e.g. pm list packages -d)
             setTimeout(() => toast.classList.remove('show'), 2600);
         }
 
+        function handleShizukuTap() {
+            haptic();
+            if (window.AndroidBridge && window.AndroidBridge.requestShizukuPermission) {
+                showToast('Requesting Shizuku ADB permission...', '⚡');
+                window.AndroidBridge.requestShizukuPermission();
+                setTimeout(checkShizuku, 2000);
+            } else {
+                showToast('Shizuku bridge not available in browser mode', 'ℹ️');
+            }
+        }
+
+        function checkShizuku() {
+            if (window.AndroidBridge && window.AndroidBridge.checkShizukuStatus) {
+                const statusStr = window.AndroidBridge.checkShizukuStatus();
+                try {
+                    const s = JSON.parse(statusStr);
+                    const badge = document.getElementById('execModeBadge');
+                    const text = document.getElementById('execModeText');
+                    if (s.authorized) {
+                        badge.style.background = 'rgba(0, 230, 118, 0.15)';
+                        badge.style.borderColor = 'rgba(0, 230, 118, 0.4)';
+                        badge.style.color = 'var(--status-running)';
+                        text.innerText = 'Shizuku ADB (UID 2000)';
+                    } else if (s.running) {
+                        badge.style.background = 'rgba(255, 214, 0, 0.15)';
+                        badge.style.borderColor = 'rgba(255, 214, 0, 0.4)';
+                        badge.style.color = '#FFD600';
+                        text.innerText = 'Tap to Authorize Shizuku';
+                    } else {
+                        badge.style.background = 'rgba(255, 82, 82, 0.15)';
+                        badge.style.borderColor = 'rgba(255, 82, 82, 0.4)';
+                        badge.style.color = 'var(--status-bloat)';
+                        text.innerText = 'Shizuku Not Running';
+                    }
+                } catch(e) {}
+            }
+        }
+
         // Data Loading
         function initApp() {
+            checkShizuku();
             if (window.AndroidBridge) {
                 // Load system info
                 const sysInfoStr = window.AndroidBridge.getSystemInfo();

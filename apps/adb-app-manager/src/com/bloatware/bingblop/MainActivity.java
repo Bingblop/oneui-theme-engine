@@ -23,10 +23,11 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
+import java.io.OutputStream;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -36,6 +37,8 @@ public class MainActivity extends Activity {
     private WebView webView;
     private Vibrator vibrator;
     private SharedPreferences prefs;
+    private File rishFile;
+    private File rishDexFile;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +52,9 @@ public class MainActivity extends Activity {
 
         vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
         prefs = getSharedPreferences("adb_app_manager_prefs", Context.MODE_PRIVATE);
+
+        // Setup Shizuku rish binaries in internal files dir
+        setupShizukuBinaries();
 
         webView = new WebView(this);
         setContentView(webView);
@@ -68,6 +74,47 @@ public class MainActivity extends Activity {
 
         webView.addJavascriptInterface(new AndroidBridge(), "AndroidBridge");
         webView.loadUrl("file:///android_asset/index.html");
+    }
+
+    private void setupShizukuBinaries() {
+        try {
+            File filesDir = getFilesDir();
+            rishFile = new File(filesDir, "rish");
+            rishDexFile = new File(filesDir, "rish_shizuku.dex");
+
+            // Extract rish
+            extractAsset("rish", rishFile);
+            rishFile.setExecutable(true, false);
+            rishFile.setReadable(true, false);
+
+            // Extract rish_shizuku.dex
+            extractAsset("rish_shizuku.dex", rishDexFile);
+            rishDexFile.setReadable(true, false);
+
+            // Android 14+ (SDK >= 34) requires app_process dex files to be read-only (chmod 400)
+            if (Build.VERSION.SDK_INT >= 34) {
+                rishDexFile.setWritable(false, false);
+            }
+        } catch (Exception e) {
+            // Ignore asset extraction errors
+        }
+    }
+
+    private void extractAsset(String assetName, File destFile) {
+        try {
+            InputStream in = getAssets().open(assetName);
+            OutputStream out = new FileOutputStream(destFile);
+            byte[] buf = new byte[8192];
+            int len;
+            while ((len = in.read(buf)) > 0) {
+                out.write(buf, 0, len);
+            }
+            in.close();
+            out.flush();
+            out.close();
+        } catch (Exception e) {
+            // Ignore
+        }
     }
 
     private class AndroidBridge {
@@ -94,19 +141,112 @@ public class MainActivity extends Activity {
         }
 
         @JavascriptInterface
+        public void requestShizukuPermission() {
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        Intent intent = new Intent("moe.shizuku.manager.intent.action.REQUEST_PERMISSION");
+                        intent.setPackage("moe.shizuku.privileged.api");
+                        intent.putExtra("moe.shizuku.manager.intent.extra.PACKAGE_NAME", getPackageName());
+                        startActivity(intent);
+                    } catch (Exception e) {
+                        try {
+                            Intent intent = new Intent("moe.shizuku.manager.intent.action.REQUEST_PERMISSION");
+                            intent.setPackage("af.shizuku.plus.api");
+                            intent.putExtra("moe.shizuku.manager.intent.extra.PACKAGE_NAME", getPackageName());
+                            startActivity(intent);
+                        } catch (Exception e2) {
+                            try {
+                                Intent launchIntent = getPackageManager().getLaunchIntentForPackage("moe.shizuku.privileged.api");
+                                if (launchIntent != null) {
+                                    startActivity(launchIntent);
+                                } else {
+                                    Intent launchPlus = getPackageManager().getLaunchIntentForPackage("af.shizuku.plus.api");
+                                    if (launchPlus != null) {
+                                        startActivity(launchPlus);
+                                    } else {
+                                        Toast.makeText(MainActivity.this, "Shizuku app not found on device!", Toast.LENGTH_LONG).show();
+                                    }
+                                }
+                            } catch (Exception e3) {
+                                Toast.makeText(MainActivity.this, "Failed to launch Shizuku: " + e3.getMessage(), Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        @JavascriptInterface
+        public String checkShizukuStatus() {
+            JSONObject obj = new JSONObject();
+            try {
+                boolean installed = false;
+                try {
+                    getPackageManager().getPackageInfo("moe.shizuku.privileged.api", 0);
+                    installed = true;
+                } catch (Exception e) {
+                    try {
+                        getPackageManager().getPackageInfo("af.shizuku.plus.api", 0);
+                        installed = true;
+                    } catch (Exception ignored) {}
+                }
+                obj.put("installed", installed);
+
+                // Test execution through bundled rish
+                String testId = executeShell("id");
+                boolean authorized = testId.contains("uid=2000") || testId.contains("shell") || testId.contains("uid=0");
+                obj.put("authorized", authorized);
+                obj.put("running", authorized || testId.contains("Waiting for Shizuku"));
+                obj.put("raw", testId.trim());
+
+                return obj.toString();
+            } catch (Exception e) {
+                return "{\"installed\":false,\"authorized\":false,\"running\":false}";
+            }
+        }
+
+        @JavascriptInterface
         public String executeShell(String cmd) {
             StringBuilder sb = new StringBuilder();
             try {
-                Process p;
-                try {
-                    p = Runtime.getRuntime().exec(new String[]{"rish", "-c", cmd});
-                } catch (Exception e) {
+                Process p = null;
+
+                // 1. Try bundled Shizuku rish
+                if (rishFile != null && rishFile.exists()) {
+                    try {
+                        ProcessBuilder pb = new ProcessBuilder(
+                                "/system/bin/sh",
+                                rishFile.getAbsolutePath(),
+                                "-c",
+                                cmd
+                        );
+                        pb.environment().put("RISH_APPLICATION_ID", getPackageName());
+                        pb.redirectErrorStream(true);
+                        p = pb.start();
+                    } catch (Exception ignored) {}
+                }
+
+                // 2. Try global rish
+                if (p == null) {
+                    try {
+                        p = Runtime.getRuntime().exec(new String[]{"rish", "-c", cmd});
+                    } catch (Exception ignored) {}
+                }
+
+                // 3. Try Root su
+                if (p == null) {
                     try {
                         p = Runtime.getRuntime().exec(new String[]{"su", "-c", cmd});
-                    } catch (Exception e2) {
-                        p = Runtime.getRuntime().exec(new String[]{"sh", "-c", cmd});
-                    }
+                    } catch (Exception ignored) {}
                 }
+
+                // 4. Fallback to standard sh
+                if (p == null) {
+                    p = Runtime.getRuntime().exec(new String[]{"/system/bin/sh", "-c", cmd});
+                }
+
                 BufferedReader reader = new BufferedReader(new InputStreamReader(p.getInputStream()));
                 String line;
                 while ((line = reader.readLine()) != null) {
@@ -372,7 +512,6 @@ public class MainActivity extends Activity {
 
         @JavascriptInterface
         public String setAppOp(String pkg, String op, String mode) {
-            // mode: allow, ignore, default
             return executeShell("appops set " + pkg + " " + op + " " + mode);
         }
 
