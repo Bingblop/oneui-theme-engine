@@ -39,29 +39,30 @@
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
         }
 
-        html, body {
-            margin: 0;
-            padding: 0;
+        html {
+            background-color: var(--bg-base);
+        }
+
+        body {
             background-color: var(--bg-base);
             color: var(--text-main);
-            overflow: hidden;
-            height: 100vh;
-            height: 100dvh;
+            padding: 0 0 160px 0;
+            min-height: 100vh;
             -webkit-user-select: none;
             user-select: none;
-            touch-action: pan-x pan-y;
         }
 
         /* Top Sticky Header */
         .app-header {
-            height: 64px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
             background: #080A0F;
             border-bottom: 1px solid var(--border-glass);
             padding: 12px 16px;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            flex-shrink: 0;
         }
 
         .brand-box {
@@ -129,22 +130,19 @@
             100% { transform: scale(0.95); opacity: 0.8; }
         }
 
-        /* Top Navigation Tabs with Momentum Pan-X */
+        /* Top Navigation Tabs */
         .tab-bar {
             display: flex;
             background: #0E121B;
             border-bottom: 1px solid var(--border-glass);
             overflow-x: auto;
-            overflow-y: hidden;
-            -webkit-overflow-scrolling: touch;
-            touch-action: pan-x;
-            overscroll-behavior-x: contain;
             scrollbar-width: none;
             padding: 6px 10px;
             position: sticky;
             top: 65px;
             z-index: 90;
-            scroll-behavior: smooth;
+            -webkit-overflow-scrolling: touch;
+            touch-action: pan-x;
         }
 
         .tab-bar::-webkit-scrollbar {
@@ -153,7 +151,7 @@
 
         .tab-btn {
             flex: 0 0 auto;
-            padding: 9px 16px;
+            padding: 8px 16px;
             background: none;
             border: none;
             color: var(--text-muted);
@@ -161,7 +159,7 @@
             font-weight: 800;
             cursor: pointer;
             border-radius: 20px;
-            margin: 2px 4px;
+            margin: 0 4px;
             transition: all 0.2s ease;
             display: flex;
             align-items: center;
@@ -175,30 +173,20 @@
             box-shadow: 0 2px 12px var(--accent-glow);
         }
 
-        /* Container */
+        /* Main Container */
         .container {
-            padding: 12px 16px;
+            padding: 14px 16px;
             max-width: 600px;
             margin: 0 auto;
         }
 
-        
-
-        
-
-        @keyframes slideInRight {
-            from { opacity: 0; transform: translateX(24px); }
-            to { opacity: 1; transform: translateX(0); }
+        .view-content {
+            display: none;
         }
 
-        @keyframes slideInLeft {
-            from { opacity: 0; transform: translateX(-24px); }
-            to { opacity: 1; transform: translateX(0); }
+        .view-content.active {
+            display: block;
         }
-
-        
-
-        
 
         /* Stats Dashboard Strip */
         .stats-grid {
@@ -279,14 +267,11 @@
             display: flex;
             gap: 8px;
             overflow-x: auto;
-            overflow-y: hidden;
+            scrollbar-width: none;
+            padding-bottom: 6px;
+            margin-bottom: 14px;
             -webkit-overflow-scrolling: touch;
             touch-action: pan-x;
-            overscroll-behavior-x: contain;
-            scrollbar-width: none;
-            padding: 4px 6px 8px 6px;
-            margin-bottom: 12px;
-            scroll-behavior: smooth;
         }
 
         .filter-scroll::-webkit-scrollbar {
@@ -304,6 +289,7 @@
             color: var(--text-muted);
             cursor: pointer;
             transition: all 0.15s ease;
+            white-space: nowrap;
         }
 
         .filter-pill.active {
@@ -312,7 +298,7 @@
             color: var(--accent);
         }
 
-        /* Clean Native App Card */
+        /* App Cards */
         .app-card {
             background: var(--bg-card);
             border: 1px solid var(--border-glass);
@@ -468,7 +454,7 @@
             color: #000000;
         }
 
-        /* Docked Batch Action Sheet (One UI Style) */
+        /* DOCKED BATCH COMMANDS SHEET (One UI 2-Row Grid: Never Cut Off, No Side Scroll Needed!) */
         .batch-bottom-sheet {
             position: fixed;
             bottom: 0;
@@ -477,12 +463,13 @@
             background: #0E121B;
             border-top: 2px solid var(--accent);
             border-radius: 20px 20px 0 0;
-            box-shadow: 0 -8px 32px rgba(0, 0, 0, 0.85), 0 0 20px var(--accent-glow);
-            padding: 12px 16px 22px 16px;
+            box-shadow: 0 -8px 32px rgba(0, 0, 0, 0.9), 0 0 24px var(--accent-glow);
+            padding: 12px 16px 24px 16px;
             z-index: 200;
             transform: translateY(120%);
             transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1);
-            touch-action: pan-y;
+            max-width: 600px;
+            margin: 0 auto;
         }
 
         .batch-bottom-sheet.show {
@@ -519,48 +506,36 @@
             font-size: 11px;
             font-weight: 800;
             cursor: pointer;
-            padding: 2px;
+            padding: 4px;
         }
 
-        .batch-actions-scroll {
-            display: flex;
+        /* 3-Column Responsive Grid: 100% On Screen, No Cut Off! */
+        .batch-actions-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
             gap: 8px;
-            overflow-x: auto;
-            overflow-y: hidden;
-            -webkit-overflow-scrolling: touch;
-            touch-action: pan-x;
-            overscroll-behavior-x: contain;
-            scrollbar-width: none;
-            padding: 2px 2px 6px 2px;
-            scroll-behavior: smooth;
         }
 
-        .batch-actions-scroll::-webkit-scrollbar {
-            display: none;
-        }
-
-        .batch-action-pill {
-            flex: 0 0 auto;
-            height: 40px;
-            padding: 0 14px;
-            background: rgba(255, 255, 255, 0.07);
+        .batch-grid-btn {
+            height: 44px;
+            background: rgba(255, 255, 255, 0.08);
             border: 1px solid var(--border-glass);
-            border-radius: 20px;
+            border-radius: 12px;
             color: #FFFFFF;
-            font-size: 12px;
+            font-size: 11px;
             font-weight: 800;
             cursor: pointer;
             display: flex;
             align-items: center;
+            justify-content: center;
             gap: 6px;
-            white-space: nowrap;
             transition: all 0.15s ease;
         }
 
-        .batch-action-pill:active {
+        .batch-grid-btn:active {
             background: var(--accent);
             color: #000000;
-            transform: scale(0.97);
+            transform: scale(0.96);
         }
 
         /* Color Settings View */
@@ -981,10 +956,10 @@
         <button class="tab-btn" onclick="switchView('terminal')">💻 ADB Console</button>
     </nav>
 
-    <div class="viewpager-track" id="viewpagerTrack">
+    <div class="container">
 
         <!-- VIEW 1: APPLICATIONS LIST -->
-        <section id="view-apps" class="view-page">
+        <section id="view-apps" class="view-content active">
             
             <!-- Live Statistics Grid -->
             <div class="stats-grid">
@@ -1041,7 +1016,7 @@
         </section>
 
         <!-- VIEW 2: BLOATWARE PRESETS -->
-        <section id="view-bloatware" class="view-page">
+        <section id="view-bloatware" class="view-content">
             <div style="margin-bottom:14px;">
                 <h3 style="font-size:15px; font-weight:800; margin-bottom:4px;">One-Tap Bloatware Manager</h3>
                 <p style="font-size:11px; color:var(--text-muted);">Batch debloat safe OEM & carrier background services.</p>
@@ -1098,7 +1073,7 @@
         </section>
 
         <!-- VIEW 3: COLOR & THEMES CUSTOMIZER -->
-        <section id="view-colors" class="view-page">
+        <section id="view-colors" class="view-content">
             <div class="color-card">
                 <div class="color-card-title">🎨 Curated Theme Palettes</div>
                 <div class="color-card-subtitle">Choose from luxury dark and high-contrast color schemes</div>
@@ -1249,7 +1224,7 @@
         </section>
 
         <!-- VIEW 4: ADB CONSOLE -->
-        <section id="view-terminal" class="view-page">
+        <section id="view-terminal" class="view-content">
             <div class="bloat-card" style="margin-bottom:14px; border-color:var(--accent);">
                 <div class="bloat-header">
                     <div>
@@ -1259,8 +1234,7 @@
                     <button class="bloat-btn" onclick="handleShizukuTap()">Authorize</button>
                 </div>
                 <div style="display:flex; gap:8px; margin-top:8px;">
-                    <button class="apps-tool-btn" onclick="checkShizuku();
-            initViewPager(); showToast('Checked Shizuku status', '🔍');">Check Status</button>
+                    <button class="apps-tool-btn" onclick="checkShizuku(); showToast('Checked Shizuku status', '🔍');">Check Status</button>
                     <button class="apps-tool-btn" onclick="document.getElementById('termCmd').value = 'id'; runTerminalCmd();">Test UID (id)</button>
                     <button class="apps-tool-btn" onclick="document.getElementById('termCmd').value = 'pm list packages -s | head -n 10'; runTerminalCmd();">Sample PM</button>
                 </div>
@@ -1284,7 +1258,7 @@ Type any command below (e.g. pm list packages -d)
 
     </div>
 
-    <!-- Docked Batch Action Sheet -->
+    <!-- DOCKED BATCH COMMANDS SHEET (2-Row Grid: Never Cut Off, No Side Scroll Needed!) -->
     <div class="batch-bottom-sheet" id="floatingBatchBar">
         <div class="batch-sheet-header">
             <div class="batch-sheet-title">
@@ -1292,27 +1266,27 @@ Type any command below (e.g. pm list packages -d)
                 <span id="batchCountText">0 Selected</span>
             </div>
             <div class="batch-sheet-tools">
-                <button class="batch-tool-link" onclick="selectAllVisible(true)">Select All Visible</button>
-                <button class="batch-tool-link" onclick="clearBatchSelection()">Deselect All ✕</button>
+                <button class="batch-tool-link" onclick="selectAllVisible(true)">Select All</button>
+                <button class="batch-tool-link" onclick="clearBatchSelection()">Deselect ✕</button>
             </div>
         </div>
-        <div class="batch-actions-scroll">
-            <button class="batch-action-pill" onclick="batchAction('freeze')">
+        <div class="batch-actions-grid">
+            <button class="batch-grid-btn" onclick="batchAction('freeze')">
                 <span>❄️</span> Freeze
             </button>
-            <button class="batch-action-pill" onclick="batchAction('unfreeze')">
+            <button class="batch-grid-btn" onclick="batchAction('unfreeze')">
                 <span>🔥</span> Enable
             </button>
-            <button class="batch-action-pill" onclick="batchAction('force_stop')">
-                <span>🛑</span> Force Stop
+            <button class="batch-grid-btn" onclick="batchAction('force_stop')">
+                <span>🛑</span> Stop
             </button>
-            <button class="batch-action-pill" onclick="batchAction('clear_data')">
+            <button class="batch-grid-btn" onclick="batchAction('clear_data')">
                 <span>🧹</span> Clear Data
             </button>
-            <button class="batch-action-pill" onclick="batchAction('uninstall')">
+            <button class="batch-grid-btn" onclick="batchAction('uninstall')">
                 <span>🗑️</span> Uninstall
             </button>
-            <button class="batch-action-pill" onclick="batchAction('reinstall')">
+            <button class="batch-grid-btn" onclick="batchAction('reinstall')">
                 <span>📥</span> Reinstall
             </button>
         </div>
@@ -1422,52 +1396,29 @@ Type any command below (e.g. pm list packages -d)
         };
 
         const tabKeys = ['apps', 'bloatware', 'colors', 'terminal'];
-        let currentTabIdx = 0;
-        let isProgrammaticScroll = false;
 
-        function initViewPager() {
-            const track = document.getElementById('viewpagerTrack');
-            if (!track) return;
+        function switchView(viewName) {
+            const targetIdx = tabKeys.indexOf(viewName);
+            if (targetIdx === -1) return;
 
-            let scrollTimer;
-            track.addEventListener('scroll', () => {
-                if (isProgrammaticScroll) return;
-                clearTimeout(scrollTimer);
-                scrollTimer = setTimeout(() => {
-                    const pageW = track.clientWidth || window.innerWidth;
-                    const newIdx = Math.round(track.scrollLeft / pageW);
-                    if (newIdx !== currentTabIdx && newIdx >= 0 && newIdx < tabKeys.length) {
-                        currentTabIdx = newIdx;
-                        updateActiveTabUI(newIdx);
-                        haptic();
-                    }
-                }, 40);
-            }, { passive: true });
-        }
-
-        function updateActiveTabUI(idx) {
+            // Update Tab Buttons
             const tabBtns = document.querySelectorAll('.tab-btn');
-            tabBtns.forEach((b, i) => {
-                const isActive = (i === idx);
+            tabBtns.forEach((b, idx) => {
+                const isActive = (idx === targetIdx);
                 b.classList.toggle('active', isActive);
                 if (isActive) {
                     b.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
                 }
             });
-        }
 
-        function switchView(tabKey) {
-            const targetIdx = tabKeys.indexOf(tabKey);
-            if (targetIdx === -1) return;
-            currentTabIdx = targetIdx;
-            updateActiveTabUI(targetIdx);
+            // Update Views
+            document.querySelectorAll('.view-content').forEach(v => {
+                v.classList.remove('active');
+            });
 
-            const track = document.getElementById('viewpagerTrack');
-            if (track) {
-                isProgrammaticScroll = true;
-                const pageW = track.clientWidth || window.innerWidth;
-                track.scrollTo({ left: targetIdx * pageW, behavior: 'smooth' });
-                setTimeout(() => { isProgrammaticScroll = false; }, 350);
+            const activeView = document.getElementById('view-' + viewName);
+            if (activeView) {
+                activeView.classList.add('active');
             }
             haptic();
         }
@@ -1525,7 +1476,6 @@ Type any command below (e.g. pm list packages -d)
         // Initialize App
         function initApp() {
             checkShizuku();
-            initViewPager();
 
             if (window.AndroidBridge) {
                 const sysInfoStr = window.AndroidBridge.getSystemInfo();
@@ -1538,7 +1488,7 @@ Type any command below (e.g. pm list packages -d)
 
                 setTimeout(loadPackageData, 80);
             } else {
-                for (let i = 1; i <= 80; i++) {
+                for (let i = 1; i <= 60; i++) {
                     const ch = String.fromCharCode(65 + (i % 26));
                     allApps.push({
                         name: `${ch}pplication ${i}`,
