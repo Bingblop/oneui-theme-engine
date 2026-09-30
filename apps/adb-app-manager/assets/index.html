@@ -130,17 +130,22 @@
             100% { transform: scale(0.95); opacity: 0.8; }
         }
 
-        /* Top Navigation Tabs */
+        /* Top Navigation Tabs with Momentum Pan-X */
         .tab-bar {
             display: flex;
             background: #0E121B;
             border-bottom: 1px solid var(--border-glass);
             overflow-x: auto;
+            overflow-y: hidden;
+            -webkit-overflow-scrolling: touch;
+            touch-action: pan-x;
+            overscroll-behavior-x: contain;
             scrollbar-width: none;
-            padding: 4px 8px;
+            padding: 6px 10px;
             position: sticky;
             top: 65px;
             z-index: 90;
+            scroll-behavior: smooth;
         }
 
         .tab-bar::-webkit-scrollbar {
@@ -149,7 +154,7 @@
 
         .tab-btn {
             flex: 0 0 auto;
-            padding: 9px 15px;
+            padding: 9px 16px;
             background: none;
             border: none;
             color: var(--text-muted);
@@ -157,11 +162,12 @@
             font-weight: 800;
             cursor: pointer;
             border-radius: 20px;
-            margin: 3px;
+            margin: 2px 4px;
             transition: all 0.2s ease;
             display: flex;
             align-items: center;
             gap: 6px;
+            white-space: nowrap;
         }
 
         .tab-btn.active {
@@ -179,10 +185,29 @@
 
         .view-content {
             display: none;
+            touch-action: pan-y;
         }
 
         .view-content.active {
             display: block;
+        }
+
+        @keyframes slideInRight {
+            from { opacity: 0; transform: translateX(24px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        @keyframes slideInLeft {
+            from { opacity: 0; transform: translateX(-24px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        .view-content.slide-left {
+            animation: slideInRight 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .view-content.slide-right {
+            animation: slideInLeft 0.2s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
         /* Stats Dashboard Strip */
@@ -264,9 +289,14 @@
             display: flex;
             gap: 8px;
             overflow-x: auto;
+            overflow-y: hidden;
+            -webkit-overflow-scrolling: touch;
+            touch-action: pan-x;
+            overscroll-behavior-x: contain;
             scrollbar-width: none;
-            padding-bottom: 6px;
+            padding: 4px 6px 8px 6px;
             margin-bottom: 12px;
+            scroll-behavior: smooth;
         }
 
         .filter-scroll::-webkit-scrollbar {
@@ -1335,13 +1365,83 @@ Type any command below (e.g. pm list packages -d)
             crimson: { accent: '#FF1744', bg: '#000000', card: '#1C080B', running: '#00E676', frozen: '#FF1744', system: '#D50000', bloat: '#FF5252' }
         };
 
-        function switchView(viewName) {
-            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-            event.currentTarget.classList.add('active');
-            document.querySelectorAll('.view-content').forEach(v => v.classList.remove('active'));
-            document.getElementById('view-' + viewName).classList.add('active');
+        const tabKeys = ['apps', 'bloatware', 'colors', 'terminal'];
+
+        function switchView(viewName, direction = 'none') {
+            const targetIdx = tabKeys.indexOf(viewName);
+            if (targetIdx === -1) return;
+
+            // Update Tab Buttons
+            const tabBtns = document.querySelectorAll('.tab-btn');
+            tabBtns.forEach((b, idx) => {
+                const isActive = (idx === targetIdx);
+                b.classList.toggle('active', isActive);
+                if (isActive) {
+                    b.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+                }
+            });
+
+            // Update Views
+            document.querySelectorAll('.view-content').forEach(v => {
+                v.classList.remove('active', 'slide-left', 'slide-right');
+            });
+
+            const activeView = document.getElementById('view-' + viewName);
+            if (activeView) {
+                activeView.classList.add('active');
+                if (direction === 'left') {
+                    activeView.classList.add('slide-left');
+                } else if (direction === 'right') {
+                    activeView.classList.add('slide-right');
+                }
+            }
             haptic();
         }
+
+        // Horizontal Swipe Navigation across Tabs (ViewPager gesture)
+        let touchStartX = 0;
+        let touchStartY = 0;
+        let touchStartTime = 0;
+
+        window.addEventListener('touchstart', (e) => {
+            if (e.touches.length !== 1) return;
+            touchStartX = e.touches[0].clientX;
+            touchStartY = e.touches[0].clientY;
+            touchStartTime = Date.now();
+        }, { passive: true });
+
+        window.addEventListener('touchend', (e) => {
+            if (e.changedTouches.length !== 1) return;
+            const touchEndX = e.changedTouches[0].clientX;
+            const touchEndY = e.changedTouches[0].clientY;
+            const dx = touchEndX - touchStartX;
+            const dy = touchEndY - touchStartY;
+            const dt = Date.now() - touchStartTime;
+
+            // Must be a clean horizontal swipe gesture
+            if (Math.abs(dx) > 55 && Math.abs(dx) > Math.abs(dy) * 1.3 && dt < 600) {
+                const target = e.target;
+                if (target && target.closest && (
+                    target.closest('.filter-scroll') || 
+                    target.closest('.tab-bar') || 
+                    target.closest('.terminal-box') || 
+                    target.closest('input') || 
+                    target.closest('.modal-sheet')
+                )) {
+                    return;
+                }
+
+                const currentActiveView = document.querySelector('.view-content.active');
+                const currentViewId = currentActiveView ? currentActiveView.id.replace('view-', '') : 'apps';
+                const currentIdx = tabKeys.indexOf(currentViewId);
+
+                if (dx < 0 && currentIdx < tabKeys.length - 1) {
+                    switchView(tabKeys[currentIdx + 1], 'left');
+                } else if (dx > 0 && currentIdx > 0) {
+                    switchView(tabKeys[currentIdx - 1], 'right');
+                }
+            }
+        }, { passive: true });
 
         function haptic() {
             if (window.AndroidBridge && window.AndroidBridge.vibrate) {
@@ -1581,6 +1681,7 @@ Type any command below (e.g. pm list packages -d)
             if (el) {
                 document.querySelectorAll('.filter-pill').forEach(p => p.classList.remove('active'));
                 el.classList.add('active');
+                el.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
             }
             haptic();
             renderApps();
