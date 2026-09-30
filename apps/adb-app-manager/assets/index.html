@@ -478,57 +478,99 @@
             color: #000000;
         }
 
-        /* Floating Batch Bar */
-        .floating-batch-bar {
+        /* Docked Batch Action Sheet (One UI Style) */
+        .batch-bottom-sheet {
             position: fixed;
-            bottom: 24px;
-            left: 50%;
-            transform: translateX(-50%) translateY(150px);
-            background: #10141E;
-            border: 1px solid var(--accent);
-            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.8), 0 0 20px var(--accent-glow);
-            border-radius: 30px;
-            padding: 8px 14px;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: #0E121B;
+            border-top: 2px solid var(--accent);
+            border-radius: 20px 20px 0 0;
+            box-shadow: 0 -8px 32px rgba(0, 0, 0, 0.85), 0 0 20px var(--accent-glow);
+            padding: 12px 16px 22px 16px;
+            z-index: 200;
+            transform: translateY(120%);
+            transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+            touch-action: pan-y;
+        }
+
+        .batch-bottom-sheet.show {
+            transform: translateY(0);
+        }
+
+        .batch-sheet-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            padding: 0 4px;
+        }
+
+        .batch-sheet-title {
+            font-size: 13px;
+            font-weight: 800;
             display: flex;
             align-items: center;
             gap: 6px;
-            z-index: 180;
-            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            max-width: 92vw;
-            overflow-x: auto;
+            color: #FFFFFF;
         }
 
-        .floating-batch-bar.show {
-            transform: translateX(-50%) translateY(0);
+        .batch-sheet-tools {
+            display: flex;
+            align-items: center;
+            gap: 12px;
         }
 
-        .batch-count {
+        .batch-tool-link {
+            background: none;
+            border: none;
+            color: var(--accent);
             font-size: 11px;
             font-weight: 800;
-            color: var(--accent);
-            padding: 0 6px;
-            white-space: nowrap;
+            cursor: pointer;
+            padding: 2px;
         }
 
-        .batch-action-btn {
-            height: 36px;
-            padding: 0 11px;
-            background: rgba(255, 255, 255, 0.08);
+        .batch-actions-scroll {
+            display: flex;
+            gap: 8px;
+            overflow-x: auto;
+            overflow-y: hidden;
+            -webkit-overflow-scrolling: touch;
+            touch-action: pan-x;
+            overscroll-behavior-x: contain;
+            scrollbar-width: none;
+            padding: 2px 2px 6px 2px;
+            scroll-behavior: smooth;
+        }
+
+        .batch-actions-scroll::-webkit-scrollbar {
+            display: none;
+        }
+
+        .batch-action-pill {
+            flex: 0 0 auto;
+            height: 40px;
+            padding: 0 14px;
+            background: rgba(255, 255, 255, 0.07);
             border: 1px solid var(--border-glass);
-            border-radius: 18px;
+            border-radius: 20px;
             color: #FFFFFF;
-            font-size: 11px;
+            font-size: 12px;
             font-weight: 800;
             cursor: pointer;
             display: flex;
             align-items: center;
-            gap: 5px;
+            gap: 6px;
             white-space: nowrap;
+            transition: all 0.15s ease;
         }
 
-        .batch-action-btn:active {
+        .batch-action-pill:active {
             background: var(--accent);
             color: #000000;
+            transform: scale(0.97);
         }
 
         /* Color Settings View */
@@ -1251,15 +1293,38 @@ Type any command below (e.g. pm list packages -d)
 
     </div>
 
-    <!-- Floating Batch Actions Bar -->
-    <div class="floating-batch-bar" id="floatingBatchBar">
-        <span class="batch-count" id="batchCountText">0 Selected</span>
-        <button class="batch-action-btn" onclick="batchAction('freeze')">❄️ Freeze</button>
-        <button class="batch-action-btn" onclick="batchAction('unfreeze')">🔥 Enable</button>
-        <button class="batch-action-btn" onclick="batchAction('force_stop')">🛑 Stop</button>
-        <button class="batch-action-btn" onclick="batchAction('uninstall')">🗑️ Uninstall</button>
-        <button class="batch-action-btn" onclick="batchAction('clear_data')">🧹 Clear</button>
-        <button class="batch-action-btn" onclick="clearBatchSelection()">✕</button>
+    <!-- Docked Batch Action Sheet -->
+    <div class="batch-bottom-sheet" id="floatingBatchBar">
+        <div class="batch-sheet-header">
+            <div class="batch-sheet-title">
+                <span style="color:var(--accent);">⚡</span>
+                <span id="batchCountText">0 Selected</span>
+            </div>
+            <div class="batch-sheet-tools">
+                <button class="batch-tool-link" onclick="selectAllVisible(true)">Select All Visible</button>
+                <button class="batch-tool-link" onclick="clearBatchSelection()">Deselect All ✕</button>
+            </div>
+        </div>
+        <div class="batch-actions-scroll">
+            <button class="batch-action-pill" onclick="batchAction('freeze')">
+                <span>❄️</span> Freeze
+            </button>
+            <button class="batch-action-pill" onclick="batchAction('unfreeze')">
+                <span>🔥</span> Enable
+            </button>
+            <button class="batch-action-pill" onclick="batchAction('force_stop')">
+                <span>🛑</span> Force Stop
+            </button>
+            <button class="batch-action-pill" onclick="batchAction('clear_data')">
+                <span>🧹</span> Clear Data
+            </button>
+            <button class="batch-action-pill" onclick="batchAction('uninstall')">
+                <span>🗑️</span> Uninstall
+            </button>
+            <button class="batch-action-pill" onclick="batchAction('reinstall')">
+                <span>📥</span> Reinstall
+            </button>
+        </div>
     </div>
 
     <!-- Inspector Modal -->
@@ -1426,7 +1491,8 @@ Type any command below (e.g. pm list packages -d)
                     target.closest('.tab-bar') || 
                     target.closest('.terminal-box') || 
                     target.closest('input') || 
-                    target.closest('.modal-sheet')
+                    target.closest('.modal-sheet') ||
+                    target.closest('.batch-bottom-sheet')
                 )) {
                     return;
                 }
@@ -1624,6 +1690,19 @@ Type any command below (e.g. pm list packages -d)
                 card.classList.toggle('selected', selectedPkgs.has(pkg));
                 card.querySelector('.app-checkbox').innerText = selectedPkgs.has(pkg) ? '✓' : '';
             }
+        }
+
+        function selectAllVisible(select) {
+            filteredApps.forEach(app => {
+                if (select) {
+                    selectedPkgs.add(app.pkg);
+                } else {
+                    selectedPkgs.delete(app.pkg);
+                }
+            });
+            updateBatchBar();
+            renderApps();
+            haptic();
         }
 
         function updateBatchBar() {
