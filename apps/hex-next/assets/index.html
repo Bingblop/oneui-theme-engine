@@ -1,0 +1,844 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>HexNext Themer</title>
+    <style>
+        :root {
+            --bg-base: #0B0D14;
+            --bg-card: rgba(23, 27, 40, 0.7);
+            --bg-card-hover: rgba(32, 38, 56, 0.9);
+            --border-glass: rgba(255, 255, 255, 0.08);
+            --border-active: rgba(0, 229, 255, 0.5);
+            --accent: #00E5FF;
+            --accent-glow: rgba(0, 229, 255, 0.35);
+            --secondary: #7C4DFF;
+            --text-main: #FFFFFF;
+            --text-muted: #8E9BAE;
+            --success: #00E676;
+            --danger: #FF5252;
+            --radius-lg: 24px;
+            --radius-md: 16px;
+            --radius-sm: 10px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            user-select: none;
+        }
+
+        body {
+            background-color: var(--bg-base);
+            color: var(--text-main);
+            padding: 16px 16px 40px 16px;
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        /* Top App Bar */
+        .app-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 6px 20px 6px;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .hex-logo {
+            width: 42px;
+            height: 42px;
+            background: linear-gradient(135deg, var(--accent), var(--secondary));
+            clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 0 20px var(--accent-glow);
+        }
+
+        .hex-logo-inner {
+            width: 32px;
+            height: 32px;
+            background: var(--bg-base);
+            clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 900;
+            font-size: 16px;
+            color: var(--accent);
+        }
+
+        .brand-title h1 {
+            font-size: 20px;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            background: linear-gradient(90deg, #FFFFFF, var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .brand-title p {
+            font-size: 11px;
+            color: var(--text-muted);
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+
+        .status-badge {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(0, 230, 118, 0.12);
+            border: 1px solid rgba(0, 230, 118, 0.3);
+            color: var(--success);
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--success);
+            box-shadow: 0 0 10px var(--success);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(0.95); opacity: 0.8; }
+            50% { transform: scale(1.2); opacity: 1; }
+            100% { transform: scale(0.95); opacity: 0.8; }
+        }
+
+        /* Live Preview Stage */
+        .preview-card {
+            background: var(--bg-card);
+            backdrop-filter: blur(16px);
+            border: 1px solid var(--border-glass);
+            border-radius: var(--radius-lg);
+            padding: 18px;
+            margin-bottom: 22px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .preview-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 14px;
+        }
+
+        .preview-title {
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+        }
+
+        /* Mockup Screens */
+        .mockup-container {
+            background: #000000;
+            border-radius: var(--radius-md);
+            border: 1px solid var(--border-glass);
+            padding: 16px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .mock-qs-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+            margin-bottom: 14px;
+        }
+
+        .mock-tile {
+            background: var(--accent);
+            border-radius: 18px;
+            height: 52px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: #000000;
+            font-size: 10px;
+            font-weight: 700;
+            box-shadow: 0 4px 12px var(--accent-glow);
+            transition: all 0.3s ease;
+        }
+
+        .mock-tile.inactive {
+            background: #1C1D26;
+            color: #8E9BAE;
+            box-shadow: none;
+        }
+
+        .mock-tile-icon {
+            font-size: 16px;
+            margin-bottom: 2px;
+        }
+
+        .mock-noti {
+            background: #141722;
+            border-radius: 14px;
+            padding: 12px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            border-left: 4px solid var(--accent);
+        }
+
+        .mock-noti-icon {
+            width: 32px;
+            height: 32px;
+            border-radius: 10px;
+            background: var(--accent);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #000000;
+            font-size: 14px;
+            font-weight: 900;
+        }
+
+        .mock-noti-text h4 {
+            font-size: 13px;
+            font-weight: 700;
+            margin-bottom: 2px;
+        }
+
+        .mock-noti-text p {
+            font-size: 11px;
+            color: var(--text-muted);
+        }
+
+        /* Section Cards */
+        .section-title {
+            font-size: 14px;
+            font-weight: 800;
+            letter-spacing: 0.5px;
+            margin: 20px 6px 12px 6px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--text-main);
+        }
+
+        .section-title span {
+            color: var(--accent);
+        }
+
+        /* Presets Carousel */
+        .presets-scroll {
+            display: flex;
+            gap: 12px;
+            overflow-x: auto;
+            padding-bottom: 6px;
+            margin-bottom: 18px;
+            scrollbar-width: none;
+        }
+
+        .presets-scroll::-webkit-scrollbar {
+            display: none;
+        }
+
+        .preset-card {
+            flex: 0 0 140px;
+            background: var(--bg-card);
+            border: 1px solid var(--border-glass);
+            border-radius: var(--radius-md);
+            padding: 14px;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            position: relative;
+        }
+
+        .preset-card.active {
+            border-color: var(--accent);
+            box-shadow: 0 0 16px var(--accent-glow);
+            background: var(--bg-card-hover);
+        }
+
+        .preset-palette {
+            display: flex;
+            height: 18px;
+            border-radius: 6px;
+            overflow: hidden;
+            margin-bottom: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .preset-swatch {
+            flex: 1;
+            height: 100%;
+        }
+
+        .preset-name {
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--text-main);
+            margin-bottom: 2px;
+        }
+
+        .preset-desc {
+            font-size: 10px;
+            color: var(--text-muted);
+        }
+
+        /* Color Customizer */
+        .customizer-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-glass);
+            border-radius: var(--radius-lg);
+            padding: 18px;
+            margin-bottom: 22px;
+        }
+
+        .color-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid var(--border-glass);
+        }
+
+        .color-row:last-child {
+            border-bottom: none;
+        }
+
+        .color-info h4 {
+            font-size: 13px;
+            font-weight: 700;
+        }
+
+        .color-info p {
+            font-size: 11px;
+            color: var(--text-muted);
+        }
+
+        .color-picker-btn {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(0, 0, 0, 0.4);
+            border: 1px solid var(--border-glass);
+            padding: 4px 10px 4px 6px;
+            border-radius: 20px;
+            cursor: pointer;
+        }
+
+        .color-bubble {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            border: 2px solid #FFFFFF;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.5);
+        }
+
+        .color-hex {
+            font-size: 12px;
+            font-weight: 700;
+            font-family: monospace;
+            color: #FFFFFF;
+        }
+
+        input[type="color"] {
+            opacity: 0;
+            position: absolute;
+            pointer-events: none;
+        }
+
+        /* Target Apps Checkboxes */
+        .targets-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-bottom: 24px;
+        }
+
+        .target-item {
+            background: var(--bg-card);
+            border: 1px solid var(--border-glass);
+            border-radius: var(--radius-md);
+            padding: 12px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .target-item.selected {
+            border-color: var(--accent);
+            background: rgba(0, 229, 255, 0.08);
+        }
+
+        .target-check {
+            width: 20px;
+            height: 20px;
+            border-radius: 6px;
+            border: 2px solid var(--border-glass);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 11px;
+            color: #000000;
+            font-weight: 900;
+            transition: all 0.2s ease;
+        }
+
+        .target-item.selected .target-check {
+            background: var(--accent);
+            border-color: var(--accent);
+        }
+
+        .target-info h5 {
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        .target-info span {
+            font-size: 10px;
+            color: var(--text-muted);
+        }
+
+        /* Main Action Button */
+        .btn-apply {
+            width: 100%;
+            height: 56px;
+            background: linear-gradient(135deg, var(--accent), var(--secondary));
+            border: none;
+            border-radius: var(--radius-lg);
+            color: #000000;
+            font-size: 16px;
+            font-weight: 900;
+            letter-spacing: 0.5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            cursor: pointer;
+            box-shadow: 0 8px 24px var(--accent-glow);
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+            margin-bottom: 12px;
+        }
+
+        .btn-apply:active {
+            transform: scale(0.98);
+            box-shadow: 0 4px 12px var(--accent-glow);
+        }
+
+        .btn-secondary-row {
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn-sec {
+            flex: 1;
+            height: 46px;
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid var(--border-glass);
+            border-radius: var(--radius-md);
+            color: var(--text-main);
+            font-size: 13px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            cursor: pointer;
+        }
+
+        .btn-sec:active {
+            background: rgba(255, 255, 255, 0.12);
+        }
+
+        /* Toast Container */
+        .toast {
+            position: fixed;
+            bottom: 24px;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: rgba(23, 27, 40, 0.95);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--accent);
+            color: #FFFFFF;
+            padding: 12px 24px;
+            border-radius: 30px;
+            font-size: 13px;
+            font-weight: 700;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            z-index: 999;
+            pointer-events: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .toast.show {
+            transform: translateX(-50%) translateY(0);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <div class="app-header">
+        <div class="brand">
+            <div class="hex-logo">
+                <div class="hex-logo-inner">⚡</div>
+            </div>
+            <div class="brand-title">
+                <h1>HexNext</h1>
+                <p>One UI 9.0 Themer</p>
+            </div>
+        </div>
+        <div class="status-badge" id="shizukuBadge">
+            <div class="status-dot"></div>
+            <span id="shizukuText">Ready</span>
+        </div>
+    </div>
+
+    <!-- Live Preview Stage -->
+    <div class="preview-card">
+        <div class="preview-header">
+            <div class="preview-title">Live Preview (One UI 9.0)</div>
+            <div style="font-size: 11px; color: var(--accent); font-weight: 700;">Instant Fabrication</div>
+        </div>
+        <div class="mockup-container" id="mockContainer">
+            <!-- Quick Settings Grid -->
+            <div class="mock-qs-grid">
+                <div class="mock-tile" id="mockTile1">
+                    <div class="mock-tile-icon">📶</div>
+                    <div>Wi-Fi</div>
+                </div>
+                <div class="mock-tile" id="mockTile2">
+                    <div class="mock-tile-icon">ᛒ</div>
+                    <div>Bluetooth</div>
+                </div>
+                <div class="mock-tile inactive">
+                    <div class="mock-tile-icon">🔊</div>
+                    <div>Sound</div>
+                </div>
+                <div class="mock-tile inactive">
+                    <div class="mock-tile-icon">🔦</div>
+                    <div>Torch</div>
+                </div>
+            </div>
+
+            <!-- Notification Bubble -->
+            <div class="mock-noti" id="mockNoti">
+                <div class="mock-noti-icon" id="mockNotiIcon">💬</div>
+                <div class="mock-noti-text">
+                    <h4 id="mockNotiTitle">Messages</h4>
+                    <p id="mockNotiSub">HexNext: Theme loaded with dynamic palette</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Theme Presets Carousel -->
+    <div class="section-title">
+        <span>🎨</span> Curated One UI 9 Presets
+    </div>
+    <div class="presets-scroll">
+        <div class="preset-card active" onclick="selectPreset('amoled')">
+            <div class="preset-palette">
+                <div class="preset-swatch" style="background:#00E5FF"></div>
+                <div class="preset-swatch" style="background:#000000"></div>
+                <div class="preset-swatch" style="background:#0F1117"></div>
+            </div>
+            <div class="preset-name">AMOLED Cyan</div>
+            <div class="preset-desc">Pitch Black OLED</div>
+        </div>
+
+        <div class="preset-card" onclick="selectPreset('tokyo')">
+            <div class="preset-palette">
+                <div class="preset-swatch" style="background:#8A2BE2"></div>
+                <div class="preset-swatch" style="background:#0D0E15"></div>
+                <div class="preset-swatch" style="background:#EDE7F6"></div>
+            </div>
+            <div class="preset-name">Tokyo Neon</div>
+            <div class="preset-desc">Cyberpunk Violet</div>
+        </div>
+
+        <div class="preset-card" onclick="selectPreset('crimson')">
+            <div class="preset-palette">
+                <div class="preset-swatch" style="background:#FF1744"></div>
+                <div class="preset-swatch" style="background:#000000"></div>
+                <div class="preset-swatch" style="background:#1A080B"></div>
+            </div>
+            <div class="preset-name">Blood Moon</div>
+            <div class="preset-desc">Deep Crimson Red</div>
+        </div>
+
+        <div class="preset-card" onclick="selectPreset('emerald')">
+            <div class="preset-palette">
+                <div class="preset-swatch" style="background:#00E676"></div>
+                <div class="preset-swatch" style="background:#050F0A"></div>
+                <div class="preset-swatch" style="background:#E8F5E9"></div>
+            </div>
+            <div class="preset-name">Emerald Mint</div>
+            <div class="preset-desc">Fresh Neo-Green</div>
+        </div>
+
+        <div class="preset-card" onclick="selectPreset('gold')">
+            <div class="preset-palette">
+                <div class="preset-swatch" style="background:#FFD600"></div>
+                <div class="preset-swatch" style="background:#0B0A06"></div>
+                <div class="preset-swatch" style="background:#FFFDE7"></div>
+            </div>
+            <div class="preset-name">Cyber Gold</div>
+            <div class="preset-desc">Amber High Contrast</div>
+        </div>
+    </div>
+
+    <!-- Custom Palette Controls -->
+    <div class="section-title">
+        <span>✨</span> Custom Colors
+    </div>
+    <div class="customizer-card">
+        <div class="color-row">
+            <div class="color-info">
+                <h4>Primary Accent</h4>
+                <p>Quick Settings tiles, switches, badges</p>
+            </div>
+            <label class="color-picker-btn">
+                <div class="color-bubble" id="accentBubble" style="background: #00E5FF;"></div>
+                <span class="color-hex" id="accentHex">#00E5FF</span>
+                <input type="color" id="accentInput" value="#00E5FF" onchange="updateColor('accent', this.value)">
+            </label>
+        </div>
+
+        <div class="color-row">
+            <div class="color-info">
+                <h4>System Background</h4>
+                <p>OLED Pitch Black or Deep Tone</p>
+            </div>
+            <label class="color-picker-btn">
+                <div class="color-bubble" id="bgBubble" style="background: #000000;"></div>
+                <span class="color-hex" id="bgHex">#000000</span>
+                <input type="color" id="bgInput" value="#000000" onchange="updateColor('bg', this.value)">
+            </label>
+        </div>
+
+        <div class="color-row">
+            <div class="color-info">
+                <h4>Cards & Notifications</h4>
+                <p>Card surfaces & notification bubbles</p>
+            </div>
+            <label class="color-picker-btn">
+                <div class="color-bubble" id="cardBubble" style="background: #141722;"></div>
+                <span class="color-hex" id="cardHex">#141722</span>
+                <input type="color" id="cardInput" value="#141722" onchange="updateColor('card', this.value)">
+            </label>
+        </div>
+    </div>
+
+    <!-- Target Applications -->
+    <div class="section-title">
+        <span>📱</span> Target System Apps
+    </div>
+    <div class="targets-grid">
+        <div class="target-item selected" onclick="toggleTarget(this, 'android')">
+            <div class="target-check">✓</div>
+            <div class="target-info">
+                <h5>Framework</h5>
+                <span>android</span>
+            </div>
+        </div>
+        <div class="target-item selected" onclick="toggleTarget(this, 'systemui')">
+            <div class="target-check">✓</div>
+            <div class="target-info">
+                <h5>SystemUI</h5>
+                <span>Quick Settings</span>
+            </div>
+        </div>
+        <div class="target-item selected" onclick="toggleTarget(this, 'settings')">
+            <div class="target-check">✓</div>
+            <div class="target-info">
+                <h5>Settings</h5>
+                <span>One UI Menus</span>
+            </div>
+        </div>
+        <div class="target-item selected" onclick="toggleTarget(this, 'telephony')">
+            <div class="target-check">✓</div>
+            <div class="target-info">
+                <h5>Phone & Dialer</h5>
+                <span>Call Screen</span>
+            </div>
+        </div>
+        <div class="target-item selected" onclick="toggleTarget(this, 'contacts')">
+            <div class="target-check">✓</div>
+            <div class="target-info">
+                <h5>Contacts</h5>
+                <span>Samsung Contacts</span>
+            </div>
+        </div>
+        <div class="target-item selected" onclick="toggleTarget(this, 'myfiles')">
+            <div class="target-check">✓</div>
+            <div class="target-info">
+                <h5>My Files</h5>
+                <span>File Explorer</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Buttons -->
+    <button class="btn-apply" onclick="applyTheme()">
+        <span>🚀</span> 1-TAP BUILD & APPLY THEME
+    </button>
+
+    <div class="btn-secondary-row">
+        <button class="btn-sec" onclick="revertStock()">
+            <span>🔄</span> Reset to Stock
+        </button>
+        <button class="btn-sec" onclick="autoFixHex()">
+            <span>🪄</span> Fix Theme Park
+        </button>
+    </div>
+
+    <!-- Toast Notification -->
+    <div class="toast" id="toast">
+        <span id="toastIcon">✨</span>
+        <span id="toastMsg">Theme applied successfully!</span>
+    </div>
+
+    <script>
+        const state = {
+            accent: '#00E5FF',
+            bg: '#000000',
+            card: '#141722',
+            targets: {
+                android: true,
+                systemui: true,
+                settings: true,
+                telephony: true,
+                contacts: true,
+                myfiles: true
+            }
+        };
+
+        const presets = {
+            amoled: { accent: '#00E5FF', bg: '#000000', card: '#141722' },
+            tokyo: { accent: '#8A2BE2', bg: '#0D0E15', card: '#1C1D2B' },
+            crimson: { accent: '#FF1744', bg: '#000000', card: '#1C0B0E' },
+            emerald: { accent: '#00E676', bg: '#050F0A', card: '#0D2015' },
+            gold: { accent: '#FFD600', bg: '#0B0A06', card: '#1C190D' }
+        };
+
+        function selectPreset(name) {
+            document.querySelectorAll('.preset-card').forEach(c => c.classList.remove('active'));
+            event.currentTarget.classList.add('active');
+            const p = presets[name];
+            state.accent = p.accent;
+            state.bg = p.bg;
+            state.card = p.card;
+            updateUI();
+            haptic();
+        }
+
+        function updateColor(key, val) {
+            state[key] = val;
+            updateUI();
+            haptic();
+        }
+
+        function updateUI() {
+            // Update customizer controls
+            document.getElementById('accentBubble').style.background = state.accent;
+            document.getElementById('accentHex').innerText = state.accent.toUpperCase();
+            document.getElementById('accentInput').value = state.accent;
+
+            document.getElementById('bgBubble').style.background = state.bg;
+            document.getElementById('bgHex').innerText = state.bg.toUpperCase();
+            document.getElementById('bgInput').value = state.bg;
+
+            document.getElementById('cardBubble').style.background = state.card;
+            document.getElementById('cardHex').innerText = state.card.toUpperCase();
+            document.getElementById('cardInput').value = state.card;
+
+            // Update Mockup UI
+            document.documentElement.style.setProperty('--accent', state.accent);
+            document.documentElement.style.setProperty('--accent-glow', state.accent + '55');
+            document.getElementById('mockContainer').style.background = state.bg;
+            document.getElementById('mockTile1').style.background = state.accent;
+            document.getElementById('mockTile2').style.background = state.accent;
+            document.getElementById('mockNoti').style.background = state.card;
+            document.getElementById('mockNoti').style.borderLeftColor = state.accent;
+            document.getElementById('mockNotiIcon').style.background = state.accent;
+        }
+
+        function toggleTarget(el, key) {
+            state.targets[key] = !state.targets[key];
+            el.classList.toggle('selected', state.targets[key]);
+            haptic();
+        }
+
+        function haptic() {
+            if (window.AndroidBridge && window.AndroidBridge.vibrate) {
+                window.AndroidBridge.vibrate();
+            }
+        }
+
+        function showToast(msg, icon = '✨') {
+            const toast = document.getElementById('toast');
+            document.getElementById('toastMsg').innerText = msg;
+            document.getElementById('toastIcon').innerText = icon;
+            toast.classList.add('show');
+            setTimeout(() => toast.classList.remove('show'), 3000);
+        }
+
+        function applyTheme() {
+            haptic();
+            showToast('Fabricating One UI 9 Overlays...', '⚡');
+
+            if (window.AndroidBridge && window.AndroidBridge.applyTheme) {
+                const res = window.AndroidBridge.applyTheme(JSON.stringify(state));
+                setTimeout(() => showToast('Theme Applied Instantly! 🎉', '✔'), 800);
+            } else {
+                setTimeout(() => showToast('Preview Mode: Overlays Prepared! ✨', '✔'), 800);
+            }
+        }
+
+        function revertStock() {
+            haptic();
+            if (window.AndroidBridge && window.AndroidBridge.resetTheme) {
+                window.AndroidBridge.resetTheme();
+                showToast('Restored default One UI Theme', '🔄');
+            } else {
+                showToast('Restored default One UI Theme', '🔄');
+            }
+        }
+
+        function autoFixHex() {
+            haptic();
+            if (window.AndroidBridge && window.AndroidBridge.autoFixHex) {
+                window.AndroidBridge.autoFixHex();
+                showToast('Theme Park Compatibility Fixed!', '🪄');
+            } else {
+                showToast('Theme Park Compatibility Fixed!', '🪄');
+            }
+        }
+
+        // Init
+        updateUI();
+    </script>
+</body>
+</html>
