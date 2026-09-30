@@ -39,30 +39,29 @@
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
         }
 
-        html {
-            background-color: var(--bg-base);
-        }
-
-        body {
+        html, body {
+            margin: 0;
+            padding: 0;
             background-color: var(--bg-base);
             color: var(--text-main);
-            padding: 0 0 120px 0;
-            min-height: 100vh;
+            overflow: hidden;
+            height: 100vh;
+            height: 100dvh;
             -webkit-user-select: none;
             user-select: none;
+            touch-action: pan-x pan-y;
         }
 
         /* Top Sticky Header */
         .app-header {
-            position: sticky;
-            top: 0;
-            z-index: 100;
+            height: 64px;
             background: #080A0F;
             border-bottom: 1px solid var(--border-glass);
             padding: 12px 16px;
             display: flex;
             align-items: center;
             justify-content: space-between;
+            flex-shrink: 0;
         }
 
         .brand-box {
@@ -183,14 +182,9 @@
             margin: 0 auto;
         }
 
-        .view-content {
-            display: none;
-            touch-action: pan-y;
-        }
+        
 
-        .view-content.active {
-            display: block;
-        }
+        
 
         @keyframes slideInRight {
             from { opacity: 0; transform: translateX(24px); }
@@ -202,13 +196,9 @@
             to { opacity: 1; transform: translateX(0); }
         }
 
-        .view-content.slide-left {
-            animation: slideInRight 0.2s cubic-bezier(0.16, 1, 0.3, 1);
-        }
+        
 
-        .view-content.slide-right {
-            animation: slideInLeft 0.2s cubic-bezier(0.16, 1, 0.3, 1);
-        }
+        
 
         /* Stats Dashboard Strip */
         .stats-grid {
@@ -991,10 +981,10 @@
         <button class="tab-btn" onclick="switchView('terminal')">💻 ADB Console</button>
     </nav>
 
-    <div class="container">
+    <div class="viewpager-track" id="viewpagerTrack">
 
         <!-- VIEW 1: APPLICATIONS LIST -->
-        <section id="view-apps" class="view-content active">
+        <section id="view-apps" class="view-page">
             
             <!-- Live Statistics Grid -->
             <div class="stats-grid">
@@ -1051,7 +1041,7 @@
         </section>
 
         <!-- VIEW 2: BLOATWARE PRESETS -->
-        <section id="view-bloatware" class="view-content">
+        <section id="view-bloatware" class="view-page">
             <div style="margin-bottom:14px;">
                 <h3 style="font-size:15px; font-weight:800; margin-bottom:4px;">One-Tap Bloatware Manager</h3>
                 <p style="font-size:11px; color:var(--text-muted);">Batch debloat safe OEM & carrier background services.</p>
@@ -1108,7 +1098,7 @@
         </section>
 
         <!-- VIEW 3: COLOR & THEMES CUSTOMIZER -->
-        <section id="view-colors" class="view-content">
+        <section id="view-colors" class="view-page">
             <div class="color-card">
                 <div class="color-card-title">🎨 Curated Theme Palettes</div>
                 <div class="color-card-subtitle">Choose from luxury dark and high-contrast color schemes</div>
@@ -1259,7 +1249,7 @@
         </section>
 
         <!-- VIEW 4: ADB CONSOLE -->
-        <section id="view-terminal" class="view-content">
+        <section id="view-terminal" class="view-page">
             <div class="bloat-card" style="margin-bottom:14px; border-color:var(--accent);">
                 <div class="bloat-header">
                     <div>
@@ -1269,7 +1259,8 @@
                     <button class="bloat-btn" onclick="handleShizukuTap()">Authorize</button>
                 </div>
                 <div style="display:flex; gap:8px; margin-top:8px;">
-                    <button class="apps-tool-btn" onclick="checkShizuku(); showToast('Checked Shizuku status', '🔍');">Check Status</button>
+                    <button class="apps-tool-btn" onclick="checkShizuku();
+            initViewPager(); showToast('Checked Shizuku status', '🔍');">Check Status</button>
                     <button class="apps-tool-btn" onclick="document.getElementById('termCmd').value = 'id'; runTerminalCmd();">Test UID (id)</button>
                     <button class="apps-tool-btn" onclick="document.getElementById('termCmd').value = 'pm list packages -s | head -n 10'; runTerminalCmd();">Sample PM</button>
                 </div>
@@ -1431,83 +1422,55 @@ Type any command below (e.g. pm list packages -d)
         };
 
         const tabKeys = ['apps', 'bloatware', 'colors', 'terminal'];
+        let currentTabIdx = 0;
+        let isProgrammaticScroll = false;
 
-        function switchView(viewName, direction = 'none') {
-            const targetIdx = tabKeys.indexOf(viewName);
-            if (targetIdx === -1) return;
+        function initViewPager() {
+            const track = document.getElementById('viewpagerTrack');
+            if (!track) return;
 
-            // Update Tab Buttons
+            let scrollTimer;
+            track.addEventListener('scroll', () => {
+                if (isProgrammaticScroll) return;
+                clearTimeout(scrollTimer);
+                scrollTimer = setTimeout(() => {
+                    const pageW = track.clientWidth || window.innerWidth;
+                    const newIdx = Math.round(track.scrollLeft / pageW);
+                    if (newIdx !== currentTabIdx && newIdx >= 0 && newIdx < tabKeys.length) {
+                        currentTabIdx = newIdx;
+                        updateActiveTabUI(newIdx);
+                        haptic();
+                    }
+                }, 40);
+            }, { passive: true });
+        }
+
+        function updateActiveTabUI(idx) {
             const tabBtns = document.querySelectorAll('.tab-btn');
-            tabBtns.forEach((b, idx) => {
-                const isActive = (idx === targetIdx);
+            tabBtns.forEach((b, i) => {
+                const isActive = (i === idx);
                 b.classList.toggle('active', isActive);
                 if (isActive) {
                     b.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
                 }
             });
+        }
 
-            // Update Views
-            document.querySelectorAll('.view-content').forEach(v => {
-                v.classList.remove('active', 'slide-left', 'slide-right');
-            });
+        function switchView(tabKey) {
+            const targetIdx = tabKeys.indexOf(tabKey);
+            if (targetIdx === -1) return;
+            currentTabIdx = targetIdx;
+            updateActiveTabUI(targetIdx);
 
-            const activeView = document.getElementById('view-' + viewName);
-            if (activeView) {
-                activeView.classList.add('active');
-                if (direction === 'left') {
-                    activeView.classList.add('slide-left');
-                } else if (direction === 'right') {
-                    activeView.classList.add('slide-right');
-                }
+            const track = document.getElementById('viewpagerTrack');
+            if (track) {
+                isProgrammaticScroll = true;
+                const pageW = track.clientWidth || window.innerWidth;
+                track.scrollTo({ left: targetIdx * pageW, behavior: 'smooth' });
+                setTimeout(() => { isProgrammaticScroll = false; }, 350);
             }
             haptic();
         }
-
-        // Horizontal Swipe Navigation across Tabs (ViewPager gesture)
-        let touchStartX = 0;
-        let touchStartY = 0;
-        let touchStartTime = 0;
-
-        window.addEventListener('touchstart', (e) => {
-            if (e.touches.length !== 1) return;
-            touchStartX = e.touches[0].clientX;
-            touchStartY = e.touches[0].clientY;
-            touchStartTime = Date.now();
-        }, { passive: true });
-
-        window.addEventListener('touchend', (e) => {
-            if (e.changedTouches.length !== 1) return;
-            const touchEndX = e.changedTouches[0].clientX;
-            const touchEndY = e.changedTouches[0].clientY;
-            const dx = touchEndX - touchStartX;
-            const dy = touchEndY - touchStartY;
-            const dt = Date.now() - touchStartTime;
-
-            // Must be a clean horizontal swipe gesture
-            if (Math.abs(dx) > 55 && Math.abs(dx) > Math.abs(dy) * 1.3 && dt < 600) {
-                const target = e.target;
-                if (target && target.closest && (
-                    target.closest('.filter-scroll') || 
-                    target.closest('.tab-bar') || 
-                    target.closest('.terminal-box') || 
-                    target.closest('input') || 
-                    target.closest('.modal-sheet') ||
-                    target.closest('.batch-bottom-sheet')
-                )) {
-                    return;
-                }
-
-                const currentActiveView = document.querySelector('.view-content.active');
-                const currentViewId = currentActiveView ? currentActiveView.id.replace('view-', '') : 'apps';
-                const currentIdx = tabKeys.indexOf(currentViewId);
-
-                if (dx < 0 && currentIdx < tabKeys.length - 1) {
-                    switchView(tabKeys[currentIdx + 1], 'left');
-                } else if (dx > 0 && currentIdx > 0) {
-                    switchView(tabKeys[currentIdx - 1], 'right');
-                }
-            }
-        }, { passive: true });
 
         function haptic() {
             if (window.AndroidBridge && window.AndroidBridge.vibrate) {
@@ -1562,6 +1525,7 @@ Type any command below (e.g. pm list packages -d)
         // Initialize App
         function initApp() {
             checkShizuku();
+            initViewPager();
 
             if (window.AndroidBridge) {
                 const sysInfoStr = window.AndroidBridge.getSystemInfo();
