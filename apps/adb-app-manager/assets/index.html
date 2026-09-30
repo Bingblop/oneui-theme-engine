@@ -1,0 +1,1846 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>ADB Application Manager Pro</title>
+    <style>
+        :root {
+            --bg-base: #080A0F;
+            --bg-surface: #10141E;
+            --bg-card: rgba(22, 28, 42, 0.75);
+            --bg-card-hover: rgba(30, 38, 58, 0.95);
+            --border-glass: rgba(255, 255, 255, 0.09);
+            --accent: #00E5FF;
+            --accent-glow: rgba(0, 229, 255, 0.35);
+            --secondary: #7C4DFF;
+            --text-main: #FFFFFF;
+            --text-muted: #8E9BAE;
+            --text-dim: #546075;
+            
+            /* Status Badge Colors */
+            --status-running: #00E676;
+            --status-frozen: #00E5FF;
+            --status-system: #7C4DFF;
+            --status-user: #FF9100;
+            --status-bloat: #FF5252;
+
+            --radius-xl: 24px;
+            --radius-lg: 18px;
+            --radius-md: 12px;
+            --radius-sm: 8px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            user-select: none;
+        }
+
+        body {
+            background-color: var(--bg-base);
+            color: var(--text-main);
+            padding: 0 0 110px 0;
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        /* Top Sticky Header */
+        .app-header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(8, 10, 15, 0.92);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border-glass);
+            padding: 12px 18px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .brand-box {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .app-icon {
+            width: 42px;
+            height: 42px;
+            border-radius: 12px;
+            background: linear-gradient(135deg, var(--accent), var(--secondary));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            box-shadow: 0 0 16px var(--accent-glow);
+        }
+
+        .brand-text h1 {
+            font-size: 18px;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            background: linear-gradient(90deg, #FFFFFF, var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .brand-text p {
+            font-size: 10px;
+            color: var(--text-muted);
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+
+        .status-badge {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(0, 230, 118, 0.12);
+            border: 1px solid rgba(0, 230, 118, 0.3);
+            color: var(--status-running);
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 800;
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--status-running);
+            box-shadow: 0 0 10px var(--status-running);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(0.95); opacity: 0.8; }
+            50% { transform: scale(1.2); opacity: 1; }
+            100% { transform: scale(0.95); opacity: 0.8; }
+        }
+
+        /* Top Navigation Tabs */
+        .tab-bar {
+            display: flex;
+            background: var(--bg-surface);
+            border-bottom: 1px solid var(--border-glass);
+            overflow-x: auto;
+            scrollbar-width: none;
+            padding: 4px 8px;
+            position: sticky;
+            top: 67px;
+            z-index: 90;
+        }
+
+        .tab-bar::-webkit-scrollbar {
+            display: none;
+        }
+
+        .tab-btn {
+            flex: 0 0 auto;
+            padding: 10px 16px;
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            font-size: 13px;
+            font-weight: 800;
+            cursor: pointer;
+            border-radius: 20px;
+            margin: 4px;
+            transition: all 0.25s ease;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .tab-btn.active {
+            color: #000000;
+            background: var(--accent);
+            box-shadow: 0 2px 14px var(--accent-glow);
+        }
+
+        /* Container */
+        .container {
+            padding: 14px 16px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .view-content {
+            display: none;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .view-content.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(6px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Stats Dashboard Strip */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin-bottom: 16px;
+        }
+
+        .stat-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-glass);
+            border-radius: var(--radius-md);
+            padding: 12px 10px;
+            text-align: center;
+            transition: all 0.2s;
+            cursor: pointer;
+        }
+
+        .stat-card:active {
+            background: var(--bg-card-hover);
+            transform: scale(0.98);
+        }
+
+        .stat-num {
+            font-size: 18px;
+            font-weight: 900;
+            color: var(--accent);
+            margin-bottom: 2px;
+        }
+
+        .stat-label {
+            font-size: 10px;
+            font-weight: 700;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* Search & Filter Toolbar */
+        .search-box {
+            position: relative;
+            margin-bottom: 12px;
+        }
+
+        .search-input {
+            width: 100%;
+            height: 48px;
+            background: var(--bg-surface);
+            border: 1px solid var(--border-glass);
+            border-radius: var(--radius-lg);
+            padding: 0 44px 0 16px;
+            color: #FFFFFF;
+            font-size: 14px;
+            font-weight: 600;
+            outline: none;
+            transition: all 0.25s ease;
+        }
+
+        .search-input:focus {
+            border-color: var(--accent);
+            box-shadow: 0 0 16px var(--accent-glow);
+        }
+
+        .search-clear {
+            position: absolute;
+            right: 14px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-muted);
+            font-size: 16px;
+            cursor: pointer;
+            padding: 4px;
+            display: none;
+        }
+
+        /* Filter Pills */
+        .filter-scroll {
+            display: flex;
+            gap: 8px;
+            overflow-x: auto;
+            scrollbar-width: none;
+            padding-bottom: 8px;
+            margin-bottom: 14px;
+        }
+
+        .filter-scroll::-webkit-scrollbar {
+            display: none;
+        }
+
+        .filter-pill {
+            flex: 0 0 auto;
+            padding: 6px 14px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border-glass);
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 800;
+            color: var(--text-muted);
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .filter-pill.active {
+            background: rgba(0, 229, 255, 0.14);
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        /* Apps List */
+        .app-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-glass);
+            border-radius: var(--radius-lg);
+            padding: 14px;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            transition: all 0.2s ease;
+        }
+
+        .app-card.selected {
+            border-color: var(--accent);
+            background: rgba(0, 229, 255, 0.08);
+        }
+
+        .app-left {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex: 1;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .app-checkbox {
+            width: 22px;
+            height: 22px;
+            border-radius: 6px;
+            border: 2px solid var(--border-glass);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 11px;
+            font-weight: 900;
+            color: #000000;
+            transition: all 0.2s ease;
+            flex-shrink: 0;
+        }
+
+        .app-card.selected .app-checkbox {
+            background: var(--accent);
+            border-color: var(--accent);
+        }
+
+        .app-avatar {
+            width: 38px;
+            height: 38px;
+            border-radius: 10px;
+            background: #1C2030;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            font-weight: 800;
+            color: var(--accent);
+            border: 1px solid var(--border-glass);
+            flex-shrink: 0;
+        }
+
+        .app-meta {
+            overflow: hidden;
+        }
+
+        .app-name {
+            font-size: 13px;
+            font-weight: 800;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            margin-bottom: 2px;
+        }
+
+        .app-pkg {
+            font-size: 11px;
+            color: var(--text-muted);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            margin-bottom: 4px;
+        }
+
+        .badge-row {
+            display: flex;
+            gap: 6px;
+            flex-wrap: wrap;
+        }
+
+        .tag-badge {
+            font-size: 9px;
+            font-weight: 800;
+            padding: 2px 7px;
+            border-radius: 6px;
+            text-transform: uppercase;
+            letter-spacing: 0.4px;
+        }
+
+        .tag-running {
+            background: rgba(0, 230, 118, 0.12);
+            color: var(--status-running);
+            border: 1px solid rgba(0, 230, 118, 0.3);
+        }
+
+        .tag-frozen {
+            background: rgba(0, 229, 255, 0.12);
+            color: var(--status-frozen);
+            border: 1px solid rgba(0, 229, 255, 0.3);
+        }
+
+        .tag-system {
+            background: rgba(124, 77, 255, 0.12);
+            color: var(--status-system);
+            border: 1px solid rgba(124, 77, 255, 0.3);
+        }
+
+        .tag-user {
+            background: rgba(255, 145, 0, 0.12);
+            color: var(--status-user);
+            border: 1px solid rgba(255, 145, 0, 0.3);
+        }
+
+        .tag-bloat {
+            background: rgba(255, 82, 82, 0.12);
+            color: var(--status-bloat);
+            border: 1px solid rgba(255, 82, 82, 0.3);
+        }
+
+        .app-actions {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            flex-shrink: 0;
+            margin-left: 10px;
+        }
+
+        .btn-mini {
+            width: 34px;
+            height: 34px;
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid var(--border-glass);
+            color: var(--text-main);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .btn-mini:active {
+            background: var(--accent);
+            color: #000000;
+        }
+
+        /* Floating Batch Actions Bar */
+        .floating-batch-bar {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%) translateY(150px);
+            background: rgba(16, 20, 30, 0.95);
+            backdrop-filter: blur(25px);
+            border: 1px solid var(--accent);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.8), 0 0 20px var(--accent-glow);
+            border-radius: 30px;
+            padding: 8px 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            z-index: 200;
+            transition: transform 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            max-width: 90vw;
+        }
+
+        .floating-batch-bar.show {
+            transform: translateX(-50%) translateY(0);
+        }
+
+        .batch-count {
+            font-size: 12px;
+            font-weight: 800;
+            color: var(--accent);
+            padding: 0 8px;
+            white-space: nowrap;
+        }
+
+        .batch-action-btn {
+            height: 38px;
+            padding: 0 12px;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid var(--border-glass);
+            border-radius: 20px;
+            color: #FFFFFF;
+            font-size: 12px;
+            font-weight: 800;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.2s;
+            white-space: nowrap;
+        }
+
+        .batch-action-btn:active {
+            background: var(--accent);
+            color: #000000;
+        }
+
+        /* Color Settings View */
+        .color-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-glass);
+            border-radius: var(--radius-lg);
+            padding: 16px;
+            margin-bottom: 16px;
+        }
+
+        .color-card-title {
+            font-size: 14px;
+            font-weight: 800;
+            margin-bottom: 4px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .color-card-subtitle {
+            font-size: 11px;
+            color: var(--text-muted);
+            margin-bottom: 14px;
+        }
+
+        .palette-presets-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            margin-bottom: 18px;
+        }
+
+        .palette-preset-card {
+            background: var(--bg-surface);
+            border: 1px solid var(--border-glass);
+            border-radius: var(--radius-md);
+            padding: 12px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .palette-preset-card.active {
+            border-color: var(--accent);
+            box-shadow: 0 0 16px var(--accent-glow);
+        }
+
+        .preset-strip {
+            display: flex;
+            height: 14px;
+            border-radius: 6px;
+            overflow: hidden;
+            margin-bottom: 8px;
+        }
+
+        .preset-swatch {
+            flex: 1;
+            height: 100%;
+        }
+
+        .preset-name {
+            font-size: 12px;
+            font-weight: 800;
+        }
+
+        .color-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid var(--border-glass);
+        }
+
+        .color-row:last-child {
+            border-bottom: none;
+        }
+
+        .color-meta h4 {
+            font-size: 13px;
+            font-weight: 800;
+            margin-bottom: 2px;
+        }
+
+        .color-meta p {
+            font-size: 11px;
+            color: var(--text-muted);
+        }
+
+        .picker-bubble-btn {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(0, 0, 0, 0.4);
+            border: 1px solid var(--border-glass);
+            padding: 4px 10px 4px 6px;
+            border-radius: 20px;
+            cursor: pointer;
+        }
+
+        .bubble-circle {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            border: 2px solid #FFFFFF;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.6);
+        }
+
+        .bubble-hex {
+            font-size: 12px;
+            font-family: monospace;
+            font-weight: 800;
+            color: #FFFFFF;
+        }
+
+        input[type="color"] {
+            opacity: 0;
+            position: absolute;
+            pointer-events: none;
+        }
+
+        /* Inspector Modal */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(16px);
+            z-index: 300;
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .modal-overlay.show {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .modal-sheet {
+            background: #0E121B;
+            border: 1px solid var(--border-glass);
+            border-top: 2px solid var(--accent);
+            border-radius: var(--radius-xl) var(--radius-xl) 0 0;
+            width: 100%;
+            max-width: 600px;
+            max-height: 85vh;
+            overflow-y: auto;
+            padding: 20px;
+            transform: translateY(100%);
+            transition: transform 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.15);
+        }
+
+        .modal-overlay.show .modal-sheet {
+            transform: translateY(0);
+        }
+
+        .sheet-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 16px;
+        }
+
+        .sheet-app-hero {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .sheet-avatar {
+            width: 46px;
+            height: 46px;
+            border-radius: 12px;
+            background: linear-gradient(135deg, var(--accent), var(--secondary));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            font-weight: 900;
+            color: #000000;
+        }
+
+        .sheet-title h3 {
+            font-size: 16px;
+            font-weight: 800;
+        }
+
+        .sheet-title p {
+            font-size: 11px;
+            color: var(--text-muted);
+            word-break: break-all;
+        }
+
+        .sheet-action-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+            margin-bottom: 18px;
+        }
+
+        .sheet-btn {
+            height: 46px;
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid var(--border-glass);
+            border-radius: var(--radius-md);
+            color: #FFFFFF;
+            font-size: 11px;
+            font-weight: 800;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 3px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .sheet-btn:active {
+            background: var(--accent);
+            color: #000000;
+        }
+
+        .sheet-tabs {
+            display: flex;
+            border-bottom: 1px solid var(--border-glass);
+            margin-bottom: 14px;
+            gap: 8px;
+        }
+
+        .sheet-tab-pill {
+            padding: 8px 12px;
+            font-size: 12px;
+            font-weight: 800;
+            color: var(--text-muted);
+            cursor: pointer;
+            border-bottom: 2px solid transparent;
+        }
+
+        .sheet-tab-pill.active {
+            color: var(--accent);
+            border-bottom-color: var(--accent);
+        }
+
+        .sheet-tab-content {
+            display: none;
+            max-height: 250px;
+            overflow-y: auto;
+        }
+
+        .sheet-tab-content.active {
+            display: block;
+        }
+
+        .perm-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            font-size: 12px;
+        }
+
+        .perm-toggle-btn {
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 10px;
+            font-weight: 800;
+            cursor: pointer;
+            border: none;
+        }
+
+        .perm-toggle-btn.granted {
+            background: rgba(0, 230, 118, 0.2);
+            color: var(--status-running);
+        }
+
+        .perm-toggle-btn.revoked {
+            background: rgba(255, 82, 82, 0.2);
+            color: var(--status-bloat);
+        }
+
+        /* Preset Bloatware View */
+        .bloat-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-glass);
+            border-radius: var(--radius-lg);
+            padding: 16px;
+            margin-bottom: 14px;
+        }
+
+        .bloat-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+
+        .bloat-title {
+            font-size: 14px;
+            font-weight: 800;
+        }
+
+        .bloat-btn {
+            padding: 6px 14px;
+            background: var(--accent);
+            border: none;
+            border-radius: 14px;
+            color: #000000;
+            font-size: 11px;
+            font-weight: 900;
+            cursor: pointer;
+        }
+
+        /* Terminal View */
+        .terminal-box {
+            background: #06080D;
+            border: 1px solid var(--border-glass);
+            border-radius: var(--radius-lg);
+            padding: 14px;
+            height: 350px;
+            overflow-y: auto;
+            font-family: monospace;
+            font-size: 12px;
+            color: var(--accent);
+            line-height: 1.5;
+            margin-bottom: 12px;
+        }
+
+        .term-input-row {
+            display: flex;
+            gap: 8px;
+        }
+
+        .term-input {
+            flex: 1;
+            height: 46px;
+            background: var(--bg-surface);
+            border: 1px solid var(--border-glass);
+            border-radius: var(--radius-md);
+            padding: 0 14px;
+            color: #FFFFFF;
+            font-family: monospace;
+            font-size: 13px;
+            outline: none;
+        }
+
+        .term-run-btn {
+            width: 70px;
+            height: 46px;
+            background: var(--accent);
+            border: none;
+            border-radius: var(--radius-md);
+            color: #000000;
+            font-weight: 900;
+            font-size: 13px;
+            cursor: pointer;
+        }
+
+        /* Toast */
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: rgba(23, 27, 40, 0.95);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--accent);
+            color: #FFFFFF;
+            padding: 10px 20px;
+            border-radius: 30px;
+            font-size: 12px;
+            font-weight: 800;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            z-index: 999;
+            pointer-events: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .toast.show {
+            transform: translateX(-50%) translateY(0);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header class="app-header">
+        <div class="brand-box">
+            <div class="app-icon">⚡</div>
+            <div class="brand-text">
+                <h1>ADB App Manager</h1>
+                <p id="deviceInfoSubtitle">Samsung One UI 9.0</p>
+            </div>
+        </div>
+        <div class="status-badge" id="execModeBadge">
+            <div class="status-dot"></div>
+            <span id="execModeText">Shizuku Privileged</span>
+        </div>
+    </header>
+
+    <!-- Top Navigation Tabs -->
+    <nav class="tab-bar">
+        <button class="tab-btn active" onclick="switchView('apps')">📱 Applications</button>
+        <button class="tab-btn" onclick="switchView('bloatware')">🗑️ Bloatware Presets</button>
+        <button class="tab-btn" onclick="switchView('colors')">🎨 Color & Themes</button>
+        <button class="tab-btn" onclick="switchView('terminal')">💻 ADB Console</button>
+    </nav>
+
+    <div class="container">
+
+        <!-- VIEW 1: APPLICATIONS LIST -->
+        <section id="view-apps" class="view-content active">
+            
+            <!-- Live Statistics Grid -->
+            <div class="stats-grid">
+                <div class="stat-card" onclick="setFilter('all')">
+                    <div class="stat-num" id="statTotal">--</div>
+                    <div class="stat-label">Total Installed</div>
+                </div>
+                <div class="stat-card" onclick="setFilter('running')">
+                    <div class="stat-num" style="color:var(--status-running);" id="statRunning">--</div>
+                    <div class="stat-label">Running</div>
+                </div>
+                <div class="stat-card" onclick="setFilter('frozen')">
+                    <div class="stat-num" style="color:var(--status-frozen);" id="statFrozen">--</div>
+                    <div class="stat-label">Frozen / Disabled</div>
+                </div>
+                <div class="stat-card" onclick="setFilter('user')">
+                    <div class="stat-num" style="color:var(--status-user);" id="statUser">--</div>
+                    <div class="stat-label">User Apps</div>
+                </div>
+                <div class="stat-card" onclick="setFilter('system')">
+                    <div class="stat-num" style="color:var(--status-system);" id="statSystem">--</div>
+                    <div class="stat-label">System Apps</div>
+                </div>
+                <div class="stat-card" onclick="setFilter('uninstalled')">
+                    <div class="stat-num" style="color:var(--status-bloat);" id="statUninstalled">--</div>
+                    <div class="stat-label">Bloatware (Uninstalled)</div>
+                </div>
+            </div>
+
+            <!-- Search Bar -->
+            <div class="search-box">
+                <input type="text" class="search-input" id="searchInput" placeholder="Search by app name or package..." oninput="handleSearch()">
+                <span class="search-clear" id="searchClear" onclick="clearSearch()">✕</span>
+            </div>
+
+            <!-- Quick Filter Pills -->
+            <div class="filter-scroll">
+                <div class="filter-pill active" onclick="setFilter('all', this)">All Apps (<span id="countAll">0</span>)</div>
+                <div class="filter-pill" onclick="setFilter('running', this)">⚡ Running (<span id="countRunning">0</span>)</div>
+                <div class="filter-pill" onclick="setFilter('user', this)">👤 3rd Party (<span id="countUser">0</span>)</div>
+                <div class="filter-pill" onclick="setFilter('system', this)">⚙️ System (<span id="countSystem">0</span>)</div>
+                <div class="filter-pill" onclick="setFilter('frozen', this)">❄️ Frozen (<span id="countFrozen">0</span>)</div>
+                <div class="filter-pill" onclick="setFilter('uninstalled', this)">🗑️ Uninstalled (<span id="countUninstalled">0</span>)</div>
+            </div>
+
+            <!-- Dynamic Apps List -->
+            <div id="appsListContainer">
+                <div style="text-align:center; padding: 40px; color: var(--text-muted);">
+                    <div style="font-size:24px; margin-bottom:8px;">⏳</div>
+                    <div>Querying system packages...</div>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- VIEW 2: BLOATWARE PRESETS -->
+        <section id="view-bloatware" class="view-content">
+            <div style="margin-bottom:14px;">
+                <h3 style="font-size:16px; font-weight:800; margin-bottom:4px;">One-Tap Bloatware Manager</h3>
+                <p style="font-size:12px; color:var(--text-muted);">Batch debloat safe OEM & carrier background services.</p>
+            </div>
+
+            <div class="bloat-card">
+                <div class="bloat-header">
+                    <div class="bloat-title">Samsung Safe Debloat (Bixby & AR)</div>
+                    <button class="bloat-btn" onclick="applyPresetBloat('samsung')">Freeze All</button>
+                </div>
+                <p style="font-size:11px; color:var(--text-muted); margin-bottom:8px;">
+                    Bixby wake, Bixby Agent, AR Zone, AR Doodle, Game Optimizing Service, Kids Mode, Samsung Free/Oasis.
+                </p>
+                <div style="font-size:10px; color:var(--accent); font-family:monospace;">
+                    7 packages matched
+                </div>
+            </div>
+
+            <div class="bloat-card">
+                <div class="bloat-header">
+                    <div class="bloat-title">Google Telemetry & Non-Essential</div>
+                    <button class="bloat-btn" onclick="applyPresetBloat('google')">Freeze All</button>
+                </div>
+                <p style="font-size:11px; color:var(--text-muted); margin-bottom:8px;">
+                    Google Duo/Meet, Play Movies & TV, YouTube Music, Google Assistant stubs, Digital Wellbeing.
+                </p>
+                <div style="font-size:10px; color:var(--accent); font-family:monospace;">
+                    5 packages matched
+                </div>
+            </div>
+
+            <div class="bloat-card">
+                <div class="bloat-header">
+                    <div class="bloat-title">Carrier Diagnostics & Tracking</div>
+                    <button class="bloat-btn" onclick="applyPresetBloat('carrier')">Freeze All</button>
+                </div>
+                <p style="font-size:11px; color:var(--text-muted); margin-bottom:8px;">
+                    Carrier Hub, Mobile Services Manager (DT Ignite), diagnostic telemetry loggers.
+                </p>
+                <div style="font-size:10px; color:var(--accent); font-family:monospace;">
+                    4 packages matched
+                </div>
+            </div>
+
+            <div class="bloat-card" style="border-color: rgba(0, 230, 118, 0.4);">
+                <div class="bloat-header">
+                    <div class="bloat-title" style="color:var(--status-running);">Restore All Debloated Apps</div>
+                    <button class="bloat-btn" style="background:var(--status-running);" onclick="restoreAllDebloated()">Restore</button>
+                </div>
+                <p style="font-size:11px; color:var(--text-muted);">
+                    Instantly re-enables and reinstalls any previously frozen or partitioned system applications.
+                </p>
+            </div>
+        </section>
+
+        <!-- VIEW 3: COLOR & THEMES CUSTOMIZER -->
+        <section id="view-colors" class="view-content">
+            <div class="color-card">
+                <div class="color-card-title">🎨 Curated Theme Palettes</div>
+                <div class="color-card-subtitle">Choose from luxury dark and high-contrast color schemes</div>
+
+                <div class="palette-presets-grid">
+                    <!-- Preset 1 -->
+                    <div class="palette-preset-card active" onclick="applyPalettePreset('amoled', this)">
+                        <div class="preset-strip">
+                            <div class="preset-swatch" style="background:#00E5FF"></div>
+                            <div class="preset-swatch" style="background:#000000"></div>
+                            <div class="preset-swatch" style="background:#10141E"></div>
+                        </div>
+                        <div class="preset-name">AMOLED Cyan</div>
+                    </div>
+
+                    <!-- Preset 2 -->
+                    <div class="palette-preset-card" onclick="applyPalettePreset('cyberpunk', this)">
+                        <div class="preset-strip">
+                            <div class="preset-swatch" style="background:#FF0055"></div>
+                            <div class="preset-swatch" style="background:#0F051D"></div>
+                            <div class="preset-swatch" style="background:#00FFFF"></div>
+                        </div>
+                        <div class="preset-name">Cyberpunk Violet</div>
+                    </div>
+
+                    <!-- Preset 3 -->
+                    <div class="palette-preset-card" onclick="applyPalettePreset('emerald', this)">
+                        <div class="preset-strip">
+                            <div class="preset-swatch" style="background:#00E676"></div>
+                            <div class="preset-swatch" style="background:#04140D"></div>
+                            <div class="preset-swatch" style="background:#0D2619"></div>
+                        </div>
+                        <div class="preset-name">Nordic Emerald</div>
+                    </div>
+
+                    <!-- Preset 4 -->
+                    <div class="palette-preset-card" onclick="applyPalettePreset('amber', this)">
+                        <div class="preset-strip">
+                            <div class="preset-swatch" style="background:#FF9100"></div>
+                            <div class="preset-swatch" style="background:#140F08"></div>
+                            <div class="preset-swatch" style="background:#2A1E11"></div>
+                        </div>
+                        <div class="preset-name">Sunset Amber</div>
+                    </div>
+
+                    <!-- Preset 5 -->
+                    <div class="palette-preset-card" onclick="applyPalettePreset('slate', this)">
+                        <div class="preset-strip">
+                            <div class="preset-swatch" style="background:#448AFF"></div>
+                            <div class="preset-swatch" style="background:#0D1117"></div>
+                            <div class="preset-swatch" style="background:#161B22"></div>
+                        </div>
+                        <div class="preset-name">Midnight Slate</div>
+                    </div>
+
+                    <!-- Preset 6 -->
+                    <div class="palette-preset-card" onclick="applyPalettePreset('crimson', this)">
+                        <div class="preset-strip">
+                            <div class="preset-swatch" style="background:#FF1744"></div>
+                            <div class="preset-swatch" style="background:#000000"></div>
+                            <div class="preset-swatch" style="background:#1C080B"></div>
+                        </div>
+                        <div class="preset-name">Blood Moon</div>
+                    </div>
+                </div>
+
+                <div class="color-card-title">✨ Granular Color Pickers</div>
+                <div class="color-card-subtitle">Fine-tune every visual surface and status badge</div>
+
+                <div class="color-row">
+                    <div class="color-meta">
+                        <h4>Primary System Accent</h4>
+                        <p>Buttons, active indicators, borders</p>
+                    </div>
+                    <label class="picker-bubble-btn">
+                        <div class="bubble-circle" id="circAccent" style="background: #00E5FF;"></div>
+                        <span class="bubble-hex" id="hexAccent">#00E5FF</span>
+                        <input type="color" value="#00E5FF" onchange="updateCustomColor('accent', this.value)">
+                    </label>
+                </div>
+
+                <div class="color-row">
+                    <div class="color-meta">
+                        <h4>App Background</h4>
+                        <p>True AMOLED Pitch Black (#000000) or Slate</p>
+                    </div>
+                    <label class="picker-bubble-btn">
+                        <div class="bubble-circle" id="circBg" style="background: #080A0F;"></div>
+                        <span class="bubble-hex" id="hexBg">#080A0F</span>
+                        <input type="color" value="#080A0F" onchange="updateCustomColor('bg', this.value)">
+                    </label>
+                </div>
+
+                <div class="color-row">
+                    <div class="color-meta">
+                        <h4>Card Surface Color</h4>
+                        <p>App cards and dialog containers</p>
+                    </div>
+                    <label class="picker-bubble-btn">
+                        <div class="bubble-circle" id="circCard" style="background: #10141E;"></div>
+                        <span class="bubble-hex" id="hexCard">#10141E</span>
+                        <input type="color" value="#10141E" onchange="updateCustomColor('card', this.value)">
+                    </label>
+                </div>
+
+                <div class="color-row">
+                    <div class="color-meta">
+                        <h4>Running App Badge</h4>
+                        <p>Active background process status indicator</p>
+                    </div>
+                    <label class="picker-bubble-btn">
+                        <div class="bubble-circle" id="circRunning" style="background: #00E676;"></div>
+                        <span class="bubble-hex" id="hexRunning">#00E676</span>
+                        <input type="color" value="#00E676" onchange="updateCustomColor('status-running', this.value)">
+                    </label>
+                </div>
+
+                <div class="color-row">
+                    <div class="color-meta">
+                        <h4>Frozen App Badge</h4>
+                        <p>Disabled or suspended packages</p>
+                    </div>
+                    <label class="picker-bubble-btn">
+                        <div class="bubble-circle" id="circFrozen" style="background: #00E5FF;"></div>
+                        <span class="bubble-hex" id="hexFrozen">#00E5FF</span>
+                        <input type="color" value="#00E5FF" onchange="updateCustomColor('status-frozen', this.value)">
+                    </label>
+                </div>
+
+                <div class="color-row">
+                    <div class="color-meta">
+                        <h4>System App Badge</h4>
+                        <p>Core framework & OEM system packages</p>
+                    </div>
+                    <label class="picker-bubble-btn">
+                        <div class="bubble-circle" id="circSystem" style="background: #7C4DFF;"></div>
+                        <span class="bubble-hex" id="hexSystem">#7C4DFF</span>
+                        <input type="color" value="#7C4DFF" onchange="updateCustomColor('status-system', this.value)">
+                    </label>
+                </div>
+
+                <div class="color-row">
+                    <div class="color-meta">
+                        <h4>Bloatware Badge</h4>
+                        <p>Partitioned uninstalled system apps</p>
+                    </div>
+                    <label class="picker-bubble-btn">
+                        <div class="bubble-circle" id="circBloat" style="background: #FF5252;"></div>
+                        <span class="bubble-hex" id="hexBloat">#FF5252</span>
+                        <input type="color" value="#FF5252" onchange="updateCustomColor('status-bloat', this.value)">
+                    </label>
+                </div>
+            </div>
+        </section>
+
+        <!-- VIEW 4: ADB CONSOLE -->
+        <section id="view-terminal" class="view-content">
+            <div style="margin-bottom:12px;">
+                <h3 style="font-size:16px; font-weight:800; margin-bottom:4px;">ADB Shell Terminal</h3>
+                <p style="font-size:12px; color:var(--text-muted);">Execute arbitrary pm, am, cmd, or shell commands directly.</p>
+            </div>
+
+            <div class="terminal-box" id="termOutput">
+ADB Application Manager Shell Terminal Ready.
+Type any command below (e.g. pm list packages -d)
+            </div>
+
+            <div class="term-input-row">
+                <input type="text" class="term-input" id="termCmd" placeholder="Enter shell command..." onkeydown="if(event.key==='Enter') runTerminalCmd()">
+                <button class="term-run-btn" onclick="runTerminalCmd()">RUN</button>
+            </div>
+        </section>
+
+    </div>
+
+    <!-- Floating Batch Actions Bar -->
+    <div class="floating-batch-bar" id="floatingBatchBar">
+        <span class="batch-count" id="batchCountText">0 Selected</span>
+        <button class="batch-action-btn" onclick="batchAction('freeze')">❄️ Freeze</button>
+        <button class="batch-action-btn" onclick="batchAction('unfreeze')">🔥 Enable</button>
+        <button class="batch-action-btn" onclick="batchAction('force_stop')">🛑 Stop</button>
+        <button class="batch-action-btn" onclick="batchAction('uninstall')">🗑️ Uninstall</button>
+        <button class="batch-action-btn" onclick="batchAction('clear_data')">🧹 Clear</button>
+        <button class="batch-action-btn" onclick="clearBatchSelection()">✕</button>
+    </div>
+
+    <!-- Inspector Modal -->
+    <div class="modal-overlay" id="inspectorModal" onclick="if(event.target===this) closeInspector()">
+        <div class="modal-sheet">
+            <div class="sheet-header">
+                <div class="sheet-app-hero">
+                    <div class="sheet-avatar" id="sheetAvatar">⚡</div>
+                    <div class="sheet-title">
+                        <h3 id="sheetTitle">App Title</h3>
+                        <p id="sheetPkg">com.example.package</p>
+                    </div>
+                </div>
+                <div style="font-size:20px; cursor:pointer;" onclick="closeInspector()">✕</div>
+            </div>
+
+            <!-- Action Grid -->
+            <div class="sheet-action-grid">
+                <button class="sheet-btn" onclick="singleAction('launch')">
+                    <span>🚀</span><span>Launch</span>
+                </button>
+                <button class="sheet-btn" onclick="singleAction('force_stop')">
+                    <span>🛑</span><span>Force Stop</span>
+                </button>
+                <button class="sheet-btn" onclick="singleAction('freeze')" id="sheetBtnFreeze">
+                    <span>❄️</span><span>Freeze</span>
+                </button>
+                <button class="sheet-btn" onclick="singleAction('unfreeze')" id="sheetBtnUnfreeze">
+                    <span>🔥</span><span>Enable</span>
+                </button>
+                <button class="sheet-btn" onclick="singleAction('clear_data')">
+                    <span>🧹</span><span>Clear Data</span>
+                </button>
+                <button class="sheet-btn" onclick="singleAction('uninstall')" id="sheetBtnUninstall">
+                    <span>🗑️</span><span>Uninstall</span>
+                </button>
+                <button class="sheet-btn" onclick="singleAction('reinstall')" id="sheetBtnReinstall" style="display:none;">
+                    <span>📥</span><span>Reinstall</span>
+                </button>
+                <button class="sheet-btn" onclick="singleAction('uninstall_updates')">
+                    <span>🔄</span><span>Rem Updates</span>
+                </button>
+                <button class="sheet-btn" onclick="singleAction('app_settings')">
+                    <span>⚙️</span><span>App Info</span>
+                </button>
+            </div>
+
+            <!-- Sub Tabs -->
+            <div class="sheet-tabs">
+                <div class="sheet-tab-pill active" onclick="switchSheetTab('perms')">🛡️ Permissions & AppOps</div>
+                <div class="sheet-tab-pill" onclick="switchSheetTab('comps')">🧩 Components</div>
+                <div class="sheet-tab-pill" onclick="switchSheetTab('raw')">📋 Raw Dumpsys</div>
+            </div>
+
+            <!-- Tab 1: Permissions -->
+            <div id="sheetTabPerms" class="sheet-tab-content active">
+                <div id="permsContainer">
+                    <div style="color:var(--text-muted); font-size:12px;">Loading permissions...</div>
+                </div>
+            </div>
+
+            <!-- Tab 2: Components -->
+            <div id="sheetTabComps" class="sheet-tab-content">
+                <div id="compsContainer">
+                    <div style="color:var(--text-muted); font-size:12px;">Loading activities & services...</div>
+                </div>
+            </div>
+
+            <!-- Tab 3: Raw -->
+            <div id="sheetTabRaw" class="sheet-tab-content">
+                <pre id="rawContainer" style="font-family:monospace; font-size:11px; color:var(--accent); white-space:pre-wrap;"></pre>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div class="toast" id="toast">
+        <span id="toastIcon">✨</span>
+        <span id="toastMsg">Ready</span>
+    </div>
+
+    <script>
+        // Global State
+        let allApps = [];
+        let filteredApps = [];
+        let selectedPkgs = new Set();
+        let currentFilter = 'all';
+        let inspectedPkg = null;
+
+        const themeState = {
+            accent: '#00E5FF',
+            bg: '#080A0F',
+            card: '#10141E',
+            running: '#00E676',
+            frozen: '#00E5FF',
+            system: '#7C4DFF',
+            bloat: '#FF5252'
+        };
+
+        const palettes = {
+            amoled: { accent: '#00E5FF', bg: '#000000', card: '#10141E', running: '#00E676', frozen: '#00E5FF', system: '#7C4DFF', bloat: '#FF5252' },
+            cyberpunk: { accent: '#FF0055', bg: '#0F051D', card: '#1D0C38', running: '#00FFFF', frozen: '#FF0055', system: '#9D4EDD', bloat: '#FF5252' },
+            emerald: { accent: '#00E676', bg: '#04140D', card: '#0D2619', running: '#69F0AE', frozen: '#00E676', system: '#4CAF50', bloat: '#FF5252' },
+            amber: { accent: '#FF9100', bg: '#140F08', card: '#2A1E11', running: '#FFD740', frozen: '#FF9100', system: '#FF6D00', bloat: '#FF5252' },
+            slate: { accent: '#448AFF', bg: '#0D1117', card: '#161B22', running: '#00E676', frozen: '#448AFF', system: '#7C4DFF', bloat: '#FF5252' },
+            crimson: { accent: '#FF1744', bg: '#000000', card: '#1C080B', running: '#00E676', frozen: '#FF1744', system: '#D50000', bloat: '#FF5252' }
+        };
+
+        // Navigation Views
+        function switchView(viewName) {
+            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+            event.currentTarget.classList.add('active');
+            document.querySelectorAll('.view-content').forEach(v => v.classList.remove('active'));
+            document.getElementById('view-' + viewName).classList.add('active');
+            haptic();
+        }
+
+        // Haptic & Toast
+        function haptic() {
+            if (window.AndroidBridge && window.AndroidBridge.vibrate) {
+                window.AndroidBridge.vibrate();
+            }
+        }
+
+        function showToast(msg, icon = '✨') {
+            const toast = document.getElementById('toast');
+            document.getElementById('toastMsg').innerText = msg;
+            document.getElementById('toastIcon').innerText = icon;
+            toast.classList.add('show');
+            setTimeout(() => toast.classList.remove('show'), 2600);
+        }
+
+        // Data Loading
+        function initApp() {
+            if (window.AndroidBridge) {
+                // Load system info
+                const sysInfoStr = window.AndroidBridge.getSystemInfo();
+                try {
+                    const info = JSON.parse(sysInfoStr);
+                    if (info.device) {
+                        document.getElementById('deviceInfoSubtitle').innerText = `${info.manufacturer} ${info.device} • Android ${info.release}`;
+                    }
+                    if (info.execMode) {
+                        document.getElementById('execModeText').innerText = info.execMode;
+                    }
+                } catch(e) {}
+
+                // Load packages
+                setTimeout(loadPackageData, 100);
+            } else {
+                // Mock test data for browser testing
+                document.getElementById('deviceInfoSubtitle').innerText = 'Samsung SM-S948U1 • Android 16';
+                document.getElementById('execModeText').innerText = 'Privileged Shell (Shizuku)';
+                allApps = [
+                    { name: 'SystemUI', pkg: 'com.android.systemui', isSystem: true, isRunning: true, isFrozen: false, isUninstalled: false },
+                    { name: 'One UI Settings', pkg: 'com.android.settings', isSystem: true, isRunning: true, isFrozen: false, isUninstalled: false },
+                    { name: 'Bixby Voice', pkg: 'com.samsung.android.bixby.agent', isSystem: true, isRunning: false, isFrozen: true, isUninstalled: false },
+                    { name: 'Samsung Free', pkg: 'com.samsung.android.app.spage', isSystem: true, isRunning: false, isFrozen: false, isUninstalled: true },
+                    { name: 'WhatsApp', pkg: 'com.whatsapp', isSystem: false, isRunning: true, isFrozen: false, isUninstalled: false },
+                    { name: 'Spotify', pkg: 'com.spotify.music', isSystem: false, isRunning: false, isFrozen: false, isUninstalled: false }
+                ];
+                renderApps();
+            }
+        }
+
+        function loadPackageData() {
+            if (!window.AndroidBridge) return;
+            const jsonStr = window.AndroidBridge.loadPackages();
+            try {
+                allApps = JSON.parse(jsonStr);
+                renderApps();
+            } catch (e) {
+                document.getElementById('appsListContainer').innerHTML = `<div style="text-align:center; padding:30px; color:var(--status-bloat);">Failed to parse package data: ${e.message}</div>`;
+            }
+        }
+
+        // Render Apps List
+        function renderApps() {
+            const query = (document.getElementById('searchInput').value || '').toLowerCase().trim();
+
+            filteredApps = allApps.filter(app => {
+                // Filter pill match
+                if (currentFilter === 'running' && !app.isRunning) return false;
+                if (currentFilter === 'frozen' && !app.isFrozen) return false;
+                if (currentFilter === 'user' && (app.isSystem || app.isUninstalled)) return false;
+                if (currentFilter === 'system' && (!app.isSystem || app.isUninstalled)) return false;
+                if (currentFilter === 'uninstalled' && !app.isUninstalled) return false;
+
+                // Search query match
+                if (query) {
+                    return app.name.toLowerCase().includes(query) || app.pkg.toLowerCase().includes(query);
+                }
+                return true;
+            });
+
+            // Update stats
+            const total = allApps.length;
+            const running = allApps.filter(a => a.isRunning).length;
+            const frozen = allApps.filter(a => a.isFrozen).length;
+            const user = allApps.filter(a => !a.isSystem && !a.isUninstalled).length;
+            const system = allApps.filter(a => a.isSystem && !a.isUninstalled).length;
+            const uninstalled = allApps.filter(a => a.isUninstalled).length;
+
+            document.getElementById('statTotal').innerText = total;
+            document.getElementById('statRunning').innerText = running;
+            document.getElementById('statFrozen').innerText = frozen;
+            document.getElementById('statUser').innerText = user;
+            document.getElementById('statSystem').innerText = system;
+            document.getElementById('statUninstalled').innerText = uninstalled;
+
+            document.getElementById('countAll').innerText = total;
+            document.getElementById('countRunning').innerText = running;
+            document.getElementById('countUser').innerText = user;
+            document.getElementById('countSystem').innerText = system;
+            document.getElementById('countFrozen').innerText = frozen;
+            document.getElementById('countUninstalled').innerText = uninstalled;
+
+            // Render items
+            const container = document.getElementById('appsListContainer');
+            if (filteredApps.length === 0) {
+                container.innerHTML = '<div style="text-align:center; padding: 40px; color: var(--text-muted);">No applications found matching criteria.</div>';
+                return;
+            }
+
+            let html = '';
+            filteredApps.forEach(app => {
+                const isSelected = selectedPkgs.has(app.pkg);
+                const initial = (app.name && app.name.length > 0) ? app.name.charAt(0).toUpperCase() : '⚡';
+
+                let badges = '';
+                if (app.isRunning) badges += '<span class="tag-badge tag-running">RUNNING</span>';
+                if (app.isFrozen && !app.isUninstalled) badges += '<span class="tag-badge tag-frozen">FROZEN</span>';
+                if (app.isUninstalled) badges += '<span class="tag-badge tag-bloat">UNINSTALLED</span>';
+                if (app.isSystem) badges += '<span class="tag-badge tag-system">SYSTEM</span>';
+                else badges += '<span class="tag-badge tag-user">USER</span>';
+
+                html += `
+                    <div class="app-card ${isSelected ? 'selected' : ''}" id="card_${app.pkg}">
+                        <div class="app-left" onclick="toggleSelectPkg('${app.pkg}')">
+                            <div class="app-checkbox">${isSelected ? '✓' : ''}</div>
+                            <div class="app-avatar">${initial}</div>
+                            <div class="app-meta">
+                                <div class="app-name">${app.name}</div>
+                                <div class="app-pkg">${app.pkg}</div>
+                                <div class="badge-row">${badges}</div>
+                            </div>
+                        </div>
+                        <div class="app-actions">
+                            ${app.isFrozen ? 
+                                `<button class="btn-mini" title="Enable" onclick="quickAction('unfreeze', '${app.pkg}')">🔥</button>` : 
+                                `<button class="btn-mini" title="Freeze" onclick="quickAction('freeze', '${app.pkg}')">❄️</button>`}
+                            <button class="btn-mini" title="Force Stop" onclick="quickAction('force_stop', '${app.pkg}')">🛑</button>
+                            <button class="btn-mini" title="Inspect Details" onclick="openInspector('${app.pkg}')">⋯</button>
+                        </div>
+                    </div>
+                `;
+            });
+            container.innerHTML = html;
+        }
+
+        // Selection & Batch
+        function toggleSelectPkg(pkg) {
+            if (selectedPkgs.has(pkg)) {
+                selectedPkgs.delete(pkg);
+            } else {
+                selectedPkgs.add(pkg);
+            }
+            haptic();
+            updateBatchBar();
+            const card = document.getElementById('card_' + pkg);
+            if (card) {
+                card.classList.toggle('selected', selectedPkgs.has(pkg));
+                card.querySelector('.app-checkbox').innerText = selectedPkgs.has(pkg) ? '✓' : '';
+            }
+        }
+
+        function updateBatchBar() {
+            const bar = document.getElementById('floatingBatchBar');
+            const count = selectedPkgs.size;
+            if (count > 0) {
+                bar.classList.add('show');
+                document.getElementById('batchCountText').innerText = `${count} Selected`;
+            } else {
+                bar.classList.remove('show');
+            }
+        }
+
+        function clearBatchSelection() {
+            selectedPkgs.clear();
+            updateBatchBar();
+            document.querySelectorAll('.app-card').forEach(c => {
+                c.classList.remove('selected');
+                const cb = c.querySelector('.app-checkbox');
+                if (cb) cb.innerText = '';
+            });
+            haptic();
+        }
+
+        function batchAction(action) {
+            if (selectedPkgs.size === 0) return;
+            haptic();
+            const arr = Array.from(selectedPkgs);
+            showToast(`Executing ${action} on ${arr.length} apps...`, '⚙️');
+
+            if (window.AndroidBridge) {
+                const resStr = window.AndroidBridge.executeBatchAction(action, JSON.stringify(arr));
+                try {
+                    const res = JSON.parse(resStr);
+                    showToast(`Batch Done: ${res.success} succeeded, ${res.failed} failed`, '✔');
+                } catch(e) {
+                    showToast(`Batch completed`, '✔');
+                }
+                clearBatchSelection();
+                setTimeout(loadPackageData, 500);
+            } else {
+                showToast(`Mock batch executed: ${action}`, '✔');
+                clearBatchSelection();
+            }
+        }
+
+        // Quick Actions
+        function quickAction(action, pkg) {
+            haptic();
+            if (window.AndroidBridge) {
+                window.AndroidBridge.executeAppAction(action, pkg);
+                showToast(`Action ${action} executed`, '✔');
+                setTimeout(loadPackageData, 400);
+            } else {
+                showToast(`Mock: ${action} on ${pkg}`, '✔');
+            }
+        }
+
+        // Filter & Search
+        function setFilter(filter, el) {
+            currentFilter = filter;
+            if (el) {
+                document.querySelectorAll('.filter-pill').forEach(p => p.classList.remove('active'));
+                el.classList.add('active');
+            }
+            haptic();
+            renderApps();
+        }
+
+        function handleSearch() {
+            const q = document.getElementById('searchInput').value;
+            document.getElementById('searchClear').style.display = q ? 'block' : 'none';
+            renderApps();
+        }
+
+        function clearSearch() {
+            document.getElementById('searchInput').value = '';
+            document.getElementById('searchClear').style.display = 'none';
+            renderApps();
+        }
+
+        // Detailed Inspector Modal
+        function openInspector(pkg) {
+            inspectedPkg = pkg;
+            haptic();
+            const modal = document.getElementById('inspectorModal');
+            modal.classList.add('show');
+
+            const app = allApps.find(a => a.pkg === pkg) || { name: pkg, pkg: pkg, isFrozen: false, isUninstalled: false };
+            document.getElementById('sheetTitle').innerText = app.name;
+            document.getElementById('sheetPkg').innerText = app.pkg;
+            document.getElementById('sheetAvatar').innerText = app.name.charAt(0).toUpperCase();
+
+            // Toggle action buttons based on app state
+            document.getElementById('sheetBtnReinstall').style.display = app.isUninstalled ? 'flex' : 'none';
+            document.getElementById('sheetBtnUninstall').style.display = app.isUninstalled ? 'none' : 'flex';
+
+            // Load details from native
+            if (window.AndroidBridge) {
+                const detailsStr = window.AndroidBridge.getAppDetails(pkg);
+                try {
+                    const d = JSON.parse(detailsStr);
+                    renderInspectorDetails(d);
+                } catch(e) {}
+            }
+        }
+
+        function renderInspectorDetails(d) {
+            // Permissions
+            const permsContainer = document.getElementById('permsContainer');
+            if (d.permissions && d.permissions.length > 0) {
+                let html = '';
+                d.permissions.forEach(p => {
+                    const shortName = p.name.replace('android.permission.', '');
+                    html += `
+                        <div class="perm-item">
+                            <span>${shortName}</span>
+                            <button class="perm-toggle-btn ${p.granted ? 'granted' : 'revoked'}" 
+                                onclick="togglePermission('${p.name}', ${p.granted})">
+                                ${p.granted ? 'GRANTED' : 'REVOKED'}
+                            </button>
+                        </div>
+                    `;
+                });
+                permsContainer.innerHTML = html;
+            } else {
+                permsContainer.innerHTML = '<div style="color:var(--text-muted); font-size:12px;">No permissions declared in manifest.</div>';
+            }
+
+            // Components
+            const compsContainer = document.getElementById('compsContainer');
+            let compHtml = '';
+            if (d.activities && d.activities.length > 0) {
+                compHtml += '<div style="font-weight:800; font-size:12px; margin-bottom:6px; color:var(--accent);">ACTIVITIES</div>';
+                d.activities.forEach(a => {
+                    const shortAct = a.split('.').pop();
+                    compHtml += `
+                        <div class="perm-item">
+                            <span>${shortAct}</span>
+                            <button class="perm-toggle-btn granted" onclick="launchComponent('${a}')">START</button>
+                        </div>
+                    `;
+                });
+            }
+            if (d.services && d.services.length > 0) {
+                compHtml += '<div style="font-weight:800; font-size:12px; margin:12px 0 6px 0; color:var(--secondary);">SERVICES</div>';
+                d.services.forEach(s => {
+                    const shortSrv = s.split('.').pop();
+                    compHtml += `
+                        <div class="perm-item">
+                            <span>${shortSrv}</span>
+                            <button class="perm-toggle-btn revoked" onclick="stopComponentService('${s}')">STOP</button>
+                        </div>
+                    `;
+                });
+            }
+            compsContainer.innerHTML = compHtml || '<div style="color:var(--text-muted); font-size:12px;">No exported activities or services found.</div>';
+
+            // Raw
+            document.getElementById('rawContainer').innerText = JSON.stringify(d, null, 2);
+        }
+
+        function closeInspector() {
+            document.getElementById('inspectorModal').classList.remove('show');
+            haptic();
+        }
+
+        function switchSheetTab(tab) {
+            document.querySelectorAll('.sheet-tab-pill').forEach(p => p.classList.remove('active'));
+            event.currentTarget.classList.add('active');
+            document.querySelectorAll('.sheet-tab-content').forEach(c => c.classList.remove('active'));
+            if (tab === 'perms') document.getElementById('sheetTabPerms').classList.add('active');
+            if (tab === 'comps') document.getElementById('sheetTabComps').classList.add('active');
+            if (tab === 'raw') document.getElementById('sheetTabRaw').classList.add('active');
+            haptic();
+        }
+
+        function singleAction(action) {
+            if (!inspectedPkg) return;
+            quickAction(action, inspectedPkg);
+            closeInspector();
+        }
+
+        function togglePermission(perm, wasGranted) {
+            haptic();
+            if (window.AndroidBridge && inspectedPkg) {
+                window.AndroidBridge.setPermission(inspectedPkg, perm, !wasGranted);
+                showToast(`Toggled permission`, '🛡️');
+                openInspector(inspectedPkg);
+            }
+        }
+
+        function launchComponent(comp) {
+            haptic();
+            if (window.AndroidBridge && inspectedPkg) {
+                window.AndroidBridge.executeShell(`am start -n "${inspectedPkg}/${comp}"`);
+                showToast('Activity launched', '🚀');
+            }
+        }
+
+        function stopComponentService(srv) {
+            haptic();
+            if (window.AndroidBridge && inspectedPkg) {
+                window.AndroidBridge.executeShell(`am stopservice "${inspectedPkg}/${srv}"`);
+                showToast('Service stopped', '🛑');
+            }
+        }
+
+        // Preset Bloatware Execution
+        function applyPresetBloat(type) {
+            haptic();
+            let targets = [];
+            if (type === 'samsung') {
+                targets = [
+                    'com.samsung.android.bixby.agent',
+                    'com.samsung.android.bixby.wakeup',
+                    'com.samsung.android.arzone',
+                    'com.samsung.android.ardrawing',
+                    'com.samsung.android.aremoji',
+                    'com.samsung.android.game.gamehome',
+                    'com.samsung.android.game.gametools',
+                    'com.samsung.android.kidsinstaller',
+                    'com.samsung.android.app.spage'
+                ];
+            } else if (type === 'google') {
+                targets = [
+                    'com.google.android.apps.tachyon',
+                    'com.google.android.videos',
+                    'com.google.android.apps.youtube.music',
+                    'com.google.android.apps.wellbeing'
+                ];
+            } else if (type === 'carrier') {
+                targets = [
+                    'com.aura.oobe.samsung',
+                    'com.dti.folderlauncher',
+                    'com.LogiaGroup.LogiaDeck'
+                ];
+            }
+
+            if (window.AndroidBridge) {
+                window.AndroidBridge.executeBatchAction('freeze', JSON.stringify(targets));
+                showToast(`Debloat applied (${targets.length} targets)`, '✔');
+                setTimeout(loadPackageData, 500);
+            } else {
+                showToast(`Mock debloat: ${type}`, '✔');
+            }
+        }
+
+        function restoreAllDebloated() {
+            haptic();
+            const debloated = allApps.filter(a => a.isFrozen || a.isUninstalled).map(a => a.pkg);
+            if (debloated.length === 0) {
+                showToast('No debloated apps to restore', 'ℹ️');
+                return;
+            }
+            if (window.AndroidBridge) {
+                window.AndroidBridge.executeBatchAction('unfreeze', JSON.stringify(debloated));
+                window.AndroidBridge.executeBatchAction('reinstall', JSON.stringify(debloated));
+                showToast(`Restored ${debloated.length} apps`, '✔');
+                setTimeout(loadPackageData, 500);
+            } else {
+                showToast(`Mock restored ${debloated.length} apps`, '✔');
+            }
+        }
+
+        // Color Settings Engine
+        function applyPalettePreset(name, el) {
+            document.querySelectorAll('.palette-preset-card').forEach(c => c.classList.remove('active'));
+            el.classList.add('active');
+            const p = palettes[name];
+            Object.assign(themeState, p);
+            updateColorsLive();
+            haptic();
+            showToast('Applied Theme: ' + name.toUpperCase(), '🎨');
+        }
+
+        function updateCustomColor(key, val) {
+            themeState[key] = val;
+            updateColorsLive();
+            haptic();
+        }
+
+        function updateColorsLive() {
+            // Apply CSS Root Variables
+            document.documentElement.style.setProperty('--accent', themeState.accent);
+            document.documentElement.style.setProperty('--accent-glow', themeState.accent + '44');
+            document.documentElement.style.setProperty('--bg-base', themeState.bg);
+            document.documentElement.style.setProperty('--bg-card', themeState.card);
+            document.documentElement.style.setProperty('--status-running', themeState.running);
+            document.documentElement.style.setProperty('--status-frozen', themeState.frozen);
+            document.documentElement.style.setProperty('--status-system', themeState.system);
+            document.documentElement.style.setProperty('--status-bloat', themeState.bloat);
+
+            // Update Color Pickers UI
+            document.getElementById('circAccent').style.background = themeState.accent;
+            document.getElementById('hexAccent').innerText = themeState.accent.toUpperCase();
+
+            document.getElementById('circBg').style.background = themeState.bg;
+            document.getElementById('hexBg').innerText = themeState.bg.toUpperCase();
+
+            document.getElementById('circCard').style.background = themeState.card;
+            document.getElementById('hexCard').innerText = themeState.card.toUpperCase();
+
+            document.getElementById('circRunning').style.background = themeState.running;
+            document.getElementById('hexRunning').innerText = themeState.running.toUpperCase();
+
+            document.getElementById('circFrozen').style.background = themeState.frozen;
+            document.getElementById('hexFrozen').innerText = themeState.frozen.toUpperCase();
+
+            document.getElementById('circSystem').style.background = themeState.system;
+            document.getElementById('hexSystem').innerText = themeState.system.toUpperCase();
+
+            document.getElementById('circBloat').style.background = themeState.bloat;
+            document.getElementById('hexBloat').innerText = themeState.bloat.toUpperCase();
+
+            // Save preferences
+            if (window.AndroidBridge && window.AndroidBridge.savePreferences) {
+                window.AndroidBridge.savePreferences(JSON.stringify(themeState));
+            }
+        }
+
+        // Terminal Console
+        function runTerminalCmd() {
+            const input = document.getElementById('termCmd');
+            const cmd = input.value.trim();
+            if (!cmd) return;
+            haptic();
+            input.value = '';
+
+            const term = document.getElementById('termOutput');
+            term.innerHTML += `\n<span style="color:#FFFFFF;">$ ${cmd}</span>\n`;
+
+            if (window.AndroidBridge) {
+                const res = window.AndroidBridge.executeShell(cmd);
+                term.innerHTML += res;
+            } else {
+                term.innerHTML += 'Executed in mock mode: output OK\n';
+            }
+            term.scrollTop = term.scrollHeight;
+        }
+
+        // Init App on load
+        window.addEventListener('DOMContentLoaded', () => {
+            initApp();
+            updateColorsLive();
+        });
+    </script>
+</body>
+</html>
