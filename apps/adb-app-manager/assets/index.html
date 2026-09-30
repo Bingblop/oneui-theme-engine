@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <title>ADB Application Manager Pro</title>
     <style>
         :root {
@@ -39,20 +39,20 @@
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
         }
 
-        html, body {
+        html {
+            background-color: var(--bg-base);
+        }
+
+        body {
             background-color: var(--bg-base);
             color: var(--text-main);
             padding: 0 0 120px 0;
-            overflow-x: hidden;
-            overflow-y: auto;
-            -webkit-overflow-scrolling: touch;
-            touch-action: pan-y;
-            overscroll-behavior-y: contain;
             min-height: 100vh;
+            -webkit-user-select: none;
             user-select: none;
         }
 
-        /* Top Sticky Header (Solid background for high-FPS scrolling) */
+        /* Top Sticky Header */
         .app-header {
             position: sticky;
             top: 0;
@@ -141,7 +141,6 @@
             position: sticky;
             top: 65px;
             z-index: 90;
-            touch-action: pan-x;
         }
 
         .tab-bar::-webkit-scrollbar {
@@ -176,7 +175,6 @@
             padding: 12px 16px;
             max-width: 600px;
             margin: 0 auto;
-            position: relative;
         }
 
         .view-content {
@@ -269,7 +267,6 @@
             scrollbar-width: none;
             padding-bottom: 6px;
             margin-bottom: 12px;
-            touch-action: pan-x;
         }
 
         .filter-scroll::-webkit-scrollbar {
@@ -295,7 +292,7 @@
             color: var(--accent);
         }
 
-        /* High-Performance App Card */
+        /* Clean Native App Card */
         .app-card {
             background: var(--bg-card);
             border: 1px solid var(--border-glass);
@@ -305,9 +302,6 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            touch-action: pan-y;
-            content-visibility: auto;
-            contain-intrinsic-size: 0 74px;
             transition: background 0.15s;
         }
 
@@ -323,7 +317,6 @@
             flex: 1;
             overflow: hidden;
             cursor: pointer;
-            touch-action: pan-y;
         }
 
         .app-checkbox {
@@ -453,93 +446,6 @@
         .btn-mini:active {
             background: var(--accent);
             color: #000000;
-        }
-
-        /* Alphabet Fast-Scroller Strip (Samsung / One UI style) */
-        .alphabet-strip {
-            position: fixed;
-            right: 2px;
-            top: 140px;
-            bottom: 40px;
-            width: 22px;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            align-items: center;
-            z-index: 150;
-            touch-action: none;
-            user-select: none;
-        }
-
-        .alpha-char {
-            font-size: 9px;
-            font-weight: 800;
-            color: var(--text-muted);
-            cursor: pointer;
-            padding: 1px;
-            transition: color 0.1s, transform 0.1s;
-        }
-
-        .alpha-char.active {
-            color: var(--accent);
-            transform: scale(1.4);
-        }
-
-        .alphabet-bubble {
-            position: fixed;
-            right: 36px;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 56px;
-            height: 56px;
-            border-radius: 50%;
-            background: var(--accent);
-            color: #000000;
-            font-size: 26px;
-            font-weight: 900;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 4px 20px var(--accent-glow);
-            z-index: 200;
-            opacity: 0;
-            pointer-events: none;
-            transition: opacity 0.2s ease;
-        }
-
-        .alphabet-bubble.show {
-            opacity: 1;
-        }
-
-        /* Scroll To Top FAB */
-        .fab-scroll-top {
-            position: fixed;
-            right: 20px;
-            bottom: 24px;
-            width: 44px;
-            height: 44px;
-            border-radius: 50%;
-            background: var(--bg-surface);
-            border: 1px solid var(--accent);
-            color: var(--accent);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 18px;
-            font-weight: 900;
-            box-shadow: 0 4px 16px rgba(0,0,0,0.6);
-            z-index: 120;
-            cursor: pointer;
-            opacity: 0;
-            transform: scale(0.8);
-            transition: opacity 0.2s, transform 0.2s;
-            pointer-events: none;
-        }
-
-        .fab-scroll-top.show {
-            opacity: 1;
-            transform: scale(1);
-            pointer-events: auto;
         }
 
         /* Floating Batch Bar */
@@ -743,7 +649,6 @@
             padding: 18px;
             transform: translateY(100%);
             transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.15);
-            -webkit-overflow-scrolling: touch;
         }
 
         .modal-overlay.show .modal-sheet {
@@ -840,7 +745,6 @@
             display: none;
             max-height: 250px;
             overflow-y: auto;
-            -webkit-overflow-scrolling: touch;
         }
 
         .sheet-tab-content.active {
@@ -931,7 +835,6 @@
             color: var(--accent);
             line-height: 1.5;
             margin-bottom: 10px;
-            -webkit-overflow-scrolling: touch;
         }
 
         .term-input-row {
@@ -1015,13 +918,6 @@
         <button class="tab-btn" onclick="switchView('colors')">🎨 Color & Themes</button>
         <button class="tab-btn" onclick="switchView('terminal')">💻 ADB Console</button>
     </nav>
-
-    <!-- Alphabet Quick Scroller Strip -->
-    <div class="alphabet-strip" id="alphabetStrip"></div>
-    <div class="alphabet-bubble" id="alphabetBubble">A</div>
-
-    <!-- Scroll to Top FAB -->
-    <div class="fab-scroll-top" id="fabScrollTop" onclick="scrollToTop()">▲</div>
 
     <div class="container">
 
@@ -1420,10 +1316,6 @@ Type any command below (e.g. pm list packages -d)
         let currentFilter = 'all';
         let inspectedPkg = null;
 
-        // Progressive Infinite Scrolling
-        const CHUNK_SIZE = 40;
-        let renderedIndex = 0;
-
         const themeState = {
             accent: '#00E5FF',
             bg: '#080A0F',
@@ -1448,9 +1340,6 @@ Type any command below (e.g. pm list packages -d)
             event.currentTarget.classList.add('active');
             document.querySelectorAll('.view-content').forEach(v => v.classList.remove('active'));
             document.getElementById('view-' + viewName).classList.add('active');
-            
-            // Toggle Alphabet strip visibility
-            document.getElementById('alphabetStrip').style.display = (viewName === 'apps') ? 'flex' : 'none';
             haptic();
         }
 
@@ -1507,7 +1396,6 @@ Type any command below (e.g. pm list packages -d)
         // Initialize App
         function initApp() {
             checkShizuku();
-            initAlphabetStrip();
 
             if (window.AndroidBridge) {
                 const sysInfoStr = window.AndroidBridge.getSystemInfo();
@@ -1520,8 +1408,7 @@ Type any command below (e.g. pm list packages -d)
 
                 setTimeout(loadPackageData, 80);
             } else {
-                // Browser test dummy data
-                for (let i = 1; i <= 200; i++) {
+                for (let i = 1; i <= 80; i++) {
                     const ch = String.fromCharCode(65 + (i % 26));
                     allApps.push({
                         name: `${ch}pplication ${i}`,
@@ -1541,7 +1428,6 @@ Type any command below (e.g. pm list packages -d)
             const jsonStr = window.AndroidBridge.loadPackages();
             try {
                 allApps = JSON.parse(jsonStr);
-                // Sort alphabetically by name
                 allApps.sort((a, b) => a.name.localeCompare(b.name, undefined, { sensitivity: 'base' }));
                 renderApps();
             } catch (e) {
@@ -1549,7 +1435,7 @@ Type any command below (e.g. pm list packages -d)
             }
         }
 
-        // Render Apps Filter & Progressive Chunking
+        // Render Apps
         function renderApps() {
             const query = (document.getElementById('searchInput').value || '').toLowerCase().trim();
 
@@ -1587,19 +1473,8 @@ Type any command below (e.g. pm list packages -d)
                 return;
             }
 
-            container.innerHTML = '';
-            renderedIndex = 0;
-            renderNextBatch();
-        }
-
-        function renderNextBatch() {
-            if (renderedIndex >= filteredApps.length) return;
-            const batch = filteredApps.slice(renderedIndex, renderedIndex + CHUNK_SIZE);
-            const container = document.getElementById('appsListContainer');
-
             let html = '';
-            batch.forEach((app, idx) => {
-                const globalIndex = renderedIndex + idx;
+            filteredApps.forEach(app => {
                 const isSelected = selectedPkgs.has(app.pkg);
                 const initial = (app.name && app.name.length > 0) ? app.name.charAt(0).toUpperCase() : '⚡';
 
@@ -1611,7 +1486,7 @@ Type any command below (e.g. pm list packages -d)
                 else badges += '<span class="tag-badge tag-user">USER</span>';
 
                 html += `
-                    <div class="app-card ${isSelected ? 'selected' : ''}" id="card_${app.pkg}" data-initial="${initial}">
+                    <div class="app-card ${isSelected ? 'selected' : ''}" id="card_${app.pkg}">
                         <div class="app-left" onclick="toggleSelectPkg('${app.pkg}')">
                             <div class="app-checkbox">${isSelected ? '✓' : ''}</div>
                             <div class="app-avatar">${initial}</div>
@@ -1632,92 +1507,7 @@ Type any command below (e.g. pm list packages -d)
                 `;
             });
 
-            container.insertAdjacentHTML('beforeend', html);
-            renderedIndex += batch.length;
-        }
-
-        // Window Scroll Listener for Progressive Infinite Loading & Scroll-to-Top FAB
-        window.addEventListener('scroll', () => {
-            const scrollY = window.scrollY || window.pageYOffset;
-            
-            // Show / Hide Scroll To Top FAB
-            const fab = document.getElementById('fabScrollTop');
-            if (scrollY > 600) {
-                fab.classList.add('show');
-            } else {
-                fab.classList.remove('show');
-            }
-
-            // Auto-render next chunk when within 800px of bottom
-            if ((window.innerHeight + scrollY) >= document.body.offsetHeight - 800) {
-                renderNextBatch();
-            }
-        }, { passive: true });
-
-        function scrollToTop() {
-            haptic();
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
-
-        // Alphabet Fast-Scroller Implementation
-        function initAlphabetStrip() {
-            const strip = document.getElementById('alphabetStrip');
-            const chars = ['#', 'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'];
-            let html = '';
-            chars.forEach(ch => {
-                html += `<span class="alpha-char" data-char="${ch}">${ch}</span>`;
-            });
-            strip.innerHTML = html;
-
-            // Touch Drag / Tap Support
-            strip.addEventListener('touchstart', handleAlphaTouch, { passive: false });
-            strip.addEventListener('touchmove', handleAlphaTouch, { passive: false });
-            strip.addEventListener('touchend', () => {
-                document.getElementById('alphabetBubble').classList.remove('show');
-            });
-        }
-
-        let lastJumpChar = '';
-        function handleAlphaTouch(e) {
-            e.preventDefault();
-            const touch = e.touches[0];
-            const target = document.elementFromPoint(touch.clientX, touch.clientY);
-            if (target && target.classList.contains('alpha-char')) {
-                const char = target.dataset.char;
-                if (char !== lastJumpChar) {
-                    lastJumpChar = char;
-                    jumpToChar(char);
-                }
-            }
-        }
-
-        function jumpToChar(char) {
-            haptic();
-            const bubble = document.getElementById('alphabetBubble');
-            bubble.innerText = char;
-            bubble.classList.add('show');
-
-            // Find index of first app matching this char
-            const targetIdx = filteredApps.findIndex(app => {
-                if (char === '#') return !/^[A-Za-z]/.test(app.name);
-                return app.name.toUpperCase().startsWith(char);
-            });
-
-            if (targetIdx !== -1) {
-                // Ensure all items up to targetIdx are rendered
-                while (renderedIndex <= targetIdx + 10 && renderedIndex < filteredApps.length) {
-                    renderNextBatch();
-                }
-
-                // Scroll to card
-                const targetApp = filteredApps[targetIdx];
-                const card = document.getElementById('card_' + targetApp.pkg);
-                if (card) {
-                    const rect = card.getBoundingClientRect();
-                    const targetY = window.pageYOffset + rect.top - 120;
-                    window.scrollTo({ top: targetY, behavior: 'auto' });
-                }
-            }
+            container.innerHTML = html;
         }
 
         // Selection & Batch Operations
