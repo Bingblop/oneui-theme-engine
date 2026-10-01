@@ -19,6 +19,7 @@ A next-generation theming framework, diagnostic suite, and compatibility layer f
 ```
 .
 ├── apps/
+│   ├── adb-app-manager/         # Moved: see github.com/Bingblop/ADB-Application-Manager
 │   ├── dummy-themepark/         # Theme Park legacy stub APK builder
 │   └── hex-bridge/              # Native Android APK & Web Dashboard
 │       ├── app.py               # Flask backend & REST API
