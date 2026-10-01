@@ -11,7 +11,7 @@ RESET="\033[0m"
 
 WORK_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 ANDROID_JAR="/system/framework/framework-res.apk"
-KEYSTORE="$WORK_DIR/bin/release.keystore"
+KEYSTORE="$WORK_DIR/release.keystore"
 OUTPUT_APK="/storage/emulated/0/Download/ADB_Application_Manager_Pro.apk"
 
 clear
@@ -61,15 +61,18 @@ if ! d8 --release --output "$WORK_DIR/bin" "$WORK_DIR/obj/com/bloatware/bingblop
     exit 1
 fi
 
-# Step 5: Merge classes.dex into APK
-echo -e "${YELLOW}[*] Packaging Dex bytecode into APK...${RESET}"
+# Step 5: Merge classes.dex and native libraries into APK
+echo -e "${YELLOW}[*] Packaging Dex bytecode and native libraries into APK...${RESET}"
 cd "$WORK_DIR/bin" || exit 1
 cp "uncompiled.apk" "adbappmanager.apk"
 
 python3 -c "
-import zipfile
+import zipfile, os
 with zipfile.ZipFile('adbappmanager.apk', 'a') as archive:
     archive.write('classes.dex', 'classes.dex')
+    libadb = '$WORK_DIR/assets/libadb.so'
+    if os.path.exists(libadb):
+        archive.write(libadb, 'lib/arm64-v8a/libadb.so')
 "
 
 # Step 6: Keystore

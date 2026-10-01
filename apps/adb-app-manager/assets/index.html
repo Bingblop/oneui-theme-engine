@@ -929,6 +929,187 @@
         .toast.show {
             transform: translateX(-50%) translateY(0);
         }
+
+        /* Mode Alert Card */
+        .mode-alert-card {
+            background: rgba(255, 145, 0, 0.08);
+            border: 1px solid rgba(255, 145, 0, 0.3);
+            border-radius: var(--radius-lg);
+            padding: 12px 14px;
+            margin-bottom: 14px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .mode-alert-icon {
+            font-size: 24px;
+            flex-shrink: 0;
+        }
+
+        .mode-alert-body {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .mode-alert-title {
+            font-size: 13px;
+            font-weight: 800;
+            color: #FFA726;
+            margin-bottom: 2px;
+        }
+
+        .mode-alert-desc {
+            font-size: 11px;
+            color: var(--text-muted);
+            line-height: 1.4;
+        }
+
+        .mode-alert-btn {
+            background: linear-gradient(135deg, #FF9100, #FF6D00);
+            color: #000;
+            border: none;
+            border-radius: var(--radius-pill);
+            padding: 6px 14px;
+            font-size: 11px;
+            font-weight: 800;
+            cursor: pointer;
+            flex-shrink: 0;
+            transition: transform 0.15s ease, opacity 0.15s ease;
+        }
+
+        .mode-alert-btn:active {
+            transform: scale(0.95);
+            opacity: 0.85;
+        }
+
+        /* Working Modes Modal Styles */
+        .mode-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: var(--radius-lg);
+            padding: 14px;
+            margin-bottom: 12px;
+            transition: border-color 0.2s ease, background 0.2s ease;
+        }
+
+        .mode-card.active-mode {
+            border-color: var(--status-running);
+            background: rgba(0, 230, 118, 0.06);
+        }
+
+        .mode-card-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 8px;
+        }
+
+        .mode-card-title {
+            font-size: 13.5px;
+            font-weight: 800;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .mode-card-desc {
+            font-size: 11px;
+            color: var(--text-muted);
+            margin-bottom: 10px;
+            line-height: 1.4;
+        }
+
+        .mode-input-row {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 8px;
+        }
+
+        .mode-input {
+            flex: 1;
+            background: rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: var(--radius-md);
+            padding: 8px 12px;
+            font-size: 12px;
+            color: #FFF;
+            outline: none;
+        }
+
+        .mode-input:focus {
+            border-color: var(--accent);
+        }
+
+        .mode-btn-row {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .mode-action-btn {
+            background: var(--bg-card);
+            border: 1px solid var(--border-glass);
+            color: var(--text-main);
+            border-radius: var(--radius-pill);
+            padding: 7px 14px;
+            font-size: 11px;
+            font-weight: 700;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.15s ease;
+        }
+
+        .mode-action-btn.primary {
+            background: linear-gradient(135deg, var(--accent), var(--secondary));
+            color: #000;
+            border: none;
+        }
+
+        .mode-action-btn:active {
+            transform: scale(0.96);
+            opacity: 0.85;
+        }
+
+        .mode-tip-box {
+            background: rgba(0, 229, 255, 0.06);
+            border: 1px dashed rgba(0, 229, 255, 0.3);
+            border-radius: var(--radius-md);
+            padding: 8px 10px;
+            font-size: 10.5px;
+            color: var(--text-muted);
+            line-height: 1.4;
+            margin-bottom: 10px;
+        }
+
+        .mode-status-tag {
+            font-size: 10px;
+            font-weight: 800;
+            padding: 2px 8px;
+            border-radius: var(--radius-pill);
+            letter-spacing: 0.5px;
+        }
+
+        .mode-status-tag.active {
+            background: rgba(0, 230, 118, 0.15);
+            color: var(--status-running);
+            border: 1px solid rgba(0, 230, 118, 0.4);
+        }
+
+        .mode-status-tag.inactive {
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--text-muted);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .mode-status-tag.warning {
+            background: rgba(255, 145, 0, 0.15);
+            color: #FFA726;
+            border: 1px solid rgba(255, 145, 0, 0.4);
+        }
     </style>
 </head>
 <body>
@@ -942,9 +1123,9 @@
                 <p id="deviceInfoSubtitle">Samsung One UI 9.0</p>
             </div>
         </div>
-        <div class="status-badge" id="execModeBadge" onclick="handleShizukuTap()" title="Tap to Authorize in Shizuku">
-            <div class="status-dot"></div>
-            <span id="execModeText">Checking Shizuku...</span>
+        <div class="status-badge" id="execModeBadge" onclick="openWorkingModesModal()" title="Working Modes & ADB Setup">
+            <div class="status-dot" id="execModeDot"></div>
+            <span id="execModeText">Checking Mode...</span>
         </div>
     </header>
 
@@ -960,6 +1141,16 @@
 
         <!-- VIEW 1: APPLICATIONS LIST -->
         <section id="view-apps" class="view-content active">
+
+            <!-- Read-Only / Working Mode Alert Banner -->
+            <div class="mode-alert-card" id="modeAlertCard" style="display:none;">
+                <div class="mode-alert-icon" id="modeAlertIcon">⚠️</div>
+                <div class="mode-alert-body">
+                    <div class="mode-alert-title" id="modeAlertTitle">Active Mode: Read-Only (Unprivileged)</div>
+                    <div class="mode-alert-desc" id="modeAlertDesc">All installed apps are shown. To enable Freeze, Uninstall, or ADB commands, connect via ADB TCP 5555, Wireless Debugging, Shizuku, or Root.</div>
+                </div>
+                <button class="mode-alert-btn" onclick="openWorkingModesModal()">Set Up ⚡</button>
+            </div>
             
             <!-- Live Statistics Grid -->
             <div class="stats-grid">
@@ -1228,21 +1419,19 @@
             <div class="bloat-card" style="margin-bottom:14px; border-color:var(--accent);">
                 <div class="bloat-header">
                     <div>
-                        <h4 style="font-size:14px; font-weight:800; color:var(--accent);">⚡ Shizuku ADB Authorization</h4>
-                        <p style="font-size:11px; color:var(--text-muted); margin-top:2px;">Grants direct ADB shell access (UID 2000) without root</p>
+                        <h4 style="font-size:14px; font-weight:800; color:var(--accent);" id="termActiveModeTitle">⚡ Active Mode: ADB / Shell</h4>
+                        <p style="font-size:11px; color:var(--text-muted); margin-top:2px;" id="termActiveModeDesc">Execute shell and package commands across multiple backends.</p>
                     </div>
-                    <button class="bloat-btn" onclick="handleShizukuTap()">Authorize</button>
+                    <button class="bloat-btn" onclick="openWorkingModesModal()">Configure</button>
                 </div>
-                <div style="display:flex; gap:8px; margin-top:8px;">
-                    <button class="apps-tool-btn" onclick="checkShizuku(); showToast('Checked Shizuku status', '🔍');">Check Status</button>
-                    <button class="apps-tool-btn" onclick="document.getElementById('termCmd').value = 'id'; runTerminalCmd();">Test UID (id)</button>
-                    <button class="apps-tool-btn" onclick="document.getElementById('termCmd').value = 'pm list packages -s | head -n 10'; runTerminalCmd();">Sample PM</button>
+                <div class="mode-btn-row" style="margin-top:10px;">
+                    <button class="apps-tool-btn" onclick="openWorkingModesModal()">⚙️ Working Modes</button>
+                    <button class="apps-tool-btn" onclick="document.getElementById('termCmd').value = 'adb devices'; runTerminalCmd();">📱 adb devices</button>
+                    <button class="apps-tool-btn" onclick="document.getElementById('termCmd').value = 'id'; runTerminalCmd();">🆔 UID (id)</button>
+                    <button class="apps-tool-btn" onclick="connectAdbTcpUI()">⚡ Connect 5555</button>
+                    <button class="apps-tool-btn" onclick="restartAdbTcpipUI()">🔄 tcpip 5555</button>
+                    <button class="apps-tool-btn" onclick="openDevOptionsUI()">⚙️ Dev Options</button>
                 </div>
-            </div>
-
-            <div style="margin-bottom:12px;">
-                <h3 style="font-size:15px; font-weight:800; margin-bottom:4px;">ADB Shell Terminal</h3>
-                <p style="font-size:11px; color:var(--text-muted);">Execute arbitrary pm, am, cmd, or shell commands directly.</p>
             </div>
 
             <div class="terminal-box" id="termOutput">
@@ -1250,7 +1439,7 @@ ADB Application Manager Shell Terminal Ready.
 Type any command below (e.g. pm list packages -d)
             </div>
 
-            <div class="term-input-row">
+            <div class="term-input-row" style="margin-top:12px;">
                 <input type="text" class="term-input" id="termCmd" placeholder="Enter shell command..." onkeydown="if(event.key==='Enter') runTerminalCmd()">
                 <button class="term-run-btn" onclick="runTerminalCmd()">RUN</button>
             </div>
@@ -1258,37 +1447,25 @@ Type any command below (e.g. pm list packages -d)
 
     </div>
 
-    <!-- DOCKED BATCH COMMANDS SHEET (2-Row Grid: Never Cut Off, No Side Scroll Needed!) -->
+    <!-- DOCKED BATCH COMMANDS SHEET (One UI 2-Row Grid: Never Cut Off, No Side Scroll Needed!) -->
     <div class="batch-bottom-sheet" id="floatingBatchBar">
         <div class="batch-sheet-header">
             <div class="batch-sheet-title">
-                <span style="color:var(--accent);">⚡</span>
+                <span>📦</span>
                 <span id="batchCountText">0 Selected</span>
             </div>
             <div class="batch-sheet-tools">
-                <button class="batch-tool-link" onclick="selectAllVisible(true)">Select All</button>
-                <button class="batch-tool-link" onclick="clearBatchSelection()">Deselect ✕</button>
+                <button class="batch-tool-link" onclick="selectAllFiltered()">Select All</button>
+                <button class="batch-tool-link" onclick="clearBatchSelection()" style="color:var(--text-muted);">✕ Clear</button>
             </div>
         </div>
         <div class="batch-actions-grid">
-            <button class="batch-grid-btn" onclick="batchAction('freeze')">
-                <span>❄️</span> Freeze
-            </button>
-            <button class="batch-grid-btn" onclick="batchAction('unfreeze')">
-                <span>🔥</span> Enable
-            </button>
-            <button class="batch-grid-btn" onclick="batchAction('force_stop')">
-                <span>🛑</span> Stop
-            </button>
-            <button class="batch-grid-btn" onclick="batchAction('clear_data')">
-                <span>🧹</span> Clear Data
-            </button>
-            <button class="batch-grid-btn" onclick="batchAction('uninstall')">
-                <span>🗑️</span> Uninstall
-            </button>
-            <button class="batch-grid-btn" onclick="batchAction('reinstall')">
-                <span>📥</span> Reinstall
-            </button>
+            <button class="batch-grid-btn" onclick="batchAction('freeze')">❄️ Freeze</button>
+            <button class="batch-grid-btn" onclick="batchAction('unfreeze')">🔥 Enable</button>
+            <button class="batch-grid-btn" onclick="batchAction('force_stop')">🛑 Force Stop</button>
+            <button class="batch-grid-btn" onclick="batchAction('clear_data')">🧹 Clear Data</button>
+            <button class="batch-grid-btn danger" onclick="batchAction('uninstall')">🗑️ Uninstall</button>
+            <button class="batch-grid-btn accent" onclick="batchAction('reinstall')">📥 Reinstall</button>
         </div>
     </div>
 
@@ -1344,20 +1521,23 @@ Type any command below (e.g. pm list packages -d)
                 <div class="sheet-tab-pill" onclick="switchSheetTab('raw')">📋 Raw Dumpsys</div>
             </div>
 
+            <!-- Tab 1: Permissions -->
             <div id="sheetTabPerms" class="sheet-tab-content active">
                 <div id="permsContainer">
-                    <div style="color:var(--text-muted); font-size:11px;">Loading permissions...</div>
+                    <div style="color:var(--text-muted); font-size:12px;">Loading permissions...</div>
                 </div>
             </div>
 
+            <!-- Tab 2: Components -->
             <div id="sheetTabComps" class="sheet-tab-content">
                 <div id="compsContainer">
-                    <div style="color:var(--text-muted); font-size:11px;">Loading activities & services...</div>
+                    <div style="color:var(--text-muted); font-size:12px;">Loading activities & services...</div>
                 </div>
             </div>
 
+            <!-- Tab 3: Raw -->
             <div id="sheetTabRaw" class="sheet-tab-content">
-                <pre id="rawContainer" style="font-family:monospace; font-size:10px; color:var(--accent); white-space:pre-wrap;"></pre>
+                <pre id="rawContainer" style="font-family:monospace; font-size:11px; color:var(--accent); white-space:pre-wrap;"></pre>
             </div>
         </div>
     </div>
@@ -1368,6 +1548,184 @@ Type any command below (e.g. pm list packages -d)
         <span id="toastMsg">Ready</span>
     </div>
 
+    <!-- Working Modes & ADB Setup Modal -->
+    <div class="modal-overlay" id="modesModal" onclick="if(event.target===this) closeWorkingModesModal()">
+        <div class="modal-sheet">
+            <div class="sheet-header">
+                <div class="sheet-app-hero">
+                    <div class="sheet-avatar" style="background:linear-gradient(135deg, #00E5FF, #7C4DFF);">⚡</div>
+                    <div class="sheet-title">
+                        <h3>Working Modes & ADB Setup</h3>
+                        <p id="modalActiveModeDesc">Active: Read-Only (Unprivileged)</p>
+                    </div>
+                </div>
+                <div style="font-size:20px; cursor:pointer;" onclick="closeWorkingModesModal()">✕</div>
+            </div>
+
+            <!-- Mode 1: ADB over TCP (Port 5555) -->
+            <div class="mode-card" id="modeCardAdbTcp">
+                <div class="mode-card-header">
+                    <div class="mode-card-title">
+                        <span>⚡</span>
+                        <span>ADB over TCP (Port 5555)</span>
+                    </div>
+                    <span class="mode-status-tag" id="statusTagAdbTcp">Checking...</span>
+                </div>
+                <div class="mode-card-desc">
+                    Connect directly to the device internal ADB daemon on localhost or remote IP. Fastest and most reliable non-root mode.
+                </div>
+                <div class="mode-input-row">
+                    <input type="text" class="mode-input" id="adbTcpHostInput" value="127.0.0.1" placeholder="IP (127.0.0.1)">
+                    <input type="number" class="mode-input" id="adbTcpPortInput" value="5555" style="max-width:100px;" placeholder="Port">
+                </div>
+                <div class="mode-btn-row">
+                    <button class="mode-action-btn primary" onclick="connectAdbTcpUI()">
+                        <span>⚡</span> Connect (5555)
+                    </button>
+                    <button class="mode-action-btn" onclick="restartAdbTcpipUI()">
+                        <span>🔄</span> Switch to 5555 (tcpip)
+                    </button>
+                    <button class="mode-action-btn" onclick="disconnectAdbUI()">
+                        <span>✕</span> Disconnect
+                    </button>
+                </div>
+            </div>
+
+            <!-- Mode 2: Wireless Debugging (Android 11+) -->
+            <div class="mode-card" id="modeCardAdbWireless">
+                <div class="mode-card-header">
+                    <div class="mode-card-title">
+                        <span>📶</span>
+                        <span>Wireless Debugging (Android 11+)</span>
+                    </div>
+                    <span class="mode-status-tag" id="statusTagAdbWireless">Android 11+</span>
+                </div>
+                <div class="mode-card-desc">
+                    Pair device using Android native Wireless Debugging dialog in Developer Options.
+                </div>
+                <div class="mode-tip-box">
+                    💡 <b>Tip:</b> Open Developer Options in <b>Split Screen</b> or <b>Pop-up Window</b> so Android does not rotate the 6-digit pairing code before you submit it.
+                </div>
+                <div class="mode-btn-row" style="margin-bottom:12px;">
+                    <button class="mode-action-btn" onclick="openDevOptionsUI()">
+                        <span>⚙️</span> Open Developer Options
+                    </button>
+                </div>
+
+                <!-- Step 1: Pair -->
+                <div style="font-size:11px; font-weight:800; color:var(--accent); margin-bottom:6px;">STEP 1: PAIR WITH CODE</div>
+                <div class="mode-input-row">
+                    <input type="number" class="mode-input" id="adbPairPortInput" placeholder="Pairing Port (e.g. 38475)">
+                    <input type="text" class="mode-input" id="adbPairCodeInput" placeholder="6-digit Code (e.g. 123456)">
+                </div>
+                <div class="mode-btn-row" style="margin-bottom:14px;">
+                    <button class="mode-action-btn primary" onclick="pairAdbWirelessUI()">
+                        <span>📶</span> Pair Device
+                    </button>
+                </div>
+
+                <!-- Step 2: Connect -->
+                <div style="font-size:11px; font-weight:800; color:var(--accent); margin-bottom:6px;">STEP 2: CONNECT WIRELESS ADB</div>
+                <div class="mode-input-row">
+                    <input type="number" class="mode-input" id="adbWirelessPortInput" placeholder="Connect Port from Dev Options">
+                </div>
+                <div class="mode-btn-row">
+                    <button class="mode-action-btn primary" onclick="connectAdbWirelessUI()">
+                        <span>⚡</span> Connect Wireless ADB
+                    </button>
+                </div>
+            </div>
+
+            <!-- Mode 3: Shizuku ADB (UID 2000) -->
+            <div class="mode-card" id="modeCardShizuku">
+                <div class="mode-card-header">
+                    <div class="mode-card-title">
+                        <span>🛡️</span>
+                        <span>Shizuku ADB Service</span>
+                    </div>
+                    <span class="mode-status-tag" id="statusTagShizuku">Checking...</span>
+                </div>
+                <div class="mode-card-desc">
+                    Uses the system Shizuku service to execute commands under shell UID 2000 without root.
+                </div>
+                <div class="mode-btn-row">
+                    <button class="mode-action-btn primary" onclick="handleShizukuTap()">
+                        <span>🛡️</span> Request Authorization
+                    </button>
+                    <button class="mode-action-btn" onclick="checkAllWorkingModes(true)">
+                        <span>🔍</span> Check Status
+                    </button>
+                </div>
+            </div>
+
+            <!-- Mode 4: Root (Superuser) -->
+            <div class="mode-card" id="modeCardRoot">
+                <div class="mode-card-header">
+                    <div class="mode-card-title">
+                        <span>👑</span>
+                        <span>Root (Superuser - su)</span>
+                    </div>
+                    <span class="mode-status-tag" id="statusTagRoot">Checking...</span>
+                </div>
+                <div class="mode-card-desc">
+                    Full unrestricted root access on rooted Samsung / Magisk / KernelSU / APatch devices.
+                </div>
+                <div class="mode-btn-row">
+                    <button class="mode-action-btn" onclick="requestRootUI()">
+                        <span>👑</span> Request Root Access
+                    </button>
+                </div>
+            </div>
+
+            <!-- Mode 5: Read-Only Mode -->
+            <div class="mode-card" id="modeCardUnprivileged">
+                <div class="mode-card-header">
+                    <div class="mode-card-title">
+                        <span>👁️</span>
+                        <span>Read-Only Mode (Unprivileged)</span>
+                    </div>
+                    <span class="mode-status-tag active" id="statusTagUnprivileged">Safe</span>
+                </div>
+                <div class="mode-card-desc">
+                    Allows inspecting all installed applications, package names, activities, and permissions safely without modifying packages.
+                </div>
+                <div class="mode-btn-row">
+                    <button class="mode-action-btn" onclick="selectUnprivilegedMode()">
+                        <span>👁️</span> Continue in Read-Only
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Privilege Required Modal -->
+    <div class="modal-overlay" id="privilegeModal" onclick="if(event.target===this) closePrivilegeModal()">
+        <div class="modal-sheet" style="max-width:440px;">
+            <div class="sheet-header">
+                <div class="sheet-app-hero">
+                    <div class="sheet-avatar" style="background:rgba(255,145,0,0.2); color:#FFA726;">⚠️</div>
+                    <div class="sheet-title">
+                        <h3>Working Mode Required</h3>
+                        <p id="privilegeModalActionText">Privileged command requires elevated access</p>
+                    </div>
+                </div>
+                <div style="font-size:20px; cursor:pointer;" onclick="closePrivilegeModal()">✕</div>
+            </div>
+            <div style="font-size:12px; color:var(--text-muted); line-height:1.5; margin-bottom:18px;">
+                You are currently running in <b>Read-Only Mode</b>. System package operations (such as Freeze, Enable, Force Stop, Clear Data, or Uninstall) require elevated permissions via <b>ADB TCP (5555)</b>, <b>Wireless Debugging</b>, <b>Shizuku</b>, or <b>Root</b>.
+            </div>
+            <div class="mode-btn-row">
+                <button class="mode-action-btn primary" style="flex:1; justify-content:center; padding:10px;" onclick="closePrivilegeModal(); openWorkingModesModal();">
+                    <span>⚡</span> Set Up Working Mode
+                </button>
+                <button class="mode-action-btn" style="padding:10px 16px;" onclick="closePrivilegeModal()">
+                    Cancel
+                </button>
+            </div>
+        </div>
+    </div>
+
     <script>
         // Global State
         let allApps = [];
@@ -1375,6 +1733,9 @@ Type any command below (e.g. pm list packages -d)
         let selectedPkgs = new Set();
         let currentFilter = 'all';
         let inspectedPkg = null;
+        let currentWorkingMode = 'unprivileged';
+        let isPrivilegedActive = false;
+        let lastModesData = null;
 
         const themeState = {
             accent: '#00E5FF',
@@ -1401,7 +1762,6 @@ Type any command below (e.g. pm list packages -d)
             const targetIdx = tabKeys.indexOf(viewName);
             if (targetIdx === -1) return;
 
-            // Update Tab Buttons
             const tabBtns = document.querySelectorAll('.tab-btn');
             tabBtns.forEach((b, idx) => {
                 const isActive = (idx === targetIdx);
@@ -1411,7 +1771,6 @@ Type any command below (e.g. pm list packages -d)
                 }
             });
 
-            // Update Views
             document.querySelectorAll('.view-content').forEach(v => {
                 v.classList.remove('active');
             });
@@ -1437,57 +1796,315 @@ Type any command below (e.g. pm list packages -d)
             setTimeout(() => toast.classList.remove('show'), 2400);
         }
 
-        function handleShizukuTap() {
+        // Privilege Guard
+        function guardPrivilege(actionName) {
+            if (!isPrivilegedActive) {
+                openPrivilegeRequiredModal(actionName);
+                return false;
+            }
+            return true;
+        }
+
+        function openPrivilegeRequiredModal(actionName) {
             haptic();
-            if (window.AndroidBridge && window.AndroidBridge.requestShizukuPermission) {
-                showToast('Requesting Shizuku ADB authorization...', '⚡');
-                window.AndroidBridge.requestShizukuPermission();
-                setTimeout(checkShizuku, 2000);
+            document.getElementById('privilegeModalActionText').innerText = actionName ? `Action "${actionName}" requires working mode` : 'Privileged access required';
+            document.getElementById('privilegeModal').classList.add('show');
+        }
+
+        function closePrivilegeModal() {
+            haptic();
+            document.getElementById('privilegeModal').classList.remove('show');
+        }
+
+        // Working Modes Sheet
+        function openWorkingModesModal() {
+            haptic();
+            document.getElementById('modesModal').classList.add('show');
+            checkAllWorkingModes(false);
+        }
+
+        function closeWorkingModesModal() {
+            haptic();
+            document.getElementById('modesModal').classList.remove('show');
+        }
+
+        function checkAllWorkingModes(verbose = false) {
+            if (!window.AndroidBridge || !window.AndroidBridge.getWorkingMode) {
+                return;
+            }
+            try {
+                const dataStr = window.AndroidBridge.getWorkingMode();
+                const d = JSON.parse(dataStr);
+                lastModesData = d;
+                currentWorkingMode = d.activeMode || 'unprivileged';
+                isPrivilegedActive = !!d.isPrivileged;
+
+                // Update Header Badge
+                const badge = document.getElementById('execModeBadge');
+                const dot = document.getElementById('execModeDot');
+                const text = document.getElementById('execModeText');
+
+                if (currentWorkingMode === 'adb_tcp') {
+                    badge.style.background = 'rgba(0, 230, 118, 0.15)';
+                    badge.style.borderColor = 'rgba(0, 230, 118, 0.4)';
+                    badge.style.color = 'var(--status-running)';
+                    dot.style.background = 'var(--status-running)';
+                    text.innerText = `ADB TCP (${d.adbTcp.port})`;
+                } else if (currentWorkingMode === 'adb_wireless') {
+                    badge.style.background = 'rgba(0, 230, 118, 0.15)';
+                    badge.style.borderColor = 'rgba(0, 230, 118, 0.4)';
+                    badge.style.color = 'var(--status-running)';
+                    dot.style.background = 'var(--status-running)';
+                    text.innerText = `Wireless ADB (${d.adbWireless.port})`;
+                } else if (currentWorkingMode === 'shizuku') {
+                    badge.style.background = 'rgba(0, 230, 118, 0.15)';
+                    badge.style.borderColor = 'rgba(0, 230, 118, 0.4)';
+                    badge.style.color = 'var(--status-running)';
+                    dot.style.background = 'var(--status-running)';
+                    text.innerText = 'Shizuku ADB (UID 2000)';
+                } else if (currentWorkingMode === 'root') {
+                    badge.style.background = 'rgba(124, 77, 255, 0.15)';
+                    badge.style.borderColor = 'rgba(124, 77, 255, 0.4)';
+                    badge.style.color = 'var(--status-system)';
+                    dot.style.background = 'var(--status-system)';
+                    text.innerText = 'Root (Superuser)';
+                } else {
+                    badge.style.background = 'rgba(255, 145, 0, 0.15)';
+                    badge.style.borderColor = 'rgba(255, 145, 0, 0.4)';
+                    badge.style.color = '#FFA726';
+                    dot.style.background = '#FFA726';
+                    text.innerText = '⚠️ Setup Mode (Read-Only)';
+                }
+
+                // Update Alert Banner in view-apps
+                const alertCard = document.getElementById('modeAlertCard');
+                if (alertCard) {
+                    alertCard.style.display = isPrivilegedActive ? 'none' : 'flex';
+                }
+
+                // Update Terminal Card Header
+                const termTitle = document.getElementById('termActiveModeTitle');
+                const termDesc = document.getElementById('termActiveModeDesc');
+                if (termTitle) {
+                    if (isPrivilegedActive) {
+                        termTitle.innerText = `⚡ Active Mode: ${text.innerText}`;
+                        termDesc.innerText = 'Privileged execution active and ready.';
+                    } else {
+                        termTitle.innerText = '⚠️ Active Mode: Read-Only';
+                        termDesc.innerText = 'Connect via ADB TCP 5555, Wireless Debugging, Shizuku, or Root.';
+                    }
+                }
+
+                // Update Modal Content
+                document.getElementById('modalActiveModeDesc').innerText = `Active Mode: ${text.innerText}`;
+
+                // ADB TCP Tag
+                const tagTcp = document.getElementById('statusTagAdbTcp');
+                const cardTcp = document.getElementById('modeCardAdbTcp');
+                cardTcp.classList.toggle('active-mode', currentWorkingMode === 'adb_tcp');
+                if (d.adbTcp && d.adbTcp.connected) {
+                    tagTcp.className = 'mode-status-tag active';
+                    tagTcp.innerText = 'CONNECTED';
+                } else if (d.adbTcp && d.adbTcp.portOpen) {
+                    tagTcp.className = 'mode-status-tag warning';
+                    tagTcp.innerText = 'PORT 5555 OPEN';
+                } else {
+                    tagTcp.className = 'mode-status-tag inactive';
+                    tagTcp.innerText = 'DISCONNECTED';
+                }
+
+                // ADB Wireless Tag
+                const tagWireless = document.getElementById('statusTagAdbWireless');
+                const cardWireless = document.getElementById('modeCardAdbWireless');
+                cardWireless.classList.toggle('active-mode', currentWorkingMode === 'adb_wireless');
+                if (d.adbWireless && d.adbWireless.connected) {
+                    tagWireless.className = 'mode-status-tag active';
+                    tagWireless.innerText = 'CONNECTED';
+                } else {
+                    tagWireless.className = 'mode-status-tag inactive';
+                    tagWireless.innerText = 'ANDROID 11+';
+                }
+
+                // Shizuku Tag
+                const tagShizuku = document.getElementById('statusTagShizuku');
+                const cardShizuku = document.getElementById('modeCardShizuku');
+                cardShizuku.classList.toggle('active-mode', currentWorkingMode === 'shizuku');
+                if (d.shizuku && d.shizuku.authorized) {
+                    tagShizuku.className = 'mode-status-tag active';
+                    tagShizuku.innerText = 'AUTHORIZED';
+                } else if (d.shizuku && d.shizuku.running) {
+                    tagShizuku.className = 'mode-status-tag warning';
+                    tagShizuku.innerText = 'RUNNING (UNAUTHORIZED)';
+                } else if (d.shizuku && d.shizuku.installed) {
+                    tagShizuku.className = 'mode-status-tag inactive';
+                    tagShizuku.innerText = 'NOT RUNNING';
+                } else {
+                    tagShizuku.className = 'mode-status-tag inactive';
+                    tagShizuku.innerText = 'NOT INSTALLED';
+                }
+
+                // Root Tag
+                const tagRoot = document.getElementById('statusTagRoot');
+                const cardRoot = document.getElementById('modeCardRoot');
+                cardRoot.classList.toggle('active-mode', currentWorkingMode === 'root');
+                if (d.rootAvailable) {
+                    tagRoot.className = 'mode-status-tag ' + (currentWorkingMode === 'root' ? 'active' : 'warning');
+                    tagRoot.innerText = currentWorkingMode === 'root' ? 'ACTIVE' : 'AVAILABLE';
+                } else {
+                    tagRoot.className = 'mode-status-tag inactive';
+                    tagRoot.innerText = 'NOT FOUND';
+                }
+
+                // Unprivileged Card
+                const cardUnpriv = document.getElementById('modeCardUnprivileged');
+                cardUnpriv.classList.toggle('active-mode', currentWorkingMode === 'unprivileged');
+
+                if (verbose) {
+                    showToast(`Mode: ${text.innerText}`, isPrivilegedActive ? '⚡' : '⚠️');
+                }
+            } catch (e) {
+                console.error('Failed to parse modes:', e);
             }
         }
 
-        function checkShizuku() {
-            if (window.AndroidBridge && window.AndroidBridge.checkShizukuStatus) {
-                const statusStr = window.AndroidBridge.checkShizukuStatus();
-                try {
-                    const s = JSON.parse(statusStr);
-                    const badge = document.getElementById('execModeBadge');
-                    const text = document.getElementById('execModeText');
-                    if (s.authorized) {
-                        badge.style.background = 'rgba(0, 230, 118, 0.15)';
-                        badge.style.borderColor = 'rgba(0, 230, 118, 0.4)';
-                        badge.style.color = 'var(--status-running)';
-                        text.innerText = 'Shizuku ADB (UID 2000)';
-                    } else if (s.running) {
-                        badge.style.background = 'rgba(255, 214, 0, 0.15)';
-                        badge.style.borderColor = 'rgba(255, 214, 0, 0.4)';
-                        badge.style.color = '#FFD600';
-                        text.innerText = 'Tap to Authorize Shizuku';
-                    } else {
-                        badge.style.background = 'rgba(255, 82, 82, 0.15)';
-                        badge.style.borderColor = 'rgba(255, 82, 82, 0.4)';
-                        badge.style.color = 'var(--status-bloat)';
-                        text.innerText = 'Shizuku Not Running';
-                    }
-                } catch(e) {}
+        // ADB TCP UI Actions
+        function connectAdbTcpUI() {
+            haptic();
+            const host = (document.getElementById('adbTcpHostInput').value || '127.0.0.1').trim();
+            const port = parseInt(document.getElementById('adbTcpPortInput').value, 10) || 5555;
+            showToast(`Connecting to ${host}:${port}...`, '⚡');
+
+            if (window.AndroidBridge && window.AndroidBridge.connectAdbTcp) {
+                setTimeout(() => {
+                    const res = window.AndroidBridge.connectAdbTcp(host, port);
+                    showToast(res || 'Connection attempted', '⚡');
+                    checkAllWorkingModes(true);
+                    loadPackageData();
+                }, 100);
+            }
+        }
+
+        function restartAdbTcpipUI() {
+            haptic();
+            showToast('Restarting ADB in TCP mode (port 5555)...', '🔄');
+            if (window.AndroidBridge && window.AndroidBridge.setAdbTcpip) {
+                setTimeout(() => {
+                    const res = window.AndroidBridge.setAdbTcpip(5555);
+                    showToast(res || 'Port 5555 requested', '🔄');
+                    setTimeout(() => connectAdbTcpUI(), 800);
+                }, 100);
+            }
+        }
+
+        function disconnectAdbUI() {
+            haptic();
+            if (window.AndroidBridge && window.AndroidBridge.disconnectAdb) {
+                const res = window.AndroidBridge.disconnectAdb('');
+                showToast(res || 'Disconnected', '✕');
+                checkAllWorkingModes(true);
+            }
+        }
+
+        // Wireless Debugging UI Actions
+        function openDevOptionsUI() {
+            haptic();
+            showToast('Opening Developer Options...', '⚙️');
+            if (window.AndroidBridge && window.AndroidBridge.openDeveloperOptions) {
+                window.AndroidBridge.openDeveloperOptions();
+            }
+        }
+
+        function pairAdbWirelessUI() {
+            haptic();
+            const port = parseInt(document.getElementById('adbPairPortInput').value, 10);
+            const code = (document.getElementById('adbPairCodeInput').value || '').trim();
+
+            if (!port || !code) {
+                showToast('Please enter pairing port and 6-digit code', '⚠️');
+                return;
+            }
+
+            showToast(`Pairing with 127.0.0.1:${port}...`, '📶');
+            if (window.AndroidBridge && window.AndroidBridge.pairAdbWireless) {
+                setTimeout(() => {
+                    const res = window.AndroidBridge.pairAdbWireless('127.0.0.1', port, code);
+                    showToast(res || 'Pairing completed', '📶');
+                    checkAllWorkingModes(true);
+                }, 100);
+            }
+        }
+
+        function connectAdbWirelessUI() {
+            haptic();
+            const port = parseInt(document.getElementById('adbWirelessPortInput').value, 10);
+            if (!port) {
+                showToast('Please enter wireless debugging port', '⚠️');
+                return;
+            }
+
+            showToast(`Connecting to 127.0.0.1:${port}...`, '⚡');
+            if (window.AndroidBridge && window.AndroidBridge.connectAdbWireless) {
+                setTimeout(() => {
+                    const res = window.AndroidBridge.connectAdbWireless('127.0.0.1', port);
+                    showToast(res || 'Connected', '⚡');
+                    checkAllWorkingModes(true);
+                    loadPackageData();
+                }, 100);
+            }
+        }
+
+        // Shizuku UI Action
+        function handleShizukuTap() {
+            haptic();
+            if (window.AndroidBridge && window.AndroidBridge.requestShizukuPermission) {
+                showToast('Requesting Shizuku authorization...', '🛡️');
+                window.AndroidBridge.requestShizukuPermission();
+                setTimeout(() => checkAllWorkingModes(true), 2000);
+            }
+        }
+
+        // Root UI Action
+        function requestRootUI() {
+            haptic();
+            if (window.AndroidBridge) {
+                showToast('Requesting Root Superuser...', '👑');
+                window.AndroidBridge.setWorkingMode('root');
+                window.AndroidBridge.executeShell('id');
+                setTimeout(() => {
+                    checkAllWorkingModes(true);
+                    loadPackageData();
+                }, 800);
+            }
+        }
+
+        // Unprivileged Mode
+        function selectUnprivilegedMode() {
+            haptic();
+            if (window.AndroidBridge) {
+                window.AndroidBridge.setWorkingMode('unprivileged');
+                checkAllWorkingModes(false);
+                closeWorkingModesModal();
+                showToast('Switched to Read-Only Mode', '👁️');
             }
         }
 
         // Initialize App
         function initApp() {
-            checkShizuku();
+            checkAllWorkingModes(false);
 
             if (window.AndroidBridge) {
-                const sysInfoStr = window.AndroidBridge.getSystemInfo();
                 try {
+                    const sysInfoStr = window.AndroidBridge.getSystemInfo();
                     const info = JSON.parse(sysInfoStr);
                     if (info.device) {
                         document.getElementById('deviceInfoSubtitle').innerText = `${info.manufacturer} ${info.device} • Android ${info.release}`;
                     }
                 } catch(e) {}
 
-                setTimeout(loadPackageData, 80);
+                // Load packages immediately
+                loadPackageData();
             } else {
+                // Mock packages for preview
                 for (let i = 1; i <= 60; i++) {
                     const ch = String.fromCharCode(65 + (i % 26));
                     allApps.push({
@@ -1505,13 +2122,20 @@ Type any command below (e.g. pm list packages -d)
 
         function loadPackageData() {
             if (!window.AndroidBridge) return;
-            const jsonStr = window.AndroidBridge.loadPackages();
+            const container = document.getElementById('appsListContainer');
             try {
+                const jsonStr = window.AndroidBridge.loadPackages();
                 allApps = JSON.parse(jsonStr);
                 allApps.sort((a, b) => a.name.localeCompare(b.name, undefined, { sensitivity: 'base' }));
                 renderApps();
             } catch (e) {
-                document.getElementById('appsListContainer').innerHTML = `<div style="text-align:center; padding:30px; color:var(--status-bloat);">Failed to parse package data: ${e.message}</div>`;
+                container.innerHTML = `
+                    <div style="text-align:center; padding:35px 20px; color:var(--text-muted);">
+                        <div style="font-size:28px; margin-bottom:8px;">📦</div>
+                        <div style="font-size:13px; font-weight:700; color:var(--text-main); margin-bottom:4px;">No Applications Loaded</div>
+                        <div style="font-size:11px; margin-bottom:14px;">${e.message || "Failed to query system applications."}</div>
+                        <button class="mode-action-btn primary" onclick="loadPackageData()">🔄 Reload Packages</button>
+                    </div>`;
             }
         }
 
@@ -1549,7 +2173,12 @@ Type any command below (e.g. pm list packages -d)
 
             const container = document.getElementById('appsListContainer');
             if (filteredApps.length === 0) {
-                container.innerHTML = '<div style="text-align:center; padding: 40px; color: var(--text-muted);">No applications found matching criteria.</div>';
+                container.innerHTML = `
+                    <div style="text-align:center; padding: 40px 20px; color: var(--text-muted);">
+                        <div style="font-size:24px; margin-bottom:8px;">🔍</div>
+                        <div style="font-size:13px; font-weight:700; color:var(--text-main); margin-bottom:4px;">No Applications Found</div>
+                        <div style="font-size:11px;">Try clearing your search query or changing active filter pills.</div>
+                    </div>`;
                 return;
             }
 
@@ -1643,6 +2272,8 @@ Type any command below (e.g. pm list packages -d)
 
         function batchAction(action) {
             if (selectedPkgs.size === 0) return;
+            if (!guardPrivilege(`Batch ${action}`)) return;
+
             haptic();
             const arr = Array.from(selectedPkgs);
             showToast(`Executing ${action} on ${arr.length} apps...`, '⚙️');
@@ -1661,6 +2292,8 @@ Type any command below (e.g. pm list packages -d)
         }
 
         function quickAction(action, pkg) {
+            if (!guardPrivilege(action)) return;
+
             haptic();
             if (window.AndroidBridge) {
                 window.AndroidBridge.executeAppAction(action, pkg);
@@ -1785,11 +2418,13 @@ Type any command below (e.g. pm list packages -d)
 
         function singleAction(action) {
             if (!inspectedPkg) return;
+            if (!guardPrivilege(action)) return;
             quickAction(action, inspectedPkg);
             closeInspector();
         }
 
         function togglePermission(perm, wasGranted) {
+            if (!guardPrivilege('Modify Permission')) return;
             haptic();
             if (window.AndroidBridge && inspectedPkg) {
                 window.AndroidBridge.setPermission(inspectedPkg, perm, !wasGranted);
@@ -1807,6 +2442,7 @@ Type any command below (e.g. pm list packages -d)
         }
 
         function stopComponentService(srv) {
+            if (!guardPrivilege('Stop Service')) return;
             haptic();
             if (window.AndroidBridge && inspectedPkg) {
                 window.AndroidBridge.executeShell(`am stopservice "${inspectedPkg}/${srv}"`);
@@ -1816,6 +2452,7 @@ Type any command below (e.g. pm list packages -d)
 
         // Preset Bloatware Execution
         function applyPresetBloat(type) {
+            if (!guardPrivilege('Debloat Preset')) return;
             haptic();
             let targets = [];
             if (type === 'samsung') {
@@ -1853,6 +2490,7 @@ Type any command below (e.g. pm list packages -d)
         }
 
         function restoreAllDebloated() {
+            if (!guardPrivilege('Restore Apps')) return;
             haptic();
             const debloated = allApps.filter(a => a.isFrozen || a.isUninstalled).map(a => a.pkg);
             if (debloated.length === 0) {

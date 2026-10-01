@@ -4,6 +4,10 @@
     android:versionCode="200"
     android:versionName="3.0-Pro">
 
+    <uses-sdk
+        android:minSdkVersion="26"
+        android:targetSdkVersion="34" />
+
     <!-- Shizuku Privileged Permissions -->
     <uses-permission android:name="moe.shizuku.manager.permission.API_V23" />
     <uses-permission android:name="rikka.shizuku.permission.USE_SHIZUKU" />
@@ -35,6 +39,8 @@
         android:theme="@android:style/Theme.DeviceDefault.NoActionBar"
         android:hardwareAccelerated="true"
         android:largeHeap="true"
+        android:extractNativeLibs="true"
+        android:debuggable="true"
         android:usesCleartextTraffic="true">
 
         <activity
