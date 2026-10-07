@@ -38,7 +38,9 @@ Current file ownership while parallel work runs:
 - `repo_audit`: `apps/oneui-studio/src/org/bingblop/oneui/studio/ThemeSource.java`, bounded source codec and adversarial validation tests. Proposed API: `read(InputStream)`, `builtin(AssetManager,String)`, `copy()`, `exportTo(OutputStream)`, `getId()`, `getName()`, `getManifest()`, `hasVariant(String)`, `getTokens(boolean)`, `setColor(boolean,String,String)`, `getOverrides(boolean)`. Defensive JSON access; absent requested variant is an error. Original spec import limits20MiB compressed/80MiB expanded/500 entries/1MiB perJSON; no traversal, symlinks, executable data, undeclared assets or duplicate paths.
 - `platform_research`: `tools/build_oneui9_studio_app.py` and app README build section. Install official platformAPI37/JDK/D8 outside repo and implement a reproducible offlinejavac/AAPT2/D8/zipalign/apksigner builder. Explicit local tool paths, no committed workspace-specific defaults.
 
-These native files are **not yet implemented or validated** at this handoff checkpoint. Check `git log`, source files and later handoff updates rather than restarting completed work.
+Native source scaffold now exists: `MainActivity.java` implements the four native screens, 25 color controls, per-app color scope, five typed dimensions, conceptual quick-panel/Settings/keyboard previews, SAF import/export, local atomic draft/history storage and a read-only device-report export. `DeviceInventory.java` compares fingerprint/API/base APK hashes and explicitly leaves application/policy unverified. The manifest grants no network, root or storage permissions; three current `.ouitheme` sources and the measured pack are bundled as assets.
+
+This scaffold is **not compiled yet**: the source codec and offline app builder are being implemented in parallel. Check `git log`, source files and later handoff updates rather than restarting completed work. In particular, Activity lifecycle persistence and actual UI behavior still need runtime validation.
 
 ## Local workspace aids
 
