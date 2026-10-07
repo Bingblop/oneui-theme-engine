@@ -40,7 +40,11 @@ Current file ownership while parallel work runs:
 
 Native source scaffold now exists: `MainActivity.java` implements the four native screens, 25 color controls, per-app color scope, five typed dimensions, conceptual quick-panel/Settings/keyboard previews, SAF import/export, local atomic draft/history storage and a read-only device-report export. `DeviceInventory.java` compares fingerprint/API/base APK hashes and explicitly leaves application/policy unverified. The manifest grants no network, root or storage permissions; three current `.ouitheme` sources and the measured pack are bundled as assets.
 
-This scaffold is **not compiled yet**: the source codec and offline app builder are being implemented in parallel. Check `git log`, source files and later handoff updates rather than restarting completed work. In particular, Activity lifecycle persistence and actual UI behavior still need runtime validation.
+The source codec is implemented and SDK37 compilation succeeded;156 host checks passed for strict schemas/JSON, hostile ZIP metadata, size limits, asset structure, canonical export and copy/mutation isolation. `ThemeSource.copy()` deep-copies editable JSON while sharing only private immutable asset bytes, avoiding full image/font revalidation during each edit. A portable copy of the host harness is being prepared; its Android image/font/runtime limits must remain explicit.
+
+Review fixes now add `WorkspaceIO.java` and a process-wide serialized Activity worker. New edits/imports are persisted before publishing the new UI source; same-directory atomic replacement preserves prior drafts on write failure. Secondary history failure is reported without pretending it rolled back a saved source. Startup restoration and SAF results are coordinated; exports snapshot and prepare content before opening/truncating the destination. Rotation does not cancel queued durable saves. Conceptual tile/key radii and body size now respond to edited dimensions; navigation height remains an export value.
+
+The app compiled once, but that candidate is superseded by the review fixes. **No final app APK is published yet.** The builder is correcting APK resource-table compression/alignment and checking official D8 support forAPI37. Device/UI execution remains unverified. Check later handoff updates and `git log` rather than restarting completed work.
 
 ## Local workspace aids
 

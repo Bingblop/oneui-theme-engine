@@ -12,7 +12,6 @@ import android.os.Handler;
 import android.os.Looper;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.AtomicFile;
 import android.view.Gravity;
 import android.view.View;
 import android.view.WindowInsets;
@@ -23,8 +22,6 @@ import android.widget.ScrollView;
 import android.widget.SeekBar;
 import android.widget.TextView;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.nio.charset.StandardCharsets;
@@ -60,14 +57,16 @@ public final class MainActivity extends Activity {
     private static final String[] DIMENSIONS = {"cornerRadius", "quickTileRadius", "keyboardKeyRadius", "navigationBarHeight", "bodyTextSize"};
     private static final String[] DIMENSION_NAMES = {"Dialog & button corners", "Quick tile corners", "Keyboard key corners", "Navigation bar height", "Body text size"};
     private static final int[] DIM_MIN = {0, 0, 0, 16, 10}, DIM_MAX = {32, 32, 24, 96, 28};
-    private final ExecutorService worker = Executors.newSingleThreadExecutor();
+    private static final ExecutorService worker = Executors.newSingleThreadExecutor();
     private final Handler main = new Handler(Looper.getMainLooper());
     private ThemeSource theme;
     private JSONObject pack, device;
     private JSONArray history = new JSONArray();
     private LinearLayout content, root;
     private int page = 0, preview = 0, appScope = 0;
-    private boolean dark = true, busy = true;
+    private boolean dark = true, busy = true, initialized = false;
+    private Uri pendingDocument;
+    private int pendingRequest;
     private String status = "Opening your workspace…";
 
     @Override public void onCreate(Bundle state) {
@@ -77,6 +76,15 @@ public final class MainActivity extends Activity {
             page = state.getInt("page", 0);
             preview = state.getInt("preview", 0);
             appScope = state.getInt("appScope", 0);
+            String document = state.getString("pendingDocument");
+            if (document != null) { pendingDocument = Uri.parse(document); pendingRequest = state.getInt("pendingRequest"); }
+            try {
+                String observed = state.getString("deviceReport");
+                if (observed != null && observed.length() <= 64 * 1024) {
+                    JSONObject restored = new JSONObject(observed);
+                    if (android.os.Build.FINGERPRINT.equals(restored.optString("buildFingerprint"))) device = restored;
+                }
+            } catch (Exception ignored) { device = null; }
         }
         render();
         worker.execute(() -> {
@@ -86,33 +94,34 @@ public final class MainActivity extends Activity {
                     measured = new JSONObject(new String(input.readAllBytes(), StandardCharsets.UTF_8));
                 }
                 ThemeSource restored;
-                File draft = new File(getFilesDir(), "draft.ouitheme");
-                try (InputStream input = new AtomicFile(draft).openRead()) {
-                    restored = ThemeSource.read(input);
+                try {
+                    restored = new WorkspaceIO(getFilesDir()).readDraft();
                 } catch (java.io.FileNotFoundException missing) {
                     restored = ThemeSource.builtin(getAssets(), "sources/amoled-black.ouitheme");
+                    restored = new WorkspaceIO(getFilesDir()).save(restored, new JSONArray(), "Started with AMOLED Black").source;
                 }
-                JSONArray events = readHistory();
+                JSONArray events = new WorkspaceIO(getFilesDir()).readHistory();
                 ThemeSource opened = restored;
                 main.post(() -> {
                     if (isFinishing() || isDestroyed()) return;
                     pack = measured; theme = opened; history = events;
-                    chooseAvailableVariant(); busy = false; status = "Your workspace is saved on this device";
-                    render();
+                    chooseAvailableVariant(); busy = false; initialized = true; status = "Your workspace is saved on this device";
+                    render(); resumePendingDocument();
                 });
             } catch (Exception error) {
-                main.post(() -> { busy = false; status = "Workspace could not open"; render(); showError(error); });
+                main.post(() -> { if (isDestroyed()) return; initialized = true; busy = false; status = "Workspace could not open"; render(); showError(error); resumePendingDocument(); });
             }
         });
     }
 
     @Override protected void onSaveInstanceState(Bundle state) {
         state.putInt("page", page); state.putInt("preview", preview); state.putInt("appScope", appScope);
+        if (pendingDocument != null) { state.putString("pendingDocument", pendingDocument.toString()); state.putInt("pendingRequest", pendingRequest); }
+        if (device != null && device.toString().length() <= 64 * 1024) state.putString("deviceReport", device.toString());
         super.onSaveInstanceState(state);
     }
 
     @Override protected void onDestroy() {
-        worker.shutdownNow();
         main.removeCallbacksAndMessages(null);
         super.onDestroy();
     }
@@ -231,7 +240,7 @@ public final class MainActivity extends Activity {
             content.addView(row); space(content, 5);
         }
         space(content, 18); section("GEOMETRY");
-        content.addView(text("Dialog and button corners have measured bindings. Other geometry controls remain preview and export values.", 13, MUTED));
+        content.addView(text("Dialog and button corners have measured bindings. Tile/key corners and body size affect the concept preview; navigation height is an export value.", 13, MUTED));
         for (int i = 0; i < DIMENSIONS.length; i++) {
             final int index = i;
             content.addView(button(DIMENSION_NAMES[i] + "  ·  " + dimensionLabel(DIMENSIONS[i]), () -> editDimension(index), false));
@@ -252,7 +261,7 @@ public final class MainActivity extends Activity {
             for (int i = 0; i < labels.length; i++) {
                 boolean active = i != 2;
                 TextView tile = text(labels[i], 12, color(active ? "quickTileIconActive" : "quickTileIconInactive", scope));
-                tile.setGravity(Gravity.CENTER); tile.setBackground(background(color(active ? "quickTileActive" : "quickTileInactive", scope), 20));
+                tile.setGravity(Gravity.CENTER); tile.setBackground(background(color(active ? "quickTileActive" : "quickTileInactive", scope), previewDimension("quickTileRadius", 20)));
                 LinearLayout.LayoutParams layout = new LinearLayout.LayoutParams(0, dp(58), 1); layout.setMargins(0, 0, dp(6), 0); tiles.addView(tile, layout);
             }
             panel.addView(tiles); space(panel, 14);
@@ -264,16 +273,16 @@ public final class MainActivity extends Activity {
             LinearLayout settings = column(); settings.setPadding(dp(15), dp(10), dp(15), dp(10)); settings.setBackground(background(color("surface", scope), 18));
             for (String label : new String[]{"Connections", "Sounds and vibration", "Display"}) {
                 LinearLayout line = row(); TextView icon = text("●", 20, color("settingsIcon", scope)); line.addView(icon);
-                TextView title = text(label, 15, color("textPrimary", scope)); title.setPadding(dp(12), dp(12), 0, dp(12)); line.addView(title); settings.addView(line);
+                TextView title = text(label, previewDimension("bodyTextSize", 15), color("textPrimary", scope)); title.setPadding(dp(12), dp(12), 0, dp(12)); line.addView(title); settings.addView(line);
             }
             panel.addView(settings);
         } else {
-            panel.addView(text("Type something beautiful", 18, color("textPrimary", scope))); space(panel, 18);
+            panel.addView(text("Type something beautiful", previewDimension("bodyTextSize", 18), color("textPrimary", scope))); space(panel, 18);
             for (String keys : new String[]{"QWERTYUIOP", "ASDFGHJKL", "ZXCVBNM"}) {
                 LinearLayout line = row();
                 for (char letter : keys.toCharArray()) {
                     TextView key = text(String.valueOf(letter), 13, color("keyboardKeyText", scope)); key.setGravity(Gravity.CENTER);
-                    key.setBackground(background(color("keyboardKeyBackground", scope), 8));
+                    key.setBackground(background(color("keyboardKeyBackground", scope), previewDimension("keyboardKeyRadius", 8)));
                     LinearLayout.LayoutParams layout = new LinearLayout.LayoutParams(0, dp(35), 1); layout.setMargins(0, 0, dp(3), 0); line.addView(key, layout);
                 }
                 panel.addView(line); space(panel, 4);
@@ -287,7 +296,8 @@ public final class MainActivity extends Activity {
         LinearLayout card = card(); card.addView(text(android.os.Build.MODEL, 24, TEXT));
         card.addView(text("Android " + android.os.Build.VERSION.RELEASE + " · API " + android.os.Build.VERSION.SDK_INT, 14, MUTED));
         space(card, 12); card.addView(text(android.os.Build.DISPLAY, 12, MUTED)); space(card, 16);
-        card.addView(text(device != null && device.optBoolean("measuredResourcesMatched") ? "Measured resources match" : "Resource match not yet verified", 16, ACCENT));
+        card.addView(text(device != null && device.optBoolean("measuredResourcesMatched") ? "Last inspection matched resources" : "Resource match not yet verified", 16, ACCENT));
+        if (device != null) card.addView(text("Last checked: " + java.text.DateFormat.getDateTimeInstance().format(new java.util.Date(device.optLong("observedAtEpochMillis"))), 12, MUTED));
         card.addView(text("Theme application remains unverified", 13, MUTED)); content.addView(card); space(content, 18);
         content.addView(button("Verify installed targets", this::inspectDevice, true)); space(content, 12);
         if (device != null) {
@@ -357,8 +367,9 @@ public final class MainActivity extends Activity {
         dialog.setOnShowListener(ignored -> dialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener(view -> {
             try {
                 String value = hex.getText().toString().trim().toUpperCase(Locale.ROOT);
-                if (appScope == 0) theme.setColor(dark, role, value); else theme.setOverrideColor(dark, scopeKey(), role, value);
-                dialog.dismiss(); persist("Saved " + label.toLowerCase(Locale.ROOT));
+                ThemeSource candidate = theme.copy();
+                if (appScope == 0) candidate.setColor(dark, role, value); else candidate.setOverrideColor(dark, scopeKey(), role, value);
+                dialog.dismiss(); persist(candidate, "Saved " + label.toLowerCase(Locale.ROOT));
             } catch (Exception error) { hex.setError(error.getMessage()); }
         }));
         dialog.show();
@@ -374,18 +385,21 @@ public final class MainActivity extends Activity {
         AlertDialog dialog = new AlertDialog.Builder(this).setTitle(DIMENSION_NAMES[index]).setView(form).setNegativeButton("Cancel", null).setPositiveButton("Save value", null).create();
         dialog.setOnShowListener(ignored -> dialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener(view -> {
             try {
-                theme.setDimension(dark, DIMENSIONS[index], Double.parseDouble(value.getText().toString()), unit);
-                dialog.dismiss(); persist("Saved " + DIMENSION_NAMES[index].toLowerCase(Locale.ROOT));
+                ThemeSource candidate = theme.copy();
+                candidate.setDimension(dark, DIMENSIONS[index], Double.parseDouble(value.getText().toString()), unit);
+                dialog.dismiss(); persist(candidate, "Saved " + DIMENSION_NAMES[index].toLowerCase(Locale.ROOT));
             } catch (Exception error) { value.setError("Enter a value in the allowed range"); }
         })); dialog.show();
     }
 
     private void loadPreset(String slug) {
         if (busy) return; busy = true; status = "Opening palette…"; render();
+        final JSONArray prior = historySnapshot();
         worker.execute(() -> {
             try {
                 ThemeSource opened = ThemeSource.builtin(getAssets(), "sources/" + slug + ".ouitheme");
-                main.post(() -> { theme = opened; chooseAvailableVariant(); page = 1; busy = false; persist("Opened " + theme.getName()); });
+                WorkspaceIO.Commit committed = new WorkspaceIO(getFilesDir()).save(opened, prior, "Opened " + opened.getName());
+                publish(committed, true);
             } catch (Exception error) { failure(error); }
         });
     }
@@ -413,7 +427,34 @@ public final class MainActivity extends Activity {
     @Override protected void onActivityResult(int request, int result, Intent data) {
         super.onActivityResult(request, result, data);
         if (result != RESULT_OK || data == null || data.getData() == null) return;
-        Uri uri = data.getData(); busy = true; status = request == IMPORT ? "Checking imported source…" : "Writing your export…"; render();
+        if (!initialized) {
+            pendingRequest = request; pendingDocument = data.getData();
+            return;
+        }
+        performDocumentAction(request, data.getData());
+    }
+
+    private void resumePendingDocument() {
+        if (pendingDocument == null) return;
+        Uri document = pendingDocument; int request = pendingRequest;
+        pendingDocument = null;
+        performDocumentAction(request, document);
+    }
+
+    private void performDocumentAction(int request, Uri uri) {
+        if (isDestroyed() || isFinishing()) return;
+        final ThemeSource exportSnapshot;
+        final byte[] reportSnapshot;
+        try {
+            // Validate and snapshot before opening a provider in truncating mode.
+            exportSnapshot = request != IMPORT && theme != null ? theme.copy() : null;
+            reportSnapshot = request == REPORT && device != null ? device.toString(2).getBytes(StandardCharsets.UTF_8) : null;
+            if (request == EXPORT && exportSnapshot == null) throw new java.io.IOException("Open a theme before exporting");
+            if (request == REPORT && reportSnapshot == null) throw new java.io.IOException("Run device verification again before exporting its report");
+            if (request != IMPORT && request != EXPORT && request != REPORT) throw new java.io.IOException("Unknown document operation");
+        } catch (Exception error) { showError(error); return; }
+        final JSONArray prior = historySnapshot();
+        busy = true; status = request == IMPORT ? "Checking imported source…" : "Writing your export…"; render();
         worker.execute(() -> {
             try {
                 if (request == IMPORT) {
@@ -422,47 +463,52 @@ public final class MainActivity extends Activity {
                         if (input == null) throw new java.io.IOException("Could not read selected document");
                         imported = ThemeSource.read(input);
                     }
-                    main.post(() -> { theme = imported; chooseAvailableVariant(); page = 1; busy = false; persist("Imported " + theme.getName()); });
+                    WorkspaceIO.Commit committed = new WorkspaceIO(getFilesDir()).save(imported, prior, "Imported " + imported.getName());
+                    publish(committed, true);
                 } else {
+                    byte[] prepared = reportSnapshot;
+                    if (request == EXPORT) {
+                        java.io.ByteArrayOutputStream buffer = new java.io.ByteArrayOutputStream();
+                        exportSnapshot.exportTo(buffer);
+                        prepared = buffer.toByteArray();
+                    }
                     try (OutputStream output = getContentResolver().openOutputStream(uri, "wt")) {
                         if (output == null) throw new java.io.IOException("Could not write selected document");
-                        if (request == EXPORT) theme.exportTo(output);
-                        else if (request == REPORT && device != null) output.write(device.toString(2).getBytes(StandardCharsets.UTF_8));
-                        else throw new java.io.IOException("No report is ready for export");
+                        output.write(prepared);
                     }
-                    main.post(() -> { busy = false; persist(request == EXPORT ? "Exported " + theme.getName() : "Exported device report"); });
+                    ThemeSource saved = exportSnapshot;
+                    if (saved == null) saved = new WorkspaceIO(getFilesDir()).readDraft();
+                    WorkspaceIO.Commit committed = new WorkspaceIO(getFilesDir()).save(saved, prior,
+                            request == EXPORT ? "Exported " + saved.getName() : "Exported device report");
+                    publish(committed, false);
                 }
             } catch (Exception error) { failure(error); }
         });
     }
 
-    private void persist(String eventDescription) {
-        if (theme == null) return;
-        try {
-            ThemeSource snapshot = theme.copy();
-            JSONObject event = new JSONObject(); event.put("description", eventDescription); event.put("time", System.currentTimeMillis());
-            history.put(event);
-            while (history.length() > 50) history.remove(0);
-            byte[] events = history.toString().getBytes(StandardCharsets.UTF_8);
-            busy = true; status = "Saving your draft…"; render();
-            worker.execute(() -> {
-                AtomicFile draft = new AtomicFile(new File(getFilesDir(), "draft.ouitheme")); FileOutputStream output = null;
-                try {
-                    output = draft.startWrite(); snapshot.exportTo(output); draft.finishWrite(output); output = null;
-                    AtomicFile journal = new AtomicFile(new File(getFilesDir(), "history.json"));
-                    FileOutputStream historyOutput = journal.startWrite();
-                    try { historyOutput.write(events); journal.finishWrite(historyOutput); } catch (Exception error) { journal.failWrite(historyOutput); throw error; }
-                    main.post(() -> { busy = false; status = "Saved on this device"; render(); });
-                } catch (Exception error) { if (output != null) draft.failWrite(output); failure(error); }
-            });
-        } catch (Exception error) { showError(error); }
+    private void persist(ThemeSource candidate, String description) {
+        final JSONArray prior = historySnapshot();
+        busy = true; status = "Saving your draft…"; render();
+        worker.execute(() -> {
+            try { publish(new WorkspaceIO(getFilesDir()).save(candidate, prior, description), false); }
+            catch (Exception error) { failure(error); }
+        });
     }
 
-    private JSONArray readHistory() {
-        try (InputStream input = new AtomicFile(new File(getFilesDir(), "history.json")).openRead()) {
-            byte[] data = input.readNBytes(64 * 1024 + 1); if (data.length > 64 * 1024) return new JSONArray();
-            return new JSONArray(new String(data, StandardCharsets.UTF_8));
-        } catch (Exception ignored) { return new JSONArray(); }
+    private JSONArray historySnapshot() {
+        try { return new JSONArray(history.toString()); }
+        catch (Exception ignored) { return new JSONArray(); }
+    }
+
+    private void publish(WorkspaceIO.Commit committed, boolean openEditor) {
+        main.post(() -> {
+            if (isFinishing() || isDestroyed()) return;
+            theme = committed.source; history = committed.history; chooseAvailableVariant();
+            if (openEditor) page = 1;
+            busy = false;
+            status = committed.historySaved ? "Saved on this device" : "Draft saved; history could not be updated";
+            render();
+        });
     }
 
     private void confirmReplace(Runnable action) {
@@ -482,9 +528,15 @@ public final class MainActivity extends Activity {
             if (token != null) return Color.parseColor(token.getString("value"));
             if (role.equals("quickTileActive") || role.endsWith("Accent") || role.equals("settingsIcon") || role.equals("link")) return color("accent", scope);
             if (role.equals("quickTileIconActive")) return color("onAccent", scope);
+            if (role.equals("quickPanelBackground") || role.equals("settingsBackground") || role.equals("keyboardBackground") || role.equals("navigationBarBackground")) return color("background", scope);
             if (role.endsWith("Background")) return color("surface", scope);
             return color(role.equals("quickTileIconInactive") || role.equals("outline") ? "textSecondary" : "textPrimary", scope);
         } catch (Exception ignored) { return MUTED; }
+    }
+
+    private int previewDimension(String role, int fallback) {
+        try { JSONObject token = theme.getTokens(dark).optJSONObject(role); return token == null ? fallback : (int) Math.round(token.getDouble("value")); }
+        catch (Exception ignored) { return fallback; }
     }
 
     private String dimensionLabel(String role) {
