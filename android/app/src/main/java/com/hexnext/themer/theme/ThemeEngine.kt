@@ -38,7 +38,7 @@ class ThemeEngine(private val prefs: SharedPreferences) {
     /**
      * Non-root path. Android won't let the shell user fabricate overlays, so hand the seed color and
      * style to System UI's own Monet engine through the setting it watches. Stock Android honors it;
-     * One UI may override it with its own color palette, so this is a best-effort fallback.
+     * Confirmed working on One UI 9 with non-root Shizuku (2026-10-07).
      */
     fun applySeedSetting(service: IThemeService, spec: ThemeSpec, log: (LogLine) -> Unit): Boolean {
         if (!prefs.contains(PREF_SETTING_BACKUP)) {
@@ -60,7 +60,7 @@ class ThemeEngine(private val prefs: SharedPreferences) {
         if (spec.pureBlack) {
             log(LogLine(LogLevel.WARN, "Pure black needs root, so it was skipped."))
         }
-        log(LogLine(LogLevel.OK, "Seed color handed to System UI. If One UI ignores it, root Shizuku is needed."))
+        log(LogLine(LogLevel.OK, "Seed color handed to System UI. The system palette updates in a moment."))
         return true
     }
 

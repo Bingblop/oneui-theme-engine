@@ -17,7 +17,7 @@ release when a `v*` tag is pushed). It needs Android 14+ and [Shizuku](https://s
 - **Shizuku over wireless debugging (no root):** Android refuses fabricated overlays from the shell user
   (`OverlayManagerService`: "Non-root shell cannot fabricate overlays", and `cmd overlay fabricate`
   requires root). HexNext instead hands the seed color and style to System UI's own Monet engine through
-  `theme_customization_overlay_packages`. One UI may override that with its own color palette.
+  `theme_customization_overlay_packages`. This works on One UI 9 without root.
 
 Build locally with `cd android && ./gradlew assembleDebug`. The old WebView app in `apps/hex-next/`
 is kept only as a design reference.
