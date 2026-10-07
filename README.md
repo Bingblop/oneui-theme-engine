@@ -26,6 +26,7 @@ A next-generation theming framework, diagnostic suite, and compatibility layer f
 │       └── build-apk/           # Java sources, AAPT2, D8, and compile scripts
 ├── bin/
 │   └── oneui-themer             # Command line wrapper
+├── design/                      # HexNext design tokens (JSON source + Android XML, Compose, CSS)
 ├── docs/
 │   ├── ONE_UI_9_THEME_ARCHITECTURE.md
 │   ├── HEX_INSTALLER_REVERSE_ENGINEERING.md

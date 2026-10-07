@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generated from design/tokens.json by design/build_tokens.py. Do not edit by hand. -->
+<resources>
+    <color name="hx_bg_base">#FF080A0F</color>
+    <color name="hx_bg_surface">#FF10141E</color>
+    <color name="hx_bg_card">#BF161C2A</color>
+    <color name="hx_bg_card_hover">#F21E263A</color>
+    <color name="hx_scrim">#E6080A0F</color>
+    <color name="hx_border_glass">#17FFFFFF</color>
+    <color name="hx_border_active">#9900E5FF</color>
+    <color name="hx_accent">#FF00E5FF</color>
+    <color name="hx_accent_glow">#5900E5FF</color>
+    <color name="hx_secondary">#FF7C4DFF</color>
+    <color name="hx_on_accent">#FF000000</color>
+    <color name="hx_text_main">#FFFFFFFF</color>
+    <color name="hx_text_muted">#FF8E9BAE</color>
+    <color name="hx_text_dim">#FF546075</color>
+    <color name="hx_success">#FF00E676</color>
+    <color name="hx_warning">#FFFFD600</color>
+    <color name="hx_danger">#FFFF5252</color>
+
+    <dimen name="hx_radius_sm">8dp</dimen>
+    <dimen name="hx_radius_md">14dp</dimen>
+    <dimen name="hx_radius_lg">20dp</dimen>
+    <dimen name="hx_radius_xl">28dp</dimen>
+    <dimen name="hx_radius_phone">36dp</dimen>
+    <dimen name="hx_radius_pill">999dp</dimen>
+    <dimen name="hx_space_1">4dp</dimen>
+    <dimen name="hx_space_2">8dp</dimen>
+    <dimen name="hx_space_3">12dp</dimen>
+    <dimen name="hx_space_4">16dp</dimen>
+    <dimen name="hx_space_5">24dp</dimen>
+    <dimen name="hx_space_6">32dp</dimen>
+    <dimen name="hx_text_display">28sp</dimen>
+    <dimen name="hx_text_brand">20sp</dimen>
+    <dimen name="hx_text_section">14sp</dimen>
+    <dimen name="hx_text_body">14sp</dimen>
+    <dimen name="hx_text_control">13sp</dimen>
+    <dimen name="hx_text_caption">11sp</dimen>
+    <dimen name="hx_blur_glass">20dp</dimen>
+    <dimen name="hx_blur_card">12dp</dimen>
+</resources>
