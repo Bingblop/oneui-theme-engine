@@ -11,8 +11,12 @@ First target: **SM-S948U1 · One UI 9.0 · Android 17 · CP2A.260605.016.S948U1U
 - [Theme source schemas, defaults, and examples](theme-source/README.md)
 - Draft sources: [AMOLED Black](theme-source/bundles/amoled-black.ouitheme), [Neon Violet](theme-source/bundles/neon-violet.ouitheme), [Cyberpunk Gold](theme-source/bundles/cyberpunk-gold.ouitheme)
 - [Read-only APK/input collection instructions](collect-oneui9-inputs.md)
+- [Native Studio prototype, APK and build instructions](../../apps/oneui-studio/README.md)
+- [Agent handoff and remaining work](../AGENT_HANDOFF.md)
 
 The initial source archives above are design examples. The supplied firmware APKs have now been inspected, and a [first measured theme pack](oneui9-first-theme-pack.md) provides current resource mappings, materialized dark/light sources, a desktop compiler, generated projects, reports and **nine freshly compiled developer-signed APKs**. Device application and visual certification remain unverified. Old One UI 6.1.1 bindings are excluded.
+
+The native **One UI Studio 0.3.0** prototype is implemented and packaged. It provides local source browsing, color/per-app editing, bounded dimensions, conceptual previews, durable drafts/history, strict import/export and read-only device diagnostics. SDK 37 compilation and packaging checks passed; phone execution remains unverified. Full font/icon/style editing and the rest of the Hex customization suite remain planned work.
 
 The three base targets and device report have been received. Further Samsung app targets can be collected from the repository root on a laptop with an authorized phone and Android Platform Tools:
 

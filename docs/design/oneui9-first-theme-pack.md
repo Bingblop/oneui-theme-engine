@@ -2,7 +2,7 @@
 
 This pack is authored from the APKs collected on **SM-S948U1, One UI 9.0, Android 17 / API 37, CP2A.260605.016.S948U1UEU4BZID**. It replaces legacy resource assumptions with measured names, types, IDs, configuration values and APK hashes.
 
-The first release contains **AMOLED Black, Neon Violet and Cyberpunk Gold**, each with explicit dark and light source tokens and three freshly compiled, aligned, developer-signed overlay APKs. All nine APKs passed compiled-value readback and signature verification. **Device application, Samsung policy acceptance and visual behavior remain untested.** The native Studio application is specified and illustrated; it has not been implemented yet.
+The first release contains **AMOLED Black, Neon Violet and Cyberpunk Gold**, each with explicit dark and light source tokens and three freshly compiled, aligned, developer-signed overlay APKs. All nine APKs passed compiled-value readback and signature verification. **Device application, Samsung policy acceptance and visual behavior remain untested.** A separate [native Studio 0.3.0 prototype](../../apps/oneui-studio/README.md) now provides source editing and import/export; its phone execution is also unverified.
 
 ## Files
 

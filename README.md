@@ -2,7 +2,7 @@
 
 A theming framework, diagnostic suite, and compatibility research repository for Samsung Galaxy devices.
 
-**Current One UI 9 work:** [One UI Studio application design](docs/design/README.md) and a [fresh measured theme pack](docs/design/oneui9-first-theme-pack.md) for **SM-S948U1, Android 17 / API 37, build S948U1UEU4BZID**. The pack includes three dark/light theme sources, nine compiled developer-signed APKs, generated projects, a desktop compiler and validation reports. Device application and full Hex customization parity remain unverified; legacy features below are not evidence of support on this firmware.
+**Current One UI 9 work:** a [native One UI Studio 0.3.0 prototype](apps/oneui-studio/README.md), [application design](docs/design/README.md) and a [fresh measured theme pack](docs/design/oneui9-first-theme-pack.md) for **SM-S948U1, Android 17 / API 37, build S948U1UEU4BZID**. Download the [editor APK package](artifacts/oneui-studio/0.3.0/oneui-studio-0.3.0.zip) and [nine-overlay theme pack](artifacts/oneui9/S948U1UEU4BZID/oneui9-first-theme-pack.zip). Source, reproducible checks and build evidence are included. Phone execution, device application and full Hex customization parity remain unverified; legacy features below are not evidence of support on this firmware. See the [agent handoff](docs/AGENT_HANDOFF.md) to continue development.
 
 ---
 
@@ -86,7 +86,7 @@ The compiled APK will be automatically signed and placed into `/storage/emulated
 Our full reverse engineering breakdown of `project.vivid.hex.bodhi` reveals:
 1. **Setup Check (Theme Park):** Evaluates `Settings.System.getString("current_sec_active_themepackage").startsWith("com.samsung.themedesigner")`.
 2. **Build Failures:** Legacy Hex Installer attempts to build overlay APKs with deprecated resource IDs against legacy AAPT toolchains.
-3. **Modern Alternative:** Using native Fabricated Overlays avoids AAPT fragmentation and provides 100% compatibility across all One UI versions.
+3. **Modern Alternative:** Fabricated overlays are another research path. Their availability and resource-policy acceptance must be checked on each firmware; they do not establish compatibility across all One UI versions.
 
 For detailed analysis, refer to [docs/HEX_INSTALLER_REVERSE_ENGINEERING.md](docs/HEX_INSTALLER_REVERSE_ENGINEERING.md).
 
