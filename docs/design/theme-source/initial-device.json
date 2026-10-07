@@ -1,0 +1,20 @@
+{
+  "recordType": "design-research-observation",
+  "evidence": "user-provided Software information screenshot",
+  "modelIdentifier": "SM-S948U1",
+  "oneUiVersion": "9.0",
+  "androidVersion": "17",
+  "buildNumber": "CP2A.260605.016.S948U1UEU4BZID",
+  "basebandVersion": "S948U1UEU4BZID",
+  "googlePlaySystemUpdate": "2026-08-01",
+  "seLinuxStatus": "Enforcing",
+  "buildFingerprint": null,
+  "androidApiLevel": null,
+  "androidSecurityPatch": null,
+  "themeParkVersion": null,
+  "shizukuIdentity": null,
+  "targetPackageInventory": [],
+  "themeApplicationSupport": "unverified",
+  "verifiedCompatibilityPacks": [],
+  "automaticSystemOverlayApplicationEligible": false
+}

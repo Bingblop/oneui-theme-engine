@@ -1,0 +1,20 @@
+{
+  "keyboard": {
+    "accent": {
+      "type": "color",
+      "value": "#FFC2A5FF"
+    },
+    "keyboardBackground": {
+      "type": "color",
+      "value": "#FF0D0E15"
+    },
+    "keyboardKeyBackground": {
+      "type": "color",
+      "value": "#FF1C1D26"
+    },
+    "keyboardKeyText": {
+      "type": "color",
+      "value": "#FFF2EEFA"
+    }
+  }
+}

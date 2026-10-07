@@ -1,0 +1,127 @@
+{
+  "background": {
+    "type": "color",
+    "value": "#FF080A0F"
+  },
+  "surface": {
+    "type": "color",
+    "value": "#FF161C2A"
+  },
+  "accent": {
+    "type": "color",
+    "value": "#FF00E5FF"
+  },
+  "onAccent": {
+    "type": "color",
+    "value": "#FF00191E"
+  },
+  "textPrimary": {
+    "type": "color",
+    "value": "#FFF5F5F5"
+  },
+  "textSecondary": {
+    "type": "color",
+    "value": "#FFB8BCC5"
+  },
+  "quickTileInactive": {
+    "type": "color",
+    "value": "#FF1C202F"
+  },
+  "quickTileActive": {
+    "type": "color",
+    "value": "#FF00E5FF"
+  },
+  "quickTileIconActive": {
+    "type": "color",
+    "value": "#FF00191E"
+  },
+  "quickTileIconInactive": {
+    "type": "color",
+    "value": "#FFB8BCC5"
+  },
+  "quickPanelBackground": {
+    "type": "color",
+    "value": "#FF080A0F"
+  },
+  "notificationBackground": {
+    "type": "color",
+    "value": "#FF161C2A"
+  },
+  "notificationText": {
+    "type": "color",
+    "value": "#FFF5F5F5"
+  },
+  "settingsBackground": {
+    "type": "color",
+    "value": "#FF080A0F"
+  },
+  "settingsIcon": {
+    "type": "color",
+    "value": "#FF00E5FF"
+  },
+  "keyboardBackground": {
+    "type": "color",
+    "value": "#FF080A0F"
+  },
+  "keyboardKeyBackground": {
+    "type": "color",
+    "value": "#FF161C2A"
+  },
+  "keyboardKeyText": {
+    "type": "color",
+    "value": "#FFF5F5F5"
+  },
+  "keyboardAccent": {
+    "type": "color",
+    "value": "#FF00E5FF"
+  },
+  "statusBarIcons": {
+    "type": "color",
+    "value": "#FFF5F5F5"
+  },
+  "navigationBarBackground": {
+    "type": "color",
+    "value": "#FF080A0F"
+  },
+  "navigationBarIcons": {
+    "type": "color",
+    "value": "#FFF5F5F5"
+  },
+  "outline": {
+    "type": "color",
+    "value": "#FF485062"
+  },
+  "link": {
+    "type": "color",
+    "value": "#FF9DEEFF"
+  },
+  "error": {
+    "type": "color",
+    "value": "#FFFFB4AB"
+  },
+  "cornerRadius": {
+    "type": "dimension",
+    "value": 24,
+    "unit": "dp"
+  },
+  "quickTileRadius": {
+    "type": "dimension",
+    "value": 20,
+    "unit": "dp"
+  },
+  "keyboardKeyRadius": {
+    "type": "dimension",
+    "value": 8,
+    "unit": "dp"
+  },
+  "navigationBarHeight": {
+    "type": "dimension",
+    "value": 48,
+    "unit": "dp"
+  },
+  "bodyTextSize": {
+    "type": "dimension",
+    "value": 14,
+    "unit": "sp"
+  }
+}

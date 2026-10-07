@@ -1,0 +1,260 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:oneui-studio:tokens:1",
+  "title": "Draft One UI Studio semantic tokens v1",
+  "$ref": "#/$defs/values",
+  "required": [
+    "background",
+    "surface",
+    "accent",
+    "onAccent",
+    "textPrimary",
+    "textSecondary",
+    "quickTileInactive"
+  ],
+  "$defs": {
+    "values": {
+      "type": "object",
+      "additionalProperties": false,
+      "minProperties": 1,
+      "properties": {
+        "background": {
+          "$ref": "#/$defs/color"
+        },
+        "surface": {
+          "$ref": "#/$defs/color"
+        },
+        "accent": {
+          "$ref": "#/$defs/color"
+        },
+        "onAccent": {
+          "$ref": "#/$defs/color"
+        },
+        "textPrimary": {
+          "$ref": "#/$defs/color"
+        },
+        "textSecondary": {
+          "$ref": "#/$defs/color"
+        },
+        "quickTileInactive": {
+          "$ref": "#/$defs/color"
+        },
+        "quickTileActive": {
+          "$ref": "#/$defs/color"
+        },
+        "quickTileIconActive": {
+          "$ref": "#/$defs/color"
+        },
+        "quickTileIconInactive": {
+          "$ref": "#/$defs/color"
+        },
+        "quickPanelBackground": {
+          "$ref": "#/$defs/color"
+        },
+        "notificationBackground": {
+          "$ref": "#/$defs/color"
+        },
+        "notificationText": {
+          "$ref": "#/$defs/color"
+        },
+        "settingsBackground": {
+          "$ref": "#/$defs/color"
+        },
+        "settingsIcon": {
+          "$ref": "#/$defs/color"
+        },
+        "keyboardBackground": {
+          "$ref": "#/$defs/color"
+        },
+        "keyboardKeyBackground": {
+          "$ref": "#/$defs/color"
+        },
+        "keyboardKeyText": {
+          "$ref": "#/$defs/color"
+        },
+        "keyboardAccent": {
+          "$ref": "#/$defs/color"
+        },
+        "statusBarIcons": {
+          "$ref": "#/$defs/color"
+        },
+        "navigationBarBackground": {
+          "$ref": "#/$defs/color"
+        },
+        "navigationBarIcons": {
+          "$ref": "#/$defs/color"
+        },
+        "outline": {
+          "$ref": "#/$defs/color"
+        },
+        "link": {
+          "$ref": "#/$defs/color"
+        },
+        "error": {
+          "$ref": "#/$defs/color"
+        },
+        "cornerRadius": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "type",
+            "value",
+            "unit"
+          ],
+          "properties": {
+            "type": {
+              "const": "dimension"
+            },
+            "value": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 32
+            },
+            "unit": {
+              "enum": [
+                "dp"
+              ]
+            }
+          }
+        },
+        "quickTileRadius": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "type",
+            "value",
+            "unit"
+          ],
+          "properties": {
+            "type": {
+              "const": "dimension"
+            },
+            "value": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 32
+            },
+            "unit": {
+              "enum": [
+                "dp"
+              ]
+            }
+          }
+        },
+        "keyboardKeyRadius": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "type",
+            "value",
+            "unit"
+          ],
+          "properties": {
+            "type": {
+              "const": "dimension"
+            },
+            "value": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 24
+            },
+            "unit": {
+              "enum": [
+                "dp"
+              ]
+            }
+          }
+        },
+        "navigationBarHeight": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "type",
+            "value",
+            "unit"
+          ],
+          "properties": {
+            "type": {
+              "const": "dimension"
+            },
+            "value": {
+              "type": "number",
+              "minimum": 16,
+              "maximum": 96
+            },
+            "unit": {
+              "enum": [
+                "dp"
+              ]
+            }
+          }
+        },
+        "bodyTextSize": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "type",
+            "value",
+            "unit"
+          ],
+          "properties": {
+            "type": {
+              "const": "dimension"
+            },
+            "value": {
+              "type": "number",
+              "minimum": 10,
+              "maximum": 28
+            },
+            "unit": {
+              "enum": [
+                "sp"
+              ]
+            }
+          }
+        },
+        "bodyFont": {
+          "$ref": "#/$defs/fontAsset"
+        },
+        "headlineFont": {
+          "$ref": "#/$defs/fontAsset"
+        }
+      }
+    },
+    "color": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "type",
+        "value"
+      ],
+      "properties": {
+        "type": {
+          "const": "color"
+        },
+        "value": {
+          "type": "string",
+          "pattern": "^#[0-9A-F]{8}$"
+        }
+      }
+    },
+    "fontAsset": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "type",
+        "value"
+      ],
+      "properties": {
+        "type": {
+          "const": "fontAsset"
+        },
+        "value": {
+          "type": "string",
+          "pattern": "^assets/[A-Za-z0-9_-]+\\.(ttf|otf)$",
+          "maxLength": 160
+        }
+      }
+    }
+  }
+}

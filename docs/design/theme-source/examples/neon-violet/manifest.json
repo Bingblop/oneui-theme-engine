@@ -1,0 +1,62 @@
+{
+  "format": "oneui-studio.source/1",
+  "id": "org.bingblop.neon-violet",
+  "version": "0.1.0",
+  "name": "Neon Violet",
+  "author": "OneUI-Theme-Engine Contributors",
+  "license": "MIT",
+  "licenseFile": "LICENSE.txt",
+  "tokenApi": "oneui-studio.tokens/1",
+  "targetIntent": {
+    "manufacturer": "Samsung",
+    "uiFamily": "One UI",
+    "uiMajor": 9
+  },
+  "variants": {
+    "dark": "tokens/dark.json"
+  },
+  "assets": [],
+  "components": [
+    {
+      "id": "device.palette",
+      "required": false
+    },
+    {
+      "id": "quick-panel.palette",
+      "required": false
+    },
+    {
+      "id": "keyboard.palette",
+      "required": false
+    },
+    {
+      "id": "systemui.geometry",
+      "required": false
+    },
+    {
+      "id": "component.drawables",
+      "required": false
+    }
+  ],
+  "overrides": {
+    "dark": "overrides/dark.json"
+  },
+  "appearance": {
+    "dark": {
+      "components": {
+        "quickTile": {
+          "shape": "roundedRectangle",
+          "fillRole": "quickTileActive",
+          "strokeRole": "outline",
+          "strokeWidthDp": 1,
+          "radiusRole": "quickTileRadius"
+        },
+        "keyboardKey": {
+          "shape": "roundedRectangle",
+          "fillRole": "keyboardKeyBackground",
+          "radiusRole": "keyboardKeyRadius"
+        }
+      }
+    }
+  }
+}
