@@ -1,0 +1,172 @@
+{
+  "androidApiLevel": 37,
+  "apk": {
+    "path": "oneui-studio.apk",
+    "sha256": "8e3aca67b31dff96ee7027c2e048b16f8437b84cd500a8e1fe314200016046b1",
+    "sizeBytes": 70309
+  },
+  "d8Diagnostics": "",
+  "developerSigned": true,
+  "deviceRuntimeVerified": false,
+  "dexFiles": {
+    "classes.dex": "cd63497373a04acd8991e243d6efe5f2a65682c4bb767611812223f78541f2b5"
+  },
+  "format": "oneui-studio.app-build/1",
+  "inputs": {
+    "AndroidManifest.xml": "a72fc526cfde0ac95b2ce016988091bd1d13373d93719e4fc19f67e046844922",
+    "assets/resource-pack.json": "92d9650f22b7620ec889e586fc7cb7e05e8cf45f97d7c890fe3c7f1e0c48287d",
+    "assets/sources/amoled-black.ouitheme": "f417e6286c443d40cddb9ce767c3eb37bfd5900e8777b28c5bc47b88b10c637f",
+    "assets/sources/cyberpunk-gold.ouitheme": "3cc66bdcaf617bb9b1b1f9d3d4acedd5f52187f4fa1f597d0cff4ed1e192c977",
+    "assets/sources/neon-violet.ouitheme": "423847a4cf13b3feba08adbe59f58c3edb6fa237355eb6ee8a84cddf21e569e6",
+    "res/drawable/ic_studio.xml": "9c4e46a92e811b7b18f519cb23ddb3a6c1d445058f146ca31366c254ea3cbedb",
+    "res/mipmap-anydpi-v26/ic_launcher.xml": "e312719b72d30b33dca5f2ba2df2c9e8a8a3e4560002afc5936b726e4849cd27",
+    "res/values/colors.xml": "b083bf29ecd57c34593da5164ee18d270d24670bb607b50d9777c6848e9d056b",
+    "res/values/strings.xml": "946f6da6e827bbbf91dcf5fabacc19f5cf38c08bca06b52340644b3a2ee81f0f",
+    "src/org/bingblop/oneui/studio/DeviceInventory.java": "57e45241eb4f893884cb871af14aefcd0c389c6d189be114f3147fe65692cd0d",
+    "src/org/bingblop/oneui/studio/MainActivity.java": "fc6ea7de4f2ccb2450c303bbf349921571e8028d05f1369554affb72e436f114",
+    "src/org/bingblop/oneui/studio/ThemeSource.java": "fb995b1263499f7037ae596610e43b48e7687ecfe44050381955bce1a2ac116a",
+    "src/org/bingblop/oneui/studio/WorkspaceIO.java": "3f9bee1200150da19c366cab1215f3ee9216fe9e94895fdb2bc2512978dfd240"
+  },
+  "installed": false,
+  "javaBytecodeLevel": 8,
+  "javaSourceLevel": 8,
+  "javacDiagnostics": "warning: [options] source value 8 is obsolete and will be removed in a future release\nwarning: [options] target value 8 is obsolete and will be removed in a future release\nwarning: [options] To suppress warnings about obsolete options, use -Xlint:-options.\n3 warnings",
+  "manifestVerified": true,
+  "minSdkVersion": 37,
+  "package": "org.bingblop.oneui.studio",
+  "resourceStorageVerified": true,
+  "signatureVerified": true,
+  "signingKeyAlias": "oneui9dev",
+  "status": "succeeded",
+  "targetSdkVersion": 37,
+  "toolProvenance": {
+    "archives": {
+      "build_tools": {
+        "checksum_verified": true,
+        "local_archive": "/workspace/toolchains/android-theme/downloads/build-tools_r37_linux.zip",
+        "sha1": "70954e99f4c3d9d46ee70fa32624672fe7cd6ebe",
+        "sha256": "01af179347cbcd9c208b7f8171f7b21f6dd1d2f85bcd15e88caa51d5d7b86060",
+        "size": 66135704,
+        "upstream_checksum": {
+          "algorithm": "sha1",
+          "value": "70954e99f4c3d9d46ee70fa32624672fe7cd6ebe"
+        },
+        "url": "https://dl.google.com/android/repository/build-tools_r37_linux.zip",
+        "version": "37.0.0"
+      },
+      "jdk_packages": [
+        {
+          "file": "/workspace/toolchains/android-theme/downloads/openjdk-21-jdk-headless_21.0.12.1+1-1~deb13u1_amd64.deb",
+          "package": "openjdk-21-jdk-headless",
+          "package_metadata": "https://deb.debian.org/debian/dists/trixie/main/binary-amd64/Packages.xz",
+          "sha256": "f3abafb6c644b03df042824e707cd211ea33254761d7f7b75be3f8dc0df97c7a",
+          "size": 83035048,
+          "upstream_checksum_verified": true,
+          "url": "https://deb.debian.org/debian/pool/main/o/openjdk-21/openjdk-21-jdk-headless_21.0.12.1+1-1~deb13u1_amd64.deb",
+          "version": "21.0.12.1+1-1~deb13u1"
+        },
+        {
+          "file": "/workspace/toolchains/android-theme/downloads/openjdk-21-jre-headless_21.0.12.1+1-1~deb13u1_amd64.deb",
+          "package": "openjdk-21-jre-headless",
+          "package_metadata": "https://deb.debian.org/debian/dists/trixie/main/binary-amd64/Packages.xz",
+          "sha256": "e95f36193e45464ac758e5436f940bf3eaecc77de67188275a42104f58aa7674",
+          "size": 41900512,
+          "upstream_checksum_verified": true,
+          "url": "https://deb.debian.org/debian/pool/main/o/openjdk-21/openjdk-21-jre-headless_21.0.12.1+1-1~deb13u1_amd64.deb",
+          "version": "21.0.12.1+1-1~deb13u1"
+        }
+      ],
+      "maven_aapt2": {
+        "checksum_verified": true,
+        "local_archive": "/workspace/toolchains/android-theme/downloads/aapt2-9.4.1-15978811-linux.jar",
+        "sha1": "6ad07b566daaefa1c2721255637ec137c93580a6",
+        "sha256": "f5bebd466ecf14d341fd465f2756a16d86052f29eb4532003d5ff7bcffd08de5",
+        "size": 2385035,
+        "upstream_checksum": {
+          "algorithm": "sha1",
+          "value": "6ad07b566daaefa1c2721255637ec137c93580a6"
+        },
+        "url": "https://dl.google.com/android/maven2/com/android/tools/build/aapt2/9.4.1-15978811/aapt2-9.4.1-15978811-linux.jar",
+        "version": "9.4.1-15978811"
+      },
+      "maven_r8": {
+        "checksum_verified": true,
+        "sha1": "029c70b981916940c7a45e1d4d7da0f8668bbb11",
+        "sha256": "748ab0ef66e85b54cec5ad83d168999db9e3dad8c8f63170e836eff195cbd09b",
+        "size": 21182718,
+        "upstream_checksum": {
+          "algorithm": "sha1",
+          "value": "029c70b981916940c7a45e1d4d7da0f8668bbb11"
+        },
+        "url": "https://dl.google.com/android/maven2/com/android/tools/r8/9.5.23/r8-9.5.23.jar",
+        "version": "9.5.23",
+        "wrapper": "Unchanged official Build Tools 37.0.0 d8 wrapper, paired with this official R8/D8 jar."
+      },
+      "sdk_platform": {
+        "checksum_verified": true,
+        "sha1": "ed8ebf7f8822a4de5686d427f237d2fa30ff7410",
+        "sha256": "840b23e827f96e64aea4c89a1194aac3dc5f6bad37edb231c5c795d890330e8d",
+        "size": 67281901,
+        "upstream_checksum": {
+          "algorithm": "sha1",
+          "value": "ed8ebf7f8822a4de5686d427f237d2fa30ff7410"
+        },
+        "url": "https://dl.google.com/android/repository/platform-37.0_r02.zip",
+        "version": "37.0_r02"
+      }
+    },
+    "sha256": "899f9513c5fc3cd2b760a05485e2ca058eaa5eb6c17ec9081c7880d46621009c",
+    "verified": true
+  },
+  "tools": {
+    "aapt2": {
+      "path": "/workspace/toolchains/android-theme/aapt2/9.4.1-15978811/aapt2",
+      "sha256": "7f0587c898f8401986b9c32385fb25d1ecea1e9007907376215f30f99c4894a9",
+      "version": "Android Asset Packaging Tool (aapt) 2.20-15978811"
+    },
+    "android_jar": {
+      "path": "/workspace/toolchains/android-theme/sdk/platforms/android-37/android.jar",
+      "sha256": "bf1b4387cc7ca94fc6ef684f040d9d16fbf16248e181819f020736ea2053f177"
+    },
+    "apksigner": {
+      "path": "/workspace/toolchains/android-theme/sdk/build-tools/37.0.0/apksigner",
+      "sha256": "b47549e373b895ce6ca620d0c7887e674d9615ffa837a86ac601dcfd04adb0f0",
+      "version": "0.9"
+    },
+    "apksigner_jar": {
+      "path": "/workspace/toolchains/android-theme/sdk/build-tools/37.0.0/lib/apksigner.jar",
+      "sha256": "2defad215d7ff52968a409cde528cdaef7918b115e276b8e3378ca7a178e4180"
+    },
+    "d8": {
+      "path": "/workspace/toolchains/android-theme/r8/9.5.23/d8",
+      "sha256": "b773a721be3d4988dea9660815a9e441b76100e5b0f5c72b5893cfadadc76c6f",
+      "version": "D8 9.5.23 (build d4479de6af1586fc1f6911964542da8d442549db from go/r8bot (luci-r8-custom-ci-jammy-c3d-us-central1-c-6-atgt))"
+    },
+    "d8_jar": {
+      "path": "/workspace/toolchains/android-theme/r8/9.5.23/lib/d8.jar",
+      "sha256": "748ab0ef66e85b54cec5ad83d168999db9e3dad8c8f63170e836eff195cbd09b"
+    },
+    "java": {
+      "path": "/workspace/toolchains/android-theme/jdk-debian/usr/lib/jvm/java-21-openjdk-amd64/bin/java",
+      "sha256": "6698f6f10143ed8463b06062281c727152d2e0ae2a3569b1716fbb2c6cedf0ba",
+      "version": "openjdk version \"21.0.12.1\" 2026-08-18\nOpenJDK Runtime Environment (build 21.0.12.1+1-1-deb13u1-Debian)\nOpenJDK 64-Bit Server VM (build 21.0.12.1+1-1-deb13u1-Debian, mixed mode, sharing)"
+    },
+    "java_modules": {
+      "path": "/workspace/toolchains/android-theme/jdk-debian/usr/lib/jvm/java-21-openjdk-amd64/lib/modules",
+      "sha256": "f82ec56fbf7c7b69da09a04d4fb103c74c44e6443c8a1b2744e59c5539e7f781"
+    },
+    "javac": {
+      "path": "/workspace/toolchains/android-theme/jdk-debian/usr/lib/jvm/java-21-openjdk-amd64/bin/javac",
+      "sha256": "94b4eb733f5d6b44ff7ae8437206de8428ac4e2e3e8efc50b204e54c5d84dcc3",
+      "version": "javac 21.0.12.1"
+    },
+    "lambda_stubs": {
+      "path": "/workspace/toolchains/android-theme/sdk/build-tools/37.0.0/core-lambda-stubs.jar",
+      "sha256": "54b19ebb0b9a0345fdb1b929a1bdc99fd49954e97b3624be0e79e04fa386d05f"
+    },
+    "zipalign": {
+      "path": "/workspace/toolchains/android-theme/sdk/build-tools/37.0.0/zipalign",
+      "sha256": "0859ed6e59d3ded7519cd6e6409c0d9ce914af0e09dadc2dce7965ee2e991852"
+    }
+  }
+}

@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+  <color name="tw_color_control_activated">#FF22D3EE</color>
+  <color name="tw_searchview_result_title_text_color_material">#FFF2EEFA</color>
+  <dimen name="sem_button_corner_radius">20dp</dimen>
+  <dimen name="sem_dialog_background_corner_radius">20dp</dimen>
+</resources>

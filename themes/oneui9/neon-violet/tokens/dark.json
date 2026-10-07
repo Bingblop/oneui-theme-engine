@@ -1,0 +1,117 @@
+{
+  "background": {
+    "type": "color",
+    "value": "#FF07080B"
+  },
+  "surface": {
+    "type": "color",
+    "value": "#FF0D0E15"
+  },
+  "accent": {
+    "type": "color",
+    "value": "#FF8A2BE2"
+  },
+  "onAccent": {
+    "type": "color",
+    "value": "#FFFFFFFF"
+  },
+  "textPrimary": {
+    "type": "color",
+    "value": "#FFF2EEFA"
+  },
+  "textSecondary": {
+    "type": "color",
+    "value": "#FFB6B0C9"
+  },
+  "quickTileInactive": {
+    "type": "color",
+    "value": "#FF1C1D26"
+  },
+  "quickTileActive": {
+    "type": "color",
+    "value": "#FF8A2BE2"
+  },
+  "quickTileIconActive": {
+    "type": "color",
+    "value": "#FFFFFFFF"
+  },
+  "quickTileIconInactive": {
+    "type": "color",
+    "value": "#FFB6B0C9"
+  },
+  "quickPanelBackground": {
+    "type": "color",
+    "value": "#FF07080B"
+  },
+  "cornerRadius": {
+    "type": "dimension",
+    "value": 24,
+    "unit": "dp"
+  },
+  "quickTileRadius": {
+    "type": "dimension",
+    "value": 20,
+    "unit": "dp"
+  },
+  "keyboardKeyRadius": {
+    "type": "dimension",
+    "value": 8,
+    "unit": "dp"
+  },
+  "notificationBackground": {
+    "type": "color",
+    "value": "#FF0D0E15"
+  },
+  "notificationText": {
+    "type": "color",
+    "value": "#FFF2EEFA"
+  },
+  "settingsBackground": {
+    "type": "color",
+    "value": "#FF07080B"
+  },
+  "settingsIcon": {
+    "type": "color",
+    "value": "#FF8A2BE2"
+  },
+  "keyboardBackground": {
+    "type": "color",
+    "value": "#FF07080B"
+  },
+  "keyboardKeyBackground": {
+    "type": "color",
+    "value": "#FF0D0E15"
+  },
+  "keyboardKeyText": {
+    "type": "color",
+    "value": "#FFF2EEFA"
+  },
+  "keyboardAccent": {
+    "type": "color",
+    "value": "#FF8A2BE2"
+  },
+  "statusBarIcons": {
+    "type": "color",
+    "value": "#FFF2EEFA"
+  },
+  "navigationBarBackground": {
+    "type": "color",
+    "value": "#FF07080B"
+  },
+  "navigationBarIcons": {
+    "type": "color",
+    "value": "#FFF2EEFA"
+  },
+  "link": {
+    "type": "color",
+    "value": "#FF8A2BE2"
+  },
+  "outline": {
+    "type": "color",
+    "value": "#FF494356"
+  },
+  "error": {
+    "type": "color",
+    "value": "#FFFFB4AB"
+  }
+}

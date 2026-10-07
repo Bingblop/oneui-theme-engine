@@ -1,0 +1,33 @@
+<?xml version='1.0' encoding='utf-8'?>
+<overlay>
+  <item target="color/accent_material_dark" value="@color/accent_material_dark" />
+  <item target="color/accent_material_light" value="@color/accent_material_light" />
+  <item target="color/materialColorSurfaceContainer" value="@color/materialColorSurfaceContainer" />
+  <item target="color/sec_widget_color_primary" value="@color/sec_widget_color_primary" />
+  <item target="color/sec_widget_color_round_button_bg_color" value="@color/sec_widget_color_round_button_bg_color" />
+  <item target="color/sec_widget_color_round_button_text_color" value="@color/sec_widget_color_round_button_text_color" />
+  <item target="color/sec_widget_round_and_bgcolor" value="@color/sec_widget_round_and_bgcolor" />
+  <item target="color/sesl_background_color_dark" value="@color/sesl_background_color_dark" />
+  <item target="color/sesl_background_color_light" value="@color/sesl_background_color_light" />
+  <item target="color/sesl_control_normal_color_light" value="@color/sesl_control_normal_color_light" />
+  <item target="color/sesl_list_divider_color_dark" value="@color/sesl_list_divider_color_dark" />
+  <item target="color/sesl_list_divider_color_light" value="@color/sesl_list_divider_color_light" />
+  <item target="color/sesl_primary_color_dark" value="@color/sesl_primary_color_dark" />
+  <item target="color/sesl_primary_color_light" value="@color/sesl_primary_color_light" />
+  <item target="color/sesl_primary_dark_color_dark" value="@color/sesl_primary_dark_color_dark" />
+  <item target="color/sesl_primary_dark_color_light" value="@color/sesl_primary_dark_color_light" />
+  <item target="color/sesl_primary_text_color_dark" value="@color/sesl_primary_text_color_dark" />
+  <item target="color/sesl_primary_text_color_light" value="@color/sesl_primary_text_color_light" />
+  <item target="color/sesl_round_and_bgcolor_dark" value="@color/sesl_round_and_bgcolor_dark" />
+  <item target="color/sesl_round_and_bgcolor_light" value="@color/sesl_round_and_bgcolor_light" />
+  <item target="color/sesl_search_view_icon_color" value="@color/sesl_search_view_icon_color" />
+  <item target="color/sesl_search_view_icon_color_dark" value="@color/sesl_search_view_icon_color_dark" />
+  <item target="color/sesl_secondary_text_color_dark" value="@color/sesl_secondary_text_color_dark" />
+  <item target="color/sesl_secondary_text_color_light" value="@color/sesl_secondary_text_color_light" />
+  <item target="color/settingslib_materialColorOnSurface" value="@color/settingslib_materialColorOnSurface" />
+  <item target="color/settingslib_materialColorOnSurfaceVariant" value="@color/settingslib_materialColorOnSurfaceVariant" />
+  <item target="color/settingslib_materialColorSurfaceContainerLow" value="@color/settingslib_materialColorSurfaceContainerLow" />
+  <item target="dimen/sec_widget_round_button_bg_radius" value="@dimen/sec_widget_round_button_bg_radius" />
+  <item target="dimen/sesl_button_corner_radius" value="@dimen/sesl_button_corner_radius" />
+  <item target="dimen/sesl_dialog_background_corner_radius" value="@dimen/sesl_dialog_background_corner_radius" />
+</overlay>

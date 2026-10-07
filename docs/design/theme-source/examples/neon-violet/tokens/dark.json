@@ -1,0 +1,61 @@
+{
+  "background": {
+    "type": "color",
+    "value": "#FF07080B"
+  },
+  "surface": {
+    "type": "color",
+    "value": "#FF0D0E15"
+  },
+  "accent": {
+    "type": "color",
+    "value": "#FF8A2BE2"
+  },
+  "onAccent": {
+    "type": "color",
+    "value": "#FFFFFFFF"
+  },
+  "textPrimary": {
+    "type": "color",
+    "value": "#FFF2EEFA"
+  },
+  "textSecondary": {
+    "type": "color",
+    "value": "#FFB6B0C9"
+  },
+  "quickTileInactive": {
+    "type": "color",
+    "value": "#FF1C1D26"
+  },
+  "quickTileActive": {
+    "type": "color",
+    "value": "#FF8A2BE2"
+  },
+  "quickTileIconActive": {
+    "type": "color",
+    "value": "#FFFFFFFF"
+  },
+  "quickTileIconInactive": {
+    "type": "color",
+    "value": "#FFB6B0C9"
+  },
+  "quickPanelBackground": {
+    "type": "color",
+    "value": "#FF07080B"
+  },
+  "cornerRadius": {
+    "type": "dimension",
+    "value": 24,
+    "unit": "dp"
+  },
+  "quickTileRadius": {
+    "type": "dimension",
+    "value": 20,
+    "unit": "dp"
+  },
+  "keyboardKeyRadius": {
+    "type": "dimension",
+    "value": 8,
+    "unit": "dp"
+  }
+}

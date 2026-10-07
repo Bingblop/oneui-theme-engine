@@ -1,0 +1,39 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:oneui-studio:overrides:1",
+  "title": "Draft One UI Studio per-app semantic overrides v1",
+  "type": "object",
+  "additionalProperties": false,
+  "minProperties": 1,
+  "properties": {
+    "framework": {
+      "$ref": "urn:oneui-studio:tokens:1#/$defs/values"
+    },
+    "systemui": {
+      "$ref": "urn:oneui-studio:tokens:1#/$defs/values"
+    },
+    "settings": {
+      "$ref": "urn:oneui-studio:tokens:1#/$defs/values"
+    },
+    "phone": {
+      "$ref": "urn:oneui-studio:tokens:1#/$defs/values"
+    },
+    "keyboard": {
+      "$ref": "urn:oneui-studio:tokens:1#/$defs/values"
+    },
+    "files": {
+      "$ref": "urn:oneui-studio:tokens:1#/$defs/values"
+    },
+    "messages": {
+      "$ref": "urn:oneui-studio:tokens:1#/$defs/values"
+    },
+    "contacts": {
+      "$ref": "urn:oneui-studio:tokens:1#/$defs/values"
+    }
+  },
+  "patternProperties": {
+    "^extension:[a-z][a-z0-9.-]+/[a-z][a-z0-9.-]+$": {
+      "$ref": "urn:oneui-studio:tokens:1#/$defs/values"
+    }
+  }
+}

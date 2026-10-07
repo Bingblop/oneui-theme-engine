@@ -1,0 +1,265 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1920" height="1250" viewBox="0 0 1920 1250" role="img" aria-labelledby="title description">
+  <title id="title">One UI Studio — four-screen Android theme concept</title>
+  <desc id="description">A concept contact sheet for the theme library, Theme Studio source editor, build review, and handoff to a separately implemented application bridge. Authoring scope includes semantic colors, fonts, icons, styles, variants, and per-app overrides. Quick settings are a conceptual preview. Framework, quick panel, and Settings compilation awaits current APK inputs. Exports and bridge integration are planned, with no generated artifacts or device application demonstrated. Device compatibility has not yet been verified.</desc>
+  <defs>
+    <linearGradient id="sheet" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#25272D"/><stop offset="1" stop-color="#15171C"/></linearGradient>
+    <radialGradient id="ambient"><stop stop-color="#706289" stop-opacity=".22"/><stop offset="1" stop-color="#706289" stop-opacity="0"/></radialGradient>
+    <linearGradient id="violet" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#C4B2FF"/><stop offset="1" stop-color="#AA8BED"/></linearGradient>
+    <linearGradient id="violetArt" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#34304D"/><stop offset=".5" stop-color="#836EB9"/><stop offset="1" stop-color="#16171E"/></linearGradient>
+    <linearGradient id="goldArt" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#363024"/><stop offset="1" stop-color="#111318"/></linearGradient>
+    <linearGradient id="mintArt" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#172A28"/><stop offset="1" stop-color="#030606"/></linearGradient>
+    <filter id="shadow" x="-25%" y="-15%" width="150%" height="140%"><feGaussianBlur in="SourceAlpha" stdDeviation="19" result="blur"/><feOffset in="blur" dx="0" dy="16" result="offset"/><feFlood flood-color="#050608" flood-opacity=".5" result="color"/><feComposite in="color" in2="offset" operator="in" result="shade"/><feMerge><feMergeNode in="shade"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+    <clipPath id="display"><rect x="12" y="12" width="380" height="892" rx="42"/></clipPath>
+    <symbol id="chevron" viewBox="0 0 24 24"><path d="m9 5 7 7-7 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="back" viewBox="0 0 24 24"><path d="m15 5-7 7 7 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="search" viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="m15.5 15.5 5 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></symbol>
+    <symbol id="grid" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="2" fill="none" stroke="currentColor" stroke-width="1.8"/><rect x="14" y="3" width="7" height="7" rx="2" fill="none" stroke="currentColor" stroke-width="1.8"/><rect x="3" y="14" width="7" height="7" rx="2" fill="none" stroke="currentColor" stroke-width="1.8"/><rect x="14" y="14" width="7" height="7" rx="2" fill="none" stroke="currentColor" stroke-width="1.8"/></symbol>
+    <symbol id="sliders" viewBox="0 0 24 24"><path d="M3 6h18M3 12h18M3 18h18" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><circle cx="8" cy="6" r="2.5" fill="#14151A" stroke="currentColor" stroke-width="1.8"/><circle cx="16" cy="12" r="2.5" fill="#14151A" stroke="currentColor" stroke-width="1.8"/><circle cx="10" cy="18" r="2.5" fill="#14151A" stroke="currentColor" stroke-width="1.8"/></symbol>
+    <symbol id="check" viewBox="0 0 24 24"><path d="m5 12 4 4L19 6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="apply" viewBox="0 0 24 24"><rect x="4" y="3" width="16" height="18" rx="5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="m8 12 3 3 5-6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="wifi" viewBox="0 0 24 24"><path d="M3 8a14 14 0 0 1 18 0M6 12a9.5 9.5 0 0 1 12 0M9 16a4.8 4.8 0 0 1 6 0" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle cx="12" cy="20" r="1.3" fill="currentColor"/></symbol>
+    <symbol id="sound" viewBox="0 0 24 24"><path d="M4 9h4l5-4v14l-5-4H4z" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"/><path d="M17 8a7 7 0 0 1 0 8M20 5a12 12 0 0 1 0 14" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/></symbol>
+    <symbol id="sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.5 1.5m11 11L19 19M5 19l1.5-1.5m11-11L19 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></symbol>
+    <symbol id="copy" viewBox="0 0 24 24"><rect x="8" y="8" width="12" height="13" rx="3" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M15 4H7a3 3 0 0 0-3 3v8" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></symbol>
+    <g id="phoneBase">
+      <rect width="404" height="916" rx="54" fill="#08090C" stroke="#4A4C54" stroke-width="2"/>
+      <rect x="12" y="12" width="380" height="892" rx="42" fill="#111216"/>
+      <circle cx="202" cy="29" r="5" fill="#050607" stroke="#212329" stroke-width="1.5"/>
+      <text x="35" y="49" font-size="16" font-weight="600" fill="#F4F3F7">9:41</text>
+      <path d="M315 43h3v5h-3zm5-4h3v9h-3zm5-3h3v12h-3z" fill="#E7E6ED"/>
+      <path d="M337 39q6-5 12 0m-10 3q4-3 8 0" fill="none" stroke="#E7E6ED" stroke-width="1.5" stroke-linecap="round"/>
+      <circle cx="343" cy="46" r="1.2" fill="#E7E6ED"/>
+      <rect x="357" y="37" width="16" height="10" rx="3" fill="none" stroke="#E7E6ED" stroke-width="1.5"/><rect x="360" y="40" width="10" height="4" rx="1" fill="#E7E6ED"/><path d="M375 40v4" stroke="#E7E6ED" stroke-width="1.5" stroke-linecap="round"/>
+      <rect x="153" y="889" width="98" height="4" rx="2" fill="#F1F0F6"/>
+    </g>
+    <g id="navBase">
+      <path d="M12 819H392" stroke="#2B2D34"/>
+      <rect x="13" y="820" width="378" height="61" fill="#14151A"/>
+    </g>
+    <style>
+      text { font-family: Arial, Helvetica, sans-serif; }
+      .white { fill:#F7F6FA; }
+      .muted { fill:#B0B1BF; }
+      .violet { fill:#C4B2FF; }
+      .mint { fill:#B0E5D0; }
+      .body { font-size:16px; }
+      .small { font-size:14px; }
+      .label { font-size:18px; font-weight:600; }
+      .title { font-size:34px; font-weight:600; letter-spacing:-1px; }
+      .card { fill:#1D1F26; stroke:#30313A; stroke-width:1; }
+    </style>
+  </defs>
+
+  <rect width="1920" height="1250" fill="url(#sheet)"/>
+  <ellipse cx="620" cy="575" rx="1000" ry="760" fill="url(#ambient)"/>
+  <text x="102" y="62" font-size="16" font-weight="600" letter-spacing="2.8" class="mint">ANDROID THEME EXPLORATION</text>
+  <text x="102" y="129" font-size="58" font-weight="600" letter-spacing="-2" class="white">One UI Studio</text>
+  <text x="522" y="124" font-size="25" class="muted">Your theme source. Your choice of bridge.</text>
+  <rect x="1455" y="43" width="363" height="39" rx="19.5" fill="#31313D" stroke="#53505F"/>
+  <circle cx="1479" cy="62" r="4" fill="#C4B2FF"/>
+  <text x="1494" y="68" font-size="16" class="white">One UI 9 · Android 17 concept</text>
+  <text x="102" y="176" font-size="18" class="mint">Design concept · device compatibility not yet verified</text>
+  <text x="102" y="219" font-size="16" font-weight="600" class="muted">01</text><text x="135" y="219" font-size="16" class="white">Discover your palette</text>
+  <text x="540" y="219" font-size="16" font-weight="600" class="muted">02</text><text x="573" y="219" font-size="16" class="white">Make it personal</text>
+  <text x="978" y="219" font-size="16" font-weight="600" class="muted">03</text><text x="1011" y="219" font-size="16" class="white">Check the build evidence</text>
+  <text x="1416" y="219" font-size="16" font-weight="600" class="muted">04</text><text x="1449" y="219" font-size="16" class="white">Hand off to your bridge</text>
+
+  <!-- 01: Library -->
+  <g transform="translate(102 236)" filter="url(#shadow)">
+    <use xlink:href="#phoneBase"/>
+    <g clip-path="url(#display)">
+      <text x="32" y="96" font-size="14" font-weight="600" letter-spacing="1.6" class="mint">ONE UI STUDIO</text>
+      <text x="32" y="140" font-size="37" font-weight="600" letter-spacing="-1.3" class="white">Make it yours.</text>
+      <text x="32" y="171" class="body muted">Themes for every kind of day.</text>
+      <rect x="32" y="197" width="340" height="51" rx="25.5" fill="#202229"/>
+      <use xlink:href="#search" x="49" y="212" width="21" height="21" color="#B0B1BF"/>
+      <text x="81" y="228" class="body muted">Search your library</text>
+      <rect x="32" y="265" width="123" height="35" rx="17.5" fill="#D1C4F4"/>
+      <text x="93.5" y="288" text-anchor="middle" font-size="14" font-weight="600" fill="#211B30">All themes</text>
+      <rect x="166" y="265" width="78" height="35" rx="17.5" fill="#202229"/>
+      <text x="205" y="288" text-anchor="middle" class="small muted">Dark</text>
+      <rect x="255" y="265" width="89" height="35" rx="17.5" fill="#202229"/>
+      <text x="299.5" y="288" text-anchor="middle" class="small muted">Saved</text>
+
+      <rect x="32" y="317" width="340" height="125" rx="27" class="card"/>
+      <rect x="46" y="331" width="87" height="97" rx="19" fill="url(#mintArt)"/>
+      <path d="M58 396c20-37 49-62 63-33v48" fill="none" stroke="#A3DFCC" stroke-opacity=".48" stroke-width="14" stroke-linecap="round"/>
+      <rect x="55" y="345" width="20" height="13" rx="6.5" fill="#A3DFCC"/><rect x="80" y="345" width="20" height="13" rx="6.5" fill="#243431"/>
+      <text x="149" y="363" font-size="20" font-weight="600" class="white">AMOLED Black</text>
+      <text x="149" y="390" class="small muted">Pure black · soft mint</text>
+      <circle cx="157" cy="414" r="6" fill="#050706" stroke="#595F60"/><circle cx="178" cy="414" r="6" fill="#202625"/><circle cx="199" cy="414" r="6" fill="#B0E5D0"/>
+      <use xlink:href="#chevron" x="335" y="369" width="18" height="18" color="#8D919D"/>
+
+      <rect x="32" y="456" width="340" height="125" rx="27" fill="#272331" stroke="#BCA4F6" stroke-width="1.5"/>
+      <rect x="46" y="470" width="87" height="97" rx="19" fill="url(#violetArt)"/>
+      <path d="M57 546c19-47 46-70 63-35" fill="none" stroke="#BEA7FD" stroke-width="18" stroke-linecap="round"/>
+      <path d="M61 554c21-20 45-23 60-9" fill="none" stroke="#B0E5D0" stroke-opacity=".65" stroke-width="2.5"/>
+      <rect x="55" y="484" width="20" height="13" rx="6.5" fill="#D4C4FF"/><rect x="80" y="484" width="20" height="13" rx="6.5" fill="#514568"/>
+      <text x="149" y="502" font-size="20" font-weight="600" class="white">Neon Violet</text>
+      <text x="149" y="529" class="small muted">Quiet dark · a little glow</text>
+      <circle cx="157" cy="552" r="6" fill="#101115" stroke="#676170"/><circle cx="178" cy="552" r="6" fill="#1E2027"/><circle cx="199" cy="552" r="6" fill="#B8A2FF"/>
+      <circle cx="344" cy="483" r="12" fill="#C4B2FF"/><use xlink:href="#check" x="336" y="475" width="16" height="16" color="#282033"/>
+
+      <rect x="32" y="595" width="340" height="125" rx="27" class="card"/>
+      <rect x="46" y="609" width="87" height="97" rx="19" fill="url(#goldArt)"/>
+      <path d="M48 689 98 619l32 48M51 704l54-46 25 21" fill="none" stroke="#D6B968" stroke-width="2.5"/>
+      <rect x="55" y="623" width="20" height="13" rx="6.5" fill="#E3C976"/><rect x="80" y="623" width="20" height="13" rx="6.5" fill="#484332"/>
+      <text x="149" y="641" font-size="20" font-weight="600" class="white">Cyberpunk Gold</text>
+      <text x="149" y="668" class="small muted">Warm light · bold contrast</text>
+      <circle cx="157" cy="692" r="6" fill="#111318" stroke="#5D5D62"/><circle cx="178" cy="692" r="6" fill="#272520"/><circle cx="199" cy="692" r="6" fill="#E3C976"/>
+      <use xlink:href="#chevron" x="335" y="647" width="18" height="18" color="#8D919D"/>
+      <rect x="32" y="744" width="340" height="54" rx="27" fill="#23262C" stroke="#42444D"/>
+      <path d="M129 765v13m-6.5-6.5h13" stroke="#B0E5D0" stroke-width="1.8" stroke-linecap="round"/>
+      <text x="154" y="778" font-size="17" font-weight="600" class="mint">Create a theme</text>
+      <use xlink:href="#navBase"/>
+      <rect x="48" y="827" width="76" height="31" rx="15.5" fill="#3B334A"/>
+      <use xlink:href="#grid" x="75" y="831" width="22" height="22" color="#D3C1FF"/><text x="86" y="876" text-anchor="middle" class="small violet">Library</text>
+      <use xlink:href="#sliders" x="191" y="831" width="22" height="22" color="#9B9EAD"/><text x="202" y="876" text-anchor="middle" class="small muted">Studio</text>
+      <use xlink:href="#apply" x="307" y="831" width="22" height="22" color="#9B9EAD"/><text x="318" y="876" text-anchor="middle" class="small muted">Build</text>
+    </g>
+  </g>
+
+  <!-- 02: Semantic palette and conceptual quick settings preview -->
+  <g transform="translate(540 236)" filter="url(#shadow)">
+    <use xlink:href="#phoneBase"/>
+    <g clip-path="url(#display)">
+      <use xlink:href="#back" x="28" y="77" width="25" height="25" color="#F7F6FA"/>
+      <text x="68" y="100" font-size="32" font-weight="600" letter-spacing="-.9" class="white">Theme Studio</text>
+      <text x="32" y="134" class="body muted">Neon Violet · dark variant</text>
+      <rect x="28" y="155" width="70" height="34" rx="17" fill="#D1C4F4"/>
+      <text x="63" y="177" text-anchor="middle" font-size="14" font-weight="600" fill="#211B30">Colors</text>
+      <rect x="104" y="155" width="60" height="34" rx="17" fill="#24262E"/>
+      <text x="134" y="177" text-anchor="middle" class="small muted">Fonts</text>
+      <rect x="170" y="155" width="58" height="34" rx="17" fill="#24262E"/>
+      <text x="199" y="177" text-anchor="middle" class="small muted">Icons</text>
+      <rect x="234" y="155" width="62" height="34" rx="17" fill="#24262E"/>
+      <text x="265" y="177" text-anchor="middle" class="small muted">Styles</text>
+      <rect x="302" y="155" width="74" height="34" rx="17" fill="#24262E"/>
+      <text x="339" y="177" text-anchor="middle" class="small muted">Per-app</text>
+      <rect x="28" y="207" width="348" height="235" rx="29" fill="#1E2027" stroke="#3B3746"/>
+      <text x="46" y="235" font-size="14" font-weight="600" class="white">Quick settings</text>
+      <rect x="196" y="218" width="162" height="26" rx="13" fill="#3C344F"/>
+      <text x="277" y="236" text-anchor="middle" font-size="14" class="violet">Concept preview</text>
+      <rect x="46" y="260" width="149" height="112" rx="24" fill="url(#violet)"/>
+      <use xlink:href="#wifi" x="63" y="274" width="28" height="28" color="#2B213C"/>
+      <text x="64" y="335" font-size="17" font-weight="600" fill="#2B213C">Wi-Fi</text>
+      <text x="64" y="357" font-size="14" fill="#4F4267">Connected</text>
+      <rect x="209" y="260" width="149" height="112" rx="24" fill="#30333E"/>
+      <use xlink:href="#sound" x="226" y="274" width="28" height="28" color="#D3D2DD"/>
+      <text x="227" y="335" font-size="17" font-weight="600" class="white">Sound</text>
+      <text x="227" y="357" font-size="14" class="muted">On</text>
+      <rect x="46" y="390" width="312" height="34" rx="17" fill="#383B46"/>
+      <rect x="46" y="390" width="222" height="34" rx="17" fill="#C4B2FF"/>
+      <use xlink:href="#sun" x="59" y="397" width="20" height="20" color="#3F315B"/>
+      <circle cx="254" cy="407" r="10" fill="#ECE3FF"/>
+      <text x="32" y="479" font-size="22" font-weight="600" class="white">Your palette</text>
+      <rect x="28" y="497" width="348" height="62" rx="22" class="card"/>
+      <circle cx="60" cy="528" r="17" fill="#101115" stroke="#656572"/>
+      <text x="91" y="533" class="label white">Background</text>
+      <text x="353" y="533" text-anchor="end" class="body muted">#101115</text>
+      <rect x="28" y="571" width="348" height="62" rx="22" class="card"/>
+      <circle cx="60" cy="602" r="17" fill="#1E2027" stroke="#686877"/>
+      <text x="91" y="607" class="label white">Surface</text>
+      <text x="353" y="607" text-anchor="end" class="body muted">#1E2027</text>
+      <rect x="28" y="645" width="348" height="62" rx="22" class="card"/>
+      <circle cx="60" cy="676" r="17" fill="#B8A2FF"/>
+      <text x="91" y="681" class="label white">Accent</text>
+      <text x="353" y="681" text-anchor="end" class="body violet">#B8A2FF</text>
+      <rect x="28" y="737" width="348" height="58" rx="29" fill="url(#violet)"/>
+      <text x="202" y="773" text-anchor="middle" font-size="18" font-weight="600" fill="#251D33">Review build</text>
+      <use xlink:href="#navBase"/>
+      <use xlink:href="#grid" x="75" y="831" width="22" height="22" color="#9B9EAD"/><text x="86" y="876" text-anchor="middle" class="small muted">Library</text>
+      <rect x="164" y="827" width="76" height="31" rx="15.5" fill="#3B334A"/>
+      <use xlink:href="#sliders" x="191" y="831" width="22" height="22" color="#D3C1FF"/><text x="202" y="876" text-anchor="middle" class="small violet">Studio</text>
+      <use xlink:href="#apply" x="307" y="831" width="22" height="22" color="#9B9EAD"/><text x="318" y="876" text-anchor="middle" class="small muted">Build</text>
+    </g>
+  </g>
+
+  <!-- 03: Planned compilation scope; measured current target inputs are required -->
+  <g transform="translate(978 236)" filter="url(#shadow)">
+    <use xlink:href="#phoneBase"/>
+    <g clip-path="url(#display)">
+      <use xlink:href="#back" x="28" y="77" width="25" height="25" color="#F7F6FA"/>
+      <text x="68" y="100" class="title white">Build review</text>
+      <text x="32" y="134" class="small muted">One UI 9 · Android 17 · SM-S948U1</text>
+      <rect x="32" y="158" width="340" height="147" rx="29" fill="#24212E" stroke="#514361"/>
+      <text x="51" y="190" font-size="14" font-weight="600" letter-spacing=".8" class="violet">NEON VIOLET</text>
+      <text x="51" y="225" font-size="22" font-weight="600" class="white">Start with current inputs.</text>
+      <text x="51" y="253" class="small muted">No generated resources or APKs yet.</text>
+      <text x="51" y="283" class="small violet">Colors · fonts · icons · styles · per-app</text>
+      <text x="32" y="339" class="small muted">Compile compatibility · awaiting evidence</text>
+      <rect x="32" y="358" width="340" height="84" rx="23" class="card"/>
+      <circle cx="51" cy="386" r="4" fill="#C4B2FF"/>
+      <text x="64" y="392" font-size="16" font-weight="600" class="violet">Framework · Awaiting inputs</text>
+      <text x="50" y="421" class="small muted">Current APK inputs needed.</text>
+      <rect x="32" y="454" width="340" height="84" rx="23" class="card"/>
+      <circle cx="51" cy="482" r="4" fill="#C4B2FF"/>
+      <text x="64" y="488" font-size="16" font-weight="600" class="violet">Quick panel · Awaiting inputs</text>
+      <text x="50" y="517" class="small muted">Current APK inputs needed.</text>
+      <rect x="32" y="550" width="340" height="84" rx="23" class="card"/>
+      <circle cx="51" cy="578" r="4" fill="#C4B2FF"/>
+      <text x="64" y="584" font-size="16" font-weight="600" class="violet">Settings · Awaiting inputs</text>
+      <text x="50" y="613" class="small muted">Current APK inputs needed.</text>
+      <text x="42" y="675" font-size="16" font-weight="600" class="white">Planned scope, measured coverage.</text>
+      <text x="42" y="701" class="small muted">Per-app rules and omitted controls go here.</text>
+      <rect x="28" y="737" width="348" height="58" rx="29" fill="url(#violet)"/>
+      <text x="202" y="773" text-anchor="middle" font-size="18" font-weight="600" fill="#251D33">Review build inputs</text>
+      <use xlink:href="#navBase"/>
+      <use xlink:href="#grid" x="75" y="831" width="22" height="22" color="#9B9EAD"/><text x="86" y="876" text-anchor="middle" class="small muted">Library</text>
+      <use xlink:href="#sliders" x="191" y="831" width="22" height="22" color="#9B9EAD"/><text x="202" y="876" text-anchor="middle" class="small muted">Studio</text>
+      <rect x="280" y="827" width="76" height="31" rx="15.5" fill="#3B334A"/>
+      <use xlink:href="#apply" x="307" y="831" width="22" height="22" color="#D3C1FF"/><text x="318" y="876" text-anchor="middle" class="small violet">Build</text>
+    </g>
+  </g>
+
+  <!-- 04: Planned source-to-bridge handoff; compilation and application remain separate -->
+  <g transform="translate(1416 236)" filter="url(#shadow)">
+    <use xlink:href="#phoneBase"/>
+    <g clip-path="url(#display)">
+      <use xlink:href="#back" x="28" y="77" width="25" height="25" color="#F7F6FA"/>
+      <text x="67" y="100" font-size="28" font-weight="600" letter-spacing="-.7" class="white">Bridge handoff</text>
+      <text x="32" y="134" class="body muted">Planned flow · your apply bridge</text>
+      <rect x="28" y="158" width="348" height="102" rx="25" class="card"/>
+      <circle cx="57" cy="189" r="15" fill="#B0E5D0"/><text x="57" y="195" text-anchor="middle" font-size="16" font-weight="600" fill="#20352E">1</text>
+      <text x="84" y="196" font-size="20" font-weight="600" class="white">Theme source</text>
+      <text x="47" y="223" class="small muted">Tokens, licensed assets and per-app rules.</text>
+      <text x="47" y="245" class="small muted">Variants and declarative style settings.</text>
+      <path d="M202 261v8" stroke="#6F637E" stroke-width="1.5"/>
+      <rect x="28" y="270" width="348" height="102" rx="25" class="card"/>
+      <circle cx="57" cy="301" r="15" fill="#393145"/><text x="57" y="307" text-anchor="middle" font-size="16" font-weight="600" class="violet">2</text>
+      <text x="84" y="308" font-size="20" font-weight="600" class="white">Target resources</text>
+      <text x="47" y="335" class="small muted">Generated from current measured inputs.</text>
+      <text x="47" y="357" class="small muted">Planned exporter · format to be agreed.</text>
+      <path d="M202 373v8" stroke="#6F637E" stroke-width="1.5"/>
+      <rect x="28" y="382" width="348" height="102" rx="25" class="card"/>
+      <circle cx="57" cy="413" r="15" fill="#393145"/><text x="57" y="419" text-anchor="middle" font-size="16" font-weight="600" class="violet">3</text>
+      <text x="84" y="420" font-size="20" font-weight="600" class="white">Build report + plan</text>
+      <text x="47" y="447" class="small muted">Coverage, input hashes and build results.</text>
+      <text x="47" y="469" class="small muted">Requested changes and restoration.</text>
+      <path d="M202 485v8" stroke="#6F637E" stroke-width="1.5"/>
+      <rect x="28" y="494" width="348" height="102" rx="25" class="card"/>
+      <circle cx="57" cy="525" r="15" fill="#393145"/><text x="57" y="531" text-anchor="middle" font-size="16" font-weight="600" class="violet">4</text>
+      <text x="84" y="532" font-size="20" font-weight="600" class="white">Your apply bridge</text>
+      <text x="47" y="559" class="small muted">Accepts the agreed artifact format.</text>
+      <text x="47" y="581" class="small muted">Application status stays separate.</text>
+      <rect x="28" y="615" width="348" height="95" rx="25" fill="#1A2423" stroke="#344941"/>
+      <text x="47" y="644" font-size="16" font-weight="600" class="mint">Compile compatibility</text>
+      <text x="357" y="644" text-anchor="end" class="small violet">Pending inputs</text>
+      <path d="M47 656h310" stroke="#344941"/>
+      <text x="47" y="684" font-size="16" font-weight="600" class="white">Device application</text>
+      <text x="357" y="684" text-anchor="end" font-size="14" fill="#DCC68F">Unverified</text>
+      <rect x="28" y="737" width="348" height="58" rx="29" fill="url(#violet)"/>
+      <text x="202" y="761" text-anchor="middle" font-size="18" font-weight="600" fill="#251D33">Export for bridge</text>
+      <text x="202" y="783" text-anchor="middle" font-size="14" fill="#4F4267">Concept · planned</text>
+      <use xlink:href="#navBase"/>
+      <use xlink:href="#grid" x="75" y="831" width="22" height="22" color="#9B9EAD"/><text x="86" y="876" text-anchor="middle" class="small muted">Library</text>
+      <use xlink:href="#sliders" x="191" y="831" width="22" height="22" color="#9B9EAD"/><text x="202" y="876" text-anchor="middle" class="small muted">Studio</text>
+      <rect x="280" y="827" width="76" height="31" rx="15.5" fill="#3B334A"/>
+      <use xlink:href="#apply" x="307" y="831" width="22" height="22" color="#D3C1FF"/><text x="318" y="876" text-anchor="middle" class="small violet">Build</text>
+    </g>
+  </g>
+
+  <path d="M102 1180H1820" stroke="#41424A"/>
+  <text x="102" y="1212" font-size="16" class="muted">Colors, fonts, icons, styles and per-app rules form the source. Current target inputs determine the output.</text>
+  <text x="1820" y="1212" text-anchor="end" font-size="16" class="violet">Source → resources → report → bridge</text>
+</svg>

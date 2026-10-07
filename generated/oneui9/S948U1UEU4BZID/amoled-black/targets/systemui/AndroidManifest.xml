@@ -1,0 +1,6 @@
+<?xml version='1.0' encoding='utf-8'?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="org.bingblop.oneui9.theme.org.bingblop.amoled_black.systemui" android:versionCode="1" android:versionName="0.2.0">
+  <uses-sdk android:minSdkVersion="37" android:targetSdkVersion="37" />
+  <application android:hasCode="false" />
+  <overlay android:targetPackage="com.android.systemui" android:isStatic="false" android:category="org.bingblop.oneui9.theme" android:resourcesMap="@xml/overlays" />
+</manifest>

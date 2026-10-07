@@ -1,0 +1,17 @@
+test_changed_tool_provenance_rejected_before_output (__main__.AppBuilderChecks.test_changed_tool_provenance_rejected_before_output) ... ok
+test_existing_output_is_refused (__main__.AppBuilderChecks.test_existing_output_is_refused) ... ok
+test_explicit_jdk_wins_over_inherited_path (__main__.AppBuilderChecks.test_explicit_jdk_wins_over_inherited_path) ... ok
+test_javac_rejects_host_only_java_api_without_publishing_apk (__main__.AppBuilderChecks.test_javac_rejects_host_only_java_api_without_publishing_apk) ... ok
+test_keystore_inside_source_rejected_before_output (__main__.AppBuilderChecks.test_keystore_inside_source_rejected_before_output) ... ok
+test_new_source_added_during_build_rejected (__main__.AppBuilderChecks.test_new_source_added_during_build_rejected) ... ok
+test_old_d8_api37_warning_rejected_without_final_apk (__main__.AppBuilderChecks.test_old_d8_api37_warning_rejected_without_final_apk) ... ok
+test_signed_reproducible_apk_and_asset_contents (__main__.AppBuilderChecks.test_signed_reproducible_apk_and_asset_contents) ... ok
+test_success_report_write_failure_removes_final_apk (__main__.AppBuilderChecks.test_success_report_write_failure_removes_final_apk) ... ok
+test_symlinked_asset_rejected_before_output (__main__.AppBuilderChecks.test_symlinked_asset_rejected_before_output) ... ok
+test_tool_failure_has_failed_report_without_apk (__main__.AppBuilderChecks.test_tool_failure_has_failed_report_without_apk) ... ok
+test_wrong_manifest_package_or_api_rejected_before_output (__main__.AppBuilderChecks.test_wrong_manifest_package_or_api_rejected_before_output) ... ok
+
+----------------------------------------------------------------------
+Ran 12 tests in 21.430s
+
+OK

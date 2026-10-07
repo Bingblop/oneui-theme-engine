@@ -1,0 +1,78 @@
+{
+  "checks": [
+    {
+      "name": "successful commit writes readable source and history",
+      "passed": true
+    },
+    {
+      "name": "successful commit snapshots candidate instead of aliasing it",
+      "passed": true
+    },
+    {
+      "name": "editing returned committed source does not mutate candidate or saved bytes",
+      "passed": true
+    },
+    {
+      "name": "successful history commit copies prior events",
+      "passed": true
+    },
+    {
+      "name": "refused workspace preserves previously saved draft and history",
+      "passed": true
+    },
+    {
+      "name": "failed atomic source replacement preserves blocked target and cleans temporary file",
+      "passed": true
+    },
+    {
+      "name": "missing workspace fails without creating it",
+      "passed": true
+    },
+    {
+      "name": "regular file workspace is preserved on failed save",
+      "passed": true
+    },
+    {
+      "name": "failed history replacement keeps committed source and cleans journal",
+      "passed": true
+    },
+    {
+      "name": "oversized history does not roll back saved source or replace previous history",
+      "passed": true
+    },
+    {
+      "name": "history retains the newest fifty events in order",
+      "passed": true
+    },
+    {
+      "name": "history under storage limit is saved",
+      "passed": true
+    },
+    {
+      "name": "missing history returns an empty array",
+      "passed": true
+    },
+    {
+      "name": "malformed history returns an empty array without rewriting it",
+      "passed": true
+    },
+    {
+      "name": "history beyond read bound returns an empty array",
+      "passed": true
+    },
+    {
+      "name": "second successful save replaces complete source and appends history",
+      "passed": true
+    },
+    {
+      "name": "missing draft reports an input failure",
+      "passed": true
+    },
+    {
+      "name": "malformed draft fails without rewriting stored bytes",
+      "passed": true
+    }
+  ],
+  "passed": 18,
+  "failed": 0
+}

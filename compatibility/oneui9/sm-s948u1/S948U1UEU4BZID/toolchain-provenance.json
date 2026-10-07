@@ -1,0 +1,76 @@
+{
+  "build_tools": {
+    "version": "37.0.0",
+    "url": "https://dl.google.com/android/repository/build-tools_r37_linux.zip",
+    "size": 66135704,
+    "upstream_checksum": {
+      "algorithm": "sha1",
+      "value": "70954e99f4c3d9d46ee70fa32624672fe7cd6ebe"
+    },
+    "local_archive": "/workspace/toolchains/android-theme/downloads/build-tools_r37_linux.zip",
+    "sha256": "01af179347cbcd9c208b7f8171f7b21f6dd1d2f85bcd15e88caa51d5d7b86060",
+    "sha1": "70954e99f4c3d9d46ee70fa32624672fe7cd6ebe",
+    "checksum_verified": true
+  },
+  "maven_aapt2": {
+    "version": "9.4.1-15978811",
+    "url": "https://dl.google.com/android/maven2/com/android/tools/build/aapt2/9.4.1-15978811/aapt2-9.4.1-15978811-linux.jar",
+    "local_archive": "/workspace/toolchains/android-theme/downloads/aapt2-9.4.1-15978811-linux.jar",
+    "sha256": "f5bebd466ecf14d341fd465f2756a16d86052f29eb4532003d5ff7bcffd08de5",
+    "sha1": "6ad07b566daaefa1c2721255637ec137c93580a6",
+    "size": 2385035,
+    "checksum_verified": true,
+    "upstream_checksum": {
+      "algorithm": "sha1",
+      "value": "6ad07b566daaefa1c2721255637ec137c93580a6"
+    }
+  },
+  "installed_tools": {
+    "aapt2": {
+      "path": "/workspace/toolchains/android-theme/aapt2/9.4.1-15978811/aapt2",
+      "sha256": "7f0587c898f8401986b9c32385fb25d1ecea1e9007907376215f30f99c4894a9"
+    },
+    "sdk_aapt2": {
+      "path": "/workspace/toolchains/android-theme/sdk/build-tools/37.0.0/aapt2",
+      "sha256": "0f1c0e560f99db510a76ebc99ad5c3e68438f62e8e8617018a716ca4a589a699"
+    },
+    "apksigner_script": {
+      "path": "/workspace/toolchains/android-theme/sdk/build-tools/37.0.0/apksigner",
+      "sha256": "b47549e373b895ce6ca620d0c7887e674d9615ffa837a86ac601dcfd04adb0f0"
+    },
+    "apksigner_jar": {
+      "path": "/workspace/toolchains/android-theme/sdk/build-tools/37.0.0/lib/apksigner.jar",
+      "sha256": "2defad215d7ff52968a409cde528cdaef7918b115e276b8e3378ca7a178e4180"
+    },
+    "zipalign": {
+      "path": "/workspace/toolchains/android-theme/sdk/build-tools/37.0.0/zipalign",
+      "sha256": "0859ed6e59d3ded7519cd6e6409c0d9ce914af0e09dadc2dce7965ee2e991852"
+    }
+  },
+  "retrieved_at_utc": "2026-10-07T16:19:07.809214+00:00",
+  "metadata_sources": [
+    "https://dl.google.com/android/maven2/com/android/tools/build/aapt2/maven-metadata.xml",
+    "https://dl.google.com/android/repository/repository2-3.xml"
+  ],
+  "java": "openjdk version \"21.0.12.1\" 2026-08-18",
+  "smoke": {
+    "framework_apk": "/workspace/oneui9-inputs/apks/android/00-framework-res.apk",
+    "framework_sha256": "a9d4d3cfb8a9817a838b2d327c348aec72651e0fb5e3688beedd9bf37098ab6c",
+    "signed_output": "/workspace/toolchains/android-theme/smoke/probe-signed.apk",
+    "purpose": "Compiler and signing compatibility only. Synthetic target does not exist. Never install this fixture or ship its test key.",
+    "package_link_include_tests": [
+      {
+        "package": "com.android.systemui",
+        "apk": "/workspace/oneui9-inputs/apks/com.android.systemui/00-SystemUI.apk",
+        "sha256": "006da31144dcf6ac097362e4e8a9a823e71d25a6aa5cee2b2757f97b9545b745",
+        "link_with_framework_and_target_include": "passed"
+      },
+      {
+        "package": "com.android.settings",
+        "apk": "/workspace/oneui9-inputs/apks/com.android.settings/00-SecSettings.apk",
+        "sha256": "e4b7158acaef6bc55c0d09c26409ba32df2011786745f592caadb2c8dd3e9193",
+        "link_with_framework_and_target_include": "passed"
+      }
+    ]
+  }
+}

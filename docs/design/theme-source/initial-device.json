@@ -1,0 +1,39 @@
+{
+  "recordType": "collected-firmware-observation",
+  "evidence": "User screenshot and supplied collector report; three APK hashes and signatures verified",
+  "modelIdentifier": "SM-S948U1",
+  "oneUiVersion": "9.0",
+  "androidVersion": "17",
+  "buildNumber": "CP2A.260605.016.S948U1UEU4BZID",
+  "basebandVersion": "S948U1UEU4BZID",
+  "googlePlaySystemUpdate": "2026-08-01",
+  "seLinuxStatus": "Enforcing",
+  "buildFingerprint": "samsung/m3quew/m3q:17/CP2A.260605.016/S948U1UEU4BZID_OYM4BZID:user/release-keys",
+  "androidApiLevel": 37,
+  "androidSecurityPatch": "2026-09-05",
+  "themeParkVersion": null,
+  "shizukuIdentity": null,
+  "targetPackageInventory": [
+    {
+      "package": "android",
+      "apkSha256": "a9d4d3cfb8a9817a838b2d327c348aec72651e0fb5e3688beedd9bf37098ab6c",
+      "versionCode": 37,
+      "versionName": "17"
+    },
+    {
+      "package": "com.android.systemui",
+      "apkSha256": "006da31144dcf6ac097362e4e8a9a823e71d25a6aa5cee2b2757f97b9545b745",
+      "versionCode": 37,
+      "versionName": "17"
+    },
+    {
+      "package": "com.android.settings",
+      "apkSha256": "e4b7158acaef6bc55c0d09c26409ba32df2011786745f592caadb2c8dd3e9193",
+      "versionCode": 37,
+      "versionName": "17"
+    }
+  ],
+  "themeApplicationSupport": "unverified",
+  "verifiedCompatibilityPacks": [],
+  "automaticSystemOverlayApplicationEligible": false
+}

@@ -1,0 +1,27 @@
+{
+  "assets": {
+    "resource-pack.json": {
+      "sha256": "92d9650f22b7620ec889e586fc7cb7e05e8cf45f97d7c890fe3c7f1e0c48287d",
+      "sizeBytes": 217876
+    },
+    "sources/amoled-black.ouitheme": {
+      "sha256": "f417e6286c443d40cddb9ce767c3eb37bfd5900e8777b28c5bc47b88b10c637f",
+      "sizeBytes": 2052
+    },
+    "sources/cyberpunk-gold.ouitheme": {
+      "sha256": "3cc66bdcaf617bb9b1b1f9d3d4acedd5f52187f4fa1f597d0cff4ed1e192c977",
+      "sizeBytes": 2053
+    },
+    "sources/neon-violet.ouitheme": {
+      "sha256": "423847a4cf13b3feba08adbe59f58c3edb6fa237355eb6ee8a84cddf21e569e6",
+      "sizeBytes": 2869
+    }
+  },
+  "compressionLevel": 6,
+  "differences": [],
+  "format": "oneui-studio.asset-sync/1",
+  "mode": "check",
+  "status": "in-sync",
+  "written": [],
+  "zlibVersion": "1.3.2"
+}

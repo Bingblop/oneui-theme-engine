@@ -1,0 +1,18 @@
+Verifies
+Verified using v1 scheme (JAR signing): false
+Verified using v2 scheme (APK Signature Scheme v2): false
+Verified using v3 scheme (APK Signature Scheme v3): true
+Verified using v3.1 scheme (APK Signature Scheme v3.1): false
+Verified using v3.2 scheme (APK Signature Scheme v3.2): false
+Verified using v4 scheme (APK Signature Scheme v4): false
+Verified for SourceStamp: false
+Number of signers: 1
+V3.0 Signer: certificate DN: CN=One UI Studio Development
+V3.0 Signer: certificate SHA-256 digest: 86369187c5d7a3f3165103622a1c8693b147c33c4e1b625062477832ca4e448b
+V3.0 Signer: certificate SHA-1 digest: 3da27d11005679377416893f46e274d3215bd829
+V3.0 Signer: certificate MD5 digest: f9200fe739c969b77f010a2979f87ac7
+V3.0 Signer: key algorithm: RSA
+V3.0 Signer: key size (bits): 3072
+V3.0 Signer: public key SHA-256 digest: b55dcb3980dab01fe1cc54bf7f55a57577aeddd956935d5a1be6908b1a680dfc
+V3.0 Signer: public key SHA-1 digest: d30b65733c5b3223b31a16a9d842e5c49252e554
+V3.0 Signer: public key MD5 digest: c8c0268c26a11fd0adf27caf680ab388

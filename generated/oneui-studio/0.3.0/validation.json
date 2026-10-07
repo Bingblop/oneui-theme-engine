@@ -1,0 +1,38 @@
+{
+  "apkSha256": "8e3aca67b31dff96ee7027c2e048b16f8437b84cd500a8e1fe314200016046b1",
+  "appSourceCommit": "32a85e2",
+  "appVersion": "0.3.0",
+  "builderSha256": "84f638067a80cb4f39077c0811b8865cad6ff2e4238dfca779d56b4b3f83364a",
+  "codecHostChecks": {
+    "failed": 0,
+    "passed": 156,
+    "results": "codec-results.json"
+  },
+  "desktopTests": {
+    "command": "python3 -m unittest discover -s tests -v",
+    "failed": 0,
+    "passed": 33,
+    "scope": "compiler and collector before archive/asset-sync additions"
+  },
+  "deviceRuntimeVerified": false,
+  "format": "oneui-studio.prototype-validation/1",
+  "installed": false,
+  "limitations": [
+    "Host image stubs do not establish Android/WebP decoding.",
+    "No device/emulator UI, lifecycle or renderer execution.",
+    "Fonts/icons/styles preserved but native editors unfinished.",
+    "Apply bridge and Samsung overlay policy unverified."
+  ],
+  "overlayApplicationVerified": false,
+  "realToolBuilderChecks": {
+    "failed": 0,
+    "includesOptionalLegacyD8Check": true,
+    "log": "builder-checks.txt",
+    "passed": 12
+  },
+  "workspaceHostChecks": {
+    "failed": 0,
+    "passed": 18,
+    "results": "workspace-results.json"
+  }
+}

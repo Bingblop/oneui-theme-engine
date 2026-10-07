@@ -1,0 +1,9 @@
+{
+  "background": {"type": "color", "value": "#FF000000"},
+  "surface": {"type": "color", "value": "#FF0A0A0E"},
+  "accent": {"type": "color", "value": "#FFFFE600"},
+  "onAccent": {"type": "color", "value": "#FF191600"},
+  "textPrimary": {"type": "color", "value": "#FFFFFDE7"},
+  "textSecondary": {"type": "color", "value": "#FFBEBDB0"},
+  "quickTileInactive": {"type": "color", "value": "#FF181920"}
+}

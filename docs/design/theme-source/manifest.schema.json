@@ -1,0 +1,317 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Draft One UI Studio source manifest v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "format",
+    "id",
+    "version",
+    "name",
+    "author",
+    "license",
+    "licenseFile",
+    "tokenApi",
+    "targetIntent",
+    "variants",
+    "assets",
+    "components"
+  ],
+  "properties": {
+    "format": {
+      "const": "oneui-studio.source/1"
+    },
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9]*(?:[.-][a-z0-9]+)+$",
+      "maxLength": 128
+    },
+    "version": {
+      "type": "string",
+      "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"
+    },
+    "name": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 80
+    },
+    "author": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 120
+    },
+    "license": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 100
+    },
+    "licenseFile": {
+      "const": "LICENSE.txt"
+    },
+    "tokenApi": {
+      "const": "oneui-studio.tokens/1"
+    },
+    "targetIntent": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "manufacturer",
+        "uiFamily",
+        "uiMajor"
+      ],
+      "properties": {
+        "manufacturer": {
+          "const": "Samsung"
+        },
+        "uiFamily": {
+          "const": "One UI"
+        },
+        "uiMajor": {
+          "const": 9
+        }
+      }
+    },
+    "variants": {
+      "type": "object",
+      "minProperties": 1,
+      "additionalProperties": false,
+      "properties": {
+        "dark": {
+          "const": "tokens/dark.json"
+        },
+        "light": {
+          "const": "tokens/light.json"
+        }
+      }
+    },
+    "assets": {
+      "type": "array",
+      "maxItems": 100,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "path",
+          "kind",
+          "license"
+        ],
+        "properties": {
+          "path": {
+            "type": "string",
+            "pattern": "^assets/[A-Za-z0-9_-]+\\.(png|jpg|jpeg|webp|ttf|otf)$",
+            "maxLength": 160
+          },
+          "kind": {
+            "enum": [
+              "wallpaper",
+              "icon",
+              "font"
+            ]
+          },
+          "license": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100
+          }
+        }
+      }
+    },
+    "components": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 128,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "required"
+        ],
+        "properties": {
+          "id": {
+            "anyOf": [
+              {
+                "enum": [
+                  "device.palette",
+                  "quick-panel.palette",
+                  "settings.palette",
+                  "keyboard.palette",
+                  "wallpaper",
+                  "launcher.icons",
+                  "phone.palette",
+                  "contacts.palette",
+                  "messages.palette",
+                  "files.palette",
+                  "typography",
+                  "systemui.geometry",
+                  "component.drawables"
+                ]
+              },
+              {
+                "type": "string",
+                "pattern": "^extension:[a-z][a-z0-9.-]+/[a-z][a-z0-9.-]+$",
+                "maxLength": 160
+              }
+            ]
+          },
+          "required": {
+            "type": "boolean"
+          }
+        }
+      }
+    },
+    "overrides": {
+      "type": "object",
+      "additionalProperties": false,
+      "minProperties": 1,
+      "properties": {
+        "dark": {
+          "const": "overrides/dark.json"
+        },
+        "light": {
+          "const": "overrides/light.json"
+        }
+      }
+    },
+    "stylePack": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "version"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9]*(?:[.-][a-z0-9]+)+$",
+          "maxLength": 128
+        },
+        "version": {
+          "type": "string",
+          "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"
+        }
+      }
+    },
+    "appearance": {
+      "type": "object",
+      "additionalProperties": false,
+      "minProperties": 1,
+      "properties": {
+        "dark": {
+          "$ref": "#/$defs/appearance"
+        },
+        "light": {
+          "$ref": "#/$defs/appearance"
+        }
+      }
+    }
+  },
+  "$defs": {
+    "colorRole": {
+      "enum": [
+        "background",
+        "surface",
+        "accent",
+        "onAccent",
+        "textPrimary",
+        "textSecondary",
+        "quickTileInactive",
+        "quickTileActive",
+        "quickTileIconActive",
+        "quickTileIconInactive",
+        "quickPanelBackground",
+        "notificationBackground",
+        "notificationText",
+        "settingsBackground",
+        "settingsIcon",
+        "keyboardBackground",
+        "keyboardKeyBackground",
+        "keyboardKeyText",
+        "keyboardAccent",
+        "statusBarIcons",
+        "navigationBarBackground",
+        "navigationBarIcons",
+        "outline",
+        "link",
+        "error"
+      ]
+    },
+    "componentStyle": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "shape",
+        "fillRole"
+      ],
+      "properties": {
+        "shape": {
+          "enum": [
+            "rectangle",
+            "roundedRectangle",
+            "circle"
+          ]
+        },
+        "fillRole": {
+          "$ref": "#/$defs/colorRole"
+        },
+        "strokeRole": {
+          "$ref": "#/$defs/colorRole"
+        },
+        "strokeWidthDp": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 8
+        },
+        "radiusRole": {
+          "enum": [
+            "cornerRadius",
+            "quickTileRadius",
+            "keyboardKeyRadius"
+          ]
+        }
+      }
+    },
+    "appearance": {
+      "type": "object",
+      "additionalProperties": false,
+      "minProperties": 1,
+      "properties": {
+        "icons": {
+          "type": "object",
+          "minProperties": 1,
+          "maxProperties": 128,
+          "additionalProperties": false,
+          "patternProperties": {
+            "^[a-z][A-Za-z0-9]*(?:\\.[a-z][A-Za-z0-9]*)+$": {
+              "type": "string",
+              "pattern": "^assets/[A-Za-z0-9_-]+\\.(png|webp)$",
+              "maxLength": 160
+            }
+          }
+        },
+        "components": {
+          "type": "object",
+          "additionalProperties": false,
+          "minProperties": 1,
+          "properties": {
+            "quickTile": {
+              "$ref": "#/$defs/componentStyle"
+            },
+            "keyboardKey": {
+              "$ref": "#/$defs/componentStyle"
+            },
+            "card": {
+              "$ref": "#/$defs/componentStyle"
+            },
+            "dialog": {
+              "$ref": "#/$defs/componentStyle"
+            },
+            "button": {
+              "$ref": "#/$defs/componentStyle"
+            }
+          }
+        }
+      }
+    }
+  }
+}
