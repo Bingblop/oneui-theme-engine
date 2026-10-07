@@ -4,6 +4,26 @@ A next-generation theming framework, diagnostic suite, and compatibility layer f
 
 ---
 
+## 📱 HexNext app (native, `android/`)
+
+The main product is now a native Kotlin + Jetpack Compose app in [`android/`](android/), built by
+GitHub Actions on every push. Grab the APK from the **Android APK** workflow run's artifacts (or from a
+release when a `v*` tag is pushed). It needs Android 14+ and [Shizuku](https://shizuku.rikka.app/).
+
+- **Shizuku running as root (or Sui):** HexNext registers real fabricated overlays on the framework:
+  all 65 Monet shades (`system_accent1..3_*`, `system_neutral1..2_*`) plus the Android 14+ Material role
+  colors, generated from your accent color and palette style. Pure-black dark mode is available.
+  Every step shows the real result, and the app reads the color back to verify it applied.
+- **Shizuku over wireless debugging (no root):** Android refuses fabricated overlays from the shell user
+  (`OverlayManagerService`: "Non-root shell cannot fabricate overlays", and `cmd overlay fabricate`
+  requires root). HexNext instead hands the seed color and style to System UI's own Monet engine through
+  `theme_customization_overlay_packages`. One UI may override that with its own color palette.
+
+Build locally with `cd android && ./gradlew assembleDebug`. The old WebView app in `apps/hex-next/`
+is kept only as a design reference.
+
+---
+
 ## 🌟 Features
 
 - **Fabricated Runtime Resource Overlays (RRO):** Dynamic, instantaneous color and resource styling via native Android `cmd overlay fabricate`—no slow compilation, no reboot required.
