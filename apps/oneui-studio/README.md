@@ -15,6 +15,8 @@ Edits and imports commit a complete source to private app storage before the UI 
 
 Import validates bounded ZIP records, strict JSON, source schemas, paths, declared assets and image/font structure. Exports preserve accepted assets, appearance declarations and overrides, and are prepared before opening the destination. Device inspection uses public build fields and read-only hashes of the three target APKs. A resource match is separate from bridge or Samsung policy acceptance. The app requests no network, root or broad storage permissions.
 
+The [desktop export workflow](../../docs/design/native-source-to-overlays.md) compiles an exported `.ouitheme` directly against the supplied firmware inputs. A tested integration example includes three signed overlays and their value-readback reports. [Bundled-asset checks](../../docs/design/studio-asset-sync.md) keep the native presets and measured source files synchronized.
+
 The APK has passed real SDK 37 compilation, resource-table storage/alignment, manifest, asset/dex and developer-signature checks. **It has not been installed or run on a phone or emulator.** Fonts, icons and component-style declarations survive import/export, but their native editors and preview renderers are unfinished. Device overlay application, rollback, full Hex parity, localization and additional Samsung app bindings remain outstanding.
 
 ## First device smoke test

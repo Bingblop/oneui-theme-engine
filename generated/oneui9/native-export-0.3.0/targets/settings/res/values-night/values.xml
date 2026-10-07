@@ -1,0 +1,16 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+  <color name="materialColorSurfaceContainer">#FF0D0E15</color>
+  <color name="sec_widget_color_primary">#FF22D3EE</color>
+  <color name="sec_widget_color_round_button_bg_color">#FF22D3EE</color>
+  <color name="sec_widget_color_round_button_text_color">#FF001F25</color>
+  <color name="sec_widget_round_and_bgcolor">#FF07080B</color>
+  <color name="sesl_control_normal_color_light">#FF22D3EE</color>
+  <color name="sesl_round_and_bgcolor_light">#FF07080B</color>
+  <color name="settingslib_materialColorOnSurface">#FFF2EEFA</color>
+  <color name="settingslib_materialColorOnSurfaceVariant">#FFB6B0C9</color>
+  <color name="settingslib_materialColorSurfaceContainerLow">#FF07080B</color>
+  <dimen name="sec_widget_round_button_bg_radius">20dp</dimen>
+  <dimen name="sesl_button_corner_radius">20dp</dimen>
+  <dimen name="sesl_dialog_background_corner_radius">20dp</dimen>
+</resources>

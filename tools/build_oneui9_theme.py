@@ -8,6 +8,7 @@ This program never installs, enables, or downloads anything.
 import argparse
 from decimal import Decimal
 import hashlib
+import importlib.util
 import json
 import math
 import os
@@ -18,6 +19,18 @@ import subprocess
 import sys
 import xml.etree.ElementTree as ET
 import zipfile
+
+try:  # Direct CLI execution and importlib-based host tests use different roots.
+    from oneui9_source_archive import SourceArchiveError, open_source_archive
+except ModuleNotFoundError as exc:
+    if exc.name != "oneui9_source_archive":
+        raise
+    source_archive_spec = importlib.util.spec_from_file_location("oneui9_source_archive", Path(__file__).with_name("oneui9_source_archive.py"))
+    source_archive_module = importlib.util.module_from_spec(source_archive_spec)
+    sys.modules[source_archive_spec.name] = source_archive_module
+    source_archive_spec.loader.exec_module(source_archive_module)
+    SourceArchiveError = source_archive_module.SourceArchiveError
+    open_source_archive = source_archive_module.open_source_archive
 
 
 ANDROID_URI = "http://schemas.android.com/apk/res/android"
@@ -411,9 +424,20 @@ def archive(output, filename):
 
 
 def build(args):
-    source, inputs, output = Path(args.source).resolve(), Path(args.inputs).resolve(), Path(args.output).absolute()
+    source, output = Path(args.source).resolve(), Path(args.output).absolute()
     need(not output.exists() and not output.is_symlink(), f"Output already exists: {output}")
-    manifest, variants, overrides, source_files = read_source(source)
+    if source.is_file():
+        try:
+            with open_source_archive(source, read_source) as snapshot:
+                return _build_source(args, snapshot.validated, snapshot.archive_sha256)
+        except SourceArchiveError as exc:
+            raise BuildError(str(exc)) from exc
+    return _build_source(args, read_source(source))
+
+
+def _build_source(args, validated, source_archive_sha256=None):
+    inputs, output = Path(args.inputs).resolve(), Path(args.output).absolute()
+    manifest, variants, overrides, source_files = validated
     pack_path = Path(args.pack).resolve()
     pack, apks = read_pack(pack_path, inputs)
     metadata_verified = verify_collector_report(inputs, pack, apks)
@@ -454,6 +478,8 @@ def build(args):
     source_digests = {relative: sha256(path) for relative, path in sorted(source_files.items())}
     source_digest = hashlib.sha256(json_bytes(source_digests)).hexdigest()
     report = {"format": "oneui9.theme-build/1", "status": "building", "applied": False, "policyVerified": False, "compatibilityCertification": False, "metadataVerified": metadata_verified, "sourceId": manifest["id"], "sourceVersion": manifest["version"], "sourceSha256": source_digest, "sourceFiles": source_digests, "packSha256": sha256(pack_path), "buildFingerprint": pack["buildFingerprint"], "androidApiLevel": 37, "tools": {name: {"version": versions.get(name), "executableSha256": sha256(path)} for name, path in tools.items()}, "targets": [], "omittedControls": omitted_controls, "components": component_reports, "unsupportedAppearance": manifest.get("appearance", {}), "unsupportedAssets": manifest["assets"], "unresolvedStylePack": manifest.get("stylePack"), "errors": []}
+    if source_archive_sha256 is not None:
+        report["sourceArchiveSha256"] = source_archive_sha256
     output.mkdir(parents=True, exist_ok=False)
     try:
         for relative, path in sorted(source_files.items()):
@@ -506,7 +532,8 @@ def build(args):
 
 def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__)
-    for option in ("source", "pack", "inputs", "output"):
+    parser.add_argument("--source", required=True, help="Theme source directory or native .ouitheme ZIP")
+    for option in ("pack", "inputs", "output"):
         parser.add_argument("--" + option, required=True)
     for tool in ("aapt2", "apksigner", "zipalign"):
         parser.add_argument("--" + tool, default=tool)

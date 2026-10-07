@@ -1,0 +1,2412 @@
+{
+  "androidApiLevel": 37,
+  "applied": false,
+  "artifacts": [
+    {
+      "developerSigned": true,
+      "path": "targets/framework/overlay-signed.apk",
+      "sha256": "d9dcc546ce78c3d2e6f25e8dc861f2b278c541cbc32c4deb00b6dbdc339b4d92"
+    }
+  ],
+  "bindingCount": 102,
+  "buildFingerprint": "samsung/m3quew/m3q:17/CP2A.260605.016/S948U1UEU4BZID_OYM4BZID:user/release-keys",
+  "compiledValueVerification": true,
+  "configurationCount": 102,
+  "emittedBindingCount": 102,
+  "inputApkPath": "apks/android/00-framework-res.apk",
+  "inputApkSha256": "a9d4d3cfb8a9817a838b2d327c348aec72651e0fb5e3688beedd9bf37098ab6c",
+  "key": "framework",
+  "omittedBindings": [],
+  "overlayPackage": "org.bingblop.oneui9.theme.org.bingblop.neon_violet.framework",
+  "packSha256": "92d9650f22b7620ec889e586fc7cb7e05e8cf45f97d7c890fe3c7f1e0c48287d",
+  "policyVerified": false,
+  "replacements": [
+    {
+      "evidence": "framework/resources.txt:86804; existing-resource-reference; style/Theme at resources.txt:8215; color/bright_foreground_light at resources.txt:87505",
+      "name": "background_dark",
+      "originalAlpha": 255,
+      "originalValues": [
+        {
+          "kind": "literal",
+          "qualifier": "",
+          "value": "#ff000000"
+        }
+      ],
+      "qualifiers": [
+        ""
+      ],
+      "replacementKind": "literal",
+      "resourceId": "0x0106000e",
+      "role": "background",
+      "sourceValue": "#FF030712",
+      "tokenOrigin": "global-token",
+      "type": "color",
+      "value": "#FF030712",
+      "variant": "dark"
+    },
+    {
+      "evidence": "framework/resources.txt:86806; existing-resource-reference; style/Theme.Light at resources.txt:8638; color/bright_foreground_dark at resources.txt:87487",
+      "name": "background_light",
+      "originalAlpha": 255,
+      "originalValues": [
+        {
+          "kind": "literal",
+          "qualifier": "",
+          "value": "#ffffffff"
+        }
+      ],
+      "qualifiers": [
+        ""
+      ],
+      "replacementKind": "literal",
+      "resourceId": "0x0106000f",
+      "role": "background",
+      "sourceValue": "#FFF8FAFC",
+      "tokenOrigin": "global-token",
+      "type": "color",
+      "value": "#FFF8FAFC",
+      "variant": "light"
+    },
+    {
+      "evidence": "framework/resources.txt:88180; existing-resource-reference; style/Theme.Holo at resources.txt:9470; style/Theme.Material at resources.txt:13529; style/ThemeOverlay.Material.Dark at resources.txt:14107",
+      "name": "error_color_material_dark",
+      "originalAlpha": 255,
+      "originalValues": [
+        {
+          "kind": "literal",
+          "qualifier": "",
+          "value": "#ffff7043"
+        }
+      ],
+      "qualifiers": [
+        ""
+      ],
+      "replacementKind": "literal",
+      "resourceId": "0x0106027c",
+      "role": "error",
+      "sourceValue": "#FFFFB4AB",
+      "tokenOrigin": "global-token",
+      "type": "color",
+      "value": "#FFFFB4AB",
+      "variant": "dark"
+    },
+    {
+      "evidence": "framework/resources.txt:88182; existing-resource-reference; style/Theme.Holo.Light at resources.txt:9754; style/Theme.Material.Light at resources.txt:13924; style/ThemeOverlay.Material.Light at resources.txt:14079",
+      "name": "error_color_material_light",
+      "originalAlpha": 255,
+      "originalValues": [
+        {
+          "kind": "literal",
+          "qualifier": "",
+          "value": "#ffff5722"
+        }
+      ],
+      "qualifiers": [
+        ""
+      ],
+      "replacementKind": "literal",
+      "resourceId": "0x0106027d",
+      "role": "error",
+      "sourceValue": "#FFBA1A1A",
+      "tokenOrigin": "global-token",
+      "type": "color",
+      "value": "#FFBA1A1A",
+      "variant": "light"
+    },
+    {
+      "evidence": "framework/resources.txt:88367; existing-resource-reference; style/Theme at resources.txt:8312; style/Theme.Light at resources.txt:8678",
+      "name": "link_text_dark",
+      "originalAlpha": 255,
+      "originalValues": [
+        {
+          "kind": "literal",
+          "qualifier": "",
+          "value": "#ff5c5cff"
+        }
+      ],
+      "qualifiers": [
+        ""
+      ],
+      "replacementKind": "literal",
+      "resourceId": "0x010602d3",
+      "role": "link",
+      "sourceValue": "#FF8A2BE2",
+      "tokenOrigin": "global-token",
+      "type": "color",
+      "value": "#FF8A2BE2",
+      "variant": "dark"
+    },
+    {
+      "evidence": "framework/resources.txt:88373; existing-resource-reference; style/Theme at resources.txt:8393; style/Theme.Light at resources.txt:8660; style/TextAppearance.Widget.PopupMenu at resources.txt:16553",
+      "name": "link_text_light",
+      "originalAlpha": 255,
+      "originalValues": [
+        {
+          "kind": "literal",
+          "qualifier": "",
+          "value": "#ff0000ee"
+        }
+      ],
+      "qualifiers": [
+        ""
+      ],
+      "replacementKind": "literal",
+      "resourceId": "0x010602d6",
+      "role": "link",
+      "sourceValue": "#FF6F21B5",
+      "tokenOrigin": "global-token",
+      "type": "color",
+      "value": "#FF6F21B5",
+      "variant": "light"
+    },
+    {
+      "evidence": "framework/resources.txt:88701; existing-resource-reference; color/notification_primary_text_color_current at resources.txt:88700",
+      "name": "notification_primary_text_color_dark",
+      "originalAlpha": 255,
+      "originalValues": [
+        {
+          "kind": "literal",
+          "qualifier": "",
+          "value": "#fffafaff"
+        }
+      ],
+      "qualifiers": [
+        ""
+      ],
+      "replacementKind": "literal",
+      "resourceId": "0x01060355",
+      "role": "notificationText",
+      "sourceValue": "#FFF2EEFA",
+      "tokenOrigin": "global-token",
+      "type": "color",
+      "value": "#FFF2EEFA",
+      "variant": "dark"
+    },
+    {
+      "evidence": "framework/resources.txt:88703; existing-resource-reference; color/notification_primary_text_color_current at resources.txt:88699",
+      "name": "notification_primary_text_color_light",
+      "originalAlpha": 255,
+      "originalValues": [
+        {
+          "kind": "literal",
+          "qualifier": "",
+          "value": "#ff252528"
+        }
+      ],
+      "qualifiers": [
+        ""
+      ],
+      "replacementKind": "literal",
+      "resourceId": "0x01060356",
+      "role": "notificationText",
+      "sourceValue": "#FF171B24",
+      "tokenOrigin": "global-token",
+      "type": "color",
+      "value": "#FF171B24",
+      "variant": "light"
+    },
+    {
+      "evidence": "framework/resources.txt:88710; existing-resource-reference; color/notification_secondary_text_color_current at resources.txt:88709",
+      "name": "notification_secondary_text_color_dark",
+      "originalAlpha": 255,
+      "originalValues": [
+        {
+          "kind": "literal",
+          "qualifier": "",
+          "value": "#fffafaff"
+        }
+      ],
+      "qualifiers": [
+        ""
+      ],
+      "replacementKind": "literal",
+      "resourceId": "0x01060359",
+      "role": "textSecondary",
+      "sourceValue": "#FFB6B0C9",
+      "tokenOrigin": "global-token",
+      "type": "color",
+      "value": "#FFB6B0C9",
+      "variant": "dark"
+    },
+    {
+      "evidence": "framework/resources.txt:88712; existing-resource-reference; color/notification_secondary_text_color_current at resources.txt:88708",
+      "name": "notification_secondary_text_color_light",
+      "originalAlpha": 255,
+      "originalValues": [
+        {
+          "kind": "literal",
+          "qualifier": "",
+          "value": "#ff252528"
+        }
+      ],
+      "qualifiers": [
+        ""
+      ],
+      "replacementKind": "literal",
+      "resourceId": "0x0106035a",
+      "role": "textSecondary",
+      "sourceValue": "#FF505967",
+      "tokenOrigin": "global-token",
+      "type": "color",
+      "value": "#FF505967",
+      "variant": "light"
+    },
+    {
+      "evidence": "framework/resources.txt:88719; existing-resource-reference; style/TextAppearance.DeviceDefault.Notification.AppName at resources.txt:16142; style/TextAppearance.DeviceDefault.Notification.Info at resources.txt:16148",
+      "name": "notification_third_text_color_light",
+      "originalAlpha": 255,
+      "originalValues": [
+        {
+          "kind": "literal",
+          "qualifier": "",
+          "value": "#ff252528"
+        }
+      ],
+      "qualifiers": [
+        ""
+      ],
+      "replacementKind": "literal",
+      "resourceId": "0x0106035d",
+      "role": "textSecondary",
+      "sourceValue": "#FF505967",
+      "tokenOrigin": "global-token",
+      "type": "color",
+      "value": "#FF505967",
+      "variant": "light"
+    },
+    {
+      "evidence": "framework/resources.txt:88781; existing-XML-reference; style/Widget.Material.Light.FragmentBreadCrumbs at resources.txt:18846; res/color/primary_text_material_dark.xml at resources.txt:5; res/color/primary_text_material_dark.xml at resources.txt:8",
+      "name": "primary_text_default_material_dark",
+      "originalAlpha": 255,
+      "originalValues": [
+        {
+          "kind": "literal",
+          "qualifier": "",
+          "value": "#ffffffff"
+        }
+      ],
+      "qualifiers": [
+        ""
+      ],
+      "replacementKind": "literal",
+      "resourceId": "0x0106037a",
+      "role": "textPrimary",
+      "sourceValue": "#FFF2EEFA",
+      "tokenOrigin": "global-token",
+      "type": "color",
+      "value": "#FFF2EEFA",
+      "variant": "dark"
+    },
+    {
+      "evidence": "framework/resources.txt:88783; existing-XML-reference; style/Widget.Material.FragmentBreadCrumbs at resources.txt:18824; color/timepicker_default_background_material at resources.txt:90117; res/color/primary_text_material_light.xml at resources.txt:5",
+      "name": "primary_text_default_material_light",
+      "originalAlpha": 222,
+      "originalValues": [
+        {
+          "kind": "literal",
+          "qualifier": "",
+          "value": "#de000000"
+        }
+      ],
+      "qualifiers": [
+        ""
+      ],
+      "replacementKind": "literal",
+      "resourceId": "0x0106037b",
+      "role": "textPrimary",
+      "sourceValue": "#FF171B24",
+      "tokenOrigin": "global-token",
+      "type": "color",
+      "value": "#DE171B24",
+      "variant": "light"
+    },
+    {
+      "evidence": "framework/resources.txt:88884; existing-XML-reference; res/color/secondary_text_material_dark.xml at resources.txt:5; res/color/secondary_text_material_dark.xml at resources.txt:8",
+      "name": "secondary_text_default_material_dark",
+      "originalAlpha": 179,
+      "originalValues": [
+        {
+          "kind": "literal",
+          "qualifier": "",
+          "value": "#b3ffffff"
+        }
+      ],
+      "qualifiers": [
+        ""
+      ],
+      "replacementKind": "literal",
+      "resourceId": "0x010603ac",
+      "role": "textSecondary",
+      "sourceValue": "#FFB6B0C9",
+      "tokenOrigin": "global-token",
+      "type": "color",
+      "value": "#B3B6B0C9",
+      "variant": "dark"
+    },
+    {
+      "evidence": "framework/resources.txt:88886; existing-XML-reference; res/color/secondary_text_material_light.xml at resources.txt:5; res/color/secondary_text_material_light.xml at resources.txt:8",
+      "name": "secondary_text_default_material_light",
+      "originalAlpha": 138,
+      "originalValues": [
+        {
+          "kind": "literal",
+          "qualifier": "",
+          "value": "#8a000000"
+        }
+      ],
+      "qualifiers": [
+        ""
+      ],
+      "replacementKind": "literal",
+      "resourceId": "0x010603ad",
+      "role": "textSecondary",
+      "sourceValue": "#FF505967",
+      "tokenOrigin": "global-token",
+      "type": "color",
+      "value": "#8A505967",
+      "variant": "light"
+    },
+    {
+      "evidence": "framework/resources.txt:88921; existing-XML-reference; res/color/sem_btn_default_color_dark.xml at resources.txt:5; res/color/sem_btn_default_color_dark.xml at resources.txt:8",
+      "name": "sem_btn_background_color_dark",
+      "originalAlpha": 255,
+      "originalValues": [
+        {
+          "kind": "literal",
+          "qualifier": "",
+          "value": "#ff2d2d30"
+        }
+      ],
+      "qualifiers": [
+        ""
+      ],
+      "replacementKind": "literal",
+      "resourceId": "0x010603be",
+      "role": "surface",
+      "sourceValue": "#FF0D0E15",
+      "tokenOrigin": "global-token",
+      "type": "color",
+      "value": "#FF0D0E15",
+      "variant": "dark"
+    },
+    {
+      "evidence": "framework/resources.txt:88923; existing-XML-reference; res/color/sem_btn_default_color_light.xml at resources.txt:5; res/color/sem_btn_default_color_light.xml at resources.txt:8",
+      "name": "sem_btn_background_color_light",
+      "originalAlpha": 255,
+      "originalValues": [
+        {
+          "kind": "literal",
+          "qualifier": "",
+          "value": "#ffe4e4e7"
+        }
+      ],
+      "qualifiers": [
+        ""
+      ],
+      "replacementKind": "literal",
+      "resourceId": "0x010603bf",
+      "role": "surface",
+      "sourceValue": "#FFFFFFFF",
+      "tokenOrigin": "global-token",
+      "type": "color",
+      "value": "#FFFFFFFF",
+      "variant": "light"
+    },
+    {
+      "evidence": "framework/resources.txt:88929; existing-XML-reference; res/color/sem_btn_text_color_dark.xml at resources.txt:5; res/color/sem_btn_text_color_dark.xml at resources.txt:8",
+      "name": "sem_btn_default_text_color_dark",
+      "originalAlpha": 255,
+      "originalValues": [
+        {
+          "kind": "literal",
+          "qualifier": "",
+          "value": "#fffafaff"
+        }
+      ],
+      "qualifiers": [
+        ""
+      ],
+      "replacementKind": "literal",
+      "resourceId": "0x010603c2",
+      "role": "textPrimary",
+      "sourceValue": "#FFF2EEFA",
+      "tokenOrigin": "global-token",
+      "type": "color",
+      "value": "#FFF2EEFA",
+      "variant": "dark"
+    },
+    {
+      "evidence": "framework/resources.txt:88931; existing-XML-reference; res/color/sem_btn_text_color_light.xml at resources.txt:5; res/color/sem_btn_text_color_light.xml at resources.txt:8",
+      "name": "sem_btn_default_text_color_light",
+      "originalAlpha": 255,
+      "originalValues": [
+        {
+          "kind": "literal",
+          "qualifier": "",
+          "value": "#ff010102"
+        }
+      ],
+      "qualifiers": [
+        ""
+      ],
+      "replacementKind": "literal",
+      "resourceId": "0x010603c3",
+      "role": "textPrimary",
+      "sourceValue": "#FF171B24",
+      "tokenOrigin": "global-token",
+      "type": "color",
+      "value": "#FF171B24",
+      "variant": "light"
+    },
+    {
+      "evidence": "framework/resources.txt:89072; existing-resource-reference; style/Theme.DeviceDefault.Light at resources.txt:11068; style/Theme.DeviceDefault.Light.NoActionBar at resources.txt:11169; style/Theme.DeviceDefault.Light.Dialog at resources.txt:11514",
+      "name": "sem_color_primary_dark_light",
+      "originalAlpha": 255,
+      "originalValues": [
+        {
+          "kind": "literal",
+          "qualifier": "",
+          "value": "#ff0072de"
+        }
+      ],
+      "qualifiers": [
+        ""
+      ],
+      "replacementKind": "literal",
+      "resourceId": "0x010603ff",
+      "role": "accent",
+      "sourceValue": "#FF0E7490",
+      "tokenOrigin": "global-token",
+      "type": "color",
+      "value": "#FF0E7490",
+      "variant": "light"
+    },
+    {
+      "evidence": "framework/resources.txt:89074; existing-resource-reference; style/Theme.DeviceDefault.Light at resources.txt:11067; style/Theme.DeviceDefault.Light.NoActionBar at resources.txt:11168; style/Theme.DeviceDefault.Dialog at resources.txt:11267",
+      "name": "sem_color_primary_light",
+      "originalAlpha": 255,
+      "originalValues": [
+        {
+          "kind": "literal",
+          "qualifier": "",
+          "value": "#ff387aff"
+        }
+      ],
+      "qualifiers": [
+        ""
+      ],
+      "replacementKind": "literal",
+      "resourceId": "0x01060400",
+      "role": "accent",
+      "sourceValue": "#FF0E7490",
+      "tokenOrigin": "global-token",
+      "type": "color",
+      "value": "#FF0E7490",
+      "variant": "light"
+    },
+    {
+      "evidence": "framework/resources.txt:89076; existing-resource-reference; style/TextAppearance.DeviceDefault.Light.Widget.PopupMenu.Header at resources.txt:16123",
+      "name": "sem_context_menu_title_text_color",
+      "originalAlpha": 255,
+      "originalValues": [
+        {
+          "kind": "literal",
+          "qualifier": "",
+          "value": "#ff000000"
+        }
+      ],
+      "qualifiers": [
+        ""
+      ],
+      "replacementKind": "literal",
+      "resourceId": "0x01060401",
+      "role": "textPrimary",
+      "sourceValue": "#FF171B24",
+      "tokenOrigin": "global-token",
+      "type": "color",
+      "value": "#FF171B24",
+      "variant": "light"
+    },
+    {
+      "evidence": "framework/resources.txt:89078; existing-resource-reference; style/TextAppearance.DeviceDefault.Widget.PopupMenu.Header at resources.txt:16205",
+      "name": "sem_context_menu_title_text_color_dark",
+      "originalAlpha": 255,
+      "originalValues": [
+        {
+          "kind": "literal",
+          "qualifier": "",
+          "value": "#fffafaff"
+        }
+      ],
+      "qualifiers": [
+        ""
+      ],
+      "replacementKind": "literal",
+      "resourceId": "0x01060402",
+      "role": "textPrimary",
+      "sourceValue": "#FFF2EEFA",
+      "tokenOrigin": "global-token",
+      "type": "color",
+      "value": "#FFF2EEFA",
+      "variant": "dark"
+    },
+    {
+      "evidence": "framework/resources.txt:89090; existing-resource-reference; style/Theme at resources.txt:8538; style/Theme.DeviceDefault.Dialog at resources.txt:11294",
+      "name": "sem_dialog_divider_color_material_dark",
+      "originalAlpha": 255,
+      "originalValues": [
+        {
+          "kind": "literal",
+          "qualifier": "",
+          "value": "#ffa3a3a7"
+        }
+      ],
+      "qualifiers": [
+        ""
+      ],
+      "replacementKind": "literal",
+      "resourceId": "0x01060408",
+      "role": "outline",
+      "sourceValue": "#FF494356",
+      "tokenOrigin": "global-token",
+      "type": "color",
+      "value": "#FF494356",
+      "variant": "dark"
+    },
+    {
+      "evidence": "framework/resources.txt:89092; existing-resource-reference; style/Theme.Light at resources.txt:8707; style/Theme.DeviceDefault.Light.Dialog at resources.txt:11540; style/Theme.DeviceDefault.Resolver at resources.txt:16972",
+      "name": "sem_dialog_divider_color_material_light",
+      "originalAlpha": 255,
+      "originalValues": [
+        {
+          "kind": "literal",
+          "qualifier": "",
+          "value": "#ff848487"
+        }
+      ],
+      "qualifiers": [
+        ""
+      ],
+      "replacementKind": "literal",
+      "resourceId": "0x01060409",
+      "role": "outline",
+      "sourceValue": "#FF747F90",
+      "tokenOrigin": "global-token",
+      "type": "color",
+      "value": "#FF747F90",
+      "variant": "light"
+    },
+    {
+      "evidence": "framework/resources.txt:89104; existing-XML-reference; res/color/tw_edit_text_material_dark.xml at resources.txt:7",
+      "name": "sem_edit_text_color_dark",
+      "originalAlpha": 255,
+      "originalValues": [
+        {
+          "kind": "literal",
+          "qualifier": "",
+          "value": "#fffafaff"
+        }
+      ],
+      "qualifiers": [
+        ""
+      ],
+      "replacementKind": "literal",
+      "resourceId": "0x0106040f",
+      "role": "textPrimary",
+      "sourceValue": "#FFF2EEFA",
+      "tokenOrigin": "global-token",
+      "type": "color",
+      "value": "#FFF2EEFA",
+      "variant": "dark"
+    },
+    {
+      "evidence": "framework/resources.txt:89106; existing-XML-reference; res/color/tw_edit_text_material_light.xml at resources.txt:7",
+      "name": "sem_edit_text_color_light",
+      "originalAlpha": 255,
+      "originalValues": [
+        {
+          "kind": "literal",
+          "qualifier": "",
+          "value": "#ff010102"
+        }
+      ],
+      "qualifiers": [
+        ""
+      ],
+      "replacementKind": "literal",
+      "resourceId": "0x01060410",
+      "role": "textPrimary",
+      "sourceValue": "#FF171B24",
+      "tokenOrigin": "global-token",
+      "type": "color",
+      "value": "#FF171B24",
+      "variant": "light"
+    },
+    {
+      "evidence": "framework/resources.txt:89112; existing-resource-reference; style/Widget.DeviceDefault.AutoCompleteTextView at resources.txt:12137; style/Widget.DeviceDefault.EditText at resources.txt:12152",
+      "name": "sem_edit_text_hint_color_dark",
+      "originalAlpha": 255,
+      "originalValues": [
+        {
+          "kind": "literal",
+          "qualifier": "",
+          "value": "#ffa3a3a7"
+        }
+      ],
+      "qualifiers": [
+        ""
+      ],
+      "replacementKind": "literal",
+      "resourceId": "0x01060413",
+      "role": "textSecondary",
+      "sourceValue": "#FFB6B0C9",
+      "tokenOrigin": "global-token",
+      "type": "color",
+      "value": "#FFB6B0C9",
+      "variant": "dark"
+    },
+    {
+      "evidence": "framework/resources.txt:89114; existing-resource-reference; style/Widget.DeviceDefault.Light.AutoCompleteTextView at resources.txt:12401; style/Widget.DeviceDefault.Light.EditText at resources.txt:12417",
+      "name": "sem_edit_text_hint_color_light",
+      "originalAlpha": 255,
+      "originalValues": [
+        {
+          "kind": "literal",
+          "qualifier": "",
+          "value": "#ff8c8c91"
+        }
+      ],
+      "qualifiers": [
+        ""
+      ],
+      "replacementKind": "literal",
+      "resourceId": "0x01060414",
+      "role": "textSecondary",
+      "sourceValue": "#FF505967",
+      "tokenOrigin": "global-token",
+      "type": "color",
+      "value": "#FF505967",
+      "variant": "light"
+    },
+    {
+      "evidence": "framework/resources.txt:89126; existing-resource-reference; style/Theme.DeviceDefault at resources.txt:10766",
+      "name": "sem_floating_popup_divider_color_dark",
+      "originalAlpha": 255,
+      "originalValues": [
+        {
+          "kind": "literal",
+          "qualifier": "",
+          "value": "#ff636368"
+        }
+      ],
+      "qualifiers": [
+        ""
+      ],
+      "replacementKind": "literal",
+      "resourceId": "0x0106041a",
+      "role": "outline",
+      "sourceValue": "#FF494356",
+      "tokenOrigin": "global-token",
+      "type": "color",
+      "value": "#FF494356",
+      "variant": "dark"
+    },
+    {
+      "evidence": "framework/resources.txt:89128; existing-resource-reference; style/Theme.DeviceDefault.Light at resources.txt:11132",
+      "name": "sem_floating_popup_divider_color_light",
+      "originalAlpha": 255,
+      "originalValues": [
+        {
+          "kind": "literal",
+          "qualifier": "",
+          "value": "#ffe4e4e7"
+        }
+      ],
+      "qualifiers": [
+        ""
+      ],
+      "replacementKind": "literal",
+      "resourceId": "0x0106041b",
+      "role": "outline",
+      "sourceValue": "#FF747F90",
+      "tokenOrigin": "global-token",
+      "type": "color",
+      "value": "#FF747F90",
+      "variant": "light"
+    },
+    {
+      "evidence": "framework/resources.txt:89138; existing-resource-reference; style/Theme.DeviceDefault at resources.txt:10768",
+      "name": "sem_floating_popup_text_color_dark",
+      "originalAlpha": 255,
+      "originalValues": [
+        {
+          "kind": "literal",
+          "qualifier": "",
+          "value": "#fffafaff"
+        }
+      ],
+      "qualifiers": [
+        ""
+      ],
+      "replacementKind": "literal",
+      "resourceId": "0x01060420",
+      "role": "textPrimary",
+      "sourceValue": "#FFF2EEFA",
+      "tokenOrigin": "global-token",
+      "type": "color",
+      "value": "#FFF2EEFA",
+      "variant": "dark"
+    },
+    {
+      "evidence": "framework/resources.txt:89140; existing-resource-reference; style/Theme.DeviceDefault.Light at resources.txt:11134",
+      "name": "sem_floating_popup_text_color_light",
+      "originalAlpha": 255,
+      "originalValues": [
+        {
+          "kind": "literal",
+          "qualifier": "",
+          "value": "#ff010102"
+        }
+      ],
+      "qualifiers": [
+        ""
+      ],
+      "replacementKind": "literal",
+      "resourceId": "0x01060421",
+      "role": "textPrimary",
+      "sourceValue": "#FF171B24",
+      "tokenOrigin": "global-token",
+      "type": "color",
+      "value": "#FF171B24",
+      "variant": "light"
+    },
+    {
+      "evidence": "framework/resources.txt:89370; existing-resource-reference; style/TextAppearance.DeviceDefault.Widget.ActionBar.Subtitle.Inverse at resources.txt:12744; style/TextAppearance.DeviceDefault.Widget.ActionMode.Subtitle.Inverse at resources.txt:12752",
+      "name": "sem_text_color_subtitle_material_toolbar",
+      "originalAlpha": 255,
+      "originalValues": [
+        {
+          "kind": "literal",
+          "qualifier": "",
+          "value": "#ff636368"
+        }
+      ],
+      "qualifiers": [
+        ""
+      ],
+      "replacementKind": "literal",
+      "resourceId": "0x0106048d",
+      "role": "textSecondary",
+      "sourceValue": "#FF505967",
+      "tokenOrigin": "global-token",
+      "type": "color",
+      "value": "#FF505967",
+      "variant": "light"
+    },
+    {
+      "evidence": "framework/resources.txt:89372; existing-resource-reference; style/TextAppearance.DeviceDefault.Widget.ActionBar.Subtitle at resources.txt:12728",
+      "name": "sem_text_color_subtitle_material_toolbar_dark",
+      "originalAlpha": 255,
+      "originalValues": [
+        {
+          "kind": "literal",
+          "qualifier": "",
+          "value": "#ffa3a3a7"
+        }
+      ],
+      "qualifiers": [
+        ""
+      ],
+      "replacementKind": "literal",
+      "resourceId": "0x0106048e",
+      "role": "textSecondary",
+      "sourceValue": "#FFB6B0C9",
+      "tokenOrigin": "global-token",
+      "type": "color",
+      "value": "#FFB6B0C9",
+      "variant": "dark"
+    },
+    {
+      "evidence": "framework/resources.txt:87139; existing-resource-reference; color/materialColorBackground at resources.txt:88418",
+      "name": "system_background_dark",
+      "originalAlpha": 255,
+      "originalValues": [
+        {
+          "kind": "literal",
+          "qualifier": "",
+          "value": "#ff1d1d20"
+        }
+      ],
+      "qualifiers": [
+        ""
+      ],
+      "replacementKind": "literal",
+      "resourceId": "0x01060095",
+      "role": "background",
+      "sourceValue": "#FF030712",
+      "tokenOrigin": "global-token",
+      "type": "color",
+      "value": "#FF030712",
+      "variant": "dark"
+    },
+    {
+      "evidence": "framework/resources.txt:87053; existing-resource-reference; color/materialColorBackground at resources.txt:88417",
+      "name": "system_background_light",
+      "originalAlpha": 255,
+      "originalValues": [
+        {
+          "kind": "literal",
+          "qualifier": "",
+          "value": "#fff8f8fa"
+        }
+      ],
+      "qualifiers": [
+        ""
+      ],
+      "replacementKind": "literal",
+      "resourceId": "0x0106006a",
+      "role": "background",
+      "sourceValue": "#FFF8FAFC",
+      "tokenOrigin": "global-token",
+      "type": "color",
+      "value": "#FFF8FAFC",
+      "variant": "light"
+    },
+    {
+      "evidence": "framework/resources.txt:87167; existing-resource-reference; color/materialColorError at resources.txt:88430",
+      "name": "system_error_dark",
+      "originalAlpha": 255,
+      "originalValues": [
+        {
+          "kind": "literal",
+          "qualifier": "",
+          "value": "#ffffaaa6"
+        }
+      ],
+      "qualifiers": [
+        ""
+      ],
+      "replacementKind": "literal",
+      "resourceId": "0x010600a3",
+      "role": "error",
+      "sourceValue": "#FFFFB4AB",
+      "tokenOrigin": "global-token",
+      "type": "color",
+      "value": "#FFFFB4AB",
+      "variant": "dark"
+    },
+    {
+      "evidence": "framework/resources.txt:87081; existing-resource-reference; color/materialColorError at resources.txt:88429",
+      "name": "system_error_light",
+      "originalAlpha": 255,
+      "originalValues": [
+        {
+          "kind": "literal",
+          "qualifier": "",
+          "value": "#ffd93e36"
+        }
+      ],
+      "qualifiers": [
+        ""
+      ],
+      "replacementKind": "literal",
+      "resourceId": "0x01060078",
+      "role": "error",
+      "sourceValue": "#FFBA1A1A",
+      "tokenOrigin": "global-token",
+      "type": "color",
+      "value": "#FFBA1A1A",
+      "variant": "light"
+    },
+    {
+      "evidence": "framework/resources.txt:87141; existing-resource-reference; color/materialColorOnBackground at resources.txt:88448",
+      "name": "system_on_background_dark",
+      "originalAlpha": 255,
+      "originalValues": [
+        {
+          "kind": "literal",
+          "qualifier": "",
+          "value": "#ffe4e4e7"
+        }
+      ],
+      "qualifiers": [
+        ""
+      ],
+      "replacementKind": "literal",
+      "resourceId": "0x01060096",
+      "role": "textPrimary",
+      "sourceValue": "#FFF2EEFA",
+      "tokenOrigin": "global-token",
+      "type": "color",
+      "value": "#FFF2EEFA",
+      "variant": "dark"
+    },
+    {
+      "evidence": "framework/resources.txt:87055; existing-resource-reference; color/materialColorOnBackground at resources.txt:88447",
+      "name": "system_on_background_light",
+      "originalAlpha": 255,
+      "originalValues": [
+        {
+          "kind": "literal",
+          "qualifier": "",
+          "value": "#ff252528"
+        }
+      ],
+      "qualifiers": [
+        ""
+      ],
+      "replacementKind": "literal",
+      "resourceId": "0x0106006b",
+      "role": "textPrimary",
+      "sourceValue": "#FF171B24",
+      "tokenOrigin": "global-token",
+      "type": "color",
+      "value": "#FF171B24",
+      "variant": "light"
+    },
+    {
+      "evidence": "framework/resources.txt:87035; existing-resource-reference; color/materialColorOnPrimary at resources.txt:88456",
+      "name": "system_on_primary_light",
+      "originalAlpha": 255,
+      "originalValues": [
+        {
+          "kind": "literal",
+          "qualifier": "",
+          "value": "#fffcfcff"
+        }
+      ],
+      "qualifiers": [
+        ""
+      ],
+      "replacementKind": "literal",
+      "resourceId": "0x01060061",
+      "role": "onAccent",
+      "sourceValue": "#FFFFFFFF",
+      "tokenOrigin": "global-token",
+      "type": "color",
+      "value": "#FFFFFFFF",
+      "variant": "light"
+    },
+    {
+      "evidence": "framework/resources.txt:89970; existing-resource-reference; color/customColorOnShadeActive at resources.txt:88036",
+      "name": "system_on_shade_active_dark",
+      "originalAlpha": 255,
+      "originalValues": [
+        {
+          "kind": "literal",
+          "qualifier": "",
+          "value": "#ff0b1a3a"
+        }
+      ],
+      "qualifiers": [
+        ""
+      ],
+      "replacementKind": "literal",
+      "resourceId": "0x010605a0",
+      "role": "quickTileIconActive",
+      "sourceValue": "#FFFFFFFF",
+      "tokenOrigin": "global-token",
+      "type": "color",
+      "value": "#FFFFFFFF",
+      "variant": "dark"
+    },
+    {
+      "evidence": "framework/resources.txt:89972; existing-resource-reference; color/customColorOnShadeActive at resources.txt:88035",
+      "name": "system_on_shade_active_light",
+      "originalAlpha": 255,
+      "originalValues": [
+        {
+          "kind": "literal",
+          "qualifier": "",
+          "value": "#ff516391"
+        }
+      ],
+      "qualifiers": [
+        ""
+      ],
+      "replacementKind": "literal",
+      "resourceId": "0x010605a1",
+      "role": "quickTileIconActive",
+      "sourceValue": "#FFFFFFFF",
+      "tokenOrigin": "global-token",
+      "type": "color",
+      "value": "#FFFFFFFF",
+      "variant": "light"
+    },
+    {
+      "evidence": "framework/resources.txt:89978; existing-resource-reference; color/customColorOnShadeInactive at resources.txt:88042",
+      "name": "system_on_shade_inactive_dark",
+      "originalAlpha": 255,
+      "originalValues": [
+        {
+          "kind": "literal",
+          "qualifier": "",
+          "value": "#ffa9abb5"
+        }
+      ],
+      "qualifiers": [
+        ""
+      ],
+      "replacementKind": "literal",
+      "resourceId": "0x010605a4",
+      "role": "quickTileIconInactive",
+      "sourceValue": "#FFB6B0C9",
+      "tokenOrigin": "global-token",
+      "type": "color",
+      "value": "#FFB6B0C9",
+      "variant": "dark"
+    },
+    {
+      "evidence": "framework/resources.txt:89980; existing-resource-reference; color/customColorOnShadeInactive at resources.txt:88041",
+      "name": "system_on_shade_inactive_light",
+      "originalAlpha": 255,
+      "originalValues": [
+        {
+          "kind": "literal",
+          "qualifier": "",
+          "value": "#ffe1e2ed"
+        }
+      ],
+      "qualifiers": [
+        ""
+      ],
+      "replacementKind": "literal",
+      "resourceId": "0x010605a5",
+      "role": "quickTileIconInactive",
+      "sourceValue": "#FF505967",
+      "tokenOrigin": "global-token",
+      "type": "color",
+      "value": "#FF505967",
+      "variant": "light"
+    },
+    {
+      "evidence": "framework/resources.txt:87145; existing-resource-reference; style/Theme.DeviceDefault.NoActionBar at resources.txt:10804; style/Theme.DeviceDefault.NoActionBar.Fullscreen at resources.txt:10855; style/Theme.DeviceDefault.Light at resources.txt:10910",
+      "name": "system_on_surface_dark",
+      "originalAlpha": 255,
+      "originalValues": [
+        {
+          "kind": "literal",
+          "qualifier": "",
+          "value": "#ffe4e4e7"
+        }
+      ],
+      "qualifiers": [
+        ""
+      ],
+      "replacementKind": "literal",
+      "resourceId": "0x01060098",
+      "role": "textPrimary",
+      "sourceValue": "#FFF2EEFA",
+      "tokenOrigin": "global-token",
+      "type": "color",
+      "value": "#FFF2EEFA",
+      "variant": "dark"
+    },
+    {
+      "evidence": "framework/resources.txt:87059; existing-resource-reference; style/Theme.DeviceDefault.NoActionBar at resources.txt:10806; style/Theme.DeviceDefault.NoActionBar.Fullscreen at resources.txt:10857; style/Theme.DeviceDefault.Light.NoActionBar at resources.txt:11156",
+      "name": "system_on_surface_light",
+      "originalAlpha": 255,
+      "originalValues": [
+        {
+          "kind": "literal",
+          "qualifier": "",
+          "value": "#ff252528"
+        }
+      ],
+      "qualifiers": [
+        ""
+      ],
+      "replacementKind": "literal",
+      "resourceId": "0x0106006d",
+      "role": "textPrimary",
+      "sourceValue": "#FF171B24",
+      "tokenOrigin": "global-token",
+      "type": "color",
+      "value": "#FF171B24",
+      "variant": "light"
+    },
+    {
+      "evidence": "framework/resources.txt:87163; existing-resource-reference; style/Theme.DeviceDefault.NoActionBar at resources.txt:10805; style/Theme.DeviceDefault.NoActionBar.Fullscreen at resources.txt:10856; style/Theme.DeviceDefault.Light at resources.txt:10911",
+      "name": "system_on_surface_variant_dark",
+      "originalAlpha": 255,
+      "originalValues": [
+        {
+          "kind": "literal",
+          "qualifier": "",
+          "value": "#ffccccce"
+        }
+      ],
+      "qualifiers": [
+        ""
+      ],
+      "replacementKind": "literal",
+      "resourceId": "0x010600a1",
+      "role": "textSecondary",
+      "sourceValue": "#FFB6B0C9",
+      "tokenOrigin": "global-token",
+      "type": "color",
+      "value": "#FFB6B0C9",
+      "variant": "dark"
+    },
+    {
+      "evidence": "framework/resources.txt:87077; existing-resource-reference; style/Theme.DeviceDefault.NoActionBar at resources.txt:10807; style/Theme.DeviceDefault.NoActionBar.Fullscreen at resources.txt:10858; style/Theme.DeviceDefault.Light.NoActionBar at resources.txt:11157",
+      "name": "system_on_surface_variant_light",
+      "originalAlpha": 255,
+      "originalValues": [
+        {
+          "kind": "literal",
+          "qualifier": "",
+          "value": "#ff4d4d52"
+        }
+      ],
+      "qualifiers": [
+        ""
+      ],
+      "replacementKind": "literal",
+      "resourceId": "0x01060076",
+      "role": "textSecondary",
+      "sourceValue": "#FF505967",
+      "tokenOrigin": "global-token",
+      "type": "color",
+      "value": "#FF505967",
+      "variant": "light"
+    },
+    {
+      "evidence": "framework/resources.txt:87165; existing-resource-reference; style/Theme.DeviceDefault.NoActionBar at resources.txt:10811; style/Theme.DeviceDefault.NoActionBar.Fullscreen at resources.txt:10861; style/Theme.DeviceDefault.Light at resources.txt:10981",
+      "name": "system_outline_dark",
+      "originalAlpha": 255,
+      "originalValues": [
+        {
+          "kind": "literal",
+          "qualifier": "",
+          "value": "#ffa3a3a7"
+        }
+      ],
+      "qualifiers": [
+        ""
+      ],
+      "replacementKind": "literal",
+      "resourceId": "0x010600a2",
+      "role": "outline",
+      "sourceValue": "#FF494356",
+      "tokenOrigin": "global-token",
+      "type": "color",
+      "value": "#FF494356",
+      "variant": "dark"
+    },
+    {
+      "evidence": "framework/resources.txt:87079; existing-resource-reference; style/Theme.DeviceDefault.NoActionBar at resources.txt:10812; style/Theme.DeviceDefault.NoActionBar.Fullscreen at resources.txt:10862; style/Theme.DeviceDefault.Light at resources.txt:10980",
+      "name": "system_outline_light",
+      "originalAlpha": 255,
+      "originalValues": [
+        {
+          "kind": "literal",
+          "qualifier": "",
+          "value": "#ff848487"
+        }
+      ],
+      "qualifiers": [
+        ""
+      ],
+      "replacementKind": "literal",
+      "resourceId": "0x01060077",
+      "role": "outline",
+      "sourceValue": "#FF747F90",
+      "tokenOrigin": "global-token",
+      "type": "color",
+      "value": "#FF747F90",
+      "variant": "light"
+    },
+    {
+      "evidence": "framework/resources.txt:87239; existing-resource-reference; color/materialColorOutlineVariant at resources.txt:88502",
+      "name": "system_outline_variant_dark",
+      "originalAlpha": 255,
+      "originalValues": [
+        {
+          "kind": "literal",
+          "qualifier": "",
+          "value": "#ff4d4d52"
+        }
+      ],
+      "qualifiers": [
+        ""
+      ],
+      "replacementKind": "literal",
+      "resourceId": "0x010600c1",
+      "role": "outline",
+      "sourceValue": "#FF494356",
+      "tokenOrigin": "global-token",
+      "type": "color",
+      "value": "#FF494356",
+      "variant": "dark"
+    },
+    {
+      "evidence": "framework/resources.txt:87237; existing-resource-reference; color/materialColorOutlineVariant at resources.txt:88501",
+      "name": "system_outline_variant_light",
+      "originalAlpha": 255,
+      "originalValues": [
+        {
+          "kind": "literal",
+          "qualifier": "",
+          "value": "#ffccccce"
+        }
+      ],
+      "qualifiers": [
+        ""
+      ],
+      "replacementKind": "literal",
+      "resourceId": "0x010600c0",
+      "role": "outline",
+      "sourceValue": "#FF747F90",
+      "tokenOrigin": "global-token",
+      "type": "color",
+      "value": "#FF747F90",
+      "variant": "light"
+    },
+    {
+      "evidence": "framework/resources.txt:87033; existing-resource-reference; style/Theme.DeviceDefault.AutofillDialogExpressiveButton at resources.txt:16590; color/materialColorPrimary at resources.txt:88522",
+      "name": "system_primary_light",
+      "originalAlpha": 255,
+      "originalValues": [
+        {
+          "kind": "literal",
+          "qualifier": "",
+          "value": "#ff387aff"
+        }
+      ],
+      "qualifiers": [
+        ""
+      ],
+      "replacementKind": "literal",
+      "resourceId": "0x01060060",
+      "role": "accent",
+      "sourceValue": "#FF0E7490",
+      "tokenOrigin": "global-token",
+      "type": "color",
+      "value": "#FF0E7490",
+      "variant": "light"
+    },
+    {
+      "evidence": "framework/resources.txt:89994; existing-resource-reference; color/customColorShadeActive at resources.txt:88054",
+      "name": "system_shade_active_dark",
+      "originalAlpha": 255,
+      "originalValues": [
+        {
+          "kind": "literal",
+          "qualifier": "",
+          "value": "#ffd9e2ff"
+        }
+      ],
+      "qualifiers": [
+        ""
+      ],
+      "replacementKind": "literal",
+      "resourceId": "0x010605ac",
+      "role": "quickTileActive",
+      "sourceValue": "#FF8A2BE2",
+      "tokenOrigin": "global-token",
+      "type": "color",
+      "value": "#FF8A2BE2",
+      "variant": "dark"
+    },
+    {
+      "evidence": "framework/resources.txt:89996; existing-resource-reference; color/customColorShadeActive at resources.txt:88053",
+      "name": "system_shade_active_light",
+      "originalAlpha": 255,
+      "originalValues": [
+        {
+          "kind": "literal",
+          "qualifier": "",
+          "value": "#ffd9e2ff"
+        }
+      ],
+      "qualifiers": [
+        ""
+      ],
+      "replacementKind": "literal",
+      "resourceId": "0x010605ad",
+      "role": "quickTileActive",
+      "sourceValue": "#FF6F21B5",
+      "tokenOrigin": "global-token",
+      "type": "color",
+      "value": "#FF6F21B5",
+      "variant": "light"
+    },
+    {
+      "evidence": "framework/resources.txt:90002; existing-resource-reference; color/customColorShadeInactive at resources.txt:88060",
+      "name": "system_shade_inactive_dark",
+      "originalAlpha": 255,
+      "originalValues": [
+        {
+          "kind": "literal",
+          "qualifier": "",
+          "value": "#ff2f3035"
+        }
+      ],
+      "qualifiers": [
+        ""
+      ],
+      "replacementKind": "literal",
+      "resourceId": "0x010605b0",
+      "role": "quickTileInactive",
+      "sourceValue": "#FF1C1D26",
+      "tokenOrigin": "global-token",
+      "type": "color",
+      "value": "#FF1C1D26",
+      "variant": "dark"
+    },
+    {
+      "evidence": "framework/resources.txt:90004; existing-resource-reference; color/customColorShadeInactive at resources.txt:88059",
+      "name": "system_shade_inactive_light",
+      "originalAlpha": 255,
+      "originalValues": [
+        {
+          "kind": "literal",
+          "qualifier": "",
+          "value": "#ff2f3035"
+        }
+      ],
+      "qualifiers": [
+        ""
+      ],
+      "replacementKind": "literal",
+      "resourceId": "0x010605b1",
+      "role": "quickTileInactive",
+      "sourceValue": "#FFE4E7EF",
+      "tokenOrigin": "global-token",
+      "type": "color",
+      "value": "#FFE4E7EF",
+      "variant": "light"
+    },
+    {
+      "evidence": "framework/resources.txt:87143; existing-resource-reference; style/Theme.Material.Light at resources.txt:13970; color/materialColorSurface at resources.txt:88559",
+      "name": "system_surface_dark",
+      "originalAlpha": 255,
+      "originalValues": [
+        {
+          "kind": "literal",
+          "qualifier": "",
+          "value": "#ff1d1d20"
+        }
+      ],
+      "qualifiers": [
+        ""
+      ],
+      "replacementKind": "literal",
+      "resourceId": "0x01060097",
+      "role": "surface",
+      "sourceValue": "#FF0D0E15",
+      "tokenOrigin": "global-token",
+      "type": "color",
+      "value": "#FF0D0E15",
+      "variant": "dark"
+    },
+    {
+      "evidence": "framework/resources.txt:87057; existing-resource-reference; style/Theme.Material at resources.txt:13575; color/materialColorSurface at resources.txt:88558",
+      "name": "system_surface_light",
+      "originalAlpha": 255,
+      "originalValues": [
+        {
+          "kind": "literal",
+          "qualifier": "",
+          "value": "#fff8f8fa"
+        }
+      ],
+      "qualifiers": [
+        ""
+      ],
+      "replacementKind": "literal",
+      "resourceId": "0x0106006c",
+      "role": "surface",
+      "sourceValue": "#FFFFFFFF",
+      "tokenOrigin": "global-token",
+      "type": "color",
+      "value": "#FFFFFFFF",
+      "variant": "light"
+    },
+    {
+      "evidence": "framework/resources.txt:90130; existing-resource-reference; style/Theme.DeviceDefault.Light at resources.txt:10904; style/Theme.DeviceDefault.Light at resources.txt:10928",
+      "name": "tw_background_material_light",
+      "originalAlpha": 255,
+      "originalValues": [
+        {
+          "kind": "literal",
+          "qualifier": "",
+          "value": "#fffafaff"
+        }
+      ],
+      "qualifiers": [
+        ""
+      ],
+      "replacementKind": "literal",
+      "resourceId": "0x010605ef",
+      "role": "background",
+      "sourceValue": "#FFF8FAFC",
+      "tokenOrigin": "global-token",
+      "type": "color",
+      "value": "#FFF8FAFC",
+      "variant": "light"
+    },
+    {
+      "evidence": "framework/resources.txt:90140; existing-resource-reference; style/Theme.DeviceDefault.Settings at resources.txt:13238; style/Theme.DeviceDefault.Settings at resources.txt:13274; style/Theme.DeviceDefault.Resolver at resources.txt:16960",
+      "name": "tw_color_control_activated",
+      "originalAlpha": 255,
+      "originalValues": [
+        {
+          "kind": "literal",
+          "qualifier": "",
+          "value": "#ff376fde"
+        }
+      ],
+      "qualifiers": [
+        ""
+      ],
+      "replacementKind": "literal",
+      "resourceId": "0x010605f3",
+      "role": "accent",
+      "sourceValue": "#FF0E7490",
+      "tokenOrigin": "global-token",
+      "type": "color",
+      "value": "#FF0E7490",
+      "variant": "light"
+    },
+    {
+      "evidence": "framework/resources.txt:90140; existing-resource-reference; style/Theme.DeviceDefault.Settings at resources.txt:13238; style/Theme.DeviceDefault.Settings at resources.txt:13274; style/Theme.DeviceDefault.Resolver at resources.txt:16960; Author-added night configuration for this existing resource; runtime selection unverified.",
+      "name": "tw_color_control_activated",
+      "originalAlpha": 255,
+      "originalValues": [
+        {
+          "kind": "literal",
+          "qualifier": "",
+          "value": "#ff376fde"
+        }
+      ],
+      "qualifiers": [
+        "night"
+      ],
+      "replacementKind": "literal",
+      "resourceId": "0x010605f3",
+      "role": "accent",
+      "sourceValue": "#FF22D3EE",
+      "tokenOrigin": "global-token",
+      "type": "color",
+      "value": "#FF22D3EE",
+      "variant": "dark"
+    },
+    {
+      "evidence": "framework/resources.txt:90144; existing-resource-reference; color/tw_dialog_body_text_color_material_dark_theme at resources.txt:90147",
+      "name": "tw_dialog_body_text_color_material_dark",
+      "originalAlpha": 255,
+      "originalValues": [
+        {
+          "kind": "literal",
+          "qualifier": "",
+          "value": "#ffeaeaeb"
+        }
+      ],
+      "qualifiers": [
+        ""
+      ],
+      "replacementKind": "literal",
+      "resourceId": "0x010605f5",
+      "role": "textPrimary",
+      "sourceValue": "#FFF2EEFA",
+      "tokenOrigin": "global-token",
+      "type": "color",
+      "value": "#FFF2EEFA",
+      "variant": "dark"
+    },
+    {
+      "evidence": "framework/resources.txt:90148; existing-resource-reference; style/Theme.Light at resources.txt:8711; style/Theme.DeviceDefault.Light.Dialog at resources.txt:11542; style/TextAppearance.DeviceDefault.Light.Dialog at resources.txt:16096",
+      "name": "tw_dialog_body_text_color_material_light",
+      "originalAlpha": 255,
+      "originalValues": [
+        {
+          "kind": "literal",
+          "qualifier": "",
+          "value": "#ff252528"
+        }
+      ],
+      "qualifiers": [
+        ""
+      ],
+      "replacementKind": "literal",
+      "resourceId": "0x010605f7",
+      "role": "textPrimary",
+      "sourceValue": "#FF171B24",
+      "tokenOrigin": "global-token",
+      "type": "color",
+      "value": "#FF171B24",
+      "variant": "light"
+    },
+    {
+      "evidence": "framework/resources.txt:90152; existing-resource-reference; style/Widget.DeviceDefault.Button.Dialog at resources.txt:18120",
+      "name": "tw_dialog_button_text_color_material_dark",
+      "originalAlpha": 255,
+      "originalValues": [
+        {
+          "kind": "literal",
+          "qualifier": "",
+          "value": "#fffafaff"
+        }
+      ],
+      "qualifiers": [
+        ""
+      ],
+      "replacementKind": "literal",
+      "resourceId": "0x010605f9",
+      "role": "textPrimary",
+      "sourceValue": "#FFF2EEFA",
+      "tokenOrigin": "global-token",
+      "type": "color",
+      "value": "#FFF2EEFA",
+      "variant": "dark"
+    },
+    {
+      "evidence": "framework/resources.txt:90154; existing-resource-reference; style/Widget.DeviceDefault.Light.Button.Dialog at resources.txt:18174",
+      "name": "tw_dialog_button_text_color_material_light",
+      "originalAlpha": 255,
+      "originalValues": [
+        {
+          "kind": "literal",
+          "qualifier": "",
+          "value": "#ff010102"
+        }
+      ],
+      "qualifiers": [
+        ""
+      ],
+      "replacementKind": "literal",
+      "resourceId": "0x010605fa",
+      "role": "textPrimary",
+      "sourceValue": "#FF171B24",
+      "tokenOrigin": "global-token",
+      "type": "color",
+      "value": "#FF171B24",
+      "variant": "light"
+    },
+    {
+      "evidence": "framework/resources.txt:90174; existing-resource-reference; style/TextAppearance.DeviceDefault.Dialog.List.Secondary at resources.txt:16086",
+      "name": "tw_dialog_sub_text_color_material_dark",
+      "originalAlpha": 255,
+      "originalValues": [
+        {
+          "kind": "literal",
+          "qualifier": "",
+          "value": "#ff99999e"
+        }
+      ],
+      "qualifiers": [
+        ""
+      ],
+      "replacementKind": "literal",
+      "resourceId": "0x01060604",
+      "role": "textSecondary",
+      "sourceValue": "#FFB6B0C9",
+      "tokenOrigin": "global-token",
+      "type": "color",
+      "value": "#FFB6B0C9",
+      "variant": "dark"
+    },
+    {
+      "evidence": "framework/resources.txt:90176; existing-resource-reference; style/TextAppearance.DeviceDefault.Light.Dialog.List.Secondary at resources.txt:16108",
+      "name": "tw_dialog_sub_text_color_material_light",
+      "originalAlpha": 255,
+      "originalValues": [
+        {
+          "kind": "literal",
+          "qualifier": "",
+          "value": "#ff99999e"
+        }
+      ],
+      "qualifiers": [
+        ""
+      ],
+      "replacementKind": "literal",
+      "resourceId": "0x01060605",
+      "role": "textSecondary",
+      "sourceValue": "#FF505967",
+      "tokenOrigin": "global-token",
+      "type": "color",
+      "value": "#FF505967",
+      "variant": "light"
+    },
+    {
+      "evidence": "framework/resources.txt:90178; existing-resource-reference; style/Theme.DeviceDefault at resources.txt:10774; style/Widget.DeviceDefault.Button.Autofill.Save at resources.txt:18091; color/logo_samsung_pass_tint_color at resources.txt:88409",
+      "name": "tw_dialog_title_text_color_material_dark",
+      "originalAlpha": 255,
+      "originalValues": [
+        {
+          "kind": "literal",
+          "qualifier": "",
+          "value": "#fffafaff"
+        }
+      ],
+      "qualifiers": [
+        ""
+      ],
+      "replacementKind": "literal",
+      "resourceId": "0x01060606",
+      "role": "textPrimary",
+      "sourceValue": "#FFF2EEFA",
+      "tokenOrigin": "global-token",
+      "type": "color",
+      "value": "#FFF2EEFA",
+      "variant": "dark"
+    },
+    {
+      "evidence": "framework/resources.txt:90180; existing-resource-reference; style/Theme.DeviceDefault.Light at resources.txt:11140; style/TextAppearance.DeviceDefault.Light.DialogWindowTitle at resources.txt:16115; style/Widget.DeviceDefault.Light.Button.Autofill.Save at resources.txt:18167",
+      "name": "tw_dialog_title_text_color_material_light",
+      "originalAlpha": 255,
+      "originalValues": [
+        {
+          "kind": "literal",
+          "qualifier": "",
+          "value": "#ff010102"
+        }
+      ],
+      "qualifiers": [
+        ""
+      ],
+      "replacementKind": "literal",
+      "resourceId": "0x01060607",
+      "role": "textPrimary",
+      "sourceValue": "#FF171B24",
+      "tokenOrigin": "global-token",
+      "type": "color",
+      "value": "#FF171B24",
+      "variant": "light"
+    },
+    {
+      "evidence": "framework/resources.txt:90182; existing-resource-reference; style/Theme.DeviceDefault at resources.txt:10773; style/Theme.DeviceDefault.Dialog at resources.txt:11227; style/Theme.DeviceDefault.Dialog.Alert at resources.txt:14653",
+      "name": "tw_dialog_window_background_color_material_dark",
+      "originalAlpha": 255,
+      "originalValues": [
+        {
+          "kind": "literal",
+          "qualifier": "",
+          "value": "#ff252528"
+        }
+      ],
+      "qualifiers": [
+        ""
+      ],
+      "replacementKind": "literal",
+      "resourceId": "0x01060608",
+      "role": "surface",
+      "sourceValue": "#FF0D0E15",
+      "tokenOrigin": "global-token",
+      "type": "color",
+      "value": "#FF0D0E15",
+      "variant": "dark"
+    },
+    {
+      "evidence": "framework/resources.txt:90184; existing-resource-reference; style/Theme.DeviceDefault.Light at resources.txt:11139; style/Theme.DeviceDefault.Light.Dialog at resources.txt:11473; style/Theme.DeviceDefault.Light.Dialog.Alert at resources.txt:14729",
+      "name": "tw_dialog_window_background_color_material_light",
+      "originalAlpha": 255,
+      "originalValues": [
+        {
+          "kind": "literal",
+          "qualifier": "",
+          "value": "#fffcfcff"
+        }
+      ],
+      "qualifiers": [
+        ""
+      ],
+      "replacementKind": "literal",
+      "resourceId": "0x01060609",
+      "role": "surface",
+      "sourceValue": "#FFFFFFFF",
+      "tokenOrigin": "global-token",
+      "type": "color",
+      "value": "#FFFFFFFF",
+      "variant": "light"
+    },
+    {
+      "evidence": "framework/resources.txt:90231; existing-XML-reference; res/color/tw_primary_text_material_dark.xml at resources.txt:5; res/color/tw_primary_text_material_dark.xml at resources.txt:8",
+      "name": "tw_primary_text_color_dark",
+      "originalAlpha": 255,
+      "originalValues": [
+        {
+          "kind": "literal",
+          "qualifier": "",
+          "value": "#fffafaff"
+        }
+      ],
+      "qualifiers": [
+        ""
+      ],
+      "replacementKind": "literal",
+      "resourceId": "0x01060620",
+      "role": "textPrimary",
+      "sourceValue": "#FFF2EEFA",
+      "tokenOrigin": "global-token",
+      "type": "color",
+      "value": "#FFF2EEFA",
+      "variant": "dark"
+    },
+    {
+      "evidence": "framework/resources.txt:90233; existing-XML-reference; res/color/tw_primary_text_material_light.xml at resources.txt:5; res/color/tw_primary_text_material_light.xml at resources.txt:8",
+      "name": "tw_primary_text_color_light",
+      "originalAlpha": 255,
+      "originalValues": [
+        {
+          "kind": "literal",
+          "qualifier": "",
+          "value": "#ff010102"
+        }
+      ],
+      "qualifiers": [
+        ""
+      ],
+      "replacementKind": "literal",
+      "resourceId": "0x01060621",
+      "role": "textPrimary",
+      "sourceValue": "#FF171B24",
+      "tokenOrigin": "global-token",
+      "type": "color",
+      "value": "#FF171B24",
+      "variant": "light"
+    },
+    {
+      "evidence": "framework/resources.txt:90239; existing-resource-reference; style/Theme at resources.txt:8541; style/Theme.DeviceDefault at resources.txt:10769",
+      "name": "tw_progress_color_control_activated_dark",
+      "originalAlpha": 255,
+      "originalValues": [
+        {
+          "kind": "literal",
+          "qualifier": "",
+          "value": "#ff387aff"
+        }
+      ],
+      "qualifiers": [
+        ""
+      ],
+      "replacementKind": "literal",
+      "resourceId": "0x01060624",
+      "role": "accent",
+      "sourceValue": "#FF22D3EE",
+      "tokenOrigin": "global-token",
+      "type": "color",
+      "value": "#FF22D3EE",
+      "variant": "dark"
+    },
+    {
+      "evidence": "framework/resources.txt:90241; existing-resource-reference; style/Theme.Light at resources.txt:8710; style/Theme.DeviceDefault.Light at resources.txt:11135",
+      "name": "tw_progress_color_control_activated_light",
+      "originalAlpha": 255,
+      "originalValues": [
+        {
+          "kind": "literal",
+          "qualifier": "",
+          "value": "#ff387aff"
+        }
+      ],
+      "qualifiers": [
+        ""
+      ],
+      "replacementKind": "literal",
+      "resourceId": "0x01060625",
+      "role": "accent",
+      "sourceValue": "#FF0E7490",
+      "tokenOrigin": "global-token",
+      "type": "color",
+      "value": "#FF0E7490",
+      "variant": "light"
+    },
+    {
+      "evidence": "framework/resources.txt:90253; existing-XML-reference; res/drawable/tw_screen_background_dark.xml at resources.txt:4",
+      "name": "tw_screen_background_color_dark",
+      "originalAlpha": 255,
+      "originalValues": [
+        {
+          "kind": "literal",
+          "qualifier": "",
+          "value": "#ff17171a"
+        }
+      ],
+      "qualifiers": [
+        ""
+      ],
+      "replacementKind": "literal",
+      "resourceId": "0x0106062b",
+      "role": "background",
+      "sourceValue": "#FF030712",
+      "tokenOrigin": "global-token",
+      "type": "color",
+      "value": "#FF030712",
+      "variant": "dark"
+    },
+    {
+      "evidence": "framework/resources.txt:90255; existing-XML-reference; res/drawable/tw_screen_background_light.xml at resources.txt:4",
+      "name": "tw_screen_background_color_light",
+      "originalAlpha": 255,
+      "originalValues": [
+        {
+          "kind": "literal",
+          "qualifier": "",
+          "value": "#fffcfcff"
+        }
+      ],
+      "qualifiers": [
+        ""
+      ],
+      "replacementKind": "literal",
+      "resourceId": "0x0106062c",
+      "role": "background",
+      "sourceValue": "#FFF8FAFC",
+      "tokenOrigin": "global-token",
+      "type": "color",
+      "value": "#FFF8FAFC",
+      "variant": "light"
+    },
+    {
+      "evidence": "framework/resources.txt:90261; existing-resource-reference; style/Theme.Light at resources.txt:8713",
+      "name": "tw_searchview_hint_text_material",
+      "originalAlpha": 255,
+      "originalValues": [
+        {
+          "kind": "literal",
+          "qualifier": "",
+          "value": "#ff848487"
+        }
+      ],
+      "qualifiers": [
+        ""
+      ],
+      "replacementKind": "literal",
+      "resourceId": "0x0106062f",
+      "role": "textSecondary",
+      "sourceValue": "#FF505967",
+      "tokenOrigin": "global-token",
+      "type": "color",
+      "value": "#FF505967",
+      "variant": "light"
+    },
+    {
+      "evidence": "framework/resources.txt:90263; existing-resource-reference; style/Theme at resources.txt:8544",
+      "name": "tw_searchview_hint_text_material_dark",
+      "originalAlpha": 255,
+      "originalValues": [
+        {
+          "kind": "literal",
+          "qualifier": "",
+          "value": "#ffa3a3a7"
+        }
+      ],
+      "qualifiers": [
+        ""
+      ],
+      "replacementKind": "literal",
+      "resourceId": "0x01060630",
+      "role": "textSecondary",
+      "sourceValue": "#FFB6B0C9",
+      "tokenOrigin": "global-token",
+      "type": "color",
+      "value": "#FFB6B0C9",
+      "variant": "dark"
+    },
+    {
+      "evidence": "framework/resources.txt:90267; existing-resource-reference; style/TextAppearance.DeviceDefault.Light.SearchResult.Title at resources.txt:16120",
+      "name": "tw_searchview_result_title_text_color_material",
+      "originalAlpha": 255,
+      "originalValues": [
+        {
+          "kind": "literal",
+          "qualifier": "",
+          "value": "#ff252528"
+        },
+        {
+          "kind": "literal",
+          "qualifier": "night",
+          "value": "#ffeaeaeb"
+        }
+      ],
+      "qualifiers": [
+        ""
+      ],
+      "replacementKind": "literal",
+      "resourceId": "0x01060632",
+      "role": "textPrimary",
+      "sourceValue": "#FF171B24",
+      "tokenOrigin": "global-token",
+      "type": "color",
+      "value": "#FF171B24",
+      "variant": "light"
+    },
+    {
+      "evidence": "framework/resources.txt:90267; existing-resource-reference; style/TextAppearance.DeviceDefault.Light.SearchResult.Title at resources.txt:16120",
+      "name": "tw_searchview_result_title_text_color_material",
+      "originalAlpha": 255,
+      "originalValues": [
+        {
+          "kind": "literal",
+          "qualifier": "",
+          "value": "#ff252528"
+        },
+        {
+          "kind": "literal",
+          "qualifier": "night",
+          "value": "#ffeaeaeb"
+        }
+      ],
+      "qualifiers": [
+        "night"
+      ],
+      "replacementKind": "literal",
+      "resourceId": "0x01060632",
+      "role": "textPrimary",
+      "sourceValue": "#FFF2EEFA",
+      "tokenOrigin": "global-token",
+      "type": "color",
+      "value": "#FFF2EEFA",
+      "variant": "dark"
+    },
+    {
+      "evidence": "framework/resources.txt:90274; existing-resource-reference; style/Theme.Light at resources.txt:8715",
+      "name": "tw_searchview_text_material",
+      "originalAlpha": 255,
+      "originalValues": [
+        {
+          "kind": "literal",
+          "qualifier": "",
+          "value": "#ff010102"
+        }
+      ],
+      "qualifiers": [
+        ""
+      ],
+      "replacementKind": "literal",
+      "resourceId": "0x01060635",
+      "role": "textPrimary",
+      "sourceValue": "#FF171B24",
+      "tokenOrigin": "global-token",
+      "type": "color",
+      "value": "#FF171B24",
+      "variant": "light"
+    },
+    {
+      "evidence": "framework/resources.txt:90276; existing-resource-reference; style/Theme at resources.txt:8546",
+      "name": "tw_searchview_text_material_dark",
+      "originalAlpha": 255,
+      "originalValues": [
+        {
+          "kind": "literal",
+          "qualifier": "",
+          "value": "#fffafaff"
+        }
+      ],
+      "qualifiers": [
+        ""
+      ],
+      "replacementKind": "literal",
+      "resourceId": "0x01060636",
+      "role": "textPrimary",
+      "sourceValue": "#FFF2EEFA",
+      "tokenOrigin": "global-token",
+      "type": "color",
+      "value": "#FFF2EEFA",
+      "variant": "dark"
+    },
+    {
+      "evidence": "framework/resources.txt:90282; existing-XML-reference; res/color/tw_secondary_text_material_dark.xml at resources.txt:5; res/color/tw_secondary_text_material_dark.xml at resources.txt:8",
+      "name": "tw_secondary_text_color_dark",
+      "originalAlpha": 255,
+      "originalValues": [
+        {
+          "kind": "literal",
+          "qualifier": "",
+          "value": "#ff999999"
+        }
+      ],
+      "qualifiers": [
+        ""
+      ],
+      "replacementKind": "literal",
+      "resourceId": "0x01060639",
+      "role": "textSecondary",
+      "sourceValue": "#FFB6B0C9",
+      "tokenOrigin": "global-token",
+      "type": "color",
+      "value": "#FFB6B0C9",
+      "variant": "dark"
+    },
+    {
+      "evidence": "framework/resources.txt:90284; existing-XML-reference; res/color/tw_secondary_text_material_light.xml at resources.txt:5; res/color/tw_secondary_text_material_light.xml at resources.txt:8",
+      "name": "tw_secondary_text_color_light",
+      "originalAlpha": 255,
+      "originalValues": [
+        {
+          "kind": "literal",
+          "qualifier": "",
+          "value": "#ff8c8c8c"
+        }
+      ],
+      "qualifiers": [
+        ""
+      ],
+      "replacementKind": "literal",
+      "resourceId": "0x0106063a",
+      "role": "textSecondary",
+      "sourceValue": "#FF505967",
+      "tokenOrigin": "global-token",
+      "type": "color",
+      "value": "#FF505967",
+      "variant": "light"
+    },
+    {
+      "evidence": "framework/resources.txt:90292; existing-resource-reference; style/Widget.DeviceDefault.Light.TextView.ListSeparator at resources.txt:18299; style/Widget.DeviceDefault.TextView.ListSeparator.Dialog at resources.txt:18496",
+      "name": "tw_section_divider_text_color_mtrl",
+      "originalAlpha": 255,
+      "originalValues": [
+        {
+          "kind": "literal",
+          "qualifier": "",
+          "value": "#ff838383"
+        }
+      ],
+      "qualifiers": [
+        ""
+      ],
+      "replacementKind": "literal",
+      "resourceId": "0x0106063e",
+      "role": "textSecondary",
+      "sourceValue": "#FF505967",
+      "tokenOrigin": "global-token",
+      "type": "color",
+      "value": "#FF505967",
+      "variant": "light"
+    },
+    {
+      "evidence": "framework/resources.txt:90294; existing-resource-reference; style/Widget.DeviceDefault.TextView.ListSeparator at resources.txt:18476",
+      "name": "tw_section_divider_text_color_mtrl_dark",
+      "originalAlpha": 255,
+      "originalValues": [
+        {
+          "kind": "literal",
+          "qualifier": "",
+          "value": "#ff999999"
+        }
+      ],
+      "qualifiers": [
+        ""
+      ],
+      "replacementKind": "literal",
+      "resourceId": "0x0106063f",
+      "role": "textSecondary",
+      "sourceValue": "#FFB6B0C9",
+      "tokenOrigin": "global-token",
+      "type": "color",
+      "value": "#FFB6B0C9",
+      "variant": "dark"
+    },
+    {
+      "evidence": "framework/resources.txt:90296; existing-resource-reference; style/Theme at resources.txt:8547; style/Theme.DeviceDefault at resources.txt:10771",
+      "name": "tw_seekbar_color_control_activated_dark",
+      "originalAlpha": 255,
+      "originalValues": [
+        {
+          "kind": "literal",
+          "qualifier": "",
+          "value": "#ff387aff"
+        }
+      ],
+      "qualifiers": [
+        ""
+      ],
+      "replacementKind": "literal",
+      "resourceId": "0x01060640",
+      "role": "accent",
+      "sourceValue": "#FF22D3EE",
+      "tokenOrigin": "global-token",
+      "type": "color",
+      "value": "#FF22D3EE",
+      "variant": "dark"
+    },
+    {
+      "evidence": "framework/resources.txt:90298; existing-resource-reference; style/Theme.Light at resources.txt:8716; style/Theme.DeviceDefault.Light at resources.txt:11137",
+      "name": "tw_seekbar_color_control_activated_light",
+      "originalAlpha": 255,
+      "originalValues": [
+        {
+          "kind": "literal",
+          "qualifier": "",
+          "value": "#ff387aff"
+        }
+      ],
+      "qualifiers": [
+        ""
+      ],
+      "replacementKind": "literal",
+      "resourceId": "0x01060641",
+      "role": "accent",
+      "sourceValue": "#FF0E7490",
+      "tokenOrigin": "global-token",
+      "type": "color",
+      "value": "#FF0E7490",
+      "variant": "light"
+    },
+    {
+      "evidence": "framework/resources.txt:90335; existing-XML-reference; res/color/sem_text_color_menu_mtrl.xml at resources.txt:5; res/color/sem_text_color_menu_mtrl.xml at resources.txt:8",
+      "name": "tw_text_color_menu_material_toolbar",
+      "originalAlpha": 255,
+      "originalValues": [
+        {
+          "kind": "literal",
+          "qualifier": "",
+          "value": "#ff010102"
+        }
+      ],
+      "qualifiers": [
+        ""
+      ],
+      "replacementKind": "literal",
+      "resourceId": "0x01060652",
+      "role": "textPrimary",
+      "sourceValue": "#FF171B24",
+      "tokenOrigin": "global-token",
+      "type": "color",
+      "value": "#FF171B24",
+      "variant": "light"
+    },
+    {
+      "evidence": "framework/resources.txt:90337; existing-XML-reference; res/color/sem_text_color_menu_mtrl_dark.xml at resources.txt:5; res/color/sem_text_color_menu_mtrl_dark.xml at resources.txt:8",
+      "name": "tw_text_color_menu_material_toolbar_dark",
+      "originalAlpha": 255,
+      "originalValues": [
+        {
+          "kind": "literal",
+          "qualifier": "",
+          "value": "#fffafaff"
+        }
+      ],
+      "qualifiers": [
+        ""
+      ],
+      "replacementKind": "literal",
+      "resourceId": "0x01060653",
+      "role": "textPrimary",
+      "sourceValue": "#FFF2EEFA",
+      "tokenOrigin": "global-token",
+      "type": "color",
+      "value": "#FFF2EEFA",
+      "variant": "dark"
+    },
+    {
+      "evidence": "framework/resources.txt:90339; existing-resource-reference; style/TextAppearance.DeviceDefault.Widget.ActionMode.Title.Inverse at resources.txt:12748; style/TextAppearance.DeviceDefault.Toolbar.Title.Colored.Inverse at resources.txt:16194",
+      "name": "tw_text_color_title_material_toolbar",
+      "originalAlpha": 255,
+      "originalValues": [
+        {
+          "kind": "literal",
+          "qualifier": "",
+          "value": "#ff010102"
+        }
+      ],
+      "qualifiers": [
+        ""
+      ],
+      "replacementKind": "literal",
+      "resourceId": "0x01060654",
+      "role": "textPrimary",
+      "sourceValue": "#FF171B24",
+      "tokenOrigin": "global-token",
+      "type": "color",
+      "value": "#FF171B24",
+      "variant": "light"
+    },
+    {
+      "evidence": "framework/resources.txt:90341; existing-resource-reference; style/TextAppearance.DeviceDefault.Toolbar.Title.Colored at resources.txt:16191",
+      "name": "tw_text_color_title_material_toolbar_dark",
+      "originalAlpha": 255,
+      "originalValues": [
+        {
+          "kind": "literal",
+          "qualifier": "",
+          "value": "#fffafaff"
+        }
+      ],
+      "qualifiers": [
+        ""
+      ],
+      "replacementKind": "literal",
+      "resourceId": "0x01060655",
+      "role": "textPrimary",
+      "sourceValue": "#FFF2EEFA",
+      "tokenOrigin": "global-token",
+      "type": "color",
+      "value": "#FFF2EEFA",
+      "variant": "dark"
+    },
+    {
+      "evidence": "framework/resources.txt:90343; existing-resource-reference; style/Theme at resources.txt:8549; style/Theme.DeviceDefault at resources.txt:10775",
+      "name": "tw_thumb_color_control_activated_dark",
+      "originalAlpha": 255,
+      "originalValues": [
+        {
+          "kind": "literal",
+          "qualifier": "",
+          "value": "#ff387aff"
+        }
+      ],
+      "qualifiers": [
+        ""
+      ],
+      "replacementKind": "literal",
+      "resourceId": "0x01060656",
+      "role": "accent",
+      "sourceValue": "#FF22D3EE",
+      "tokenOrigin": "global-token",
+      "type": "color",
+      "value": "#FF22D3EE",
+      "variant": "dark"
+    },
+    {
+      "evidence": "framework/resources.txt:90345; existing-resource-reference; style/Theme.Light at resources.txt:8718; style/Theme.DeviceDefault.Light at resources.txt:11141",
+      "name": "tw_thumb_color_control_activated_light",
+      "originalAlpha": 255,
+      "originalValues": [
+        {
+          "kind": "literal",
+          "qualifier": "",
+          "value": "#ff387aff"
+        }
+      ],
+      "qualifiers": [
+        ""
+      ],
+      "replacementKind": "literal",
+      "resourceId": "0x01060657",
+      "role": "accent",
+      "sourceValue": "#FF0E7490",
+      "tokenOrigin": "global-token",
+      "type": "color",
+      "value": "#FF0E7490",
+      "variant": "light"
+    },
+    {
+      "evidence": "framework/resources.txt:85324; existing-resource-reference; style/Theme.DeviceDefault at resources.txt:10750; style/Theme.DeviceDefault.NoActionBar at resources.txt:10823; style/Theme.DeviceDefault.Light at resources.txt:11090",
+      "name": "sem_button_corner_radius",
+      "originalValues": [
+        {
+          "kind": "literal",
+          "qualifier": "",
+          "value": "18.000000dp"
+        }
+      ],
+      "qualifiers": [
+        ""
+      ],
+      "replacementKind": "literal",
+      "resourceId": "0x0105043d",
+      "role": "cornerRadius",
+      "sourceValue": "16dp",
+      "tokenOrigin": "global-token",
+      "type": "dimen",
+      "value": "16dp",
+      "variant": "light"
+    },
+    {
+      "evidence": "framework/resources.txt:85324; existing-resource-reference; style/Theme.DeviceDefault at resources.txt:10750; style/Theme.DeviceDefault.NoActionBar at resources.txt:10823; style/Theme.DeviceDefault.Light at resources.txt:11090; Author-added night configuration for this existing resource; runtime selection unverified.",
+      "name": "sem_button_corner_radius",
+      "originalValues": [
+        {
+          "kind": "literal",
+          "qualifier": "",
+          "value": "18.000000dp"
+        }
+      ],
+      "qualifiers": [
+        "night"
+      ],
+      "replacementKind": "literal",
+      "resourceId": "0x0105043d",
+      "role": "cornerRadius",
+      "sourceValue": "20dp",
+      "tokenOrigin": "global-token",
+      "type": "dimen",
+      "value": "20dp",
+      "variant": "dark"
+    },
+    {
+      "evidence": "framework/resources.txt:85493; existing-XML-reference; res/drawable/tw_dialog_background_material.xml at resources.txt:5; res/drawable/tw_dialog_background_material_cover_screen.xml at resources.txt:5",
+      "name": "sem_dialog_background_corner_radius",
+      "originalValues": [
+        {
+          "kind": "literal",
+          "qualifier": "",
+          "value": "26.000000dp"
+        },
+        {
+          "kind": "literal",
+          "qualifier": "w352dp-h307dp-port",
+          "value": "18.000000dp"
+        },
+        {
+          "kind": "literal",
+          "qualifier": "w352dp-h308dp-port",
+          "value": "26.000000dp"
+        },
+        {
+          "kind": "literal",
+          "qualifier": "w353dp-h307dp-port",
+          "value": "26.000000dp"
+        }
+      ],
+      "qualifiers": [
+        ""
+      ],
+      "replacementKind": "literal",
+      "resourceId": "0x01050484",
+      "role": "cornerRadius",
+      "sourceValue": "16dp",
+      "tokenOrigin": "global-token",
+      "type": "dimen",
+      "value": "16dp",
+      "variant": "light"
+    },
+    {
+      "evidence": "framework/resources.txt:85493; existing-XML-reference; res/drawable/tw_dialog_background_material.xml at resources.txt:5; res/drawable/tw_dialog_background_material_cover_screen.xml at resources.txt:5; Author-added night configuration for this existing resource; runtime selection unverified.",
+      "name": "sem_dialog_background_corner_radius",
+      "originalValues": [
+        {
+          "kind": "literal",
+          "qualifier": "",
+          "value": "26.000000dp"
+        },
+        {
+          "kind": "literal",
+          "qualifier": "w352dp-h307dp-port",
+          "value": "18.000000dp"
+        },
+        {
+          "kind": "literal",
+          "qualifier": "w352dp-h308dp-port",
+          "value": "26.000000dp"
+        },
+        {
+          "kind": "literal",
+          "qualifier": "w353dp-h307dp-port",
+          "value": "26.000000dp"
+        }
+      ],
+      "qualifiers": [
+        "night"
+      ],
+      "replacementKind": "literal",
+      "resourceId": "0x01050484",
+      "role": "cornerRadius",
+      "sourceValue": "20dp",
+      "tokenOrigin": "global-token",
+      "type": "dimen",
+      "value": "20dp",
+      "variant": "dark"
+    }
+  ],
+  "resourceCount": 98,
+  "sourceSha256": "15eee0087cca760ff3baed31cbbce0db1e7b093c21da0b115f45ccd9d66fa347",
+  "status": "signed",
+  "targetName": null,
+  "targetPackage": "android"
+}

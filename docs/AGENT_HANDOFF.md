@@ -5,7 +5,7 @@
 - Repository: `Bingblop/oneui-theme-engine`; branch: `design/oneui9-studio`.
 - Draft PR: https://github.com/Bingblop/oneui-theme-engine/pull/2
 - Published design: `9d27c35`; measured overlays/compiler: `e19b1d8`; native scaffold: `b86d786`; secure codec/durable saves: `32a85e2`.
-- The native APK and portable checks are published in the next checkpoint after `32a85e2`; inspect `git log` for its exact commit.
+- Published native APK/checks: `dc649a7`; detailed firmware resource research: `048b689`. Source-to-overlay integration and asset sync are in the following checkpoint; inspect `git log` for its exact commit.
 - The user authorizes ongoing implementation, commits and pushes. Publish small checkpoints and update this document before stopping. The user specifically wants another agent to continue if this session runs low on resources.
 - GitHub pushes work. Commit with `git -c user.name=Bingblop -c user.email=61481058+Bingblop@users.noreply.github.com commit ...`; GitHub blocks the earlier private email. Never print credentials or commit signing keys.
 
@@ -24,6 +24,7 @@ Read-only collector inputs: https://drive.google.com/drive/folders/1jjMuBDvXSsO-
 - Generated projects/reports: `generated/oneui9/S948U1UEU4BZID/`.
 - Download: `artifacts/oneui9/S948U1UEU4BZID/oneui9-first-theme-pack.zip`; nine final developer-signed overlays, source/projects/reports/tools. SHA-256: `577e3aabd2ed18ac71eb9b5fe75a6490b506858b6f3b73688fbafe4e2e0df12f`.
 - **33 desktop tests passed** before the native APK checkpoint. All nine actual overlay APKs passed compilation, value readback, signing and alignment. ZIP integrity and exactly nine final signed APKs were checked.
+- Preserved research: `artifacts/oneui9/S948U1UEU4BZID/oneui9-resource-research.zip`, 1,081 files / 28,691,341 bytes, SHA-256 `4577b046e3251c2903064ee24a1ec2fe54b49e0bec64d6016975b634c91e461a`. Resource/manifest/configuration dumps, selected XML, indexes, static DEX references and exploratory candidate scripts are included with a per-file inventory. Candidate maps are not production bindings; exploratory scripts retain some original workspace paths. See `docs/design/oneui9-resource-research.md`.
 
 Coverage: 174 colors plus seven optional dialog/button dimensions, 250 configured bindings. Neon explicitly requests the geometry; the other sources omit it. Shared framework primary/on-primary and SystemUI active/dim tile bindings are withheld to preserve contrast across coupled consumers. Do not reintroduce them simply to increase counts. Full Hex parity is not achieved.
 
@@ -54,9 +55,21 @@ Download: `artifacts/oneui-studio/0.3.0/oneui-studio-0.3.0.zip`. It contains the
 
 The app README includes a concrete manual smoke test and portable offline build command. The initial native candidates with compressed resource tables were superseded; only the final APK above is publishable.
 
-## Work in progress after this checkpoint
+## Completed source-to-overlay integration and asset sync
 
-A subsequent checkpoint is connecting a native exported `.ouitheme` directly to the desktop compiler, preserving directory-source compatibility, rejecting hostile archives before output, and recording the archive digest. Another independent task makes the three bundled sources/resource pack reproducibly checkable so native assets cannot silently drift from measured sources. Inspect current files and later handoff updates before repeating either task.
+`tools/build_oneui9_theme.py --source /path/to/export.ouitheme` now accepts native archives directly. Directory input remains compatible. Adjacent `tools/oneui9_source_archive.py` snapshots bounded bytes, validates exact ZIP records/CRC/paths/modes and native constraints, uses existing source schemas, enforces declared-file inventory and removes its private extraction after success/failure. `sourceArchiveSha256` supplements the existing file-inventory digest. No outputs are created before archive/schema/firmware/resource preflight. The shared pure-memory `validate_source_payloads` checks captured data without filesystem access. Numeric bounds, precise decimals, schema-snapshot mismatch and external-CWD imports were reviewed and corrected.
+
+`tools/sync_oneui9_studio_assets.py --check` is read-only and reproduces all four published asset hashes exactly. Default DEFLATE6, fixed metadata and raw source bytes reproduce0.3.0; explicit9 is a separate byte-format change. `--write` validates all three inputs and pack before staging/replacing only changed known outputs. Reads are bounded, input-pack collisions/symlinks/escaping paths are rejected, unrelated files remain, and each replacement is atomic; all four files are not one filesystem transaction. **Published themes/app assets were not rewritten.** Guide: `docs/design/studio-asset-sync.md`.
+
+The exact production native codec ran with host stubs and exported edited Neon Violet: both variants, SystemUI/Settings overrides,20dp dark/16dp light corners. Source archive SHA-256 `3613d3665a7602419a890d47c6e3c9cede79b665809743f32c1e93a51ccf0419`. All three real target overlays then compiled and passed value readback, signing and alignment against the supplied firmware APKs. This is a host native-codec integration, **not an Android UI execution**. Original source ID/version and baseline Neon overlay identities are retained, so this is a replacement example.
+
+- Integration source/projects/reports: `generated/oneui9/native-export-0.3.0/`.
+- Download: `artifacts/oneui9/native-export-0.3.0/oneui9-native-export-example.zip`; edited native export, exactly three final signed overlays, evidence and latest tools. Adjacent SHA-256 file.
+- Workflow/reproduction commands: `docs/design/native-source-to-overlays.md`.
+- Latest host suite: **80 tests passed, no skips**, including33 original compiler/collector tests,30 archive tests and17 asset-sync tests. The optional external-native-export case was enabled.
+- The integration download was extracted into a fresh external folder and its included suite also passed all80 tests, checking that the packaged tools, source assets and test dependencies are complete. The download does not bundle SDK/JDK, JSON-java or a test font; those are required only for the opt-in native checks.
+- Independent review: no remaining Critical/Important findings;65 native schema fixtures matched expected acceptance, and the native fixture corpus was cross-checked. Review fixed malformed-decimal error handling, native/desktop constraints, sibling imports, pack input overwrite and target preflight before publication.
+- Native0.3.0 artifact and first overlay-pack ZIP remain immutable. Latest compiler/helper/sync tools are in the new integration download and current repository; older download snapshots do not include direct archive support.
 
 ## Local workspace aids
 
@@ -66,6 +79,7 @@ These paths are session-specific, not dependencies hardcoded into tools:
 - Detailed resource analysis: `/workspace/oneui9-analysis/{framework,systemui,settings}`.
 - Overlay builds: `/workspace/oneui9-final/{amoled-black,neon-violet,cyberpunk-gold}`.
 - Final native build: `/workspace/oneui9-studio-final`.
+- Final native-export integration: `/workspace/oneui9-native-interop/overlay-build-final`; source export and example Java are in its parent folder.
 - Toolchain/provenance: `/workspace/toolchains/android-theme/provenance.json`; official SDK under `sdk/`, R8/D8 under `r8/9.5.23/`, JDK under `jdk-debian/usr/lib/jvm/java-21-openjdk-amd64/`.
 - Development key: `/workspace/oneui9-signing/studio-dev.jks`, alias`oneui9dev`, development password`android`; uncommitted. Generate a new key on another machine; a different key changes APK signatures and cannot update this published editor in place.
 
@@ -74,7 +88,15 @@ Overlay build provenance remains beside the measured resource pack. New native p
 ## Next priorities and boundaries
 
 1. Run the app's manual smoke test on the actual Android17 phone; capture crashes, lifecycle/import/export behavior, screenshots and the exported device report. Fix observed runtime bugs before claiming support.
-2. Complete exported-source compiler integration and bundled-asset drift checks if not already published by a later checkpoint. Run focused tests and a real three-target build; update this handoff and push.
+2. Run the current host suite with the committed native export and check asset drift:
+
+   ```bash
+   ONEUI9_NATIVE_EXPORT=generated/oneui9/native-export-0.3.0/neon-violet-edited-native.ouitheme \
+     python3 -m unittest discover -s tests -v
+   python3 tools/sync_oneui9_studio_assets.py --check
+   ```
+
+   Exported-source compilation and sync are already complete; use their guides and reports instead of rebuilding those features. New app source changes require a new APK version/artifact and focused host/build checks.
 3. Add native font/icon/component-style editors and source metadata/library management. Preserve unknown/unmapped declarations. Validate assets and license inputs before adding them; no silent fallback into compiled values.
 4. Obtain current Phone, Keyboard, Contacts, Messages, My Files and Launcher APKs using the read-only command in `docs/design/oneui9-first-theme-pack.md`. Their resource bindings cannot be invented from old Hex names.
 5. Author fresh font/icon/drawable/Lottie and state-aware geometry mappings, then verify consumers, contrast, light/dark states and rollback on the phone.

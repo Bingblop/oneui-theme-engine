@@ -4,6 +4,8 @@ A theming framework, diagnostic suite, and compatibility research repository for
 
 **Current One UI 9 work:** a [native One UI Studio 0.3.0 prototype](apps/oneui-studio/README.md), [application design](docs/design/README.md) and a [fresh measured theme pack](docs/design/oneui9-first-theme-pack.md) for **SM-S948U1, Android 17 / API 37, build S948U1UEU4BZID**. Download the [editor APK package](artifacts/oneui-studio/0.3.0/oneui-studio-0.3.0.zip) and [nine-overlay theme pack](artifacts/oneui9/S948U1UEU4BZID/oneui9-first-theme-pack.zip). Source, reproducible checks and build evidence are included. Phone execution, device application and full Hex customization parity remain unverified; legacy features below are not evidence of support on this firmware. See the [agent handoff](docs/AGENT_HANDOFF.md) to continue development.
 
+Exported `.ouitheme` sources now [compile directly into fresh overlays](docs/design/native-source-to-overlays.md). A [tested native-export example](artifacts/oneui9/native-export-0.3.0/oneui9-native-export-example.zip) includes three signed overlays and current tools. [Native asset synchronization](docs/design/studio-asset-sync.md) reproduces the bundled palettes, and the [detailed firmware research snapshot](docs/design/oneui9-resource-research.md) preserves evidence for further customization work.
+
 ---
 
 ## 🌟 Features

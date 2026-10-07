@@ -12,6 +12,7 @@ The first release contains **AMOLED Black, Neon Violet and Cyberpunk Gold**, eac
 - [Compiler](../../tools/build_oneui9_theme.py) and [compiler tests](../../tests/test_oneui9_theme_builder.py)
 - [Generated projects and build reports](../../generated/oneui9/S948U1UEU4BZID/)
 - [Artifact hashes](../../artifacts/oneui9/S948U1UEU4BZID/SHA256SUMS)
+- [Detailed resource research snapshot](oneui9-resource-research.md) for continued authoring
 
 The download contains source tokens, resource maps, generated Android resource projects, nine signed APKs, per-target reports, signatures, the compiler and collector. The original Samsung firmware APKs remain collection inputs, and signing keys are not included.
 
@@ -55,6 +56,8 @@ python3 tools/build_oneui9_theme.py \
 This creates aligned, unsigned APKs and source/report archives. The output directory must be new. Add `--aapt2 /path/to/aapt2 --zipalign /path/to/zipalign` when needed. For developer signing, additionally supply `--apksigner /path/to/apksigner --keystore /path/to/your-key.jks --key-alias YOUR_ALIAS --store-pass YOUR_PASSWORD`. The supplied test artifacts use a development certificate, whose public certificate digest is recorded in the signature reports.
 
 The compiler performs no network or device operations. It verifies complete APK hashes and every mapped resource identity before output generation. When `report.json` is present, it checks the collected fingerprint, API level, APK paths, hashes and sizes; a partial collector status caused by informational overlay help does not invalidate matching APK evidence. It checks emitted values again after compilation and signing. A failed build produces no successful bundle. It imports only explicit source values and per-app overrides; preview defaults are not silently compiled.
+
+The current repository compiler also accepts a native `.ouitheme` ZIP through `--source`. See the [direct export-to-overlay workflow and tested example](native-source-to-overlays.md). Keep the adjacent `oneui9_source_archive.py` module when copying the compiler. The original first-pack download remains an immutable earlier directory-source compiler snapshot.
 
 ```bash
 python3 -m unittest discover -s tests -v

@@ -1,0 +1,99 @@
+{
+  "androidApiLevel": 37,
+  "androidUiExecuted": false,
+  "appSourceCommit": "32a85e2",
+  "appVersion": "0.3.0",
+  "applied": false,
+  "assetCheck": {
+    "mode": "check",
+    "report": "asset-check.json",
+    "status": "in-sync",
+    "written": []
+  },
+  "buildFingerprint": "samsung/m3quew/m3q:17/CP2A.260605.016/S948U1UEU4BZID_OYM4BZID:user/release-keys",
+  "deviceInstalled": false,
+  "format": "oneui-studio.export-integration/1",
+  "hostGenerated": true,
+  "hostTests": {
+    "failed": 0,
+    "log": "desktop-tests.txt",
+    "nativeExportEnabled": true,
+    "passed": 80,
+    "skipped": 0
+  },
+  "independentReview": {
+    "criticalFindingsRemaining": 0,
+    "importantFindingsRemaining": 0,
+    "nativeSchemaFixturesChecked": 65
+  },
+  "metadataVerified": true,
+  "nativeThemeSourceSha256": "fb995b1263499f7037ae596610e43b48e7687ecfe44050381955bce1a2ac116a",
+  "notes": [
+    "Production native codec with host Android stubs exported the edited source; this is not an Android UI test.",
+    "Existing Neon source identity/version and overlay package identities are retained.",
+    "Unmapped roles/assets remain preserved and reported; no preview defaults compiled.",
+    "Original input Samsung APKs and signing key are excluded."
+  ],
+  "policyVerified": false,
+  "sourceArchiveSha256": "3613d3665a7602419a890d47c6e3c9cede79b665809743f32c1e93a51ccf0419",
+  "sourceFilesSha256": "15eee0087cca760ff3baed31cbbce0db1e7b093c21da0b115f45ccd9d66fa347",
+  "sourceId": "org.bingblop.neon-violet",
+  "sourceToolSha256": {
+    "tests/test_oneui9_source_archive.py": "da4f0cee55a3cca72f064ad49cc3e753fd15cfbb7ec5c94d0363a2794159396c",
+    "tests/test_oneui9_studio_assets.py": "dd1b0374a40bb039d563845bac7ff37ec2049e2638f107afa7121663e059cb70",
+    "tools/build_oneui9_theme.py": "e6f0f4a0b66e2c9ebef0cbf7c6f9d836b9a72415d6402b11192a257d55d6e834",
+    "tools/oneui9_source_archive.py": "acc4657f1e36842c61828b747404e4e6e87a6b70e9f4cb5c704bfdeef7088b2e",
+    "tools/sync_oneui9_studio_assets.py": "26f6381ad3f1b60f59a8a1f0424efae5dda6323bd2be7b302dde99f2b44a47c3"
+  },
+  "sourceVersion": "0.2.0",
+  "status": "verified-host-build",
+  "targets": [
+    {
+      "artifacts": [
+        {
+          "developerSigned": true,
+          "path": "targets/framework/overlay-signed.apk",
+          "sha256": "d9dcc546ce78c3d2e6f25e8dc861f2b278c541cbc32c4deb00b6dbdc339b4d92"
+        }
+      ],
+      "compiledValueVerification": true,
+      "configurationCount": 102,
+      "key": "framework",
+      "status": "signed"
+    },
+    {
+      "artifacts": [
+        {
+          "developerSigned": true,
+          "path": "targets/systemui/overlay-signed.apk",
+          "sha256": "48dd26dcfd3a926bc3d14b9e0f13469e6f46efdb6fd5e9338459d3d47187e6fa"
+        }
+      ],
+      "compiledValueVerification": true,
+      "configurationCount": 105,
+      "key": "systemui",
+      "status": "signed"
+    },
+    {
+      "artifacts": [
+        {
+          "developerSigned": true,
+          "path": "targets/settings/overlay-signed.apk",
+          "sha256": "ea34221ea523adde1aed34b56d16053334a210c2e3ef663cb8549c6b4970d5b6"
+        }
+      ],
+      "compiledValueVerification": true,
+      "configurationCount": 43,
+      "key": "settings",
+      "status": "signed"
+    }
+  ],
+  "verifiedEdits": {
+    "darkCornerRadius": "20dp",
+    "lightCornerRadius": "16dp",
+    "settingsDarkIcon": "#FF22D3EE",
+    "settingsLightIcon": "#FF0E7490",
+    "systemuiDarkPanel": "#F0111828",
+    "systemuiLightPanel": "#F0E8F3F8"
+  }
+}

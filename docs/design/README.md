@@ -13,6 +13,9 @@ First target: **SM-S948U1 · One UI 9.0 · Android 17 · CP2A.260605.016.S948U1U
 - [Read-only APK/input collection instructions](collect-oneui9-inputs.md)
 - [Native Studio prototype, APK and build instructions](../../apps/oneui-studio/README.md)
 - [Agent handoff and remaining work](../AGENT_HANDOFF.md)
+- [Compile a native source export directly](native-source-to-overlays.md)
+- [Reproduce and check native bundled assets](studio-asset-sync.md)
+- [Detailed resource/XML/DEX-reference research snapshot](oneui9-resource-research.md)
 
 The initial source archives above are design examples. The supplied firmware APKs have now been inspected, and a [first measured theme pack](oneui9-first-theme-pack.md) provides current resource mappings, materialized dark/light sources, a desktop compiler, generated projects, reports and **nine freshly compiled developer-signed APKs**. Device application and visual certification remain unverified. Old One UI 6.1.1 bindings are excluded.
 
