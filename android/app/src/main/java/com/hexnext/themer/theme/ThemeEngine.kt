@@ -38,7 +38,7 @@ class ThemeEngine(private val prefs: SharedPreferences) {
     /**
      * Non-root path. Android won't let the shell user fabricate overlays, so hand the seed color and
      * style to System UI's own Monet engine through the setting it watches. Stock Android honors it;
-     * Confirmed working on One UI 9 with non-root Shizuku (2026-10-07).
+     * On One UI 9 this recolors Material You (Monet) apps but not One UI's own Samsung UI.
      */
     fun applySeedSetting(service: IThemeService, spec: ThemeSpec, log: (LogLine) -> Unit): Boolean {
         if (!prefs.contains(PREF_SETTING_BACKUP)) {
@@ -60,7 +60,7 @@ class ThemeEngine(private val prefs: SharedPreferences) {
         if (spec.pureBlack) {
             log(LogLine(LogLevel.WARN, "Pure black needs root, so it was skipped."))
         }
-        log(LogLine(LogLevel.OK, "Seed color handed to System UI. The system palette updates in a moment."))
+        log(LogLine(LogLevel.OK, "Seed color handed to System UI. Material You apps update; One UI's own UI keeps its colors."))
         return true
     }
 
