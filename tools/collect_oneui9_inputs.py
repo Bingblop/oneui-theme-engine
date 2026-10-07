@@ -42,6 +42,7 @@ PROPERTIES = (
     "ro.build.version.oneui",
 )
 MAX_TEXT_BYTES = 256 * 1024
+MAX_VERSION_LINE_BYTES = 4096
 APK_ROOTS = ("/system", "/system_ext", "/product", "/vendor", "/odm")
 SAFE_PATH = re.compile(r"/[A-Za-z0-9_./+=@~-]+\Z")
 
@@ -64,15 +65,49 @@ def bounded_text(value):
 
 def drain_pipe(pipe, captured):
     """Drain child output without retaining more than the per-stream limit."""
+    pending = bytearray()
+    dropping_line = False
+
+    def remember_version_line(line, truncated=False):
+        fields = package_version_fields(line.decode("utf-8", errors="replace"))
+        for key, value in fields.items():
+            encoded = value.encode("utf-8")
+            if len(encoded) > MAX_VERSION_LINE_BYTES:
+                value = encoded[:MAX_VERSION_LINE_BYTES].decode("utf-8", errors="ignore")
+                truncated = True
+            captured["fields"][key] = value
+        if fields and truncated:
+            captured["versionFieldsTruncated"] = True
+
     try:
         while True:
             block = pipe.read(8192)
             if not block:
                 break
+            if captured.get("versionOnly"):
+                # Extract from every line, including lines beyond the ordinary
+                # capture limit, while retaining neither the dump nor long lines.
+                parts = block.split(b"\n")
+                for index, part in enumerate(parts):
+                    if not dropping_line:
+                        remaining = MAX_VERSION_LINE_BYTES - len(pending)
+                        pending.extend(part[:remaining])
+                        if len(part) > remaining:
+                            remember_version_line(bytes(pending), truncated=True)
+                            pending.clear()
+                            dropping_line = True
+                    if index < len(parts) - 1:
+                        if not dropping_line:
+                            remember_version_line(bytes(pending))
+                        pending.clear()
+                        dropping_line = False
+                continue
             remaining = MAX_TEXT_BYTES - len(captured["data"])
             captured["data"].extend(block[:remaining])
             if len(block) > remaining:
                 captured["truncated"] = True
+        if captured.get("versionOnly") and pending and not dropping_line:
+            remember_version_line(bytes(pending))
     except OSError as exc:
         captured["error"] = str(exc)
     finally:
@@ -108,6 +143,40 @@ def package_version_fields(raw):
             key, _, value = stripped.partition("=")
             fields[key] = value.split()[0] if value else ""
     return fields
+
+
+def informational_overlay_help(record):
+    """Recognize the observed complete Android help/255 result conservatively."""
+    if record["exitCode"] != 255 or record["stderr"]:
+        return False
+    if any(record.get(key) for key in (
+        "error", "timedOut", "interrupted", "captureIncomplete",
+        "stdoutTruncated", "stderrTruncated",
+    )):
+        return False
+    stdout = record["stdout"]
+    if not stdout.startswith("Overlay manager (overlay) commands:\n"):
+        return False
+    if not re.search(r"(?m)^  help\n    Print this help text\.$", stdout):
+        return False
+    if not re.search(
+        r"(?m)^  list \[--user USER_ID\] \[PACKAGE\[:NAME\]\]\n"
+        r"    Print information about target and overlay packages\.", stdout
+    ):
+        return False
+    terminal = (
+        "  partition-order\n"
+        "    Print the partition order from overlay config and how this order\n"
+        "    got established, by default or by /product/overlay/partition_order.xml\n"
+    )
+    if not stdout.endswith(terminal):
+        return False
+    return not re.search(
+        r"(?im)^\s*(?:error[: ]|exception(?:[: ]|$)|"
+        r"(?:[\w.]*\.)?\w+(?:Exception|Error)(?:[: ]|$)|"
+        r"permission (?:denied|denial)|unknown command|"
+        r"can't find service|cannot find service)", stdout
+    )
 
 
 def validate_apk_path(raw):
@@ -203,6 +272,8 @@ class Collector:
             )
             for name, pipe in (("stdout", process.stdout), ("stderr", process.stderr)):
                 captured = {"data": bytearray(), "truncated": False}
+                if name == "stdout" and version_only:
+                    captured.update(versionOnly=True, fields={})
                 streams[name] = captured
                 reader = threading.Thread(target=drain_pipe, args=(pipe, captured), daemon=True)
                 reader.start()
@@ -233,7 +304,15 @@ class Collector:
                 record["captureIncomplete"] = True
                 record.setdefault("error", "Command output pipes remained open after exit.")
         for name, captured in streams.items():
-            record[name], decoded_cut = bounded_text(bytes(captured["data"]))
+            if captured.get("versionOnly"):
+                fields = dict(captured["fields"])
+                retained = "".join(key + "=" + value + "\n" for key, value in fields.items())
+                record[name], decoded_cut = bounded_text(retained)
+                if captured.get("versionFieldsTruncated"):
+                    record["versionFieldsTruncated"] = True
+                    self.warn("Selected package version fields were truncated: " + " ".join(command))
+            else:
+                record[name], decoded_cut = bounded_text(bytes(captured["data"]))
             if captured["truncated"] or decoded_cut:
                 record[name + "Truncated"] = True
             if captured.get("error"):
@@ -241,9 +320,7 @@ class Collector:
         stdout = record["stdout"]
         record["durationSeconds"] = round(time.monotonic() - started, 3)
         if version_only:
-            fields = package_version_fields(stdout)
-            stdout = "".join(key + "=" + value + "\n" for key, value in fields.items())
-            record["stdoutHandling"] = "Selected version fields only; raw package dump discarded"
+            record["stdoutHandling"] = "Selected version fields from the full stream; raw package dump discarded"
         record["stdout"], selected_cut = bounded_text(stdout)
         if selected_cut:
             record["stdoutTruncated"] = True
@@ -261,7 +338,15 @@ class Collector:
     def required(self, command):
         record = self.run(command)
         if not self.ok(record):
-            self.error("Read-only command failed: " + " ".join(command))
+            if command == ["shell", "cmd", "overlay", "help"] and informational_overlay_help(record):
+                record["classification"] = "informational-help"
+                record["classificationReason"] = (
+                    "Observed Android help/255 behavior: complete help with no diagnostics; "
+                    "the actual exit code is retained."
+                )
+                self.warn("Overlay help returned 255 with complete informational help and no diagnostics.")
+            else:
+                self.error("Read-only command failed: " + " ".join(command))
         return record
 
     def select_device(self):

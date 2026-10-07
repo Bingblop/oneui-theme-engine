@@ -26,7 +26,7 @@ These observations identify a target, not a certified compatible device. A Googl
 
 Success means a user can create and exchange a theme with Hex-style customization, generate newly authored components against the actual One UI 9 resource inventory, and pass those artifacts to the user's bridge. The fresh collection begins with framework, SystemUI, and Settings, then covers the Samsung applications enumerated in the overlay-suite design. **Build compatibility** (correct current targets/resources and successful compilation) and **application compatibility** (acceptance, effect, and recovery through a bridge) are separate reports. Source authoring and compilation can proceed before the bridge is complete. A compiled artifact must not be represented as applied or device-verified.
 
-The fresh collection and evidence required to author it are specified in [oneui9-overlay-suite.md](../../design/oneui9-overlay-suite.md). A [read-only ADB collector](../../design/collect-oneui9-inputs.md) makes the missing device/resource inputs concrete. No current firmware APKs or on-device application results have been supplied.
+The fresh collection and evidence required to author it are specified in [oneui9-overlay-suite.md](../../design/oneui9-overlay-suite.md). A [read-only ADB collector](../../design/collect-oneui9-inputs.md) supplies device/resource inputs. The framework, SystemUI and Settings APKs have now been supplied and used for a [first measured compiled pack](../../design/oneui9-first-theme-pack.md). On-device application results remain outstanding.
 
 ## 2. What the current repository establishes
 

@@ -1,0 +1,25 @@
+{
+  "keyboard": {
+    "keyboardBackground": {
+      "type": "color",
+      "value": "#FFE4E7EF"
+    },
+    "keyboardKeyBackground": {
+      "type": "color",
+      "value": "#FFFFFFFF"
+    },
+    "keyboardKeyText": {
+      "type": "color",
+      "value": "#FF171B24"
+    },
+    "keyboardAccent": {
+      "type": "color",
+      "value": "#FF6F21B5"
+    },
+    "keyboardKeyRadius": {
+      "type": "dimension",
+      "value": 8,
+      "unit": "dp"
+    }
+  }
+}

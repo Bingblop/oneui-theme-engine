@@ -1,0 +1,38 @@
+{
+  "format": "oneui-studio.source/1",
+  "id": "org.bingblop.cyberpunk-gold",
+  "version": "0.2.0",
+  "name": "Cyberpunk Gold",
+  "author": "OneUI-Theme-Engine Contributors",
+  "license": "MIT",
+  "licenseFile": "LICENSE.txt",
+  "tokenApi": "oneui-studio.tokens/1",
+  "targetIntent": {
+    "manufacturer": "Samsung",
+    "uiFamily": "One UI",
+    "uiMajor": 9
+  },
+  "variants": {
+    "dark": "tokens/dark.json",
+    "light": "tokens/light.json"
+  },
+  "assets": [],
+  "components": [
+    {
+      "id": "device.palette",
+      "required": false
+    },
+    {
+      "id": "quick-panel.palette",
+      "required": false
+    },
+    {
+      "id": "settings.palette",
+      "required": false
+    },
+    {
+      "id": "keyboard.palette",
+      "required": false
+    }
+  ]
+}

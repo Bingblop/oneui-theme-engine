@@ -1,0 +1,1004 @@
+{
+  "androidApiLevel": 37,
+  "applied": false,
+  "artifacts": [
+    {
+      "developerSigned": true,
+      "path": "targets/settings/overlay-signed.apk",
+      "sha256": "38c45438510b9bb9c6146b614141ab014dd74d72d50196e1276982a8dcd6f2ce"
+    }
+  ],
+  "bindingCount": 43,
+  "buildFingerprint": "samsung/m3quew/m3q:17/CP2A.260605.016/S948U1UEU4BZID_OYM4BZID:user/release-keys",
+  "compiledValueVerification": true,
+  "configurationCount": 37,
+  "emittedBindingCount": 37,
+  "inputApkPath": "apks/com.android.settings/00-SecSettings.apk",
+  "inputApkSha256": "e4b7158acaef6bc55c0d09c26409ba32df2011786745f592caadb2c8dd3e9193",
+  "key": "settings",
+  "omittedBindings": [
+    {
+      "name": "sec_widget_round_button_bg_radius",
+      "reason": "explicit-token-missing",
+      "role": "cornerRadius",
+      "type": "dimen",
+      "variant": "light"
+    },
+    {
+      "name": "sec_widget_round_button_bg_radius",
+      "reason": "explicit-token-missing",
+      "role": "cornerRadius",
+      "type": "dimen",
+      "variant": "dark"
+    },
+    {
+      "name": "sesl_button_corner_radius",
+      "reason": "explicit-token-missing",
+      "role": "cornerRadius",
+      "type": "dimen",
+      "variant": "light"
+    },
+    {
+      "name": "sesl_button_corner_radius",
+      "reason": "explicit-token-missing",
+      "role": "cornerRadius",
+      "type": "dimen",
+      "variant": "dark"
+    },
+    {
+      "name": "sesl_dialog_background_corner_radius",
+      "reason": "explicit-token-missing",
+      "role": "cornerRadius",
+      "type": "dimen",
+      "variant": "light"
+    },
+    {
+      "name": "sesl_dialog_background_corner_radius",
+      "reason": "explicit-token-missing",
+      "role": "cornerRadius",
+      "type": "dimen",
+      "variant": "dark"
+    }
+  ],
+  "overlayPackage": "org.bingblop.oneui9.theme.org.bingblop.cyberpunk_gold.settings",
+  "packSha256": "92d9650f22b7620ec889e586fc7cb7e05e8cf45f97d7c890fe3c7f1e0c48287d",
+  "policyVerified": false,
+  "replacements": [
+    {
+      "evidence": "settings/resources.txt declaration of color/accent_material_dark (0x7f060016); resources.txt:229571 colorAccent(0x7f04014e)=@color/accent_material_dark in style/Base.V7.Theme.AppCompat",
+      "name": "accent_material_dark",
+      "originalAlpha": 255,
+      "originalValues": [
+        {
+          "kind": "reference",
+          "qualifier": "",
+          "value": "@color/material_deep_teal_200"
+        }
+      ],
+      "qualifiers": [
+        ""
+      ],
+      "replacementKind": "literal",
+      "resourceId": "0x7f060016",
+      "role": "accent",
+      "sourceValue": "#FFFFE600",
+      "tokenOrigin": "global-token",
+      "type": "color",
+      "value": "#FFFFE600",
+      "variant": "dark"
+    },
+    {
+      "evidence": "settings/resources.txt declaration of color/accent_material_light (0x7f060017); resources.txt:229783 colorAccent(0x7f04014e)=@color/accent_material_light in style/Base.V7.Theme.AppCompat.Light",
+      "name": "accent_material_light",
+      "originalAlpha": 255,
+      "originalValues": [
+        {
+          "kind": "reference",
+          "qualifier": "",
+          "value": "@color/material_deep_teal_500"
+        }
+      ],
+      "qualifiers": [
+        ""
+      ],
+      "replacementKind": "literal",
+      "resourceId": "0x7f060017",
+      "role": "accent",
+      "sourceValue": "#FF8A6E00",
+      "tokenOrigin": "global-token",
+      "type": "color",
+      "value": "#FF8A6E00",
+      "variant": "light"
+    },
+    {
+      "evidence": "settings/resources.txt declaration of color/materialColorSurfaceContainer (0x7f060624); xml/res__drawable__preference_background.xml.txt:3 A: http://schemas.android.com/apk/res/android:color(0x010101a5)=@0x7f060624 in res/drawable/preference_background.xml; resources.txt:20475 @color/materialColorSurfaceContainer in color/user_avatar_color_bg; resources.txt:231422 cardBackgroundColor(0x7f0400e3)=@color/materialColorSurfaceContainer in style/ContextualCardStyle; resources.txt:232147 0x01010054=@color/materialColorSurfaceContainer in style/GlifTheme",
+      "name": "materialColorSurfaceContainer",
+      "originalAlpha": 255,
+      "originalValues": [
+        {
+          "kind": "reference",
+          "qualifier": "",
+          "value": "@0x01060070"
+        },
+        {
+          "kind": "reference",
+          "qualifier": "night",
+          "value": "@0x0106009b"
+        }
+      ],
+      "qualifiers": [
+        ""
+      ],
+      "replacementKind": "literal",
+      "resourceId": "0x7f060624",
+      "role": "surface",
+      "sourceValue": "#FFFFFFFF",
+      "tokenOrigin": "global-token",
+      "type": "color",
+      "value": "#FFFFFFFF",
+      "variant": "light"
+    },
+    {
+      "evidence": "settings/resources.txt declaration of color/materialColorSurfaceContainer (0x7f060624); xml/res__drawable__preference_background.xml.txt:3 A: http://schemas.android.com/apk/res/android:color(0x010101a5)=@0x7f060624 in res/drawable/preference_background.xml; resources.txt:20475 @color/materialColorSurfaceContainer in color/user_avatar_color_bg; resources.txt:231422 cardBackgroundColor(0x7f0400e3)=@color/materialColorSurfaceContainer in style/ContextualCardStyle; resources.txt:232147 0x01010054=@color/materialColorSurfaceContainer in style/GlifTheme",
+      "name": "materialColorSurfaceContainer",
+      "originalAlpha": 255,
+      "originalValues": [
+        {
+          "kind": "reference",
+          "qualifier": "",
+          "value": "@0x01060070"
+        },
+        {
+          "kind": "reference",
+          "qualifier": "night",
+          "value": "@0x0106009b"
+        }
+      ],
+      "qualifiers": [
+        "night"
+      ],
+      "replacementKind": "literal",
+      "resourceId": "0x7f060624",
+      "role": "surface",
+      "sourceValue": "#FF0A0A0E",
+      "tokenOrigin": "global-token",
+      "type": "color",
+      "value": "#FF0A0A0E",
+      "variant": "dark"
+    },
+    {
+      "evidence": "settings/resources.txt declaration of color/sec_widget_color_primary (0x7f060a3b); xml/res__color__sec_preference_summary_primary_color.xml.txt:5 A: http://schemas.android.com/apk/res/android:color(0x010101a5)=@0x7f060a3b in res/color/sec_preference_summary_primary_color.xml; xml/res__color__sec_preference_summary_primary_color.xml.txt:8 A: http://schemas.android.com/apk/res/android:color(0x010101a5)=@0x7f060a3b in res/color/sec_preference_summary_primary_color.xml; resources.txt:16645 @color/sec_widget_color_primary in color/sec_eye_comfort_spinner_dropdown_selected_color; resources.txt:16793 @color/sec_widget_color_primary in color/sec_lock_pattern_line_color_confirm",
+      "name": "sec_widget_color_primary",
+      "originalAlpha": 255,
+      "originalValues": [
+        {
+          "kind": "reference",
+          "qualifier": "",
+          "value": "@color/sesl_primary_dark_color_light"
+        },
+        {
+          "kind": "reference",
+          "qualifier": "night",
+          "value": "@color/sesl_primary_dark_color_dark"
+        }
+      ],
+      "qualifiers": [
+        ""
+      ],
+      "replacementKind": "literal",
+      "resourceId": "0x7f060a3b",
+      "role": "accent",
+      "sourceValue": "#FF8A6E00",
+      "tokenOrigin": "global-token",
+      "type": "color",
+      "value": "#FF8A6E00",
+      "variant": "light"
+    },
+    {
+      "evidence": "settings/resources.txt declaration of color/sec_widget_color_primary (0x7f060a3b); xml/res__color__sec_preference_summary_primary_color.xml.txt:5 A: http://schemas.android.com/apk/res/android:color(0x010101a5)=@0x7f060a3b in res/color/sec_preference_summary_primary_color.xml; xml/res__color__sec_preference_summary_primary_color.xml.txt:8 A: http://schemas.android.com/apk/res/android:color(0x010101a5)=@0x7f060a3b in res/color/sec_preference_summary_primary_color.xml; resources.txt:16645 @color/sec_widget_color_primary in color/sec_eye_comfort_spinner_dropdown_selected_color; resources.txt:16793 @color/sec_widget_color_primary in color/sec_lock_pattern_line_color_confirm",
+      "name": "sec_widget_color_primary",
+      "originalAlpha": 255,
+      "originalValues": [
+        {
+          "kind": "reference",
+          "qualifier": "",
+          "value": "@color/sesl_primary_dark_color_light"
+        },
+        {
+          "kind": "reference",
+          "qualifier": "night",
+          "value": "@color/sesl_primary_dark_color_dark"
+        }
+      ],
+      "qualifiers": [
+        "night"
+      ],
+      "replacementKind": "literal",
+      "resourceId": "0x7f060a3b",
+      "role": "accent",
+      "sourceValue": "#FFFFE600",
+      "tokenOrigin": "global-token",
+      "type": "color",
+      "value": "#FFFFE600",
+      "variant": "dark"
+    },
+    {
+      "evidence": "settings/resources.txt declaration of color/sec_widget_color_round_button_bg_color (0x7f060a3c); xml/res__drawable__sec_widget_color_round_button_background.xml.txt:20 A: http://schemas.android.com/apk/res/android:tint(0x01010121)=@0x7f060a3c in res/drawable/sec_widget_color_round_button_background.xml; resources.txt:11755 @color/sec_widget_color_round_button_bg_color in color/as_theme_primary_color; resources.txt:15744 @color/sec_widget_color_round_button_bg_color in color/protection_timer_circle_progress",
+      "name": "sec_widget_color_round_button_bg_color",
+      "originalAlpha": 255,
+      "originalValues": [
+        {
+          "kind": "reference",
+          "qualifier": "",
+          "value": "@color/sesl_primary_color_light"
+        },
+        {
+          "kind": "reference",
+          "qualifier": "night",
+          "value": "@color/sesl_primary_color_dark"
+        }
+      ],
+      "qualifiers": [
+        ""
+      ],
+      "replacementKind": "literal",
+      "resourceId": "0x7f060a3c",
+      "role": "accent",
+      "sourceValue": "#FF8A6E00",
+      "tokenOrigin": "global-token",
+      "type": "color",
+      "value": "#FF8A6E00",
+      "variant": "light"
+    },
+    {
+      "evidence": "settings/resources.txt declaration of color/sec_widget_color_round_button_bg_color (0x7f060a3c); xml/res__drawable__sec_widget_color_round_button_background.xml.txt:20 A: http://schemas.android.com/apk/res/android:tint(0x01010121)=@0x7f060a3c in res/drawable/sec_widget_color_round_button_background.xml; resources.txt:11755 @color/sec_widget_color_round_button_bg_color in color/as_theme_primary_color; resources.txt:15744 @color/sec_widget_color_round_button_bg_color in color/protection_timer_circle_progress",
+      "name": "sec_widget_color_round_button_bg_color",
+      "originalAlpha": 255,
+      "originalValues": [
+        {
+          "kind": "reference",
+          "qualifier": "",
+          "value": "@color/sesl_primary_color_light"
+        },
+        {
+          "kind": "reference",
+          "qualifier": "night",
+          "value": "@color/sesl_primary_color_dark"
+        }
+      ],
+      "qualifiers": [
+        "night"
+      ],
+      "replacementKind": "literal",
+      "resourceId": "0x7f060a3c",
+      "role": "accent",
+      "sourceValue": "#FFFFE600",
+      "tokenOrigin": "global-token",
+      "type": "color",
+      "value": "#FFFFE600",
+      "variant": "dark"
+    },
+    {
+      "evidence": "settings/resources.txt declaration of color/sec_widget_color_round_button_text_color (0x7f060a3e); resources.txt:11747 @color/sec_widget_color_round_button_text_color in color/as_theme_button_text_color; resources.txt:231373 0x01010098=@color/sec_widget_color_round_button_text_color in style/ColorRoundButtonStyle; resources.txt:232542 0x01010098=@color/sec_widget_color_round_button_text_color in style/MandatoryBiometricSuggestionColorRoundButtonStyle; resources.txt:233178 0x01010098=@color/sec_widget_color_round_button_text_color in style/ResetColorRoundButtonStyle",
+      "name": "sec_widget_color_round_button_text_color",
+      "originalAlpha": 255,
+      "originalValues": [
+        {
+          "kind": "reference",
+          "qualifier": "",
+          "value": "@color/sesl_text1_dark"
+        }
+      ],
+      "qualifiers": [
+        ""
+      ],
+      "replacementKind": "literal",
+      "resourceId": "0x7f060a3e",
+      "role": "onAccent",
+      "sourceValue": "#FFFFFFFF",
+      "tokenOrigin": "global-token",
+      "type": "color",
+      "value": "#FFFFFFFF",
+      "variant": "light"
+    },
+    {
+      "evidence": "settings/resources.txt declaration of color/sec_widget_color_round_button_text_color (0x7f060a3e); resources.txt:11747 @color/sec_widget_color_round_button_text_color in color/as_theme_button_text_color; resources.txt:231373 0x01010098=@color/sec_widget_color_round_button_text_color in style/ColorRoundButtonStyle; resources.txt:232542 0x01010098=@color/sec_widget_color_round_button_text_color in style/MandatoryBiometricSuggestionColorRoundButtonStyle; resources.txt:233178 0x01010098=@color/sec_widget_color_round_button_text_color in style/ResetColorRoundButtonStyle; Author-added night configuration for this existing resource; runtime selection unverified.",
+      "name": "sec_widget_color_round_button_text_color",
+      "originalAlpha": 255,
+      "originalValues": [
+        {
+          "kind": "reference",
+          "qualifier": "",
+          "value": "@color/sesl_text1_dark"
+        }
+      ],
+      "qualifiers": [
+        "night"
+      ],
+      "replacementKind": "literal",
+      "resourceId": "0x7f060a3e",
+      "role": "onAccent",
+      "sourceValue": "#FF191600",
+      "tokenOrigin": "global-token",
+      "type": "color",
+      "value": "#FF191600",
+      "variant": "dark"
+    },
+    {
+      "evidence": "settings/resources.txt declaration of color/sec_widget_round_and_bgcolor (0x7f060a60); resources.txt:239964 0x01010451=@color/sec_widget_round_and_bgcolor in style/Theme.SecSettingsBase; resources.txt:239965 0x01010452=@color/sec_widget_round_and_bgcolor in style/Theme.SecSettingsBase; resources.txt:239967 0x01010564=@color/sec_widget_round_and_bgcolor in style/Theme.SecSettingsBase; xml/res__layout__sec_settings_main_prefs.xml.txt:13 A: http://schemas.android.com/apk/res/android:background(0x010100d4)=@0x7f060a60 in res/layout/sec_settings_main_prefs.xml",
+      "name": "sec_widget_round_and_bgcolor",
+      "originalAlpha": 255,
+      "originalValues": [
+        {
+          "kind": "reference",
+          "qualifier": "",
+          "value": "@color/sesl_round_and_bgcolor_light"
+        },
+        {
+          "kind": "reference",
+          "qualifier": "night",
+          "value": "@color/sesl_round_and_bgcolor_dark"
+        }
+      ],
+      "qualifiers": [
+        ""
+      ],
+      "replacementKind": "literal",
+      "resourceId": "0x7f060a60",
+      "role": "settingsBackground",
+      "sourceValue": "#FFF7F8FC",
+      "tokenOrigin": "global-token",
+      "type": "color",
+      "value": "#FFF7F8FC",
+      "variant": "light"
+    },
+    {
+      "evidence": "settings/resources.txt declaration of color/sec_widget_round_and_bgcolor (0x7f060a60); resources.txt:239964 0x01010451=@color/sec_widget_round_and_bgcolor in style/Theme.SecSettingsBase; resources.txt:239965 0x01010452=@color/sec_widget_round_and_bgcolor in style/Theme.SecSettingsBase; resources.txt:239967 0x01010564=@color/sec_widget_round_and_bgcolor in style/Theme.SecSettingsBase; xml/res__layout__sec_settings_main_prefs.xml.txt:13 A: http://schemas.android.com/apk/res/android:background(0x010100d4)=@0x7f060a60 in res/layout/sec_settings_main_prefs.xml",
+      "name": "sec_widget_round_and_bgcolor",
+      "originalAlpha": 255,
+      "originalValues": [
+        {
+          "kind": "reference",
+          "qualifier": "",
+          "value": "@color/sesl_round_and_bgcolor_light"
+        },
+        {
+          "kind": "reference",
+          "qualifier": "night",
+          "value": "@color/sesl_round_and_bgcolor_dark"
+        }
+      ],
+      "qualifiers": [
+        "night"
+      ],
+      "replacementKind": "literal",
+      "resourceId": "0x7f060a60",
+      "role": "settingsBackground",
+      "sourceValue": "#FF000000",
+      "tokenOrigin": "global-token",
+      "type": "color",
+      "value": "#FF000000",
+      "variant": "dark"
+    },
+    {
+      "evidence": "settings/resources.txt declaration of color/sesl_background_color_dark (0x7f060b26); resources.txt:232764 0x01010031=@color/sesl_background_color_dark in style/Platform.V7.AppCompat; xml/res__drawable__sesl_screen_background_dark.xml.txt:4 A: http://schemas.android.com/apk/res/android:color(0x010101a5)=@0x7f060b26 in res/drawable/sesl_screen_background_dark.xml; resources.txt:12783 @color/sesl_background_color_dark in color/content_background; resources.txt:12786 @color/sesl_background_color_dark in color/content_background_color",
+      "name": "sesl_background_color_dark",
+      "originalAlpha": 255,
+      "originalValues": [
+        {
+          "kind": "reference",
+          "qualifier": "",
+          "value": "@color/sesl_gray_D3"
+        }
+      ],
+      "qualifiers": [
+        ""
+      ],
+      "replacementKind": "literal",
+      "resourceId": "0x7f060b26",
+      "role": "settingsBackground",
+      "sourceValue": "#FF000000",
+      "tokenOrigin": "global-token",
+      "type": "color",
+      "value": "#FF000000",
+      "variant": "dark"
+    },
+    {
+      "evidence": "settings/resources.txt declaration of color/sesl_background_color_light (0x7f060b27); resources.txt:232796 0x01010031=@color/sesl_background_color_light in style/Platform.V7.AppCompat.Light; xml/res__drawable__sesl_screen_background_light.xml.txt:4 A: http://schemas.android.com/apk/res/android:color(0x010101a5)=@0x7f060b27 in res/drawable/sesl_screen_background_light.xml; resources.txt:12782 @color/sesl_background_color_light in color/content_background; resources.txt:12785 @color/sesl_background_color_light in color/content_background_color",
+      "name": "sesl_background_color_light",
+      "originalAlpha": 255,
+      "originalValues": [
+        {
+          "kind": "reference",
+          "qualifier": "",
+          "value": "@color/sesl_gray_L1"
+        }
+      ],
+      "qualifiers": [
+        ""
+      ],
+      "replacementKind": "literal",
+      "resourceId": "0x7f060b27",
+      "role": "settingsBackground",
+      "sourceValue": "#FFF7F8FC",
+      "tokenOrigin": "global-token",
+      "type": "color",
+      "value": "#FFF7F8FC",
+      "variant": "light"
+    },
+    {
+      "evidence": "settings/resources.txt declaration of color/sesl_control_normal_color_light (0x7f060b80); resources.txt:229576 colorControlNormal(0x7f040156)=@color/sesl_control_normal_color_light in style/Base.V7.Theme.AppCompat; resources.txt:229788 colorControlNormal(0x7f040156)=@color/sesl_control_normal_color_light in style/Base.V7.Theme.AppCompat.Light; resources.txt:227441 colorControlNormal(0x7f040156)=@color/sesl_control_normal_color_light in style/Base.ThemeOverlay.AppCompat.Dark; resources.txt:227479 colorControlNormal(0x7f040156)=@color/sesl_control_normal_color_light in style/Base.ThemeOverlay.AppCompat.Light",
+      "name": "sesl_control_normal_color_light",
+      "originalAlpha": 255,
+      "originalValues": [
+        {
+          "kind": "reference",
+          "qualifier": "",
+          "value": "@color/basic_token_sys_surface_container_higher"
+        }
+      ],
+      "qualifiers": [
+        ""
+      ],
+      "replacementKind": "literal",
+      "resourceId": "0x7f060b80",
+      "role": "settingsIcon",
+      "sourceValue": "#FF8A6E00",
+      "tokenOrigin": "global-token",
+      "type": "color",
+      "value": "#FF8A6E00",
+      "variant": "light"
+    },
+    {
+      "evidence": "settings/resources.txt declaration of color/sesl_control_normal_color_light (0x7f060b80); resources.txt:229576 colorControlNormal(0x7f040156)=@color/sesl_control_normal_color_light in style/Base.V7.Theme.AppCompat; resources.txt:229788 colorControlNormal(0x7f040156)=@color/sesl_control_normal_color_light in style/Base.V7.Theme.AppCompat.Light; resources.txt:227441 colorControlNormal(0x7f040156)=@color/sesl_control_normal_color_light in style/Base.ThemeOverlay.AppCompat.Dark; resources.txt:227479 colorControlNormal(0x7f040156)=@color/sesl_control_normal_color_light in style/Base.ThemeOverlay.AppCompat.Light; Author-added night configuration for this existing resource; runtime selection unverified.",
+      "name": "sesl_control_normal_color_light",
+      "originalAlpha": 255,
+      "originalValues": [
+        {
+          "kind": "reference",
+          "qualifier": "",
+          "value": "@color/basic_token_sys_surface_container_higher"
+        }
+      ],
+      "qualifiers": [
+        "night"
+      ],
+      "replacementKind": "literal",
+      "resourceId": "0x7f060b80",
+      "role": "settingsIcon",
+      "sourceValue": "#FFFFE600",
+      "tokenOrigin": "global-token",
+      "type": "color",
+      "value": "#FFFFE600",
+      "variant": "dark"
+    },
+    {
+      "evidence": "settings/resources.txt declaration of color/sesl_list_divider_color_dark (0x7f060c24); resources.txt:229599 listDividerColor(0x7f04042a)=@color/sesl_list_divider_color_dark in style/Base.V7.Theme.AppCompat; resources.txt:13580 @color/sesl_list_divider_color_dark in color/list_item_divider_color; resources.txt:16750 @color/sesl_list_divider_color_dark in color/sec_intelligence_service_suw_list_stroke_color; resources.txt:17292 @color/sesl_list_divider_color_dark in color/sec_touchpad_divider_color",
+      "name": "sesl_list_divider_color_dark",
+      "originalAlpha": 255,
+      "originalValues": [
+        {
+          "kind": "reference",
+          "qualifier": "",
+          "value": "@color/basic_token_sys_outline_low_dark"
+        }
+      ],
+      "qualifiers": [
+        ""
+      ],
+      "replacementKind": "literal",
+      "resourceId": "0x7f060c24",
+      "role": "outline",
+      "sourceValue": "#FF454432",
+      "tokenOrigin": "global-token",
+      "type": "color",
+      "value": "#FF454432",
+      "variant": "dark"
+    },
+    {
+      "evidence": "settings/resources.txt declaration of color/sesl_list_divider_color_light (0x7f060c25); resources.txt:229811 listDividerColor(0x7f04042a)=@color/sesl_list_divider_color_light in style/Base.V7.Theme.AppCompat.Light; resources.txt:13579 @color/sesl_list_divider_color_light in color/list_item_divider_color; resources.txt:17291 @color/sesl_list_divider_color_light in color/sec_touchpad_divider_color; resources.txt:17499 @color/sesl_list_divider_color_light in color/sec_widget_list_divider_color",
+      "name": "sesl_list_divider_color_light",
+      "originalAlpha": 255,
+      "originalValues": [
+        {
+          "kind": "reference",
+          "qualifier": "",
+          "value": "@color/basic_token_sys_outline_low_light"
+        }
+      ],
+      "qualifiers": [
+        ""
+      ],
+      "replacementKind": "literal",
+      "resourceId": "0x7f060c25",
+      "role": "outline",
+      "sourceValue": "#FF747F90",
+      "tokenOrigin": "global-token",
+      "type": "color",
+      "value": "#FF747F90",
+      "variant": "light"
+    },
+    {
+      "evidence": "settings/resources.txt declaration of color/sesl_primary_color_dark (0x7f060c6d); resources.txt:229578 colorPrimary(0x7f040171)=@color/sesl_primary_color_dark in style/Base.V7.Theme.AppCompat; resources.txt:17455 @color/sesl_primary_color_dark in color/sec_widget_color_round_button_bg_color; resources.txt:17494 @color/sesl_primary_color_dark in color/sec_widget_homepage_summary_primary_color; resources.txt:229687 colorPrimary(0x7f040171)=@color/sesl_primary_color_dark in style/Base.V7.Theme.AppCompat.Dialog",
+      "name": "sesl_primary_color_dark",
+      "originalAlpha": 255,
+      "originalValues": [
+        {
+          "kind": "reference",
+          "qualifier": "",
+          "value": "@color/sesl_blue_color_dark"
+        }
+      ],
+      "qualifiers": [
+        ""
+      ],
+      "replacementKind": "literal",
+      "resourceId": "0x7f060c6d",
+      "role": "accent",
+      "sourceValue": "#FFFFE600",
+      "tokenOrigin": "global-token",
+      "type": "color",
+      "value": "#FFFFE600",
+      "variant": "dark"
+    },
+    {
+      "evidence": "settings/resources.txt declaration of color/sesl_primary_color_light (0x7f060c6e); resources.txt:229790 colorPrimary(0x7f040171)=@color/sesl_primary_color_light in style/Base.V7.Theme.AppCompat.Light; resources.txt:16788 @color/sesl_primary_color_light in color/sec_locale_drag_cell_stroke_color; resources.txt:17257 @color/sesl_primary_color_light in color/sec_tab_custom_spinner_dropdown_selected_color; resources.txt:17454 @color/sesl_primary_color_light in color/sec_widget_color_round_button_bg_color",
+      "name": "sesl_primary_color_light",
+      "originalAlpha": 255,
+      "originalValues": [
+        {
+          "kind": "reference",
+          "qualifier": "",
+          "value": "@color/sesl_blue_color_light"
+        }
+      ],
+      "qualifiers": [
+        ""
+      ],
+      "replacementKind": "literal",
+      "resourceId": "0x7f060c6e",
+      "role": "accent",
+      "sourceValue": "#FF8A6E00",
+      "tokenOrigin": "global-token",
+      "type": "color",
+      "value": "#FF8A6E00",
+      "variant": "light"
+    },
+    {
+      "evidence": "settings/resources.txt declaration of color/sesl_primary_dark_color_dark (0x7f060c6f); resources.txt:229574 colorControlActivated(0x7f040154)=@color/sesl_primary_dark_color_dark in style/Base.V7.Theme.AppCompat; resources.txt:229579 colorPrimaryDark(0x7f040173)=@color/sesl_primary_dark_color_dark in style/Base.V7.Theme.AppCompat; resources.txt:12515 @color/sesl_primary_dark_color_dark in color/bluetooth_highlight_text_color; resources.txt:16318 @color/sesl_primary_dark_color_dark in color/sec_clear_search_history",
+      "name": "sesl_primary_dark_color_dark",
+      "originalAlpha": 255,
+      "originalValues": [
+        {
+          "kind": "reference",
+          "qualifier": "",
+          "value": "@color/sesl_blue_dark_color_dark"
+        }
+      ],
+      "qualifiers": [
+        ""
+      ],
+      "replacementKind": "literal",
+      "resourceId": "0x7f060c6f",
+      "role": "accent",
+      "sourceValue": "#FFFFE600",
+      "tokenOrigin": "global-token",
+      "type": "color",
+      "value": "#FFFFE600",
+      "variant": "dark"
+    },
+    {
+      "evidence": "settings/resources.txt declaration of color/sesl_primary_dark_color_light (0x7f060c70); resources.txt:229786 colorControlActivated(0x7f040154)=@color/sesl_primary_dark_color_light in style/Base.V7.Theme.AppCompat.Light; resources.txt:229791 colorPrimaryDark(0x7f040173)=@color/sesl_primary_dark_color_light in style/Base.V7.Theme.AppCompat.Light; resources.txt:12514 @color/sesl_primary_dark_color_light in color/bluetooth_highlight_text_color; resources.txt:12626 @color/sesl_primary_dark_color_light in color/bt_tips_icon_tint_color",
+      "name": "sesl_primary_dark_color_light",
+      "originalAlpha": 255,
+      "originalValues": [
+        {
+          "kind": "reference",
+          "qualifier": "",
+          "value": "@color/sesl_blue_dark_color_light"
+        }
+      ],
+      "qualifiers": [
+        ""
+      ],
+      "replacementKind": "literal",
+      "resourceId": "0x7f060c70",
+      "role": "accent",
+      "sourceValue": "#FF8A6E00",
+      "tokenOrigin": "global-token",
+      "type": "color",
+      "value": "#FF8A6E00",
+      "variant": "light"
+    },
+    {
+      "evidence": "settings/resources.txt declaration of color/sesl_primary_text_color_dark (0x7f060c71); xml/res__color__sesl_primary_text_dark.xml.txt:5 A: http://schemas.android.com/apk/res/android:color(0x010101a5)=@0x7f060c71 in res/color/sesl_primary_text_dark.xml; xml/res__color__sesl_primary_text_dark.xml.txt:8 A: http://schemas.android.com/apk/res/android:color(0x010101a5)=@0x7f060c71 in res/color/sesl_primary_text_dark.xml; resources.txt:13577 @color/sesl_primary_text_color_dark in color/list_item_call_background_text; resources.txt:14806 @color/sesl_primary_text_color_dark in color/main_text_color",
+      "name": "sesl_primary_text_color_dark",
+      "originalAlpha": 255,
+      "originalValues": [
+        {
+          "kind": "reference",
+          "qualifier": "",
+          "value": "@color/basic_token_sys_on_surface_container_highest_dark"
+        }
+      ],
+      "qualifiers": [
+        ""
+      ],
+      "replacementKind": "literal",
+      "resourceId": "0x7f060c71",
+      "role": "textPrimary",
+      "sourceValue": "#FFFFFDE7",
+      "tokenOrigin": "global-token",
+      "type": "color",
+      "value": "#FFFFFDE7",
+      "variant": "dark"
+    },
+    {
+      "evidence": "settings/resources.txt declaration of color/sesl_primary_text_color_light (0x7f060c72); xml/res__color__sesl_primary_text_light.xml.txt:5 A: http://schemas.android.com/apk/res/android:color(0x010101a5)=@0x7f060c72 in res/color/sesl_primary_text_light.xml; xml/res__color__sesl_primary_text_light.xml.txt:8 A: http://schemas.android.com/apk/res/android:color(0x010101a5)=@0x7f060c72 in res/color/sesl_primary_text_light.xml; resources.txt:13576 @color/sesl_primary_text_color_light in color/list_item_call_background_text; resources.txt:14805 @color/sesl_primary_text_color_light in color/main_text_color",
+      "name": "sesl_primary_text_color_light",
+      "originalAlpha": 255,
+      "originalValues": [
+        {
+          "kind": "reference",
+          "qualifier": "",
+          "value": "@color/basic_token_sys_on_surface_container_highest_light"
+        }
+      ],
+      "qualifiers": [
+        ""
+      ],
+      "replacementKind": "literal",
+      "resourceId": "0x7f060c72",
+      "role": "textPrimary",
+      "sourceValue": "#FF171B24",
+      "tokenOrigin": "global-token",
+      "type": "color",
+      "value": "#FF171B24",
+      "variant": "light"
+    },
+    {
+      "evidence": "settings/resources.txt declaration of color/sesl_round_and_bgcolor_dark (0x7f060c81); resources.txt:229622 roundedCornerColor(0x7f0405a1)=@color/sesl_round_and_bgcolor_dark in style/Base.V7.Theme.AppCompat; resources.txt:13023 @color/sesl_round_and_bgcolor_dark in color/direction_lock_action_bar_background; resources.txt:13026 @color/sesl_round_and_bgcolor_dark in color/direction_lock_status_bar_background; resources.txt:15652 @color/sesl_round_and_bgcolor_dark in color/picker_app_fading_edge_color",
+      "name": "sesl_round_and_bgcolor_dark",
+      "originalAlpha": 255,
+      "originalValues": [
+        {
+          "kind": "reference",
+          "qualifier": "",
+          "value": "@color/sesl_gray_D1"
+        }
+      ],
+      "qualifiers": [
+        ""
+      ],
+      "replacementKind": "literal",
+      "resourceId": "0x7f060c81",
+      "role": "settingsBackground",
+      "sourceValue": "#FF000000",
+      "tokenOrigin": "global-token",
+      "type": "color",
+      "value": "#FF000000",
+      "variant": "dark"
+    },
+    {
+      "evidence": "settings/resources.txt declaration of color/sesl_round_and_bgcolor_light (0x7f060c82); resources.txt:229834 roundedCornerColor(0x7f0405a1)=@color/sesl_round_and_bgcolor_light in style/Base.V7.Theme.AppCompat.Light; resources.txt:13022 @color/sesl_round_and_bgcolor_light in color/direction_lock_action_bar_background; resources.txt:13025 @color/sesl_round_and_bgcolor_light in color/direction_lock_status_bar_background; resources.txt:15651 @color/sesl_round_and_bgcolor_light in color/picker_app_fading_edge_color",
+      "name": "sesl_round_and_bgcolor_light",
+      "originalAlpha": 255,
+      "originalValues": [
+        {
+          "kind": "reference",
+          "qualifier": "",
+          "value": "@color/sesl_gray_L3"
+        },
+        {
+          "kind": "reference",
+          "qualifier": "night",
+          "value": "@color/sesl_round_and_bgcolor_dark"
+        }
+      ],
+      "qualifiers": [
+        ""
+      ],
+      "replacementKind": "literal",
+      "resourceId": "0x7f060c82",
+      "role": "settingsBackground",
+      "sourceValue": "#FFF7F8FC",
+      "tokenOrigin": "global-token",
+      "type": "color",
+      "value": "#FFF7F8FC",
+      "variant": "light"
+    },
+    {
+      "evidence": "settings/resources.txt declaration of color/sesl_round_and_bgcolor_light (0x7f060c82); resources.txt:229834 roundedCornerColor(0x7f0405a1)=@color/sesl_round_and_bgcolor_light in style/Base.V7.Theme.AppCompat.Light; resources.txt:13022 @color/sesl_round_and_bgcolor_light in color/direction_lock_action_bar_background; resources.txt:13025 @color/sesl_round_and_bgcolor_light in color/direction_lock_status_bar_background; resources.txt:15651 @color/sesl_round_and_bgcolor_light in color/picker_app_fading_edge_color",
+      "name": "sesl_round_and_bgcolor_light",
+      "originalAlpha": 255,
+      "originalValues": [
+        {
+          "kind": "reference",
+          "qualifier": "",
+          "value": "@color/sesl_gray_L3"
+        },
+        {
+          "kind": "reference",
+          "qualifier": "night",
+          "value": "@color/sesl_round_and_bgcolor_dark"
+        }
+      ],
+      "qualifiers": [
+        "night"
+      ],
+      "replacementKind": "literal",
+      "resourceId": "0x7f060c82",
+      "role": "settingsBackground",
+      "sourceValue": "#FF000000",
+      "tokenOrigin": "global-token",
+      "type": "color",
+      "value": "#FF000000",
+      "variant": "dark"
+    },
+    {
+      "evidence": "settings/resources.txt declaration of color/sesl_search_view_icon_color (0x7f060c9e); resources.txt:229836 searchViewIconColor(0x7f0405ba)=@color/sesl_search_view_icon_color in style/Base.V7.Theme.AppCompat.Light",
+      "name": "sesl_search_view_icon_color",
+      "originalAlpha": 255,
+      "originalValues": [
+        {
+          "kind": "reference",
+          "qualifier": "",
+          "value": "@color/sesl_text1_light"
+        }
+      ],
+      "qualifiers": [
+        ""
+      ],
+      "replacementKind": "literal",
+      "resourceId": "0x7f060c9e",
+      "role": "settingsIcon",
+      "sourceValue": "#FF8A6E00",
+      "tokenOrigin": "global-token",
+      "type": "color",
+      "value": "#FF8A6E00",
+      "variant": "light"
+    },
+    {
+      "evidence": "settings/resources.txt declaration of color/sesl_search_view_icon_color_dark (0x7f060c9f); resources.txt:229624 searchViewIconColor(0x7f0405ba)=@color/sesl_search_view_icon_color_dark in style/Base.V7.Theme.AppCompat",
+      "name": "sesl_search_view_icon_color_dark",
+      "originalAlpha": 255,
+      "originalValues": [
+        {
+          "kind": "reference",
+          "qualifier": "",
+          "value": "@color/sesl_white"
+        }
+      ],
+      "qualifiers": [
+        ""
+      ],
+      "replacementKind": "literal",
+      "resourceId": "0x7f060c9f",
+      "role": "settingsIcon",
+      "sourceValue": "#FFFFE600",
+      "tokenOrigin": "global-token",
+      "type": "color",
+      "value": "#FFFFE600",
+      "variant": "dark"
+    },
+    {
+      "evidence": "settings/resources.txt declaration of color/sesl_secondary_text_color_dark (0x7f060ca4); xml/res__color__sesl_secondary_text_dark.xml.txt:5 A: http://schemas.android.com/apk/res/android:color(0x010101a5)=@0x7f060ca4 in res/color/sesl_secondary_text_dark.xml; xml/res__color__sesl_secondary_text_dark.xml.txt:8 A: http://schemas.android.com/apk/res/android:color(0x010101a5)=@0x7f060ca4 in res/color/sesl_secondary_text_dark.xml; resources.txt:16110 @color/sesl_secondary_text_color_dark in color/sec_auracast_source_qr_summary_color; resources.txt:16196 @color/sesl_secondary_text_color_dark in color/sec_biometrics_guide_common_info_text_theme_color",
+      "name": "sesl_secondary_text_color_dark",
+      "originalAlpha": 255,
+      "originalValues": [
+        {
+          "kind": "reference",
+          "qualifier": "",
+          "value": "@color/basic_token_sys_on_surface_container_lowest_dark"
+        }
+      ],
+      "qualifiers": [
+        ""
+      ],
+      "replacementKind": "literal",
+      "resourceId": "0x7f060ca4",
+      "role": "textSecondary",
+      "sourceValue": "#FFBEBDB0",
+      "tokenOrigin": "global-token",
+      "type": "color",
+      "value": "#FFBEBDB0",
+      "variant": "dark"
+    },
+    {
+      "evidence": "settings/resources.txt declaration of color/sesl_secondary_text_color_light (0x7f060ca5); xml/res__color__sesl_secondary_text_light.xml.txt:5 A: http://schemas.android.com/apk/res/android:color(0x010101a5)=@0x7f060ca5 in res/color/sesl_secondary_text_light.xml; xml/res__color__sesl_secondary_text_light.xml.txt:8 A: http://schemas.android.com/apk/res/android:color(0x010101a5)=@0x7f060ca5 in res/color/sesl_secondary_text_light.xml; resources.txt:16109 @color/sesl_secondary_text_color_light in color/sec_auracast_source_qr_summary_color; resources.txt:16195 @color/sesl_secondary_text_color_light in color/sec_biometrics_guide_common_info_text_theme_color",
+      "name": "sesl_secondary_text_color_light",
+      "originalAlpha": 255,
+      "originalValues": [
+        {
+          "kind": "reference",
+          "qualifier": "",
+          "value": "@color/basic_token_sys_on_surface_container_lowest_light"
+        }
+      ],
+      "qualifiers": [
+        ""
+      ],
+      "replacementKind": "literal",
+      "resourceId": "0x7f060ca5",
+      "role": "textSecondary",
+      "sourceValue": "#FF505967",
+      "tokenOrigin": "global-token",
+      "type": "color",
+      "value": "#FF505967",
+      "variant": "light"
+    },
+    {
+      "evidence": "settings/resources.txt declaration of color/settingslib_materialColorOnSurface (0x7f060e0b); xml/res__color-v36__settingslib_text_color_primary.xml.txt:5 A: http://schemas.android.com/apk/res/android:color(0x010101a5)=@0x7f060e0b in res/color-v36/settingslib_text_color_primary.xml; xml/res__color-v36__settingslib_text_color_primary.xml.txt:8 A: http://schemas.android.com/apk/res/android:color(0x010101a5)=@0x7f060e0b in res/color-v36/settingslib_text_color_primary.xml; resources.txt:231362 collapsedTitleTextColor(0x7f040146)=@color/settingslib_materialColorOnSurface in style/CollapsingToolbarLayoutStyle.SettingsLib; resources.txt:231363 expandedTitleTextColor(0x7f0402a2)=@color/settingslib_materialColorOnSurface in style/CollapsingToolbarLayoutStyle.SettingsLib",
+      "name": "settingslib_materialColorOnSurface",
+      "originalAlpha": 255,
+      "originalValues": [
+        {
+          "kind": "reference",
+          "qualifier": "",
+          "value": "@0x0106006d"
+        },
+        {
+          "kind": "reference",
+          "qualifier": "night",
+          "value": "@0x01060098"
+        }
+      ],
+      "qualifiers": [
+        ""
+      ],
+      "replacementKind": "literal",
+      "resourceId": "0x7f060e0b",
+      "role": "textPrimary",
+      "sourceValue": "#FF171B24",
+      "tokenOrigin": "global-token",
+      "type": "color",
+      "value": "#FF171B24",
+      "variant": "light"
+    },
+    {
+      "evidence": "settings/resources.txt declaration of color/settingslib_materialColorOnSurface (0x7f060e0b); xml/res__color-v36__settingslib_text_color_primary.xml.txt:5 A: http://schemas.android.com/apk/res/android:color(0x010101a5)=@0x7f060e0b in res/color-v36/settingslib_text_color_primary.xml; xml/res__color-v36__settingslib_text_color_primary.xml.txt:8 A: http://schemas.android.com/apk/res/android:color(0x010101a5)=@0x7f060e0b in res/color-v36/settingslib_text_color_primary.xml; resources.txt:231362 collapsedTitleTextColor(0x7f040146)=@color/settingslib_materialColorOnSurface in style/CollapsingToolbarLayoutStyle.SettingsLib; resources.txt:231363 expandedTitleTextColor(0x7f0402a2)=@color/settingslib_materialColorOnSurface in style/CollapsingToolbarLayoutStyle.SettingsLib",
+      "name": "settingslib_materialColorOnSurface",
+      "originalAlpha": 255,
+      "originalValues": [
+        {
+          "kind": "reference",
+          "qualifier": "",
+          "value": "@0x0106006d"
+        },
+        {
+          "kind": "reference",
+          "qualifier": "night",
+          "value": "@0x01060098"
+        }
+      ],
+      "qualifiers": [
+        "night"
+      ],
+      "replacementKind": "literal",
+      "resourceId": "0x7f060e0b",
+      "role": "textPrimary",
+      "sourceValue": "#FFFFFDE7",
+      "tokenOrigin": "global-token",
+      "type": "color",
+      "value": "#FFFFFDE7",
+      "variant": "dark"
+    },
+    {
+      "evidence": "settings/resources.txt declaration of color/settingslib_materialColorOnSurfaceVariant (0x7f060e0d); xml/res__color-v36__settingslib_text_color_secondary.xml.txt:5 A: http://schemas.android.com/apk/res/android:color(0x010101a5)=@0x7f060e0d in res/color-v36/settingslib_text_color_secondary.xml; xml/res__color-v36__settingslib_text_color_secondary.xml.txt:8 A: http://schemas.android.com/apk/res/android:color(0x010101a5)=@0x7f060e0d in res/color-v36/settingslib_text_color_secondary.xml; resources.txt:226747 0x01010098=@color/settingslib_materialColorOnSurfaceVariant in style/Banner.Header.SettingsLib.Expressive; resources.txt:226781 0x01010098=@color/settingslib_materialColorOnSurfaceVariant in style/Banner.Subtitle.SettingsLib.Expressive",
+      "name": "settingslib_materialColorOnSurfaceVariant",
+      "originalAlpha": 255,
+      "originalValues": [
+        {
+          "kind": "reference",
+          "qualifier": "",
+          "value": "@0x01060076"
+        },
+        {
+          "kind": "reference",
+          "qualifier": "night",
+          "value": "@0x010600a1"
+        }
+      ],
+      "qualifiers": [
+        ""
+      ],
+      "replacementKind": "literal",
+      "resourceId": "0x7f060e0d",
+      "role": "textSecondary",
+      "sourceValue": "#FF505967",
+      "tokenOrigin": "global-token",
+      "type": "color",
+      "value": "#FF505967",
+      "variant": "light"
+    },
+    {
+      "evidence": "settings/resources.txt declaration of color/settingslib_materialColorOnSurfaceVariant (0x7f060e0d); xml/res__color-v36__settingslib_text_color_secondary.xml.txt:5 A: http://schemas.android.com/apk/res/android:color(0x010101a5)=@0x7f060e0d in res/color-v36/settingslib_text_color_secondary.xml; xml/res__color-v36__settingslib_text_color_secondary.xml.txt:8 A: http://schemas.android.com/apk/res/android:color(0x010101a5)=@0x7f060e0d in res/color-v36/settingslib_text_color_secondary.xml; resources.txt:226747 0x01010098=@color/settingslib_materialColorOnSurfaceVariant in style/Banner.Header.SettingsLib.Expressive; resources.txt:226781 0x01010098=@color/settingslib_materialColorOnSurfaceVariant in style/Banner.Subtitle.SettingsLib.Expressive",
+      "name": "settingslib_materialColorOnSurfaceVariant",
+      "originalAlpha": 255,
+      "originalValues": [
+        {
+          "kind": "reference",
+          "qualifier": "",
+          "value": "@0x01060076"
+        },
+        {
+          "kind": "reference",
+          "qualifier": "night",
+          "value": "@0x010600a1"
+        }
+      ],
+      "qualifiers": [
+        "night"
+      ],
+      "replacementKind": "literal",
+      "resourceId": "0x7f060e0d",
+      "role": "textSecondary",
+      "sourceValue": "#FFBEBDB0",
+      "tokenOrigin": "global-token",
+      "type": "color",
+      "value": "#FFBEBDB0",
+      "variant": "dark"
+    },
+    {
+      "evidence": "settings/resources.txt declaration of color/settingslib_materialColorSurfaceContainerLow (0x7f060e22); resources.txt:240061 0x01010031=@color/settingslib_materialColorSurfaceContainerLow in style/Theme.Settings.Home",
+      "name": "settingslib_materialColorSurfaceContainerLow",
+      "originalAlpha": 255,
+      "originalValues": [
+        {
+          "kind": "reference",
+          "qualifier": "",
+          "value": "@0x0106006e"
+        },
+        {
+          "kind": "reference",
+          "qualifier": "night",
+          "value": "@0x01060099"
+        }
+      ],
+      "qualifiers": [
+        ""
+      ],
+      "replacementKind": "literal",
+      "resourceId": "0x7f060e22",
+      "role": "settingsBackground",
+      "sourceValue": "#FFF7F8FC",
+      "tokenOrigin": "global-token",
+      "type": "color",
+      "value": "#FFF7F8FC",
+      "variant": "light"
+    },
+    {
+      "evidence": "settings/resources.txt declaration of color/settingslib_materialColorSurfaceContainerLow (0x7f060e22); resources.txt:240061 0x01010031=@color/settingslib_materialColorSurfaceContainerLow in style/Theme.Settings.Home",
+      "name": "settingslib_materialColorSurfaceContainerLow",
+      "originalAlpha": 255,
+      "originalValues": [
+        {
+          "kind": "reference",
+          "qualifier": "",
+          "value": "@0x0106006e"
+        },
+        {
+          "kind": "reference",
+          "qualifier": "night",
+          "value": "@0x01060099"
+        }
+      ],
+      "qualifiers": [
+        "night"
+      ],
+      "replacementKind": "literal",
+      "resourceId": "0x7f060e22",
+      "role": "settingsBackground",
+      "sourceValue": "#FF000000",
+      "tokenOrigin": "global-token",
+      "type": "color",
+      "value": "#FF000000",
+      "variant": "dark"
+    }
+  ],
+  "resourceCount": 27,
+  "sourceSha256": "c820f2847060a3a16edcc1f8e44ced1d7819f9708177fb1077ab2a8d332c71d1",
+  "status": "signed",
+  "targetName": null,
+  "targetPackage": "com.android.settings"
+}

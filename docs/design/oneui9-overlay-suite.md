@@ -2,7 +2,7 @@
 
 The user reports that the old Hex Installer overlays target One UI 6.1.1 and no longer work. This collection must be authored anew for **SM-S948U1 / Android 17 / One UI 9.0 / CP2A.260605.016.S948U1UEU4BZID**. The current repository's resource names are unverified inputs and must not be copied into a production One UI 9 compatibility pack.
 
-No current firmware APKs or command reports have been inspected. There are currently **zero device-verified new overlays**. The files accompanying this design are theme appearance sources and schemas, not working system overlay APKs. The user will develop the apply bridge; current-resource source authoring and compilation can proceed before that bridge is finished. Track build compatibility and actual application compatibility separately.
+The supplied framework, SystemUI and Settings APKs and report have now been inspected. The [first measured pack](oneui9-first-theme-pack.md) contains nine compiled developer-signed APKs with current resource bindings. There are currently **zero device-verified new overlays**. The user develops the apply bridge; compilation and actual application compatibility are tracked separately.
 
 ## Collection boundaries
 

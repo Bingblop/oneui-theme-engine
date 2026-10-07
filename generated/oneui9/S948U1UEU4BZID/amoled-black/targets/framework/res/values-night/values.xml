@@ -1,0 +1,5 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+  <color name="tw_color_control_activated">#FF00E5FF</color>
+  <color name="tw_searchview_result_title_text_color_material">#FFF5F5F5</color>
+</resources>

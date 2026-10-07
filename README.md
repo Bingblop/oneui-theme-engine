@@ -1,6 +1,8 @@
 # Samsung One UI 9.0 Modern Theme Engine & Hex Compatibility Suite
 
-A next-generation theming framework, diagnostic suite, and compatibility layer for **Samsung Galaxy devices running One UI 6, 7, 8, and 9.0 (Android 14, 15, and 16)**.
+A theming framework, diagnostic suite, and compatibility research repository for Samsung Galaxy devices.
+
+**Current One UI 9 work:** [One UI Studio application design](docs/design/README.md) and a [fresh measured theme pack](docs/design/oneui9-first-theme-pack.md) for **SM-S948U1, Android 17 / API 37, build S948U1UEU4BZID**. The pack includes three dark/light theme sources, nine compiled developer-signed APKs, generated projects, a desktop compiler and validation reports. Device application and full Hex customization parity remain unverified; legacy features below are not evidence of support on this firmware.
 
 ---
 

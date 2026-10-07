@@ -1,0 +1,30 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+  <color name="accent_material_dark">#FFFFE600</color>
+  <color name="accent_material_light">#FF8A6E00</color>
+  <color name="materialColorSurfaceContainer">#FFFFFFFF</color>
+  <color name="sec_widget_color_primary">#FF8A6E00</color>
+  <color name="sec_widget_color_round_button_bg_color">#FF8A6E00</color>
+  <color name="sec_widget_color_round_button_text_color">#FFFFFFFF</color>
+  <color name="sec_widget_round_and_bgcolor">#FFF7F8FC</color>
+  <color name="sesl_background_color_dark">#FF000000</color>
+  <color name="sesl_background_color_light">#FFF7F8FC</color>
+  <color name="sesl_control_normal_color_light">#FF8A6E00</color>
+  <color name="sesl_list_divider_color_dark">#FF454432</color>
+  <color name="sesl_list_divider_color_light">#FF747F90</color>
+  <color name="sesl_primary_color_dark">#FFFFE600</color>
+  <color name="sesl_primary_color_light">#FF8A6E00</color>
+  <color name="sesl_primary_dark_color_dark">#FFFFE600</color>
+  <color name="sesl_primary_dark_color_light">#FF8A6E00</color>
+  <color name="sesl_primary_text_color_dark">#FFFFFDE7</color>
+  <color name="sesl_primary_text_color_light">#FF171B24</color>
+  <color name="sesl_round_and_bgcolor_dark">#FF000000</color>
+  <color name="sesl_round_and_bgcolor_light">#FFF7F8FC</color>
+  <color name="sesl_search_view_icon_color">#FF8A6E00</color>
+  <color name="sesl_search_view_icon_color_dark">#FFFFE600</color>
+  <color name="sesl_secondary_text_color_dark">#FFBEBDB0</color>
+  <color name="sesl_secondary_text_color_light">#FF505967</color>
+  <color name="settingslib_materialColorOnSurface">#FF171B24</color>
+  <color name="settingslib_materialColorOnSurfaceVariant">#FF505967</color>
+  <color name="settingslib_materialColorSurfaceContainerLow">#FFF7F8FC</color>
+</resources>

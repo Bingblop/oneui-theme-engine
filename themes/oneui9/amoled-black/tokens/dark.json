@@ -1,0 +1,102 @@
+{
+  "background": {
+    "type": "color",
+    "value": "#FF000000"
+  },
+  "surface": {
+    "type": "color",
+    "value": "#FF080808"
+  },
+  "accent": {
+    "type": "color",
+    "value": "#FF00E5FF"
+  },
+  "onAccent": {
+    "type": "color",
+    "value": "#FF00191E"
+  },
+  "textPrimary": {
+    "type": "color",
+    "value": "#FFF5F5F5"
+  },
+  "textSecondary": {
+    "type": "color",
+    "value": "#FFB8BCC5"
+  },
+  "quickTileInactive": {
+    "type": "color",
+    "value": "#FF121212"
+  },
+  "quickTileActive": {
+    "type": "color",
+    "value": "#FF00E5FF"
+  },
+  "quickTileIconActive": {
+    "type": "color",
+    "value": "#FF00191E"
+  },
+  "quickTileIconInactive": {
+    "type": "color",
+    "value": "#FFB8BCC5"
+  },
+  "quickPanelBackground": {
+    "type": "color",
+    "value": "#FF000000"
+  },
+  "notificationBackground": {
+    "type": "color",
+    "value": "#FF080808"
+  },
+  "notificationText": {
+    "type": "color",
+    "value": "#FFF5F5F5"
+  },
+  "settingsBackground": {
+    "type": "color",
+    "value": "#FF000000"
+  },
+  "settingsIcon": {
+    "type": "color",
+    "value": "#FF00E5FF"
+  },
+  "keyboardBackground": {
+    "type": "color",
+    "value": "#FF000000"
+  },
+  "keyboardKeyBackground": {
+    "type": "color",
+    "value": "#FF080808"
+  },
+  "keyboardKeyText": {
+    "type": "color",
+    "value": "#FFF5F5F5"
+  },
+  "keyboardAccent": {
+    "type": "color",
+    "value": "#FF00E5FF"
+  },
+  "statusBarIcons": {
+    "type": "color",
+    "value": "#FFF5F5F5"
+  },
+  "navigationBarBackground": {
+    "type": "color",
+    "value": "#FF000000"
+  },
+  "navigationBarIcons": {
+    "type": "color",
+    "value": "#FFF5F5F5"
+  },
+  "link": {
+    "type": "color",
+    "value": "#FF00E5FF"
+  },
+  "outline": {
+    "type": "color",
+    "value": "#FF3B4048"
+  },
+  "error": {
+    "type": "color",
+    "value": "#FFFFB4AB"
+  }
+}

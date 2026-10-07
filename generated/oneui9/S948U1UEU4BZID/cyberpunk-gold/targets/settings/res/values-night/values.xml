@@ -1,0 +1,13 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+  <color name="materialColorSurfaceContainer">#FF0A0A0E</color>
+  <color name="sec_widget_color_primary">#FFFFE600</color>
+  <color name="sec_widget_color_round_button_bg_color">#FFFFE600</color>
+  <color name="sec_widget_color_round_button_text_color">#FF191600</color>
+  <color name="sec_widget_round_and_bgcolor">#FF000000</color>
+  <color name="sesl_control_normal_color_light">#FFFFE600</color>
+  <color name="sesl_round_and_bgcolor_light">#FF000000</color>
+  <color name="settingslib_materialColorOnSurface">#FFFFFDE7</color>
+  <color name="settingslib_materialColorOnSurfaceVariant">#FFBEBDB0</color>
+  <color name="settingslib_materialColorSurfaceContainerLow">#FF000000</color>
+</resources>

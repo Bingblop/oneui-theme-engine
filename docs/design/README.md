@@ -12,14 +12,14 @@ First target: **SM-S948U1 · One UI 9.0 · Android 17 · CP2A.260605.016.S948U1U
 - Draft sources: [AMOLED Black](theme-source/bundles/amoled-black.ouitheme), [Neon Violet](theme-source/bundles/neon-violet.ouitheme), [Cyberpunk Gold](theme-source/bundles/cyberpunk-gold.ouitheme)
 - [Read-only APK/input collection instructions](collect-oneui9-inputs.md)
 
-The source archives are appearance data in a proposed new format. **No current firmware resource bindings, compiled overlay APKs, or device-certified overlays have been produced.** Old One UI 6.1.1 bindings are excluded from the replacement design.
+The initial source archives above are design examples. The supplied firmware APKs have now been inspected, and a [first measured theme pack](oneui9-first-theme-pack.md) provides current resource mappings, materialized dark/light sources, a desktop compiler, generated projects, reports and **nine freshly compiled developer-signed APKs**. Device application and visual certification remain unverified. Old One UI 6.1.1 bindings are excluded.
 
-The next required inputs are the actual resource-bearing APKs and device report. From the repository root on a laptop with an authorized phone and Android Platform Tools:
+The three base targets and device report have been received. Further Samsung app targets can be collected from the repository root on a laptop with an authorized phone and Android Platform Tools:
 
 ```bash
 python3 tools/collect_oneui9_inputs.py --pull-apks --output oneui9-inputs
 ```
 
-This first pass collects framework, SystemUI, and Settings. The collection guide includes all eight Samsung targets for the full suite. Supply `report.json` and the readable APKs from the output directory so the new bindings can be authored against real current resources. Collection performs no overlay or theme changes.
+The default collects framework, SystemUI, and Settings. The collection guide includes all eight Samsung targets for the full suite, and the measured-pack guide includes Launcher as well. Current APKs are needed for fresh app-specific bindings. Collection performs no overlay or theme changes.
 
 Source compilation and device application remain separate stages. Correct resource names and a successful build do not prove acceptance by Samsung's overlay policy or the user's bridge.
