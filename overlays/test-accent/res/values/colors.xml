@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Monet primary ramp (public since Android 12), replaced with magenta. -->
+    <color name="system_accent1_0">#FFFFFFFF</color>
+    <color name="system_accent1_10">#FFFFFBFF</color>
+    <color name="system_accent1_50">#FFFFEBF8</color>
+    <color name="system_accent1_100">#FFFFD7F3</color>
+    <color name="system_accent1_200">#FFFFAAEE</color>
+    <color name="system_accent1_300">#FFFF77E8</color>
+    <color name="system_accent1_400">#FFFF3DE3</color>
+    <color name="system_accent1_500">#FFE600D8</color>
+    <color name="system_accent1_600">#FFB800AD</color>
+    <color name="system_accent1_700">#FF8C0084</color>
+    <color name="system_accent1_800">#FF62005C</color>
+    <color name="system_accent1_900">#FF3B0037</color>
+    <color name="system_accent1_1000">#FF000000</color>
+
+    <!-- Material 3 role colors (public since Android 14). -->
+    <color name="system_primary_light">#FFB800AD</color>
+    <color name="system_primary_dark">#FFFFAAEE</color>
+    <color name="system_primary_container_light">#FFFFD7F3</color>
+    <color name="system_primary_container_dark">#FF8C0084</color>
+</resources>

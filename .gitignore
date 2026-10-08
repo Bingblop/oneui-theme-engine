@@ -17,3 +17,4 @@ daemon.log
 # Native Android app: keep the Gradle wrapper and the shared debug signing key.
 !android/gradle/wrapper/gradle-wrapper.jar
 !android/app/debug.keystore
+overlays/dist/
