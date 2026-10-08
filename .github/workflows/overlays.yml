@@ -1,0 +1,59 @@
+name: Overlay APKs
+
+on:
+  push:
+    paths:
+      - "overlays/**"
+      - ".github/workflows/overlays.yml"
+  pull_request:
+    paths:
+      - "overlays/**"
+      - ".github/workflows/overlays.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+
+      - name: Build overlays
+        run: ./overlays/build.sh
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: overlay-apks
+          path: overlays/dist/*.apk
+          if-no-files-found: error
+
+  # Pushes (not PRs) refresh a prerelease so the APKs can be downloaded on a
+  # phone without signing in to GitHub.
+  publish:
+    if: github.event_name != 'pull_request'
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: overlay-apks
+          path: dist
+      - uses: softprops/action-gh-release@v2
+        with:
+          tag_name: overlay-test
+          target_commitish: ${{ github.sha }}
+          name: Overlay test builds
+          prerelease: true
+          body: |
+            Test overlay APKs for One UI 9, built from ${{ github.sha }}.
+            Install and verify steps: overlays/README.md.
+          files: dist/*.apk
